@@ -26,7 +26,7 @@ function ContentSlider({ dataContent }: Props) {
                 </div>
             </div>
             <div className="w-full h-[270px]">
-                <img className="w-full h-[270px] object-cover" src={dataContent.img} alt="" />
+                <img className="h-full object-cover mx-auto" src={dataContent.img} alt="" />
             </div>
         </div>
     );

@@ -2,18 +2,23 @@ import { useRef } from "react";
 import logoImg from "../../assets/logo/L9_logo.png";
 import Button from "../Button/Button";
 import { MdLightMode, MdNightlight } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
+import { setIsOpenModal } from "../../redux/slices/modalSlice";
+import { toggleThemeREDU } from "../../redux/slices/toggleThemeSlice";
 
 function Header() {
     const btnLightRef = useRef<HTMLDivElement | null>(null);
     const btnNightRef = useRef<HTMLDivElement | null>(null);
 
+    const dispatch:DispatchType = useDispatch();
+
     const toggleTheme = () => {
-        const html = document.querySelector("html");
-        if (btnLightRef.current && btnNightRef.current) {
-            btnLightRef.current.classList.toggle("hidden");
-            btnNightRef.current.classList.toggle("hidden");
-            html?.classList.toggle("dark");
-        }
+        dispatch(toggleThemeREDU())
+    };
+
+    const handleClick = () => {
+        dispatch(setIsOpenModal(true));
     };
     return (
         <div className="bg-white dark:bg-slate-900 sticky left-0 top-0 right-0 z-20 h-header px-7 flex items-center justify-between border-b dark:border-slate-700 border-slate-200">
@@ -25,13 +30,15 @@ function Header() {
             </div>
 
             <div className="flex items-center gap-2">
-                <div ref={btnLightRef} onClick={toggleTheme} className="text-2xl cursor-pointer">
+                <div ref={btnLightRef} onClick={toggleTheme} className="btnLight text-2xl cursor-pointer">
                     <MdLightMode />
                 </div>
-                <div ref={btnNightRef} onClick={toggleTheme} className="text-2xl hidden cursor-pointer">
+                <div ref={btnNightRef} onClick={toggleTheme} className="btnNight text-2xl hidden cursor-pointer">
                     <MdNightlight />
                 </div>
-                <Button type="primary">Đăng nhập</Button>
+                <Button onClick={handleClick} type="primary">
+                    Đăng nhập
+                </Button>
             </div>
         </div>
     );

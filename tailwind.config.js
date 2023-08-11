@@ -5,13 +5,16 @@ export const COLOR_PRIMARY_HOVER = "#31ae67";
 export const COLOR_PRIMARY_ACTIVE = "#2c9f5e";
 export const HEIGHT_HEADER = "66px";
 export const WITH_SIDEBAR = "96px";
-export const WITH_CONTENT= `calc(100% - ${WITH_SIDEBAR})`;
+export const WITH_CONTENT = `calc(100% - ${WITH_SIDEBAR})`;
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     presets: [],
     darkMode: "class", // or 'class'
     theme: {
         extend: {
+            fontFamily: {
+                inter: ["Inter", "sans-serif"],
+            },
             height: () => ({
                 header: HEIGHT_HEADER,
             }),

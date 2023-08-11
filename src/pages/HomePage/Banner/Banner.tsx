@@ -1,14 +1,17 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
+
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import SwiperClass from "swiper";
+import "swiper/css";
 
 import img1 from "../../../assets/banner/Banner_web_ReactJS.png";
 import img2 from "../../../assets/banner/Banner_web_HTMLCSSPRO.png";
+import img3 from "../../../assets/banner/Banner_web_Result.png";
+import img4 from "../../../assets/banner/Banner_web_youtube.png";
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import ContentSlider from "./ContentSlider";
+import Button from "../../../components/Button/Button";
 
 const dataContent = [
     {
@@ -27,6 +30,22 @@ const dataContent = [
         img: img2,
         textBtn: "Tìm hiểu thêm",
     },
+    {
+        h2: "Thành Quả của Học Viên",
+        p: "Để đạt được kết quả tốt trong mọi việc ta cần xác định mục tiêu rõ ràng cho việc đó. Học lập trình cũng không là ngoại lệ.",
+        colorBackground: "bg-[linear-gradient(to_right,_rgb(118,18,255),_rgb(5,178,255))]",
+        colorTextBtn: "group-hover:text-[#7612ff]",
+        img: img3,
+        textBtn: "Xem thành quả",
+    },
+    {
+        h2: "L9 trên Youtube",
+        p: "L9 được nhắc tới ở mọi nơi, ở đâu có cơ hội việc làm cho nghề IT và có những con người yêu thích lập trình F8 sẽ ở đó.",
+        colorBackground: "bg-[linear-gradient(to_right,_rgb(254,33,94),_rgb(255,148,2))]",
+        colorTextBtn: "group-hover:text-[#fe215e]",
+        img: img4,
+        textBtn: "Truy cập kênh",
+    },
 ];
 
 function Banner() {
@@ -40,7 +59,6 @@ function Banner() {
         swiperRef.current?.slideNext();
     };
 
-    const classBtn = `w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-[0_3px_6px_rgba(0,0,0,.16)] absolute top-1/2 -translate-y-1/2 z-10`;
     return (
         <section className="w-full relative">
             <Swiper
@@ -60,13 +78,13 @@ function Banner() {
                     );
                 })}
             </Swiper>
-            <button className={`left-0 -translate-x-1/2  ${classBtn}`} onClick={handleClickPrev}>
-                <FaChevronLeft />
-            </button>
+            <Button className={`left-0 -translate-x-1/2`} onClick={handleClickPrev} type="circle">
+                <FaChevronLeft className="text-[#4b4b4b]" />
+            </Button>
 
-            <button className={`right-0 translate-x-1/2  ${classBtn}`} onClick={handleClickNext}>
-                <FaChevronRight />
-            </button>
+            <Button className={`right-0 translate-x-1/2`} onClick={handleClickNext} type="circle">
+                <FaChevronRight className="text-[#4b4b4b]" />
+            </Button>
         </section>
     );
 }
