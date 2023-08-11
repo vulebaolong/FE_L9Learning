@@ -66,3 +66,9 @@ input {
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
     @apply w-12 h-2 bg-[#9aa6af] opacity-75;
 }
+
+.ant-modal-close {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+}

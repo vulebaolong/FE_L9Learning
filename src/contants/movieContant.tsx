@@ -1,0 +1,1 @@
+export const MOVIE_PARAM = 'MOVIE_PARAM'

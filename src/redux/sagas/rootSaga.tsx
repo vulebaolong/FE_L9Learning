@@ -1,8 +1,8 @@
 // sagas.ts
 
 import { all } from 'redux-saga/effects';
-// import { watchSomeSaga } from './sagas/someSaga'; // Import your saga file(s)
+import { theoDoiDangNhapSaga } from './quanLyNguoiDung';
 
 export default function* rootSaga() {
-    yield all([]);
+    yield all([theoDoiDangNhapSaga()]);
 }

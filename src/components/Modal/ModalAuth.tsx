@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "antd";
+import { UserOutlined, KeyOutlined } from "@ant-design/icons";
+import { Form, Input, Modal } from "antd";
 import { DispatchType, RootState } from "../../redux/store";
 import { setIsOpenModal } from "../../redux/slices/modalSlice";
 import logoImg from "../../assets/logo/L9_logo.png";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
+import style from "./ModalAuth.module.css";
+import { I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
 
 function ModalAuth() {
+    const [form] = Form.useForm();
+
     const { isOpenModal } = useSelector((state: RootState) => state.modalSlice);
     const dispatch: DispatchType = useDispatch();
 
@@ -14,7 +19,19 @@ function ModalAuth() {
         dispatch(setIsOpenModal(false));
     };
 
-    const classInput = `bg-[#1618230f] pr-[5px] pl-[20px] py-[12px] w-full transition outline-none rounded-[44px] h-[44px] text-sm font-inter
+    const onFinish = (values: I_dangNhap) => {
+        console.log("Success:", values);
+        dispatch({
+            type: "dangNhapSaga",
+            payload: values,
+        });
+    };
+
+    const onFinishFailed = (errorInfo: string) => {
+        console.log("Failed:", errorInfo);
+    };
+
+    const classInput = `bg-[#1618230f] px-[20px] py-[12px] w-full transition outline-none rounded-[44px] h-[44px] text-sm font-inter
     border dark:border-slate-700 dark:focus:border-slate-400 
     focus:border-slate-400  border-slate-200 `;
     return (
@@ -25,11 +42,54 @@ function ModalAuth() {
                     <h1 className="text-[#292929] text-center mt-5 dark:text-slate-200 text-4xl font-bold">Đăng nhập vào L9</h1>
                 </div>
                 <div className=" mt-11">
-                    <input className={classInput} placeholder="Địa chỉ email" name="email" type="email" maxLength={50} />
-                    <input className={`${classInput}  mt-[10px]`} placeholder="Mật khẩu" name="password" type="password" maxLength={50} />
-                    <Button className="mt-[20px]" type="gradian">
-                        Đăng nhập
-                    </Button>
+                    <Form form={form} layout={"vertical"} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+                        <Form.Item
+                            name="taiKhoan"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập tài khoản",
+                                },
+                            ]}
+                            hasFeedback
+                            className="mb-[10px]"
+                        >
+                            <Input className={`${style.inputAuth} ${classInput}`} size="large" prefix={<UserOutlined />} placeholder="Tài khoản" autoComplete="taiKhoan" />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="matKhau"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập mật khẩu",
+                                },
+                            ]}
+                            hasFeedback
+                            className="m-0"
+                        >
+                            <Input.Password
+                                className={`${style.inputAuth} ${classInput}`}
+                                prefix={<KeyOutlined />}
+                                id="warning"
+                                size="large"
+                                placeholder="Mật khẩu"
+                                autoComplete="current-password"
+                            />
+                        </Form.Item>
+
+                        <Form.Item className="mt-[20px]">
+                            <Button className="" type="gradian">
+                                Đăng nhập
+                            </Button>
+                        </Form.Item>
+
+                        {/* <div className="flex items-center py-4 space-x-1">
+                            <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+                            <p className="px-3 text-sm dark:text-gray-400">Thử với tài khoản có sẵn</p>
+                            <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+                        </div> */}
+                    </Form>
                 </div>
                 <div className=" mt-11">
                     <p className="text-center text-base">
