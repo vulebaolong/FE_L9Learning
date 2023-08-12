@@ -4,22 +4,25 @@ import Button from "../Button/Button";
 import { MdLightMode, MdNightlight } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
-import { setIsOpenModal } from "../../redux/slices/modalSlice";
+import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
 import { toggleThemeREDU } from "../../redux/slices/toggleThemeSlice";
+import NotLogged from "./NotLogged";
+import { USER_LOGIN } from "../../contants/userContants";
+import { lcStorage } from "../../helpers/localStorage";
+import { ReactNode } from "react";
+import Logged from "./Logged";
+import UserControll from "./UserControll";
 
 function Header() {
     const btnLightRef = useRef<HTMLDivElement | null>(null);
     const btnNightRef = useRef<HTMLDivElement | null>(null);
 
-    const dispatch:DispatchType = useDispatch();
+    const dispatch: DispatchType = useDispatch();
 
     const toggleTheme = () => {
-        dispatch(toggleThemeREDU())
+        dispatch(toggleThemeREDU());
     };
 
-    const handleClick = () => {
-        dispatch(setIsOpenModal(true));
-    };
     return (
         <div className="bg-white dark:bg-slate-900 sticky left-0 top-0 right-0 z-20 h-header px-7 flex items-center justify-between border-b dark:border-slate-700 border-slate-200">
             <div className="flex items-center gap-2">
@@ -36,9 +39,7 @@ function Header() {
                 <div ref={btnNightRef} onClick={toggleTheme} className="btnNight text-2xl hidden cursor-pointer">
                     <MdNightlight />
                 </div>
-                <Button onClick={handleClick} type="primary">
-                    Đăng nhập
-                </Button>
+                <UserControll />
             </div>
         </div>
     );

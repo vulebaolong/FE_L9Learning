@@ -1,8 +1,8 @@
 // sagas.ts
 
-import { all } from 'redux-saga/effects';
-import { theoDoiDangNhapSaga } from './quanLyNguoiDung';
+import { all } from "redux-saga/effects";
+import * as quanLyNguoiDungSaga from "./quanLyNguoiDungSaga";
 
 export default function* rootSaga() {
-    yield all([theoDoiDangNhapSaga()]);
+    yield all([quanLyNguoiDungSaga.theoDoiDangNhapSaga(), quanLyNguoiDungSaga.theoDoiDangKySaga()]);
 }

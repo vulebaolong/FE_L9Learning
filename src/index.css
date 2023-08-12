@@ -72,3 +72,11 @@ input {
     height: 40px !important;
     border-radius: 50% !important;
 }
+
+.ant-modal-content {
+    border-radius: 16px !important;
+}
+
+.ant-popover-inner {
+    border-radius: 10px !important;
+}
