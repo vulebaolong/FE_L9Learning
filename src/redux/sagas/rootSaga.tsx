@@ -5,5 +5,10 @@ import * as quanLyNguoiDungSaga from "./quanLyNguoiDungSaga";
 import * as quanLyKhoaHocSaga from "./quanLyKhoaHocSaga";
 
 export default function* rootSaga() {
-    yield all([quanLyNguoiDungSaga.theoDoiDangNhapSaga(), quanLyNguoiDungSaga.theoDoiDangKySaga(), quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga()]);
+    yield all([
+        quanLyNguoiDungSaga.theoDoiDangNhapSaga(),
+        quanLyNguoiDungSaga.theoDoiDangKySaga(),
+        quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga(),
+        quanLyKhoaHocSaga.theoDoiLayMotKhoaHocSaga(),
+    ]);
 }

@@ -1,0 +1,77 @@
+[
+    {
+        "title": "Khái niệm kỹ thuật cần biết",
+        "videos": [
+            {
+                "title": "Mô hình Client - Server là gì?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Domain là gì? Tên miền là gì?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            }
+        ]
+    },
+    {
+        "title": "Môi trường, con người IT",
+        "videos": [
+            {
+                "title": "Học IT cần tố chất gì? Góc nhìn khác từ chuyên gia định hướng giáo dục",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Sinh viên IT đi thực tập tại doanh nghiệp cần biết những gì?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Trải nghiệm thực tế sau 2 tháng làm việc tại doanh nghiệp của học viên L9?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            }
+        ]
+    },
+    {
+        "title": "Phương pháp, định hướng",
+        "videos": [
+            {
+                "title": "Phương pháp học lập trình của Admin L9?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "8 lời khuyên giúp học lập trình tại L9 hiệu quả hơn!",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Tại sao nên học trên website này hơn là học trên Youtube?",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            }
+        ]
+    },
+    {
+        "title": "Hoàn thành khóa học",
+        "videos": [
+            {
+                "title": "Ứng tuyển xin việc làm",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            },
+            {
+                "title": "Hoàn thành khóa học",
+                "video_url": "https://www.youtube.com/watch?v=zoELAirXMJY",
+                "duration" : "0:08:19"
+            }
+        ]
+    }
+]

@@ -1,11 +1,17 @@
-import { I_khoaHoc } from "./I_quanLyKhoaHoc";
+import { I_motKhoaHoc } from "./I_quanLyKhoaHoc";
+import { I_userLogin } from "./I_quanLyNguoiDung";
 
 interface I_quanLyKhoaHoc {
-    danhSachKhoaHoc: I_khoaHoc[];
+    danhSachKhoaHoc: I_motKhoaHoc[];
+    isOpenCollapseCourse: boolean;
+}
+interface I_quanLyNguoiDung {
+    userLogin: I_userLogin[];
 }
 
 interface I_initialState {
     quanLyKhoaHocSlice: I_quanLyKhoaHoc;
+    quanLyNguoiDungSlice: I_quanLyNguoiDung;
 }
 
 export default I_initialState;

@@ -80,3 +80,7 @@ input {
 .ant-popover-inner {
     border-radius: 10px !important;
 }
+
+.ant-collapse-content-box {
+    padding: 0 !important;
+}

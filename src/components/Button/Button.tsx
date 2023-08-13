@@ -20,6 +20,9 @@ function Button({ children, type, className, onClick }: Props) {
     if (type === "gradian") {
         classType = "h-[44px] w-full bg-[linear-gradient(70.06deg,#2cccff_-5%,#22dfbf_106%)] font-semibold text-lg text-white";
     }
+    if (type === "white") {
+        classType = "bg-white hover:bg-white hover:bg-white/90 active:bg-white/80 text-black text-sm font-semibold px-5 py-2";
+    }
     return (
         <button onClick={onClick} className={`${className} ${classType} cursor-pointer transition rounded-full `}>
             {children}
