@@ -6,6 +6,7 @@ import rootSaga from "./sagas/rootSaga"; // Import saga root file
 import modalSlice from "./slices/modalSlice"; // Import saga root file
 import toggleThemeSlice from "./slices/toggleThemeSlice"; // Import saga root file
 import quanLyNguoiDungSlice from "./slices/quanLyNguoiDungSlice"; // Import saga root file
+import quanLyKhoaHocSlice from "./slices/quanLyKhoaHocSlice"; // Import saga root file
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +15,7 @@ const store = configureStore({
         modalSlice,
         toggleThemeSlice,
         quanLyNguoiDungSlice,
+        quanLyKhoaHocSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });

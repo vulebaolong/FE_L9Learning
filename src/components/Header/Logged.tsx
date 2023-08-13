@@ -1,9 +1,6 @@
 import { Avatar, Popover, Tag } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { useState } from "react";
 import { I_PropLogged } from "../../interfaces/I_quanLyNguoiDung";
-import { COLOR_PRIMARY } from "../../../tailwind.config.js";
 import { lcStorage } from "../../helpers/localStorage.js";
 import { USER_LOGIN } from "../../contants/userContants.js";
 
@@ -21,7 +18,7 @@ function Logged(props: I_PropLogged) {
             return <Tag color="green">khách hàng</Tag>;
         }
         if (userLogin.maLoaiNguoiDung === "QuanTri") {
-            return <Tag color={COLOR_PRIMARY}>admin</Tag>;
+            return <Tag color="red">admin</Tag>;
         }
     };
 
