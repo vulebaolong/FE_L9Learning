@@ -16,7 +16,7 @@ export interface I_motKhoaHoc {
     soLuongHocVien: number;
     luotXem: number;
     giaTien: number;
-    seHocDuoc: string[];
+    seHocDuoc: string [];
     chuongHoc: I_chuongHoc[];
     hinhAnh: string;
 }
