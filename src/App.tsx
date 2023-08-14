@@ -9,6 +9,7 @@ import { RootState } from "./redux/store";
 import { setMessageApi } from "./helpers/message";
 import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
+import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
 
 function App() {
     const navigate = useNavigate();
@@ -42,6 +43,7 @@ function App() {
                         <Route path="hoc" element={<HomePage />} />
                         <Route path="blog" element={<HomePage />} />
                         <Route path="detailcourse/:id" element={<DetailCoursePage />} />
+                        <Route path="addcourse" element={<AddCoursePage_Admin />} />
                     </Route>
 
                     {/* USER LAYOUT */}

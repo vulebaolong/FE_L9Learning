@@ -84,3 +84,11 @@ input {
 .ant-collapse-content-box {
     padding: 0 !important;
 }
+
+.ant-input-number {
+    background-color: transparent;
+}
+
+.ant-upload {
+    @apply dark:bg-[rgb(55,65,81,0.6)] 
+}

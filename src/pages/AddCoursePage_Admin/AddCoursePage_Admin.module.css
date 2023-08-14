@@ -1,0 +1,19 @@
+.upload > div {
+    width: 204px !important;
+    height: auto !important;
+    padding: 0.5rem;
+}
+
+.upload > div > span {
+    justify-content: space-between !important;
+}
+
+.input input,
+.input textarea {
+	@apply bg-transparent;
+}
+
+
+/* .form {
+    @apply dark:!shadow-[rgba(0,0,0,0.35)_0px_5px_15px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]
+} */

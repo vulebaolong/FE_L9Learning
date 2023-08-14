@@ -3,14 +3,15 @@ import { useState } from "react";
 import { I_PropLogged } from "../../interfaces/I_quanLyNguoiDung";
 import { lcStorage } from "../../helpers/localStorage.js";
 import { USER_LOGIN } from "../../contants/userContants.js";
+import { navigate } from "../../helpers/navigate.js";
 
 function Logged(props: I_PropLogged) {
     const { userLogin } = props;
 
-    const [open, setOpen] = useState(false);
+    const [isOpenPopupUser, setIsOpenPopupUser] = useState(false);
 
     const handleOpenChange = (newOpen: boolean) => {
-        setOpen(newOpen);
+        setIsOpenPopupUser(newOpen);
     };
 
     const renderTag = () => {
@@ -28,6 +29,42 @@ function Logged(props: I_PropLogged) {
         window.location.reload();
     };
 
+    const handleThemKhoaHoc = () => {
+        navigate("/addcourse");
+        setIsOpenPopupUser(false);
+    };
+
+    const renderControllAdmin = () => {
+        if (userLogin.maLoaiNguoiDung !== "QuanTri") return;
+
+        return (
+            <>
+                <div className="">
+                    <span
+                        onClick={handleThemKhoaHoc}
+                        className="text-base cursor-pointer transition
+                text-[#666] hover:text-[#292929]
+                dark:text-white/70 dark:hover:text-white/90
+                "
+                    >
+                        Thêm khoá học
+                    </span>
+                </div>
+                <div className="mt-4">
+                    <span
+                        className="text-base cursor-pointer transition
+                text-[#666] hover:text-[#292929]
+                dark:text-white/70 dark:hover:text-white/90
+                "
+                    >
+                        Danh sách khoá học
+                    </span>
+                </div>
+                <hr className="dark:!border-gray-700 border-gray-200 my-5" />
+            </>
+        );
+    };
+
     const content = (
         <div className="w-[250px] p-3 ">
             <div className="flex items-center gap-3 w-full">
@@ -41,6 +78,8 @@ function Logged(props: I_PropLogged) {
             </div>
 
             <hr className="dark:!border-gray-700 border-gray-200 my-5" />
+
+            {renderControllAdmin()}
 
             <div className="">
                 <span
@@ -65,6 +104,7 @@ function Logged(props: I_PropLogged) {
 
             <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
+            {/* CÀI ĐẶT */}
             <div className="">
                 <span
                     className="text-base cursor-pointer transition
@@ -75,6 +115,8 @@ function Logged(props: I_PropLogged) {
                     Cài đặt
                 </span>
             </div>
+
+            {/* ĐĂNG XUẤT */}
             <div className="mt-4">
                 <span
                     onClick={handleDangXuat}
@@ -90,10 +132,10 @@ function Logged(props: I_PropLogged) {
     );
 
     return (
-        <Popover onOpenChange={handleOpenChange} open={open} className="cursor-pointer" content={content} trigger="click" placement="bottomRight">
+        <Popover onOpenChange={handleOpenChange} open={isOpenPopupUser} className="cursor-pointer" content={content} trigger="click" placement="bottomRight">
             <Avatar
                 onClick={() => {
-                    setOpen(true);
+                    setIsOpenPopupUser(true);
                 }}
                 src={<img src={userLogin.avatar} alt="avatar" />}
                 size={35}
