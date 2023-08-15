@@ -2,55 +2,63 @@ import { Button, Form, Input, InputNumber, Modal, Space, Upload, UploadFile } fr
 import TextArea from "antd/es/input/TextArea";
 import style from "./AddCoursePage_Admin.module.css";
 import { useState } from "react";
-import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import ButtonMe from "../../components/Button/Button";
 import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
-import { I_motKhoaHoc } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_KhoaHocPayload, I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
+import _ from "lodash";
+import { DispatchType } from "../../redux/store";
+import { useDispatch } from "react-redux";
 
 function AddCoursePage_Admin() {
+    const dispatch: DispatchType = useDispatch();
     const [arrChuong, setArrChuong] = useState([]);
-    console.log(arrChuong);
 
     const [form] = Form.useForm();
-    const onFinish = (values: I_motKhoaHoc) => {
+    const onFinish = async (values: I_valuesKhoahoc) => {
         const copyValues = JSON.parse(JSON.stringify(values));
-        values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
-        console.log("values", values);
 
-        // values.ngayKhoiChieu = moment(values.ngayKhoiChieu.$d).format("DD/MM/YYYY");
-        // if (typeof values.hinhAnh === "object") {
-        //     values.hinhAnh = values.hinhAnh.file.originFileObj;
-        // }
+        if (!copyValues.seHocDuoc) {
+            values.seHocDuoc = [];
+        } else {
+            values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
+        }
 
-        // if (values.dangChieu === undefined) values.dangChieu = false;
-        // if (values.hot === undefined) values.hot = false;
-        // if (values.sapChieu === undefined) values.sapChieu = false;
+        values.chuongHoc = [];
+        _.forEach(copyValues, (value, key) => {
+            if (key.startsWith("titleChuong_")) {
+                const chuongNumber = key.split("_")[1];
+                const chuongHocKey = `chuongHoc${chuongNumber}`;
+                const videos = copyValues[chuongHocKey];
 
-        // console.log("values", values);
+                values.chuongHoc.push({
+                    title: value,
+                    videos: videos.map((video: { title_video: string; video_url: string }) => ({
+                        title: video.title_video,
+                        video_url: video.video_url,
+                    })),
+                });
+            }
+        });
 
-        // const formData = new FormData();
-        // formData.append("tenPhim", values.tenPhim);
-        // formData.append("trailer", values.trailer);
-        // formData.append("moTa", values.moTa);
-        // formData.append("ngayKhoiChieu", values.ngayKhoiChieu);
-        // formData.append("dangChieu", values.dangChieu);
-        // formData.append("sapChieu", values.sapChieu);
-        // formData.append("hot", values.hot);
-        // formData.append("danhGia", values.danhGia);
-        // formData.append("maNhom", values.maNhom);
-        // if (typeof values.hinhAnh === "string") {
-        //     formData.append("hinhAnh", null);
-        // }
-        // if (typeof values.hinhAnh === "object") {
-        //     formData.append("hinhAnh", values.hinhAnh, values.hinhAnh.name);
-        // }
-        // console.log(formData.get("hinhAnh"));
-        // console.log(formData.get("ngayKhoiChieu"));
-        // dispatch(addMovieMID(formData)).then((result) => {
-        //   if (result?.mes) result?.type(result?.mes);
-        //   if (result?.mes === "Thêm phim thành công") navigate("/list-movie");
-        // });
+        const payload = {
+            tenKhoaHoc: values.tenKhoaHoc,
+            moTa: values.moTa,
+            giaTien: values.giaTien,
+            seHocDuoc: values.seHocDuoc,
+            chuongHoc: values.chuongHoc,
+            hinhAnh: values.hinhAnh.file.originFileObj,
+        };
+        const formData = new FormData();
+        formData.append("tenKhoaHoc", payload.tenKhoaHoc);
+        formData.append("moTa", payload.moTa);
+        formData.append("giaTien", payload.giaTien.toString());
+        formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
+        formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
+        formData.append("hinhAnh", payload.hinhAnh);
+
+        dispatch({ type: "themKhoaHocSaga", payload: formData });
     };
 
     const [loading, setLoading] = useState(false);
@@ -77,9 +85,13 @@ function AddCoursePage_Admin() {
 
     const styleInput = `dark:!bg-gray-700/60 bg-transparent dark:!shadow-[rgba(0,0,0,0.20)_0px_5px_10px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]`;
 
+    const isYouTubeUrl = (url) => {
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+        return youtubeRegex.test(url);
+    };
     return (
         <div>
-            <h1 className="mt-4 font-bold text-3xl dark:text-slate-200 mb-5">Thêm khoá học</h1>
+            <h1 className={`heading_1 mt-4 mb-5`}>Thêm khoá học</h1>
             <div
                 className={`${style.form} dark:!shadow-[rgba(0,0,0,0.35)_0px_5px_15px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px] p-4 rounded-3xl border sm:p-6 xl:p-8 dark:bg-gray-800/50 backdrop-blur-sm dark:border-gray-700`}
             >
@@ -126,7 +138,7 @@ function AddCoursePage_Admin() {
                         ]}
                         hasFeedback
                     >
-                        <InputNumber size="large" className={`INPUTNUMBER ${style.input} ${styleInput}`} min={75000} max={150000} autoComplete="off" />
+                        <InputNumber size="large" className={`INPUTNUMBER ${style.input} ${styleInput}`} autoComplete="off" />
                     </Form.Item>
 
                     {/* SẼ HỌC ĐƯỢC */}
@@ -136,7 +148,7 @@ function AddCoursePage_Admin() {
                             <>
                                 {fields.map(({ key, name, ...restField }) => (
                                     <div key={key} className="flex items-center mb-2 gap-2 w-full">
-                                        <Form.Item className="flex-1" {...restField} name={[name, "item"]} rules={[{ required: true, message: "Vui lòng nhập sẽ học được gì" }]}>
+                                        <Form.Item className="flex-1" {...restField} name={[name, "item"]}>
                                             <Input size="large" className={`${style.input} ${styleInput} `} placeholder="Sẽ học được" autoComplete="off" />
                                         </Form.Item>
                                         <MinusCircleOutlined className="mb-6 text-lg" onClick={() => remove(name)} />
@@ -158,9 +170,8 @@ function AddCoursePage_Admin() {
                     <div className="space-y-3 ">
                         {arrChuong.map((item, index) => {
                             return (
-                                <div key={item} className="border-4 relative border-gray-600 rounded-xl p-5">
-                                    <MinusCircleOutlined
-                                        className="absolute top-2 right-2 text-2xl"
+                                <div key={item} className="border-4 relative dark:border-gray-600 border-gray-200 rounded-xl p-5">
+                                    <div
                                         onClick={() => {
                                             let copyArrChuong = JSON.parse(JSON.stringify(arrChuong));
                                             copyArrChuong = copyArrChuong.filter((itemChuong: number) => {
@@ -170,7 +181,11 @@ function AddCoursePage_Admin() {
 
                                             setArrChuong(copyArrChuong);
                                         }}
-                                    />
+                                        className="cursor-pointer absolute z-10 top-2 right-2 text-white/50 hover:text-white/80 transition bg-transparent hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center"
+                                    >
+                                        <CloseOutlined className="text-base" />
+                                    </div>
+
                                     <Form.Item
                                         label={<span className="text-base font-bold mr-auto">{`Tiêu đề chương ${item + 1}`}</span>}
                                         name={`titleChuong_${item + 1}`}
@@ -187,8 +202,19 @@ function AddCoursePage_Admin() {
 
                                     <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
-                                    <Form.List name={`chuongHoc${index + 1}`}>
-                                        {(fields, { add, remove }) => (
+                                    <Form.List
+                                        name={`chuongHoc${index + 1}`}
+                                        rules={[
+                                            {
+                                                validator: async (_, names) => {
+                                                    if (!names || names.length < 1) {
+                                                        return Promise.reject(new Error("Vui lòng thêm ít nhất 1 trường"));
+                                                    }
+                                                },
+                                            },
+                                        ]}
+                                    >
+                                        {(fields, { add, remove }, { errors }) => (
                                             <>
                                                 {fields.map(({ key, name, ...restField }) => (
                                                     <div key={key} className="flex items-center mb-2 gap-2 w-full">
@@ -205,7 +231,17 @@ function AddCoursePage_Admin() {
                                                                 className="basis-1/2"
                                                                 {...restField}
                                                                 name={[name, "video_url"]}
-                                                                rules={[{ required: true, message: "Vui lòng nhập đường dẫn video" }]}
+                                                                rules={[
+                                                                    { required: true, message: "Vui lòng nhập đường dẫn video" },
+                                                                    {
+                                                                        validator: (_, value) => {
+                                                                            if (!value || isYouTubeUrl(value)) {
+                                                                                return Promise.resolve();
+                                                                            }
+                                                                            return Promise.reject(new Error("Đường dẫn không hợp lệ. Vui lòng nhập đường dẫn YouTube."));
+                                                                        },
+                                                                    },
+                                                                ]}
                                                             >
                                                                 <Input size="large" className={`${style.input} ${styleInput} `} placeholder="Đường dẫn video" autoComplete="off" />
                                                             </Form.Item>
@@ -217,6 +253,7 @@ function AddCoursePage_Admin() {
                                                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                                                         Thêm trường
                                                     </Button>
+                                                    <Form.ErrorList errors={errors} />
                                                 </Form.Item>
                                             </>
                                         )}

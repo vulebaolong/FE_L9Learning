@@ -10,6 +10,7 @@ import { setMessageApi } from "./helpers/message";
 import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
 import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
+import ListCoursePage_Admin from "./pages/ListCoursePage_Admin/ListCoursePage_Admin";
 
 function App() {
     const navigate = useNavigate();
@@ -44,13 +45,8 @@ function App() {
                         <Route path="blog" element={<HomePage />} />
                         <Route path="detailcourse/:id" element={<DetailCoursePage />} />
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
+                        <Route path="listcourse" element={<ListCoursePage_Admin />} />
                     </Route>
-
-                    {/* USER LAYOUT */}
-                    {/* <Route element={<UserLayout />}>
-        <Route path='login' element={<Login />} />
-        <Route path='signin' element={<SignIn />} />
-    </Route> */}
 
                     {/* OTHER */}
                     <Route path="*" element={<Navigate to={"/"} />} />

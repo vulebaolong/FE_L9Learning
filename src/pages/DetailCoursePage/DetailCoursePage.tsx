@@ -3,18 +3,14 @@ import { useParams } from "react-router-dom";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { I_motKhoaHoc } from "./../../interfaces/I_quanLyKhoaHoc";
 import { FaBatteryFull, FaCheck, FaCirclePlay, FaClock, FaFilm, FaGaugeHigh } from "react-icons/fa6";
-import { Collapse } from "antd";
-import type { CollapseProps } from "antd";
 import { formatCurrency } from "../../helpers/formatNumber";
 import Button from "../../components/Button/Button";
-import CollapseCourse from "./CollapseCourse";
 import { DispatchType } from "../../redux/store";
 import { useDispatch } from "react-redux";
-import { setIsOpenCollapseCourseREDU } from "../../redux/slices/quanLyKhoaHocSlice";
+import ContentCourse from "./ContentCourse";
+import { handleDuration } from "./../../helpers/durationHelper";
 
 function DetailCoursePage() {
-    const dispatch: DispatchType = useDispatch();
-
     const [khoaHoc, setKhoaHoc] = useState<I_motKhoaHoc>();
 
     const { id } = useParams();
@@ -42,42 +38,20 @@ function DetailCoursePage() {
     khoaHoc?.chuongHoc.forEach((item) => {
         baiHoc += item.videos.length;
     });
-
-    // Replace with your API key
-    // const API_KEY = "AIzaSyAlz03xiJ64w3ombtwYVAEG9_tYP6_WKy4";
-
-    // Replace with the video ID you want to retrieve the duration for
-    // const videoId = "F4UQX4ASZ7k";
-
-    // YouTube Data API endpoint
-    // const apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${API_KEY}&part=contentDetails`;
-
-    // Fetch video data from YouTube API
-    // fetch(apiUrl)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         console.log(data);
-    //         const duration = data.items[0].contentDetails.duration;
-
-    //         console.log(`Video duration: ${convertDuration(duration)}`);
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error retrieving video duration:", error);
-    //     });
-
-    const handleMoTatCa = () => {
-        dispatch(setIsOpenCollapseCourseREDU());
-    };
+    let totalDuration = "0";
+    if (khoaHoc?.chuongHoc !== undefined) {
+        totalDuration = handleDuration(khoaHoc?.chuongHoc);
+    }
 
     return (
-        <section>
+        <section className="pb-24">
             <div className="flex">
                 <div className="w-[66.66667%]">
                     <h1 className="mt-4 font-bold text-3xl dark:text-slate-200">{khoaHoc?.tenKhoaHoc}</h1>
                     <p className={`${para} mt-5 mb-16`}>{khoaHoc?.moTa}</p>
                     <div className="space-y-3 mb-16">
                         <h2 className={`${heading_2}`}>Bạn sẽ học được gì?</h2>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 gap-5">
                             {khoaHoc?.seHocDuoc.map((text: string, index) => {
                                 return (
                                     <div key={index} className="flex items-center gap-2 pr-3">
@@ -91,26 +65,7 @@ function DetailCoursePage() {
                         </div>
                     </div>
                     <div className="space-y-3">
-                        <h2 className={`${heading_2}`}>Nội dung khóa học</h2>
-                        <div className="flex items-baseline justify-between">
-                            <div className="">
-                                <span className={`${para}`}>
-                                    <strong>{khoaHoc?.chuongHoc.length} </strong> chương
-                                </span>
-                                <span> • </span>
-                                <span className={`${para}`}>
-                                    <strong>{baiHoc} </strong> bài học
-                                </span>
-                                <span> • </span>
-                                <span className={`${para}`}>
-                                    Thời lượng <strong>03 giờ 25 phút</strong>
-                                </span>
-                            </div>
-                            <span onClick={handleMoTatCa} className={`${para} font-semibold cursor-pointer !text-primary hover:!text-primary_hover active:!text-primary_active`}>
-                                Mở rộng tất cả
-                            </span>
-                        </div>
-                        <CollapseCourse khoaHoc={khoaHoc} />
+                        <ContentCourse totalDuration={totalDuration} khoaHoc={khoaHoc} />
                     </div>
                 </div>
                 <div className="w-[33.33333%] pl-12 space-y-7">
@@ -149,7 +104,7 @@ function DetailCoursePage() {
                                 <FaClock />
                             </div>
                             <span className={`${para}`}>
-                                Thời lượng <strong>03 giờ 25 phút</strong>
+                                Thời lượng <strong>{totalDuration}</strong>
                             </span>
                         </div>
                         <div className="flex gap-5 items-center">

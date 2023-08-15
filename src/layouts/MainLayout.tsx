@@ -7,7 +7,7 @@ function MainLayout() {
     return (
         <>
             <Header />
-            <div className="flex min-h-screen h-[3000px]">
+            <div className="flex min-h-screen">
                 <div className="flex-shrink-0 w-sideBar">
                     <SideBar />
                 </div>

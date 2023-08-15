@@ -17,7 +17,10 @@ const store = configureStore({
         quanLyNguoiDungSlice,
         quanLyKhoaHocSlice,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false, // Tắt kiểm tra serializability
+        }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

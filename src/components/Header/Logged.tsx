@@ -34,6 +34,11 @@ function Logged(props: I_PropLogged) {
         setIsOpenPopupUser(false);
     };
 
+    const handleDanhSachKhoaHoc = () => {
+        navigate("/listcourse");
+        setIsOpenPopupUser(false);
+    };
+
     const renderControllAdmin = () => {
         if (userLogin.maLoaiNguoiDung !== "QuanTri") return;
 
@@ -56,6 +61,7 @@ function Logged(props: I_PropLogged) {
                 text-[#666] hover:text-[#292929]
                 dark:text-white/70 dark:hover:text-white/90
                 "
+                        onClick={handleDanhSachKhoaHoc}
                     >
                         Danh sách khoá học
                     </span>

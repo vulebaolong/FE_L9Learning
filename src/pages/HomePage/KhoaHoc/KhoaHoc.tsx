@@ -16,12 +16,12 @@ function KhoaHoc() {
     };
     return (
         <section className="py-24">
-            <h2 className="text-3xl text-[#242424] dark:text-slate-200 font-black">Tất cả khoá học</h2>
+            <h2 className="heading_2">Tất cả khoá học</h2>
             <div className="grid grid-cols-4 gap-7 mt-5">
                 {danhSachKhoaHoc.map((khoaHoc) => {
                     return (
                         <div key={khoaHoc._id} className="">
-                            <div className={`${style.overlay} relative rounded-2xl overflow-hidden`}>
+                            <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                 <Button
                                     onClick={() => {
                                         handleChiTietKhoaHoc(khoaHoc._id);
@@ -30,9 +30,9 @@ function KhoaHoc() {
                                 >
                                     Xem khoá học
                                 </Button>
-                                <img src={khoaHoc.hinhAnh} alt="" />
+                                <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>
-                            <p className="mt-3 text-[#292929] dark:text-slate-400 font-semibold">{khoaHoc.tenKhoaHoc}</p>
+                            <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
                         </div>
                     );
                 })}

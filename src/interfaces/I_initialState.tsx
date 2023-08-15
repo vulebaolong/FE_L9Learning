@@ -3,7 +3,6 @@ import { I_userLogin } from "./I_quanLyNguoiDung";
 
 interface I_quanLyKhoaHoc {
     danhSachKhoaHoc: I_motKhoaHoc[];
-    isOpenCollapseCourse: boolean;
 }
 interface I_quanLyNguoiDung {
     userLogin: I_userLogin[];
