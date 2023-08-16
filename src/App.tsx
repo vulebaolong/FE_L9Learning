@@ -11,6 +11,7 @@ import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
 import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
 import ListCoursePage_Admin from "./pages/ListCoursePage_Admin/ListCoursePage_Admin";
+import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Admin";
 
 function App() {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ function App() {
                         <Route path="detailcourse/:id" element={<DetailCoursePage />} />
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
                         <Route path="listcourse" element={<ListCoursePage_Admin />} />
+                        <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
                     </Route>
 
                     {/* OTHER */}

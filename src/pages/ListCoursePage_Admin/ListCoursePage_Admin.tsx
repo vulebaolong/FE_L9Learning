@@ -11,8 +11,8 @@ function ListCoursePage_Admin() {
         dispatch({ type: "layDanhSachKhoaHocSaga" });
     }, []);
     const { danhSachKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
-    const handleChinhSuaKhoaHoc = (khoaHocId: string) => {
-        // navigate(`/detailcourse/${khoaHocId}`);
+    const handleChinhSuaKhoaHoc = (idKhoaHoc: string) => {
+        navigate(`/editcourse/${idKhoaHoc}`);
     };
     const handleXoaKhoaHoc = (idKhoaHoc: string) => {
         dispatch({ type: "xoaKhoaHocSaga", payload: idKhoaHoc });

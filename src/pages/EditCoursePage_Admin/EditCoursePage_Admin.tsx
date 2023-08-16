@@ -1,66 +1,77 @@
-import { Button, Form, Input, InputNumber, Modal, Space, Upload, UploadFile } from "antd";
+import { Button, Form, Input, InputNumber, Modal, Upload, UploadProps } from "antd";
+import style from "./EditCoursePage_Admin.module.css";
 import TextArea from "antd/es/input/TextArea";
-import style from "./AddCoursePage_Admin.module.css";
-import { useState } from "react";
-import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, CloseOutlined } from "@ant-design/icons";
-import ButtonMe from "../../components/Button/Button";
+import { MinusCircleOutlined, PlusOutlined, CloseOutlined, LoadingOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 import { getBase64 } from "../../helpers/antdHelper";
-import { RcFile, UploadProps } from "antd/es/upload";
-import { I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
-import _ from "lodash";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { RcFile, UploadFile } from "antd/es/upload";
+import ButtonMe from "../../components/Button/Button";
+import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
+import { useParams } from "react-router-dom";
+import { I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
 
-function AddCoursePage_Admin() {
-    const dispatch: DispatchType = useDispatch();
-    const [arrChuong, setArrChuong] = useState([]);
+function EditCoursePage_Admin() {
+    const { id } = useParams();
 
     const [form] = Form.useForm();
-    const onFinish = async (values: I_valuesKhoahoc) => {
+
+    const [motKhoaHoc, setMotKhoaHoc] = useState<I_motKhoaHoc | null>(null);
+
+    const [arrChuong, setArrChuong] = useState([]);
+    console.log(arrChuong);
+
+    useEffect(() => {
+        const fetch = async () => {
+            if (id !== undefined) {
+                const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
+                console.log("call API - layMotKhoaHoc", { data, status });
+                setMotKhoaHoc(data.result.data);
+                const indexChuongHoc = data.result.data.chuongHoc.map((item, index) => index);
+                console.log(indexChuongHoc);
+                setArrChuong(indexChuongHoc);
+            }
+        };
+        fetch();
+    }, [id]);
+
+    const initialValues = () => {
+        const seHocDuoc = motKhoaHoc?.seHocDuoc.map((item) => {
+            return { item };
+        });
+
+        const objTitleChuong: { [key: string]: string } = {};
+        motKhoaHoc?.chuongHoc.forEach((item, index) => {
+            objTitleChuong[`titleChuong_${index + 1}`] = item.title;
+        });
+        console.log(motKhoaHoc?.chuongHoc);
+
+        const objChuongHoc: { [key: string]: { title_video: string; video_url: string }[] } = {};
+
+        motKhoaHoc?.chuongHoc.forEach((chuong, index) => {
+            objChuongHoc[`chuongHoc${index + 1}`] = chuong.videos.map((video) => ({
+                title_video: video.title,
+                video_url: video.video_url,
+            }));
+        });
+
+        return {
+            ...motKhoaHoc,
+            seHocDuoc,
+            ...objTitleChuong,
+            ...objChuongHoc
+        };
+    };
+    useEffect(() => form.resetFields(), [motKhoaHoc, form]);
+
+    const onFinish = (values: I_valuesKhoahoc) => {
         console.log(values);
-        
-        // const copyValues = JSON.parse(JSON.stringify(values));
+    };
 
-        // if (!copyValues.seHocDuoc) {
-        //     values.seHocDuoc = [];
-        // } else {
-        //     values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
-        // }
+    const styleInput = `dark:!bg-gray-700/60 bg-transparent dark:!shadow-[rgba(0,0,0,0.20)_0px_5px_10px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]`;
 
-        // values.chuongHoc = [];
-        // _.forEach(copyValues, (value, key) => {
-        //     if (key.startsWith("titleChuong_")) {
-        //         const chuongNumber = key.split("_")[1];
-        //         const chuongHocKey = `chuongHoc${chuongNumber}`;
-        //         const videos = copyValues[chuongHocKey];
-
-        //         values.chuongHoc.push({
-        //             title: value,
-        //             videos: videos.map((video: { title_video: string; video_url: string }) => ({
-        //                 title: video.title_video,
-        //                 video_url: video.video_url,
-        //             })),
-        //         });
-        //     }
-        // });
-
-        // const payload = {
-        //     tenKhoaHoc: values.tenKhoaHoc,
-        //     moTa: values.moTa,
-        //     giaTien: values.giaTien,
-        //     seHocDuoc: values.seHocDuoc,
-        //     chuongHoc: values.chuongHoc,
-        //     hinhAnh: values.hinhAnh.file.originFileObj,
-        // };
-        // const formData = new FormData();
-        // formData.append("tenKhoaHoc", payload.tenKhoaHoc);
-        // formData.append("moTa", payload.moTa);
-        // formData.append("giaTien", payload.giaTien.toString());
-        // formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
-        // formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
-        // formData.append("hinhAnh", payload.hinhAnh);
-
-        // dispatch({ type: "themKhoaHocSaga", payload: formData });
+    const isYouTubeUrl = (url: string) => {
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+        return youtubeRegex.test(url);
     };
 
     const [loading, setLoading] = useState(false);
@@ -85,19 +96,13 @@ function AddCoursePage_Admin() {
     };
     const handleCancel = () => setPreviewOpen(false);
 
-    const styleInput = `dark:!bg-gray-700/60 bg-transparent dark:!shadow-[rgba(0,0,0,0.20)_0px_5px_10px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]`;
-
-    const isYouTubeUrl = (url: string) => {
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
-        return youtubeRegex.test(url);
-    };
     return (
-        <div>
-            <h1 className={`heading_1 mt-4 mb-5`}>Thêm khoá học</h1>
+        <section className="pb-24">
+            <h1 className={`heading_1 mt-4 mb-5`}>Chỉnh sửa khoá học</h1>
             <div
                 className={`${style.form} dark:!shadow-[rgba(0,0,0,0.35)_0px_5px_15px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px] p-4 rounded-3xl border sm:p-6 xl:p-8 dark:bg-gray-800/50 backdrop-blur-sm dark:border-gray-700`}
             >
-                <Form form={form} layout="vertical" onFinish={onFinish}>
+                <Form form={form} layout="vertical" onFinish={onFinish} initialValues={initialValues()}>
                     {/* TÊN KHOÁ HỌC */}
                     <Form.Item
                         label={<span className="text-base font-bold">Tên khoá học</span>}
@@ -294,7 +299,6 @@ function AddCoursePage_Admin() {
                                 message: "Vui lòng tải hình ảnh",
                             },
                         ]}
-                        hasFeedback
                     >
                         <Upload
                             listType="picture-card"
@@ -303,13 +307,13 @@ function AddCoursePage_Admin() {
                             customRequest={({ file, onSuccess }) => {
                                 setTimeout(() => {
                                     if (onSuccess) {
-                                        // Kiểm tra xem onSuccess tồn tại trước khi gọi
                                         onSuccess("ok");
                                     }
                                 }, 0);
                             }}
                             onPreview={handlePreview}
                             onChange={handleChange}
+                            defaultFileList={motKhoaHoc?.hinhAnh ? [{ url: motKhoaHoc.hinhAnh, uid: "1", name: "image.jpg" }] : []}
                         >
                             <div className="UPLOAD">
                                 {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -330,12 +334,12 @@ function AddCoursePage_Admin() {
                     {/* BUTTON */}
                     <Form.Item>
                         <ButtonMe className="px-10 py-3" type="primary">
-                            <span className="text-base">Thêm khoá học</span>
+                            <span className="text-base">Chỉnh sửa khoá học</span>
                         </ButtonMe>
                     </Form.Item>
                 </Form>
             </div>
-        </div>
+        </section>
     );
 }
-export default AddCoursePage_Admin;
+export default EditCoursePage_Admin;

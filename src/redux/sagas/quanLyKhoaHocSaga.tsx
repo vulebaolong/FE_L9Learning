@@ -27,7 +27,7 @@ function* layMotKhoaHocSaga({ payload }: { payload: string; type: string }) {
 
         console.log("Saga - layMotKhoaHocSaga", { data, status });
 
-        yield put(layDanhSachKhoaHocREDU(data.result.data));
+        // yield put(layDanhSachKhoaHocREDU(data.result.data));
     } catch (err) {
         console.log(err);
     }
