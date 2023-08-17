@@ -99,9 +99,13 @@ input {
 }
 
 .ant-switch {
-    @apply !bg-primary/50
+    @apply !bg-primary/50;
 }
 
 .ant-switch-checked {
-    @apply !bg-primary
+    @apply !bg-primary;
+}
+
+.ant-input-disabled {
+    @apply !text-black/90 dark:!text-slate-200;
 }

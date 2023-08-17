@@ -1,12 +1,14 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
     type: string;
     className?: string;
-    onClick?: () => void;
+    name?: string;
+    htmlFor?: "button" | "submit" | "reset" | undefined;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
-function Button({ children, type, className, onClick }: Props) {
+function Button({ name, htmlFor, children, type, className, onClick }: Props) {
     let classType = "";
     if (type === "primary") {
         classType = "bg-primary hover:bg-primary_hover active:bg-primary_active  text-white text-sm font-semibold px-5 py-2";
@@ -18,7 +20,8 @@ function Button({ children, type, className, onClick }: Props) {
         classType = "bg-transparent border-2 dark:border-white/60 dark:hover:border-white/80 border-black/20 hover:border-black/50 text-sm font-semibold px-5 py-2 h-fit";
     }
     if (type === "bg-whiteblack") {
-        classType = "bg-white hover:bg-[#292929] border-2 border-[#292929] text-[#292929] hover:text-white   dark:bg-transparent dark:hover:bg-white dark:text-white dark:hover:text-[#292929] dark:border-slate-200 dark:hover:border-[#292929]   text-sm font-semibold px-5 py-2";
+        classType =
+            "bg-white hover:bg-[#292929] border-2 border-[#292929] text-[#292929] hover:text-white   dark:bg-transparent dark:hover:bg-white dark:text-white dark:hover:text-[#292929] dark:border-slate-200 dark:hover:border-[#292929]   text-sm font-semibold px-5 py-2";
     }
     if (type === "circle") {
         classType = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-[0_3px_6px_rgba(0,0,0,.16)] absolute top-1/2 -translate-y-[calc(50%_+_12px)] z-10";
@@ -33,7 +36,7 @@ function Button({ children, type, className, onClick }: Props) {
         classType = "bg-red-500  hover:bg-red-500/90 active:bg-red-500/80 text-white text-sm font-semibold px-5 py-2";
     }
     return (
-        <button onClick={onClick} className={`${className} ${classType} cursor-pointer transition rounded-full `}>
+        <button name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} cursor-pointer transition rounded-full `}>
             {children}
         </button>
     );
