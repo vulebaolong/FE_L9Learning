@@ -12,6 +12,7 @@ import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
 import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
 import ListCoursePage_Admin from "./pages/ListCoursePage_Admin/ListCoursePage_Admin";
 import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Admin";
+import CoursesPage from "./pages/CoursesPage/CoursesPage";
 
 function App() {
     const navigate = useNavigate();
@@ -41,10 +42,8 @@ function App() {
                     {/* HOME LAYOUT */}
                     <Route element={<MainLayout />}>
                         <Route index element={<HomePage />} />
-                        <Route path="lotrinh" element={<HomePage />} />
-                        <Route path="hoc" element={<HomePage />} />
-                        <Route path="blog" element={<HomePage />} />
                         <Route path="detailcourse/:id" element={<DetailCoursePage />} />
+                        <Route path="courses" element={<CoursesPage />} />
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
                         <Route path="listcourse" element={<ListCoursePage_Admin />} />
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />

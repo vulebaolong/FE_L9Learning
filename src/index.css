@@ -85,10 +85,15 @@ input {
     padding: 0 !important;
 }
 
-.ant-input-number {
-    background-color: transparent;
+.ant-input-number,
+.ant-select-selector {
+    background-color: transparent !important;
 }
 
 .ant-upload {
-    @apply dark:bg-[rgb(55,65,81,0.6)] 
+    @apply dark:bg-[rgb(55,65,81,0.6)];
+}
+
+.ant-btn-primary {
+    background-color: #1677ff;
 }

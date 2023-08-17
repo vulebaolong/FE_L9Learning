@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Modal, Upload, UploadProps } from "antd";
+import { Button, Form, Input, InputNumber, Modal, Select, Upload, UploadProps } from "antd";
 import style from "./EditCoursePage_Admin.module.css";
 import TextArea from "antd/es/input/TextArea";
 import { MinusCircleOutlined, PlusOutlined, CloseOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -8,7 +8,10 @@ import { RcFile, UploadFile } from "antd/es/upload";
 import ButtonMe from "../../components/Button/Button";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { useParams } from "react-router-dom";
-import { I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
+import { DispatchType } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import _ from "lodash";
 
 function EditCoursePage_Admin() {
     const { id } = useParams();
@@ -17,17 +20,26 @@ function EditCoursePage_Admin() {
 
     const [motKhoaHoc, setMotKhoaHoc] = useState<I_motKhoaHoc | null>(null);
 
+    const dispatch: DispatchType = useDispatch();
+
     const [arrChuong, setArrChuong] = useState([]);
-    console.log(arrChuong);
+
+    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState([]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            const { data, status } = await khoaHocApi.layDanhMucKhoaHoc();
+            setDanhMucKhoaHoc(data.result.data);
+        };
+        fetch();
+    }, []);
 
     useEffect(() => {
         const fetch = async () => {
             if (id !== undefined) {
                 const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
-                console.log("call API - layMotKhoaHoc", { data, status });
                 setMotKhoaHoc(data.result.data);
                 const indexChuongHoc = data.result.data.chuongHoc.map((item, index) => index);
-                console.log(indexChuongHoc);
                 setArrChuong(indexChuongHoc);
             }
         };
@@ -43,8 +55,6 @@ function EditCoursePage_Admin() {
         motKhoaHoc?.chuongHoc.forEach((item, index) => {
             objTitleChuong[`titleChuong_${index + 1}`] = item.title;
         });
-        console.log(motKhoaHoc?.chuongHoc);
-
         const objChuongHoc: { [key: string]: { title_video: string; video_url: string }[] } = {};
 
         motKhoaHoc?.chuongHoc.forEach((chuong, index) => {
@@ -58,13 +68,75 @@ function EditCoursePage_Admin() {
             ...motKhoaHoc,
             seHocDuoc,
             ...objTitleChuong,
-            ...objChuongHoc
+            ...objChuongHoc,
+            danhMucKhoaHoc_ID: motKhoaHoc?.danhMucKhoaHoc_ID._id,
         };
     };
     useEffect(() => form.resetFields(), [motKhoaHoc, form]);
 
     const onFinish = (values: I_valuesKhoahoc) => {
-        console.log(values);
+        const copyValues = JSON.parse(JSON.stringify(values));
+
+        if (!copyValues.seHocDuoc) {
+            values.seHocDuoc = [];
+        } else {
+            values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
+        }
+
+        values.chuongHoc = [];
+        _.forEach(copyValues, (value, key) => {
+            if (key.startsWith("titleChuong_")) {
+                const chuongNumber = key.split("_")[1];
+                const chuongHocKey = `chuongHoc${chuongNumber}`;
+                const videos = copyValues[chuongHocKey];
+
+                values.chuongHoc.push({
+                    title: value,
+                    videos: videos.map((video: { title_video: string; video_url: string }) => ({
+                        title: video.title_video,
+                        video_url: video.video_url,
+                    })),
+                });
+            }
+        });
+
+        const hinhAnh = () => {
+            if (typeof values.hinhAnh === "string") {
+                return values.hinhAnh;
+            } else {
+                return values.hinhAnh.file.originFileObj;
+            }
+        };
+
+        let maKhoaHoc: string = "";
+
+        if (motKhoaHoc?._id !== undefined) {
+            maKhoaHoc = motKhoaHoc?._id;
+        }
+
+        const payload = {
+            maKhoaHoc,
+            tenKhoaHoc: values.tenKhoaHoc,
+            moTa: values.moTa,
+            giaTien: values.giaTien,
+            danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
+            seHocDuoc: values.seHocDuoc,
+            chuongHoc: values.chuongHoc,
+            hinhAnh: hinhAnh(),
+        };
+        console.log(payload);
+        
+        const formData = new FormData();
+        formData.append("maKhoaHoc", payload.maKhoaHoc);
+        formData.append("tenKhoaHoc", payload.tenKhoaHoc);
+        formData.append("moTa", payload.moTa);
+        formData.append("giaTien", payload.giaTien.toString());
+        formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
+        formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
+        formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
+        formData.append("hinhAnh", payload.hinhAnh);
+
+        dispatch({ type: "capNhatKhoaHocSaga", payload: formData });
     };
 
     const styleInput = `dark:!bg-gray-700/60 bg-transparent dark:!shadow-[rgba(0,0,0,0.20)_0px_5px_10px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]`;
@@ -148,6 +220,29 @@ function EditCoursePage_Admin() {
                         <InputNumber size="large" className={`INPUTNUMBER ${style.input} ${styleInput}`} autoComplete="off" />
                     </Form.Item>
 
+                    {/* DANH MỤC KHOÁ HỌC*/}
+                    <Form.Item
+                        label={<span className="text-base font-bold">Danh mục khoá học</span>}
+                        name="danhMucKhoaHoc_ID"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Vui lòng chọn danh mục khoá học",
+                            },
+                        ]}
+                        hasFeedback
+                    >
+                        <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
+                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => {
+                                return (
+                                    <Select.Option key={danhMuc._id} value={danhMuc._id}>
+                                        {danhMuc.tenDanhMuc}
+                                    </Select.Option>
+                                );
+                            })}
+                        </Select>
+                    </Form.Item>
+
                     {/* SẼ HỌC ĐƯỢC */}
                     <p className="text-base font-bold mb-2">Sẽ học được gì?</p>
                     <Form.List name="seHocDuoc">
@@ -184,8 +279,6 @@ function EditCoursePage_Admin() {
                                             copyArrChuong = copyArrChuong.filter((itemChuong: number) => {
                                                 return +itemChuong !== +item;
                                             });
-                                            console.log(copyArrChuong);
-
                                             setArrChuong(copyArrChuong);
                                         }}
                                         className="cursor-pointer absolute z-10 top-2 right-2 text-white/50 hover:text-white/80 transition bg-transparent hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center"

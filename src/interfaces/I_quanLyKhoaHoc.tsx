@@ -10,7 +10,10 @@ export interface I_chuongHoc {
     title: string;
     videos: I_video[];
 }
-
+export interface I_danhMucKhoaHoc {
+    _id: string;
+    tenDanhMuc: string;
+}
 export interface I_motKhoaHoc {
     _id: string;
     tenKhoaHoc: string;
@@ -22,6 +25,7 @@ export interface I_motKhoaHoc {
     seHocDuoc: string[];
     chuongHoc: I_chuongHoc[];
     hinhAnh: string;
+    danhMucKhoaHoc_ID: I_danhMucKhoaHoc;
 }
 
 export interface I_PropContentCourse {
@@ -45,6 +49,7 @@ export interface I_valuesKhoahoc {
     seHocDuoc: string[];
     chuongHoc: I_chuongHoc[];
     hinhAnh: file;
+    danhMucKhoaHoc_ID: I_danhMucKhoaHoc;
 }
 
 export interface I_khoaHocPayload {

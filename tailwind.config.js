@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 export const COLOR_PRIMARY = "#35bf71";
+export const COLOR_PRIMARY_RGB = "53, 191, 113";
 export const COLOR_PRIMARY_HOVER = "#31ae67";
 export const COLOR_PRIMARY_ACTIVE = "#2c9f5e";
 export const HEIGHT_HEADER = "66px";
@@ -22,6 +23,9 @@ export default {
                 header: HEIGHT_HEADER,
                 sideBar: WITH_SIDEBAR,
                 content: WITH_CONTENT,
+            },
+            dropShadow: {
+                "primary": `0px 5px 20px rgba(200,200,200,0.5)`,
             },
         },
         accentColor: ({ theme }) => ({

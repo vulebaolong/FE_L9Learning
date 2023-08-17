@@ -22,19 +22,19 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/lotrinh" className={`${useMatch("/lotrinh") && btnActive} ${btnSideBar} `}>
+                    <Link to="/roadmap" className={`${useMatch("/roadmap") && btnActive} ${btnSideBar} `}>
                         <div className="text-xl">
                             <FaRoad />
                         </div>
-                        <span className="text-xs font-semibold">Home</span>
+                        <span className="text-xs font-semibold">Lộ trình</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/hoc" className={`${useMatch("/hoc") && btnActive} ${btnSideBar} `}>
+                    <Link to="/courses" className={`${useMatch("/courses") && btnActive} ${btnSideBar} `}>
                         <div className="text-xl">
                             <FaLightbulb />
                         </div>
-                        <span className="text-xs font-semibold">Home</span>
+                        <span className="text-xs font-semibold">Học</span>
                     </Link>
                 </li>
                 <li>
@@ -42,7 +42,7 @@ function SideBar() {
                         <div className="text-xl">
                             <FaNewspaper />
                         </div>
-                        <span className="text-xs font-semibold">Home</span>
+                        <span className="text-xs font-semibold">Blog</span>
                     </Link>
                 </li>
             </ul>

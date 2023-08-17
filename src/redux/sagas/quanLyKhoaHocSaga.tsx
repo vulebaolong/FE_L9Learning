@@ -80,3 +80,28 @@ function* xoaKhoaHocSaga({ payload }: { payload: string; type: string }) {
 export function* theoDoiXoaKhoaHocSaga() {
     yield takeLatest("xoaKhoaHocSaga", xoaKhoaHocSaga);
 }
+
+// capNhatKhoaHocSaga
+function* capNhatKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
+    try {
+        console.log(payload);
+
+        // console.log("maKhoaHoc ",payload.get("maKhoaHoc"));
+        // console.log("tenKhoaHoc ",payload.get("tenKhoaHoc"));
+        // console.log("moTa ",payload.get("moTa"));
+        // console.log("giaTien ",payload.get("giaTien"));
+        // console.log("seHocDuoc ",payload.get("seHocDuoc"));
+        // console.log("chuongHoc ",payload.get("chuongHoc"));
+        // console.log("hinhAnh ",payload.get("hinhAnh"));
+
+        const { data, status } = yield call(() => khoaHocApi.capNhatKhoaHoc(payload));
+
+        console.log("Saga - capNhatKhoaHocSaga", { data, status });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export function* theoDoiCapNhatKhoaHocSaga() {
+    yield takeLatest("capNhatKhoaHocSaga", capNhatKhoaHocSaga);
+}

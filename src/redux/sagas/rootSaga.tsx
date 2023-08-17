@@ -12,5 +12,6 @@ export default function* rootSaga() {
         quanLyKhoaHocSaga.theoDoiLayMotKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiThemKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiXoaKhoaHocSaga(),
+        quanLyKhoaHocSaga.theoDoiCapNhatKhoaHocSaga(),
     ]);
 }

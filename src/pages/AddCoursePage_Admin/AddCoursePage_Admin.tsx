@@ -1,66 +1,77 @@
-import { Button, Form, Input, InputNumber, Modal, Space, Upload, UploadFile } from "antd";
+import { Button, Form, Input, InputNumber, Modal, Select, Space, Upload, UploadFile } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import style from "./AddCoursePage_Admin.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import ButtonMe from "../../components/Button/Button";
 import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
-import { I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_danhMucKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
 import _ from "lodash";
 import { DispatchType } from "../../redux/store";
 import { useDispatch } from "react-redux";
+import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 
 function AddCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
     const [arrChuong, setArrChuong] = useState([]);
+    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState([]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            const { data, status } = await khoaHocApi.layDanhMucKhoaHoc();
+            console.log("call API - layDanhMucKhoaHoc", { data, status });
+            setDanhMucKhoaHoc(data.result.data);
+        };
+        fetch();
+    }, []);
 
     const [form] = Form.useForm();
     const onFinish = async (values: I_valuesKhoahoc) => {
         console.log(values);
-        
-        // const copyValues = JSON.parse(JSON.stringify(values));
 
-        // if (!copyValues.seHocDuoc) {
-        //     values.seHocDuoc = [];
-        // } else {
-        //     values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
-        // }
+        const copyValues = JSON.parse(JSON.stringify(values));
 
-        // values.chuongHoc = [];
-        // _.forEach(copyValues, (value, key) => {
-        //     if (key.startsWith("titleChuong_")) {
-        //         const chuongNumber = key.split("_")[1];
-        //         const chuongHocKey = `chuongHoc${chuongNumber}`;
-        //         const videos = copyValues[chuongHocKey];
+        if (!copyValues.seHocDuoc) {
+            values.seHocDuoc = [];
+        } else {
+            values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
+        }
 
-        //         values.chuongHoc.push({
-        //             title: value,
-        //             videos: videos.map((video: { title_video: string; video_url: string }) => ({
-        //                 title: video.title_video,
-        //                 video_url: video.video_url,
-        //             })),
-        //         });
-        //     }
-        // });
+        values.chuongHoc = [];
+        _.forEach(copyValues, (value, key) => {
+            if (key.startsWith("titleChuong_")) {
+                const chuongNumber = key.split("_")[1];
+                const chuongHocKey = `chuongHoc${chuongNumber}`;
+                const videos = copyValues[chuongHocKey];
 
-        // const payload = {
-        //     tenKhoaHoc: values.tenKhoaHoc,
-        //     moTa: values.moTa,
-        //     giaTien: values.giaTien,
-        //     seHocDuoc: values.seHocDuoc,
-        //     chuongHoc: values.chuongHoc,
-        //     hinhAnh: values.hinhAnh.file.originFileObj,
-        // };
-        // const formData = new FormData();
-        // formData.append("tenKhoaHoc", payload.tenKhoaHoc);
-        // formData.append("moTa", payload.moTa);
-        // formData.append("giaTien", payload.giaTien.toString());
-        // formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
-        // formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
-        // formData.append("hinhAnh", payload.hinhAnh);
+                values.chuongHoc.push({
+                    title: value,
+                    videos: videos.map((video: { title_video: string; video_url: string }) => ({
+                        title: video.title_video,
+                        video_url: video.video_url,
+                    })),
+                });
+            }
+        });
 
-        // dispatch({ type: "themKhoaHocSaga", payload: formData });
+        const payload = {
+            tenKhoaHoc: values.tenKhoaHoc,
+            moTa: values.moTa,
+            giaTien: values.giaTien,
+            seHocDuoc: values.seHocDuoc,
+            chuongHoc: values.chuongHoc,
+            hinhAnh: values.hinhAnh.file.originFileObj,
+        };
+        const formData = new FormData();
+        formData.append("tenKhoaHoc", payload.tenKhoaHoc);
+        formData.append("moTa", payload.moTa);
+        formData.append("giaTien", payload.giaTien.toString());
+        formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
+        formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
+        formData.append("hinhAnh", payload.hinhAnh);
+
+        dispatch({ type: "themKhoaHocSaga", payload: formData });
     };
 
     const [loading, setLoading] = useState(false);
@@ -91,8 +102,9 @@ function AddCoursePage_Admin() {
         const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
         return youtubeRegex.test(url);
     };
+
     return (
-        <div>
+        <section className="pb-24">
             <h1 className={`heading_1 mt-4 mb-5`}>Thêm khoá học</h1>
             <div
                 className={`${style.form} dark:!shadow-[rgba(0,0,0,0.35)_0px_5px_15px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px] p-4 rounded-3xl border sm:p-6 xl:p-8 dark:bg-gray-800/50 backdrop-blur-sm dark:border-gray-700`}
@@ -141,6 +153,26 @@ function AddCoursePage_Admin() {
                         hasFeedback
                     >
                         <InputNumber size="large" className={`INPUTNUMBER ${style.input} ${styleInput}`} autoComplete="off" />
+                    </Form.Item>
+
+                    {/* DANH MỤC KHOÁ HỌC*/}
+                    <Form.Item
+                        label={<span className="text-base font-bold">Danh mục khoá học</span>}
+                        name="danhMucKhoaHoc_ID"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Vui lòng chọn danh mục khoá học",
+                            },
+                        ]}
+                        hasFeedback
+                    >
+                        <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
+                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => { 
+                                return <Select.Option key={danhMuc._id} value={danhMuc._id}>{danhMuc.tenDanhMuc}</Select.Option>
+                             })}
+                            
+                        </Select>
                     </Form.Item>
 
                     {/* SẼ HỌC ĐƯỢC */}
@@ -335,7 +367,7 @@ function AddCoursePage_Admin() {
                     </Form.Item>
                 </Form>
             </div>
-        </div>
+        </section>
     );
 }
 export default AddCoursePage_Admin;

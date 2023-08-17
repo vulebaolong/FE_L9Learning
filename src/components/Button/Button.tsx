@@ -14,6 +14,9 @@ function Button({ children, type, className, onClick }: Props) {
     if (type === "transparent") {
         classType = "bg-transparent border-2 border-white hover:bg-white text-sm font-semibold px-5 py-2";
     }
+    if (type === "bg-whiteblack") {
+        classType = "bg-white hover:bg-[#292929] border-2 border-[#292929] text-[#292929] hover:text-white   dark:bg-transparent dark:hover:bg-white dark:text-white dark:hover:text-[#292929] dark:border-slate-200 dark:hover:border-[#292929]   text-sm font-semibold px-5 py-2";
+    }
     if (type === "circle") {
         classType = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-[0_3px_6px_rgba(0,0,0,.16)] absolute top-1/2 -translate-y-[calc(50%_+_12px)] z-10";
     }

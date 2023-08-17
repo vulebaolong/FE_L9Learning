@@ -3,7 +3,8 @@ import { DispatchType, RootState } from "../../redux/store";
 import style from "./ListCoursePage_Admin.module.css";
 import Button from "../../components/Button/Button";
 import { navigate } from "../../helpers/navigate";
-import { useEffect } from "react";
+import { MouseEvent, useEffect } from "react";
+import { Popconfirm } from "antd";
 
 function ListCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
@@ -14,7 +15,9 @@ function ListCoursePage_Admin() {
     const handleChinhSuaKhoaHoc = (idKhoaHoc: string) => {
         navigate(`/editcourse/${idKhoaHoc}`);
     };
-    const handleXoaKhoaHoc = (idKhoaHoc: string) => {
+
+    const confirm = (idKhoaHoc: string, e?: MouseEvent<HTMLElement>) => {
+        console.log(e);
         dispatch({ type: "xoaKhoaHocSaga", payload: idKhoaHoc });
     };
     return (
@@ -35,14 +38,17 @@ function ListCoursePage_Admin() {
                                     >
                                         Chỉnh sửa
                                     </Button>
-                                    <Button
-                                        onClick={() => {
-                                            handleXoaKhoaHoc(khoaHoc._id);
+                                    <Popconfirm
+                                        title="Xoá khoá học"
+                                        description="Bạn có chắc chắn xóa khoá học này không?"
+                                        onConfirm={(e) => {
+                                            confirm(khoaHoc._id, e);
                                         }}
-                                        type="red"
+                                        okText="Xoá"
+                                        cancelText="Không"
                                     >
-                                        Xoá
-                                    </Button>
+                                        <Button type="red">Xoá</Button>
+                                    </Popconfirm>
                                 </div>
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>

@@ -43,27 +43,35 @@ function DetailCoursePage() {
         totalDuration = handleDuration(khoaHoc?.chuongHoc);
     }
 
+    let isSeHocDuoc = false;
+    if (khoaHoc?.seHocDuoc !== undefined) {
+        if (khoaHoc?.seHocDuoc.length > 0) isSeHocDuoc = true;
+    }
+
     return (
         <section className="pb-24">
             <div className="flex">
                 <div className="w-[66.66667%]">
                     <h1 className="mt-4 font-bold text-3xl dark:text-slate-200">{khoaHoc?.tenKhoaHoc}</h1>
                     <p className={`${para} mt-5 mb-16`}>{khoaHoc?.moTa}</p>
-                    <div className="space-y-3 mb-16">
-                        <h2 className={`${heading_2}`}>Bạn sẽ học được gì?</h2>
-                        <div className="grid grid-cols-2 gap-5">
-                            {khoaHoc?.seHocDuoc.map((text: string, index) => {
-                                return (
-                                    <div key={index} className="flex items-center gap-2 pr-3">
-                                        <div className="text-primary text-sm">
-                                            <FaCheck />
+                    {isSeHocDuoc && (
+                        <div className="space-y-3 mb-16">
+                            <h2 className={`${heading_2}`}>Bạn sẽ học được gì?</h2>
+                            <div className="grid grid-cols-2 gap-5">
+                                {khoaHoc?.seHocDuoc.map((text: string, index) => {
+                                    return (
+                                        <div key={index} className="flex items-center gap-2 pr-3">
+                                            <div className="text-primary text-sm">
+                                                <FaCheck />
+                                            </div>
+                                            <p className={`${para}`}>{text}</p>
                                         </div>
-                                        <p className={`${para}`}>{text}</p>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
+
                     <div className="space-y-3">
                         <ContentCourse totalDuration={totalDuration} khoaHoc={khoaHoc} />
                     </div>
