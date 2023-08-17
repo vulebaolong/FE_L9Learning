@@ -12,13 +12,13 @@ function ListCoursePage_Admin() {
         dispatch({ type: "layDanhSachKhoaHocSaga" });
     }, []);
     const { danhSachKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
-    const handleChinhSuaKhoaHoc = (idKhoaHoc: string) => {
-        navigate(`/editcourse/${idKhoaHoc}`);
+    const handleChinhSuaKhoaHoc = (maKhoaHoc: string) => {
+        navigate(`/editcourse/${maKhoaHoc}`);
     };
 
-    const confirm = (idKhoaHoc: string, e?: MouseEvent<HTMLElement>) => {
+    const confirm = (maKhoaHoc: string, e?: MouseEvent<HTMLElement>) => {
         console.log(e);
-        dispatch({ type: "xoaKhoaHocSaga", payload: idKhoaHoc });
+        dispatch({ type: "xoaKhoaHocSaga", payload: maKhoaHoc });
     };
     return (
         <section className="pb-24">

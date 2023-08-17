@@ -14,6 +14,9 @@ function Button({ children, type, className, onClick }: Props) {
     if (type === "transparent") {
         classType = "bg-transparent border-2 border-white hover:bg-white text-sm font-semibold px-5 py-2";
     }
+    if (type === "transparent_1") {
+        classType = "bg-transparent border-2 dark:border-white/60 dark:hover:border-white/80 border-black/20 hover:border-black/50 text-sm font-semibold px-5 py-2 h-fit";
+    }
     if (type === "bg-whiteblack") {
         classType = "bg-white hover:bg-[#292929] border-2 border-[#292929] text-[#292929] hover:text-white   dark:bg-transparent dark:hover:bg-white dark:text-white dark:hover:text-[#292929] dark:border-slate-200 dark:hover:border-[#292929]   text-sm font-semibold px-5 py-2";
     }

@@ -48,15 +48,22 @@ function DetailCoursePage() {
         if (khoaHoc?.seHocDuoc.length > 0) isSeHocDuoc = true;
     }
 
+    const handleDangKyKhoaHoc = async () => {
+        if (id !== undefined) {
+            const { data, status } = await khoaHocApi.dangKyKhoaHoc({ maKhoaHoc: id });
+            console.log("Call API - dangKyKhoaHoc", { data, status });
+        }
+    };
+
     return (
         <section className="pb-24">
             <div className="flex">
                 <div className="w-[66.66667%]">
-                    <h1 className="mt-4 font-bold text-3xl dark:text-slate-200">{khoaHoc?.tenKhoaHoc}</h1>
-                    <p className={`${para} mt-5 mb-16`}>{khoaHoc?.moTa}</p>
+                    <h1 className={`heading_1 mt-4`}>{khoaHoc?.tenKhoaHoc}</h1>
+                    <p className={`para mt-5 mb-16`}>{khoaHoc?.moTa}</p>
                     {isSeHocDuoc && (
                         <div className="space-y-3 mb-16">
-                            <h2 className={`${heading_2}`}>Bạn sẽ học được gì?</h2>
+                            <h2 className={`heading_2`}>Bạn sẽ học được gì?</h2>
                             <div className="grid grid-cols-2 gap-5">
                                 {khoaHoc?.seHocDuoc.map((text: string, index) => {
                                     return (
@@ -64,7 +71,7 @@ function DetailCoursePage() {
                                             <div className="text-primary text-sm">
                                                 <FaCheck />
                                             </div>
-                                            <p className={`${para}`}>{text}</p>
+                                            <p className={`para`}>{text}</p>
                                         </div>
                                     );
                                 })}
@@ -87,39 +94,39 @@ function DetailCoursePage() {
                     </div>
                     <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>
                     <div className="text-center">
-                        <Button className="px-10 py-3" type="primary">
+                        <Button onClick={handleDangKyKhoaHoc} className="px-10 py-3" type="primary">
                             <span className="text-base">ĐĂNG KÝ HỌC</span>
                         </Button>
                     </div>
                     <div className="w-fit mx-auto space-y-5">
                         <div className="flex gap-5 items-center">
-                            <div className={`${para}`}>
+                            <div className={`para`}>
                                 <FaGaugeHigh />
                             </div>
-                            <span className={`${para}`}>Trình độ cơ bản</span>
+                            <span className={`para`}>Trình độ cơ bản</span>
                         </div>
                         <div className="flex gap-5 items-center">
-                            <div className={`${para}`}>
+                            <div className={`para`}>
                                 <FaFilm />
                             </div>
-                            <span className={`${para}`}>
+                            <span className={`para`}>
                                 <span>Tổng số </span>
                                 <strong>{baiHoc} </strong> bài học
                             </span>
                         </div>
                         <div className="flex gap-5 items-center">
-                            <div className={`${para}`}>
+                            <div className={`para`}>
                                 <FaClock />
                             </div>
-                            <span className={`${para}`}>
+                            <span className={`para`}>
                                 Thời lượng <strong>{totalDuration}</strong>
                             </span>
                         </div>
                         <div className="flex gap-5 items-center">
-                            <div className={`${para}`}>
+                            <div className={`para`}>
                                 <FaBatteryFull />
                             </div>
-                            <span className={`${para}`}>Học mọi lúc mọi nơi</span>
+                            <span className={`para`}>Học mọi lúc mọi nơi</span>
                         </div>
                     </div>
                 </div>

@@ -8,11 +8,8 @@ export const userApi = {
 	dangKy: (data: I_dangKy) => {
 		return axios.post(`/QuanLyNguoiDung/DangKy`, data);
 	},
-	getInfoAccount: () => {
+	layThongTinTaiKhoan: () => {
 		return axios.get(`/QuanLyNguoiDung/ThongTinTaiKhoan`);
-	},
-	getInfoTicket: () => {
-		return axios.get(`/QuanLyNguoiDung/ThongTinDatVe`);
 	},
 	updateAccount: (data) => {
 		return axios.put(`/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data);

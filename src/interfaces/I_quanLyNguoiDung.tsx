@@ -31,3 +31,21 @@ export interface I_PropDangKy {
 export interface I_PropLogged {
     userLogin: I_userLogin;
 }
+export interface I_thongTinTaiKhoan {
+    chiTietKhoaHocGhiDanh: I_chiTietKhoaHocGhiDanh[]
+    id: string
+    taiKhoan: string
+    email: string
+    soDt: string
+    hoTen: string
+    maLoaiNguoiDung: string
+    bannerProfile: string
+    avatar: string
+  }
+  
+  export interface I_chiTietKhoaHocGhiDanh {
+    _id: string
+    tenKhoaHoc: string
+    moTa: string
+    hinhAnh: string
+  }

@@ -13,6 +13,12 @@ import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin
 import ListCoursePage_Admin from "./pages/ListCoursePage_Admin/ListCoursePage_Admin";
 import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Admin";
 import CoursesPage from "./pages/CoursesPage/CoursesPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import BacsicLayout from "./layouts/BacsicLayout";
+import Personal from "./pages/SettingsPage/Personal";
+import Security from "./pages/SettingsPage/Security";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import Notifications from "./pages/SettingsPage/Notifications";
 
 function App() {
     const navigate = useNavigate();
@@ -49,8 +55,18 @@ function App() {
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
                     </Route>
 
+                    {/* PROFILE LAYOUT */}
+                    <Route element={<BacsicLayout />}>
+                        <Route path="profile" element={<ProfilePage />} />
+                        <Route path="settings" element={<SettingsPage />}>
+                            <Route path="personal" element={<Personal />} />
+                            <Route path="security" element={<Security />} />
+                            <Route path="notifications" element={<Notifications />} />
+                        </Route>
+                    </Route>
+
                     {/* OTHER */}
-                    <Route path="*" element={<Navigate to={"/"} />} />
+                    {/* <Route path="*" element={<Navigate to={"/"} />} /> */}
                 </Routes>
             </ConfigProvider>
         </>

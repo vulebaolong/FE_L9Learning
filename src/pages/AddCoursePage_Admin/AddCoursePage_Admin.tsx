@@ -59,6 +59,7 @@ function AddCoursePage_Admin() {
             tenKhoaHoc: values.tenKhoaHoc,
             moTa: values.moTa,
             giaTien: values.giaTien,
+            danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
             seHocDuoc: values.seHocDuoc,
             chuongHoc: values.chuongHoc,
             hinhAnh: values.hinhAnh.file.originFileObj,
@@ -67,6 +68,7 @@ function AddCoursePage_Admin() {
         formData.append("tenKhoaHoc", payload.tenKhoaHoc);
         formData.append("moTa", payload.moTa);
         formData.append("giaTien", payload.giaTien.toString());
+        formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
         formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
         formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
         formData.append("hinhAnh", payload.hinhAnh);
@@ -168,10 +170,13 @@ function AddCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => { 
-                                return <Select.Option key={danhMuc._id} value={danhMuc._id}>{danhMuc.tenDanhMuc}</Select.Option>
-                             })}
-                            
+                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => {
+                                return (
+                                    <Select.Option key={danhMuc._id} value={danhMuc._id}>
+                                        {danhMuc.tenDanhMuc}
+                                    </Select.Option>
+                                );
+                            })}
                         </Select>
                     </Form.Item>
 

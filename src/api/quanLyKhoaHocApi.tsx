@@ -13,10 +13,13 @@ export const khoaHocApi = {
     capNhatKhoaHoc: (khoahoc: FormData) => {
         return axios.put(`/QuanLyKhoaHoc/CapNhatKhoaHoc`, khoahoc);
     },
-    xoaKhoaHoc: (idKhoaHoc: string) => {
-        return axios.delete(`/QuanLyKhoaHoc/XoaKhoaHoc?idKhoaHoc=${idKhoaHoc}`);
+    xoaKhoaHoc: (maKhoaHoc: string) => {
+        return axios.delete(`/QuanLyKhoaHoc/XoaKhoaHoc?maKhoaHoc=${maKhoaHoc}`);
     },
     layDanhMucKhoaHoc: () => {
         return axios.get(`/QuanLyKhoaHoc/LayDanhMucKhoaHoc`);
+    },
+    dangKyKhoaHoc: (maKhoaHoc: { maKhoaHoc: string }) => {
+        return axios.post(`/QuanLyKhoaHoc/DangKyKhoaHoc`, maKhoaHoc);
     },
 };

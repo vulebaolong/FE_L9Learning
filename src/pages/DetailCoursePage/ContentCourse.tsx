@@ -13,8 +13,6 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
         baiHoc += item.videos.length;
     });
 
-    const heading_2 = `font-bold text-xl dark:text-slate-200`;
-
     const para = `text-black/80 text-sm dark:text-slate-400`;
 
     const handleToggleOpenClose = () => {
@@ -41,7 +39,7 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
             label: (
                 <div className="flex items-baseline justify-between">
                     <strong className="chuongHoc text-[#333] font-semibold dark:text-slate-300">{`${chuong.title}`}</strong>
-                    <span className={`${para} mr-4`}>{chuong.videos.length} bài học</span>
+                    <span className={`para mr-4`}>{chuong.videos.length} bài học</span>
                 </div>
             ),
             children: (
@@ -52,8 +50,8 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
                                 <div className="text-primary">
                                     <FaCirclePlay />
                                 </div>
-                                <span className={`${para}`}>{video.title}</span>
-                                <span className={`${para} ml-auto`}>{video.duration}</span>
+                                <span className={`para`}>{video.title}</span>
+                                <span className={`para ml-auto`}>{video.duration}</span>
                             </div>
                         );
                     })}
@@ -63,22 +61,22 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
     });
     return (
         <>
-            <h2 className={`${heading_2}`}>Nội dung khóa học</h2>
+            <h2 className={`heading_2`}>Nội dung khóa học</h2>
             <div className="flex items-baseline justify-between">
                 <div className="">
-                    <span className={`${para}`}>
+                    <span className={`para`}>
                         <strong>{khoaHoc?.chuongHoc.length} </strong> chương
                     </span>
                     <span> • </span>
-                    <span className={`${para}`}>
+                    <span className={`para`}>
                         <strong>{baiHoc} </strong> bài học
                     </span>
                     <span> • </span>
-                    <span className={`${para}`}>
+                    <span className={`para`}>
                         Thời lượng <strong>{totalDuration}</strong>
                     </span>
                 </div>
-                <span onClick={handleToggleOpenClose} className={`${para} font-semibold cursor-pointer !text-primary hover:!text-primary_hover active:!text-primary_active`}>
+                <span onClick={handleToggleOpenClose} className={`para font-semibold cursor-pointer !text-primary hover:!text-primary_hover active:!text-primary_active`}>
                     {khoaHoc?.chuongHoc.length === expandedKeys.length ? "Thu nhỏ tất cả" : "Mở rộng tất cả"}
                 </span>
             </div>

@@ -39,6 +39,16 @@ function Logged(props: I_PropLogged) {
         setIsOpenPopupUser(false);
     };
 
+    const handleProfile = () => {
+        navigate("/profile");
+        setIsOpenPopupUser(false);
+    };
+
+    const handleSetting = () => {
+        navigate("/settings/personal");
+        setIsOpenPopupUser(false);
+    };
+
     const renderControllAdmin = () => {
         if (userLogin.maLoaiNguoiDung !== "QuanTri") return;
 
@@ -89,6 +99,7 @@ function Logged(props: I_PropLogged) {
 
             <div className="">
                 <span
+                    onClick={handleProfile}
                     className="text-base cursor-pointer transition
                 text-[#666] hover:text-[#292929]
                 dark:text-white/70 dark:hover:text-white/90
@@ -113,6 +124,7 @@ function Logged(props: I_PropLogged) {
             {/* CÀI ĐẶT */}
             <div className="">
                 <span
+                    onClick={handleSetting}
                     className="text-base cursor-pointer transition
                 text-[#666] hover:text-[#292929]
                 dark:text-white/70 dark:hover:text-white/90

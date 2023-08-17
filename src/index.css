@@ -97,3 +97,11 @@ input {
 .ant-btn-primary {
     background-color: #1677ff;
 }
+
+.ant-switch {
+    @apply !bg-primary/50
+}
+
+.ant-switch-checked {
+    @apply !bg-primary
+}
