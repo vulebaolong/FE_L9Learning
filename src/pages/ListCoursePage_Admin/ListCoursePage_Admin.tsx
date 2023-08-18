@@ -8,10 +8,13 @@ import { Popconfirm } from "antd";
 
 function ListCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
+
     useEffect(() => {
         dispatch({ type: "layDanhSachKhoaHocSaga" });
     }, []);
+
     const { danhSachKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
+
     const handleChinhSuaKhoaHoc = (maKhoaHoc: string) => {
         navigate(`/editcourse/${maKhoaHoc}`);
     };
@@ -20,6 +23,7 @@ function ListCoursePage_Admin() {
         console.log(e);
         dispatch({ type: "xoaKhoaHocSaga", payload: maKhoaHoc });
     };
+
     return (
         <section className="pb-24">
             <h2 className="heading_1">Danh sách khoá học</h2>
@@ -27,9 +31,10 @@ function ListCoursePage_Admin() {
             <div className="grid grid-cols-4 gap-7 mt-5">
                 {danhSachKhoaHoc.map((khoaHoc) => {
                     return (
-                        <div key={khoaHoc._id} className="">
+                        <div key={khoaHoc._id}>
+                            {/* HÌNH ẢNH */}
                             <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
-                                <div className={`${style.actionButton} flex flex-col gap-2`}>
+                                <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                     <Button
                                         onClick={() => {
                                             handleChinhSuaKhoaHoc(khoaHoc._id);
@@ -52,6 +57,7 @@ function ListCoursePage_Admin() {
                                 </div>
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>
+                            {/* TÊN KHOÁ HỌC */}
                             <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
                         </div>
                     );

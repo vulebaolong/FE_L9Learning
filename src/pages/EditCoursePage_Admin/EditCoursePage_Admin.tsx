@@ -72,6 +72,7 @@ function EditCoursePage_Admin() {
             danhMucKhoaHoc_ID: motKhoaHoc?.danhMucKhoaHoc_ID._id,
         };
     };
+
     useEffect(() => form.resetFields(), [motKhoaHoc, form]);
 
     const onFinish = (values: I_valuesKhoahoc) => {
@@ -125,7 +126,7 @@ function EditCoursePage_Admin() {
             hinhAnh: hinhAnh(),
         };
         console.log(payload);
-        
+
         const formData = new FormData();
         formData.append("maKhoaHoc", payload.maKhoaHoc);
         formData.append("tenKhoaHoc", payload.tenKhoaHoc);
@@ -266,9 +267,7 @@ function EditCoursePage_Admin() {
                     </Form.List>
 
                     {/* CHƯƠNG HỌC */}
-                    <p className="text-base font-bold mb-2">
-                        <span className="text-red-700">* </span> Chương học
-                    </p>
+                    <p className="text-base font-bold mb-2">Chương học</p>
                     <div className="space-y-3 ">
                         {arrChuong.map((item, index) => {
                             return (

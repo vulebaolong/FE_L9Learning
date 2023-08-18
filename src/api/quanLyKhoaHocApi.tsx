@@ -22,4 +22,7 @@ export const khoaHocApi = {
     dangKyKhoaHoc: (maKhoaHoc: { maKhoaHoc: string }) => {
         return axios.post(`/QuanLyKhoaHoc/DangKyKhoaHoc`, maKhoaHoc);
     },
+    huyDangKyKhoaHoc: (maKhoaHoc: { maKhoaHoc: string }) => {
+        return axios.post(`/QuanLyKhoaHoc/HuyDangKyKhoaHoc`, maKhoaHoc);
+    },
 };

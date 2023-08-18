@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
-    type: string;
+    type: "primary" | "transparent" | "transparent_1" | "transparent_2" | "bg-whiteblack" | "circle" | "gradian" | "white" | "red";
     className?: string;
     name?: string;
     htmlFor?: "button" | "submit" | "reset" | undefined;
@@ -33,10 +33,10 @@ function Button({ name, htmlFor, children, type, className, onClick }: Props) {
         classType = "h-[44px] w-full bg-[linear-gradient(70.06deg,#2cccff_-5%,#22dfbf_106%)] font-semibold text-lg text-white";
     }
     if (type === "white") {
-        classType = "bg-white  hover:bg-white/90 active:bg-white/80 text-black text-sm font-semibold px-5 py-2";
+        classType = "bg-white w-max hover:bg-white/90 active:bg-white/80 text-black text-sm font-semibold px-5 py-2";
     }
     if (type === "red") {
-        classType = "bg-red-500  hover:bg-red-500/90 active:bg-red-500/80 text-white text-sm font-semibold px-5 py-2";
+        classType = "bg-red-500 w-max hover:bg-red-500/90 active:bg-red-500/80 text-white text-sm font-semibold px-5 py-2";
     }
     return (
         <button name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} cursor-pointer transition rounded-full `}>

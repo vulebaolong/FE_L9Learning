@@ -17,7 +17,7 @@ const quanLyNguoiDungSlice = createSlice({
             state.userLogin = payload;
         },
         capNhatUserLoginREDU: (state, { payload }) => {
-            delete payload.chiTietKhoaHocGhiDanh;
+            // delete payload.chiTietKhoaHocGhiDanh;
             lcStorage.set(USER_LOGIN, payload);
             state.userLogin = payload;
         },

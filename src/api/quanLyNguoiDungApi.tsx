@@ -17,4 +17,7 @@ export const userApi = {
     capNhatMatKhau: (thongTinMatKhau: { matKhauCurent: string; matKhauNew: string }) => {
         return axios.patch(`/QuanLyNguoiDung/CapNhatMatKhau`, thongTinMatKhau);
     },
+    capNhatAvatar: (avatar: FormData) => {
+        return axios.patch(`/QuanLyNguoiDung/CapNhatAvatar`, avatar);
+    },
 };

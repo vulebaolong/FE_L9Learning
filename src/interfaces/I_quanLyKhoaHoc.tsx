@@ -33,7 +33,7 @@ export interface I_PropContentCourse {
     totalDuration: string;
 }
 
-interface file {
+export interface file {
     file: {
         originFileObj: RcFile;
     };

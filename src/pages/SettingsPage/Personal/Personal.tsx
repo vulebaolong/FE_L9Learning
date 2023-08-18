@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormEmail from "./FormEmail";
 import FormSoDienThoai from "./FormSoDienThoai";
 import FormThayDoiMatKhau from "../Security/FormThayDoiMatKhau";
+import FormAvatar from "./FormAvatar";
 
 function Personal() {
     // const dispatch: DispatchType = useDispatch();
@@ -27,6 +28,7 @@ function Personal() {
                 <FormTaiKhoan />
                 <FormEmail />
                 <FormSoDienThoai />
+                <FormAvatar />
             </div>
         </div>
     );

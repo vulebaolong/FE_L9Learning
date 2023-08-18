@@ -12,6 +12,7 @@ export interface I_dangKy {
 }
 
 export interface I_userLogin {
+    chiTietKhoaHocGhiDanh: I_chiTietKhoaHocGhiDanh[];
     id: string;
     taiKhoan: string;
     email: string;
@@ -34,8 +35,8 @@ export interface I_thongTinTaiKhoan {
     soDt: string;
     hoTen: string;
     maLoaiNguoiDung: string;
-    bannerProfile: string;
     avatar: string;
+    bannerProfile: string;
 }
 
 export interface I_chiTietKhoaHocGhiDanh {

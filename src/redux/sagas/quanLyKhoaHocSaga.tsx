@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { layDanhSachKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
 import { error, success } from "../../helpers/message";
+import { navigate } from "../../helpers/navigate";
 
 // layDanhSachKhoaHocSaga
 function* layDanhSachKhoaHocSaga() {
@@ -52,8 +53,13 @@ function* themKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
         const { data, status } = yield call(() => khoaHocApi.themKhoaHoc(payload));
 
         console.log("Saga - themKhoaHocSaga", { data, status });
+
+        success("Thêm khoá học thành công")
+
+        navigate("/listcourse")
     } catch (err) {
         console.log(err);
+        error("Thêm khoá học không thành công")
     }
 }
 
