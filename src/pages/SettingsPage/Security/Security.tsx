@@ -1,9 +1,17 @@
 import { FaFacebookF, FaGoogle, FaPhone } from "react-icons/fa6";
-import Button from "../../components/Button/Button";
+import Button from "../../../components/Button/Button";
+import FormThayDoiMatKhau from "./FormThayDoiMatKhau";
 
 function Security() {
     return (
-        <div className="space-y-8">
+        <div className="space-y-12">
+            <div>
+                <h2 className="heading_2">Mật khẩu</h2>
+                <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
+                <div className="space-y-10">
+                    <FormThayDoiMatKhau />
+                </div>
+            </div>
             <div>
                 <h2 className="heading_2">Liên kết tài khoản đăng nhập</h2>
                 <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />

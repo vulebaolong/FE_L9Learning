@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
 import SideBar from "../components/SideBar/SideBar";
-import ModalAuth from "../components/Modal/ModalAuth";
 import Footer from "../components/Footer/Footer";
 
 function MainLayout() {
@@ -17,7 +16,6 @@ function MainLayout() {
                 </div>
             </div>
             <Footer />
-            <ModalAuth />
         </>
     );
 }

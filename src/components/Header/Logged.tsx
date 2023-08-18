@@ -24,6 +24,7 @@ function Logged(props: I_PropLogged) {
     };
 
     const handleDangXuat = () => {
+        navigate("/");
         lcStorage.remove(USER_LOGIN);
         // Reload lại trang web
         window.location.reload();
@@ -46,6 +47,11 @@ function Logged(props: I_PropLogged) {
 
     const handleSetting = () => {
         navigate("/settings/personal");
+        setIsOpenPopupUser(false);
+    };
+
+    const handleCourse = () => {
+        navigate("/courses");
         setIsOpenPopupUser(false);
     };
 
@@ -83,6 +89,7 @@ function Logged(props: I_PropLogged) {
 
     const content = (
         <div className="w-[250px] p-3 ">
+            {/* AVATAR */}
             <div className="flex items-center gap-3 w-full">
                 <div className="">
                     <Avatar src={<img src={userLogin.avatar} alt="avatar" />} size={60} />
@@ -95,8 +102,7 @@ function Logged(props: I_PropLogged) {
 
             <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
-            {renderControllAdmin()}
-
+            {/* TRANG CÁ NHÂN */}
             <div className="">
                 <span
                     onClick={handleProfile}
@@ -108,8 +114,11 @@ function Logged(props: I_PropLogged) {
                     Trang cá nhân
                 </span>
             </div>
+
+            {/* KHOÁ HỌC */}
             <div className="mt-4">
-                <span
+                    
+                <span  onClick={handleCourse}
                     className="text-base cursor-pointer transition
                 text-[#666] hover:text-[#292929]
                 dark:text-white/70 dark:hover:text-white/90
@@ -118,8 +127,10 @@ function Logged(props: I_PropLogged) {
                     Khoá học
                 </span>
             </div>
-
             <hr className="dark:!border-gray-700 border-gray-200 my-5" />
+
+            {/* ADMIN */}
+            {renderControllAdmin()}
 
             {/* CÀI ĐẶT */}
             <div className="">

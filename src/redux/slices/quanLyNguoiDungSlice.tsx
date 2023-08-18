@@ -5,6 +5,8 @@ import I_initialState from "../../interfaces/I_initialState";
 
 const initialState: I_initialState["quanLyNguoiDungSlice"] = {
     userLogin: lcStorage.get(USER_LOGIN),
+    isPageDangNhap: true,
+    autofill: null,
 };
 
 const quanLyNguoiDungSlice = createSlice({
@@ -14,9 +16,20 @@ const quanLyNguoiDungSlice = createSlice({
         dangNhapREDU: (state, { payload }) => {
             state.userLogin = payload;
         },
+        capNhatUserLoginREDU: (state, { payload }) => {
+            delete payload.chiTietKhoaHocGhiDanh;
+            lcStorage.set(USER_LOGIN, payload);
+            state.userLogin = payload;
+        },
+        setIsPageDangNhapREDU: (state, { payload }) => {
+            state.isPageDangNhap = payload;
+        },
+        setAutofillREDU: (state, { payload }) => {
+            state.autofill = payload;
+        },
     },
 });
 
-export const { dangNhapREDU } = quanLyNguoiDungSlice.actions;
+export const { setAutofillREDU, dangNhapREDU, capNhatUserLoginREDU, setIsPageDangNhapREDU } = quanLyNguoiDungSlice.actions;
 
 export default quanLyNguoiDungSlice.reducer;

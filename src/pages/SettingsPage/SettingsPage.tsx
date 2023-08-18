@@ -33,7 +33,7 @@ function SettingsPage() {
                         <span className={`heading_3`}>Cài đặt thông báo</span>
                     </Link>
                 </div>
-                <div className="col-span-6 pl-10 h-screen">
+                <div className="col-span-6 pl-10 min-h-screen">
                     <Outlet />
                 </div>
             </div>

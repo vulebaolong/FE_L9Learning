@@ -45,7 +45,7 @@ function Notifications() {
     };
     const box = `flex justify-between items-center py-[12px] px-[20px] rounded-lg hover:bg-[#e8ebed] dark:hover:bg-[#e8ebed23] cursor-pointer transition`;
     return (
-        <div className="space-y-8">
+        <div className="space-y-12">
             <div>
                 <h2 className="heading_2">Email</h2>
                 <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />

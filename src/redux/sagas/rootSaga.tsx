@@ -8,6 +8,7 @@ export default function* rootSaga() {
     yield all([
         quanLyNguoiDungSaga.theoDoiDangNhapSaga(),
         quanLyNguoiDungSaga.theoDoiDangKySaga(),
+        quanLyNguoiDungSaga.theoDoiCapNhatUserLoginSaga(),
         quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiLayMotKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiThemKhoaHocSaga(),

@@ -4,12 +4,15 @@ import logoImg from "../../assets/logo/L9_logo.png";
 import Button from "../Button/Button";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setAutofillREDU, setIsPageDangNhapREDU } from "../../redux/slices/quanLyNguoiDungSlice";
+import { useEffect } from "react";
+import { Store } from "antd/es/form/interface";
 
-function DangNhap(props: I_PropDangNhap) {
-    const { handleNavigateDangKy } = props;
+function DangNhap() {
+    const { autofill } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const [form] = Form.useForm();
 
@@ -26,6 +29,23 @@ function DangNhap(props: I_PropDangNhap) {
     const classInput = `bg-[#1618230f] px-[20px] py-[12px] w-full transition outline-none rounded-[44px] h-[44px] text-sm font-inter
     border dark:border-slate-700 dark:focus:border-slate-400 
     focus:border-slate-400  border-slate-200 `;
+
+    const handleNavigateDangNhap = () => {
+        dispatch(setIsPageDangNhapREDU(false));
+    };
+
+    const initialValues = autofill as Store | undefined;
+
+    useEffect(() => form.resetFields(), [autofill, form]);
+
+    const handleKhachHang = () => {
+        dispatch(setAutofillREDU({ taiKhoan: "khachhang", matKhau: "123456" }));
+    };
+
+    const handleQuanTri = () => {
+        dispatch(setAutofillREDU({ taiKhoan: "quantri", matKhau: "123456" }));
+    };
+
     return (
         <>
             <div className="">
@@ -33,7 +53,8 @@ function DangNhap(props: I_PropDangNhap) {
                 <h1 className="text-[#292929] text-center mt-5 dark:text-slate-200 text-4xl font-bold">Đăng nhập vào L9</h1>
             </div>
             <div className=" mt-11">
-                <Form form={form} layout={"vertical"} onFinish={onFinish} autoComplete="off">
+                <Form form={form} layout={"vertical"} onFinish={onFinish} initialValues={initialValues} autoComplete="off">
+                    {/* TÀI KHOẢN */}
                     <Form.Item
                         name="taiKhoan"
                         rules={[
@@ -48,6 +69,7 @@ function DangNhap(props: I_PropDangNhap) {
                         <Input className={`${style.inputAuth} ${classInput}`} size="large" prefix={<UserOutlined />} placeholder="Tài khoản" autoComplete="taiKhoan" />
                     </Form.Item>
 
+                    {/* MẬT KHẨU */}
                     <Form.Item
                         name="matKhau"
                         rules={[
@@ -69,23 +91,33 @@ function DangNhap(props: I_PropDangNhap) {
                         />
                     </Form.Item>
 
+                    {/* BUTTON */}
                     <Form.Item className="mt-[20px]">
                         <Button className="" type="gradian">
                             Đăng nhập
                         </Button>
                     </Form.Item>
 
-                    {/* <div className="flex items-center py-4 space-x-1">
-                            <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-                            <p className="px-3 text-sm dark:text-gray-400">Thử với tài khoản có sẵn</p>
-                            <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-                        </div> */}
+                    <div className="flex items-center py-4 space-x-1">
+                        <div className="flex-1 h-px sm:w-16 bg-gray-300 dark:bg-gray-700"></div>
+                        <p className="px-3 text-sm dark:text-gray-400">Thử với tài khoản có sẵn</p>
+                        <div className="flex-1 h-px sm:w-16 bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+
+                    <div className="flex gap-5 items-center">
+                        <Button onClick={handleKhachHang} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
+                            Khách hàng
+                        </Button>
+                        <Button onClick={handleQuanTri} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
+                            Quản trị
+                        </Button>
+                    </div>
                 </Form>
             </div>
             <div className=" mt-11">
                 <p className="text-center text-base">
                     <span>Bạn chưa có tài khoản? </span>
-                    <span onClick={handleNavigateDangKy} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
+                    <span onClick={handleNavigateDangNhap} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
                         Đăng ký
                     </span>
                 </p>

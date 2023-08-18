@@ -20,14 +20,9 @@ export interface I_userLogin {
     accessToken: string;
     maLoaiNguoiDung: string;
     avatar: string;
+    bannerProfile: string;
 }
 
-export interface I_PropDangNhap {
-    handleNavigateDangKy: () => void;
-}
-export interface I_PropDangKy {
-    handleNavigateDangNhap: () => void;
-}
 export interface I_PropLogged {
     userLogin: I_userLogin;
 }

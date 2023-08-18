@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { userApi } from "../../api/quanLyNguoiDungApi";
 import { I_dangKy, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
-import { dangNhapREDU } from "../slices/quanLyNguoiDungSlice";
+import { capNhatUserLoginREDU, dangNhapREDU, setAutofillREDU, setIsPageDangNhapREDU } from "../slices/quanLyNguoiDungSlice";
 import { error, success } from "../../helpers/message";
 import { lcStorage } from "../../helpers/localStorage";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants";
@@ -43,7 +43,9 @@ function* dangKySaga({ payload }: { payload: I_dangKy; type: string }) {
 
         success("Đăng ký thành công");
 
-        // yield put(dangNhapREDU(data.result.data));
+        yield put(setAutofillREDU(payload));
+
+        yield put(setIsPageDangNhapREDU(true));
     } catch (err) {
         console.log(err);
         error(err.response?.data?.result?.message);
@@ -53,4 +55,23 @@ function* dangKySaga({ payload }: { payload: I_dangKy; type: string }) {
 // Khai báo Saga Watcher để theo dõi action FETCH_USERS
 export function* theoDoiDangKySaga() {
     yield takeLatest("dangKySaga", dangKySaga);
+}
+
+// capNhatUserLoginSaga
+function* capNhatUserLoginSaga() {
+    try {
+        const { data, status } = yield call(() => userApi.layThongTinTaiKhoan());
+
+        console.log("Saga - capNhatUserLoginSaga", { data, status });
+
+        yield put(capNhatUserLoginREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+        error(err.response?.data?.result?.message);
+    }
+}
+
+// Khai báo Saga Watcher để theo dõi action FETCH_USERS
+export function* theoDoiCapNhatUserLoginSaga() {
+    yield takeLatest("capNhatUserLoginSaga", capNhatUserLoginSaga);
 }

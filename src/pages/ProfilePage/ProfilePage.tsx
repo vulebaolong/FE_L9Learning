@@ -36,7 +36,7 @@ function ProfilePage() {
                         </div>
                         <div className="w-44 flex-shrink-0"></div>
                         {/* NAME */}
-                        <div className="my-5 ml-5">
+                        <div className="my-5 ml-5 w-full">
                             <p className="w-1/2 truncate">{thongTinTaiKhoan?.hoTen}</p>
                         </div>
                     </div>

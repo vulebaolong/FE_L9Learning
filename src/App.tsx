@@ -15,10 +15,13 @@ import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Ad
 import CoursesPage from "./pages/CoursesPage/CoursesPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import BacsicLayout from "./layouts/BacsicLayout";
-import Personal from "./pages/SettingsPage/Personal";
-import Security from "./pages/SettingsPage/Security";
+import Personal from "./pages/SettingsPage/Personal/Personal";
+import Security from "./pages/SettingsPage/Security/Security";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
-import Notifications from "./pages/SettingsPage/Notifications";
+import Notifications from "./pages/SettingsPage/Notifications/Notifications";
+import ModalAuth from "./components/Modal/ModalAuth";
+import Roadmap from "./pages/Roadmap/Roadmap";
+import Blog from "./pages/Blog/Blog";
 
 function App() {
     const navigate = useNavigate();
@@ -44,6 +47,7 @@ function App() {
                 }}
             >
                 {contextHolder}
+                <ModalAuth />
                 <Routes>
                     {/* HOME LAYOUT */}
                     <Route element={<MainLayout />}>
@@ -53,6 +57,8 @@ function App() {
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
                         <Route path="listcourse" element={<ListCoursePage_Admin />} />
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
+                        <Route path="roadmap" element={<Roadmap />} />
+                        <Route path="blog" element={<Blog />} />
                     </Route>
 
                     {/* PROFILE LAYOUT */}
