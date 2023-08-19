@@ -38,6 +38,7 @@ export interface file {
         originFileObj: RcFile;
     };
 }
+
 export interface I_valuesKhoahoc {
     _id: string;
     tenKhoaHoc: string;
@@ -52,11 +53,10 @@ export interface I_valuesKhoahoc {
     danhMucKhoaHoc_ID: I_danhMucKhoaHoc;
 }
 
-export interface I_khoaHocPayload {
+export interface I_itemSearch {
+    _id: string;
     tenKhoaHoc: string;
-    moTa: string;
-    giaTien: number;
-    seHocDuoc: string[];
-    chuongHoc: I_chuongHoc[];
-    hinhAnh: RcFile;
+    hinhAnh: string;
 }
+
+export type I_resultSearch = I_itemSearch[] | [];

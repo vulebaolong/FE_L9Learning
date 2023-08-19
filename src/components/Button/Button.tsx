@@ -7,9 +7,11 @@ interface Props {
     name?: string;
     htmlFor?: "button" | "submit" | "reset" | undefined;
     onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+    disabled?: boolean;
 }
-function Button({ name, htmlFor, children, type, className, onClick }: Props) {
+function Button({ name, htmlFor, children, type, className, onClick, disabled = false }: Props) {
     let classType = "";
+    let classDisabled = "";
     if (type === "primary") {
         classType = "bg-primary hover:bg-primary_hover active:bg-primary_active  text-white text-sm font-semibold px-5 py-2";
     }
@@ -38,8 +40,11 @@ function Button({ name, htmlFor, children, type, className, onClick }: Props) {
     if (type === "red") {
         classType = "bg-red-500 w-max hover:bg-red-500/90 active:bg-red-500/80 text-white text-sm font-semibold px-5 py-2";
     }
+    if (disabled === true) {
+        classDisabled = "cursor-not-allowed"
+    }
     return (
-        <button name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} cursor-pointer transition rounded-full `}>
+        <button disabled={disabled} name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} ${classDisabled} cursor-pointer transition rounded-full `}>
             {children}
         </button>
     );

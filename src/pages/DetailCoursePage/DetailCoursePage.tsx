@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ContentCourse from "./ContentCourse";
 import { handleDuration } from "./../../helpers/durationHelper";
 import { error, success } from "../../helpers/message";
+import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
 
 function DetailCoursePage() {
     const dispatch: DispatchType = useDispatch();
@@ -67,11 +68,36 @@ function DetailCoursePage() {
         }
     };
 
+    const handleDangKyKhoaHocNotLogged = () => {
+        dispatch(setIsOpenModalREDU(true));
+    };
+
     const renderHoctiep = () => {
+        // Trường hợp CHƯA đăng nhập
+        if (userLogin === null) {
+            console.log("Trường hợp CHƯA đăng nhập");
+            return (
+                <>
+                    <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>
+
+                    <div className="text-center">
+                        <Button onClick={handleDangKyKhoaHocNotLogged} className="px-10 py-3" type="primary">
+                            <span className="text-base">ĐĂNG KÝ HỌC</span>
+                        </Button>
+                    </div>
+                </>
+            );
+        }
+
+        // Trường hợp ĐÃ đăng nhập
         const flag = userLogin.chiTietKhoaHocGhiDanh.findIndex((khoaHoc) => khoaHoc._id === id);
 
+        console.log(flag);
+
         // Trường hợp khoá học ĐÃ đăng ký
-        if (flag !== -1) {
+        if (flag > -1) {
+            console.log("Trường hợp khoá học ĐÃ đăng ký");
+
             return (
                 <div className="text-center">
                     <Button className="px-10 py-3" type="primary">
@@ -83,6 +109,7 @@ function DetailCoursePage() {
 
         // Trường hợp khoá học CHƯA đăng ký
         if (flag === -1) {
+            console.log("Trường hợp khoá học CHƯA đăng ký");
             return (
                 <>
                     <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>

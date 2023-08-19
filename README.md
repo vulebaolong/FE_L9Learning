@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# L9_learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Module người dùng
+- 1 - Lấy danh sách , tìm kiếm khóa học
+   - 1.1 - Lấy chi tiết khóa học
+- 2 - Lấy danh mục khóa học
+- 3 - Lấy khóa học theo danh mục
+- 4 - Đăng ký
+- 5 - Đăng nhập
+- 6 - Chỉnh sửa thông tin cá nhân
+- 7 - Đăng ký khóa học
+- 8 - Hủy đăng ký
+- 9 - Xem thông tin cá nhân
+- 10 - Chỉnh sửa thông tin cá nhân
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Module quản trị
+- 11 - Quản lý người dùng
+- 12 - Quản lý khóa học
+- 13 - Ghi danh và hủy ghi danh (Nâng cao)
 
-## Expanding the ESLint configuration
+## Tổng số màn hình tối thiểu
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### templateAdmin
+- QuanLyNguoiDung
+- QuanLyKhoaHoc
+- QuanLyGhiDanh
 
-- Configure the top-level `parserOptions` property like this:
+### templateLogin (có thể dùng popup trong home template không cần tạo template Login)
+- DangKy
+- DangNhap
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### templateHome
+- TrangChu
+- TrangChiTietKhoaHoc
+- TrangQuanLyThongTinNguoiDung

@@ -7,28 +7,26 @@ import Button from "../../components/Button/Button";
 import style from "./ProfilePage.module.css";
 import { navigate } from "../../helpers/navigate";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { error, success } from "../../helpers/message";
 
 function ProfilePage() {
     const dispatch: DispatchType = useDispatch();
 
-    const [thongTinTaiKhoan, setThongTinTaiKhoan] = useState<I_thongTinTaiKhoan>();
+    // const [thongTinTaiKhoan, setThongTinTaiKhoan] = useState<I_thongTinTaiKhoan>();
 
-    console.log(thongTinTaiKhoan);
+    // console.log(thongTinTaiKhoan);
+
+    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+
 
     useEffect(() => {
-        const fetch = async () => {
-            const { data, status } = await userApi.layThongTinTaiKhoan();
-            console.log("Call API - layThongTinTaiKhoan", { data, status });
-            setThongTinTaiKhoan(data.result.data);
-        };
-        fetch();
+        dispatch({ type: "capNhatUserLoginSaga" });
     }, []);
 
     const renderDaDangKyKhoaHoc = () => {
-        const length = thongTinTaiKhoan?.chiTietKhoaHocGhiDanh.length;
+        const length = userLogin?.chiTietKhoaHocGhiDanh.length;
         console.log(length);
 
         if (length === undefined) return;
@@ -68,7 +66,7 @@ function ProfilePage() {
             <div className="container">
                 {/* BANNER */}
                 <div className="aspect-[25/7] rounded-b-xl overflow-hidden">
-                    <img className="w-full object-cover" src={thongTinTaiKhoan?.bannerProfile} alt="" />
+                    <img className="w-full object-cover" src={userLogin?.bannerProfile} alt="" />
                 </div>
 
                 {/* BODY */}
@@ -77,13 +75,13 @@ function ProfilePage() {
                     <div className="relative flex">
                         {/* AVATAR */}
                         <div className="absolute bottom-0 left-0 aspect-square w-44 border-4 border-white dark:border-slate-900  rounded-full overflow-hidden">
-                            <img className="w-full h-full object-cover" src={thongTinTaiKhoan?.avatar} alt="" />
+                            <img className="w-full h-full object-cover" src={userLogin?.avatar} alt="" />
                         </div>
                         <div className="w-44 flex-shrink-0"></div>
 
                         {/* CHI TIẾT */}
                         <div className="my-5 ml-5 w-full">
-                            <p className="font-extrabold text-2xl w-1/2 truncate">{thongTinTaiKhoan?.hoTen}</p>
+                            <p className="font-extrabold text-2xl w-1/2 truncate">{userLogin?.hoTen}</p>
                             <p className="w-1/2 truncate">{renderDaDangKyKhoaHoc()}</p>
                         </div>
                     </div>
@@ -114,8 +112,8 @@ function ProfilePage() {
                             <div className={`${box}`}>
                                 <h4 className="heading_3">Các khóa học đã tham gia</h4>
                                 <div className="space-y-5">
-                                    {thongTinTaiKhoan?.chiTietKhoaHocGhiDanh.length === 0 && "Chưa đăng ký khoá học"}
-                                    {thongTinTaiKhoan?.chiTietKhoaHocGhiDanh.map((khoaHoc) => {
+                                    {userLogin?.chiTietKhoaHocGhiDanh.length === 0 && "Chưa đăng ký khoá học"}
+                                    {userLogin?.chiTietKhoaHocGhiDanh.map((khoaHoc) => {
                                         return (
                                             <div key={khoaHoc._id} className="grid grid-cols-2 gap-5">
                                                 {/* HÌNH ẢNH */}

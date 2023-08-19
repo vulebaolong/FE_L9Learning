@@ -9,11 +9,13 @@ import ButtonMe from "../../components/Button/Button";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { useParams } from "react-router-dom";
 import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 
 function EditCoursePage_Admin() {
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
+
     const { id } = useParams();
 
     const [form] = Form.useForm();
@@ -28,7 +30,7 @@ function EditCoursePage_Admin() {
 
     useEffect(() => {
         const fetch = async () => {
-            const { data, status } = await khoaHocApi.layDanhMucKhoaHoc();
+            const { data } = await khoaHocApi.layDanhMucKhoaHoc();
             setDanhMucKhoaHoc(data.result.data);
         };
         fetch();
@@ -37,7 +39,7 @@ function EditCoursePage_Admin() {
     useEffect(() => {
         const fetch = async () => {
             if (id !== undefined) {
-                const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
+                const { data } = await khoaHocApi.layMotKhoaHoc(id);
                 setMotKhoaHoc(data.result.data);
                 const indexChuongHoc = data.result.data.chuongHoc.map((item, index) => index);
                 setArrChuong(indexChuongHoc);
@@ -425,7 +427,8 @@ function EditCoursePage_Admin() {
 
                     {/* BUTTON */}
                     <Form.Item>
-                        <ButtonMe className="px-10 py-3" type="primary">
+                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3 space-x-2" type="primary">
+                            {isLoadingBtn && <LoadingOutlined />}
                             <span className="text-base">Chỉnh sửa khoá học</span>
                         </ButtonMe>
                     </Form.Item>

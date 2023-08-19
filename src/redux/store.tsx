@@ -2,11 +2,12 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas/rootSaga"; // Import saga root file
-import modalSlice from "./slices/modalSlice"; // Import saga root file
-import toggleThemeSlice from "./slices/toggleThemeSlice"; // Import saga root file
-import quanLyNguoiDungSlice from "./slices/quanLyNguoiDungSlice"; // Import saga root file
-import quanLyKhoaHocSlice from "./slices/quanLyKhoaHocSlice"; // Import saga root file
+import rootSaga from "./sagas/rootSaga";
+import modalSlice from "./slices/modalSlice";
+import toggleThemeSlice from "./slices/toggleThemeSlice";
+import quanLyNguoiDungSlice from "./slices/quanLyNguoiDungSlice";
+import quanLyKhoaHocSlice from "./slices/quanLyKhoaHocSlice";
+import loadingSlice from "./slices/loadingSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,6 +17,7 @@ const store = configureStore({
         toggleThemeSlice,
         quanLyNguoiDungSlice,
         quanLyKhoaHocSlice,
+        loadingSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

@@ -3,6 +3,7 @@ import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { layDanhSachKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
 import { error, success } from "../../helpers/message";
 import { navigate } from "../../helpers/navigate";
+import { setIsLoadingBtnREDU } from "../slices/loadingSlice";
 
 // layDanhSachKhoaHocSaga
 function* layDanhSachKhoaHocSaga() {
@@ -54,12 +55,12 @@ function* themKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
 
         console.log("Saga - themKhoaHocSaga", { data, status });
 
-        success("Thêm khoá học thành công")
+        success("Thêm khoá học thành công");
 
-        navigate("/listcourse")
+        navigate("/listcourse");
     } catch (err) {
         console.log(err);
-        error("Thêm khoá học không thành công")
+        error("Thêm khoá học không thành công");
     }
 }
 
@@ -90,6 +91,8 @@ export function* theoDoiXoaKhoaHocSaga() {
 // capNhatKhoaHocSaga
 function* capNhatKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
     try {
+        yield put(setIsLoadingBtnREDU(true));
+
         console.log(payload);
 
         // console.log("maKhoaHoc ",payload.get("maKhoaHoc"));
@@ -103,8 +106,13 @@ function* capNhatKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
         const { data, status } = yield call(() => khoaHocApi.capNhatKhoaHoc(payload));
 
         console.log("Saga - capNhatKhoaHocSaga", { data, status });
+
+        success("Cập nhật khoá học thành công");
     } catch (err) {
         console.log(err);
+        error("Cập nhật khoá học không thành công");
+    } finally {
+        yield put(setIsLoadingBtnREDU(false));
     }
 }
 

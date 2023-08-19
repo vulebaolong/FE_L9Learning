@@ -4,6 +4,9 @@ export const khoaHocApi = {
     layDanhSachKhoaHoc: () => {
         return axios.get(`/QuanLyKhoaHoc/LayDanhSachKhoaHoc`);
     },
+    timKiemTenKhoaHoc: (tenKhoaHoc: string) => {
+        return axios.get(`/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}`);
+    },
     layMotKhoaHoc: (id: string) => {
         return axios.get(`/QuanLyKhoaHoc/LayMotKhoaHoc?id=${id}`);
     },

@@ -13,6 +13,7 @@ import { ReactNode } from "react";
 import Logged from "./Logged";
 import UserControll from "./UserControll";
 import Logo from "../Logo/Logo";
+import Search from "../Search/Search";
 
 function Header() {
     const btnLightRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +31,8 @@ function Header() {
                 <Logo />
                 <h4 className="text-sm font-bold">Học Lập Trình Để Đi Làm</h4>
             </div>
+
+            <Search />
 
             <div className="flex items-center gap-2">
                 <div ref={btnLightRef} onClick={toggleTheme} className="btnLight text-2xl cursor-pointer">

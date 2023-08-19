@@ -2,7 +2,7 @@ import { Avatar, Popover, Tag } from "antd";
 import { useState } from "react";
 import { I_PropLogged } from "../../interfaces/I_quanLyNguoiDung";
 import { lcStorage } from "../../helpers/localStorage.js";
-import { USER_LOGIN } from "../../contants/userContants.js";
+import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants.js";
 import { navigate } from "../../helpers/navigate.js";
 
 function Logged(props: I_PropLogged) {
@@ -26,6 +26,7 @@ function Logged(props: I_PropLogged) {
     const handleDangXuat = () => {
         navigate("/");
         lcStorage.remove(USER_LOGIN);
+        lcStorage.remove(ACCESS_TOKEN);
         // Reload lại trang web
         window.location.reload();
     };

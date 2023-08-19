@@ -6,10 +6,13 @@ import { error, success } from "../../helpers/message";
 import { lcStorage } from "../../helpers/localStorage";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants";
 import { setIsOpenModalREDU } from "../slices/modalSlice";
+import { setIsLoadingBtnREDU } from "../slices/loadingSlice";
 
 // dangNhapSaga
 function* dangNhapSaga({ payload }: { payload: I_dangNhap; type: string }) {
     try {
+        yield put(setIsLoadingBtnREDU(true));
+
         const { data, status } = yield call(() => userApi.dangNhap(payload));
 
         console.log("Saga - dangNhapSaga", { data, status });
@@ -26,6 +29,8 @@ function* dangNhapSaga({ payload }: { payload: I_dangNhap; type: string }) {
         yield put(setIsOpenModalREDU(false));
     } catch (err) {
         error(err.response?.data?.result?.message);
+    } finally {
+        yield put(setIsLoadingBtnREDU(false));
     }
 }
 

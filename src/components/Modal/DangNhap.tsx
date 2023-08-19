@@ -2,7 +2,7 @@ import style from "./ModalAuth.module.css";
 import { I_PropDangNhap, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
 import logoImg from "../../assets/logo/L9_logo.png";
 import Button from "../Button/Button";
-import { UserOutlined, KeyOutlined } from "@ant-design/icons";
+import { UserOutlined, KeyOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
 import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { Store } from "antd/es/form/interface";
 
 function DangNhap() {
     const { autofill } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     const [form] = Form.useForm();
 
@@ -93,8 +94,9 @@ function DangNhap() {
 
                     {/* BUTTON */}
                     <Form.Item className="mt-[20px]">
-                        <Button className="" type="gradian">
-                            Đăng nhập
+                        <Button disabled={isLoadingBtn} className="space-x-2" type="gradian">
+                            {isLoadingBtn && <LoadingOutlined />}
+                            <span>Đăng nhập</span>
                         </Button>
                     </Form.Item>
 
