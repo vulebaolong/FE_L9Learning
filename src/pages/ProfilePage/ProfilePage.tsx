@@ -10,6 +10,7 @@ import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { error, success } from "../../helpers/message";
+import PopconfirmProfile from "./PopconfirmProfile";
 
 function ProfilePage() {
     const dispatch: DispatchType = useDispatch();
@@ -19,7 +20,6 @@ function ProfilePage() {
     // console.log(thongTinTaiKhoan);
 
     const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
-
 
     useEffect(() => {
         dispatch({ type: "capNhatUserLoginSaga" });
@@ -43,22 +43,6 @@ function ProfilePage() {
 
     const handleTiepTucHoc = (khoaHocId: string) => {
         navigate(`/detailcourse/${khoaHocId}`);
-    };
-
-    const confirm = async (maKhoaHoc: string) => {
-        console.log(maKhoaHoc);
-
-        try {
-            const { data, status } = await khoaHocApi.huyDangKyKhoaHoc({ maKhoaHoc });
-
-            console.log("Call API - huyDangKyKhoaHoc", { data, status });
-
-            success("Huỷ đăng ký khoá học thành công");
-
-            dispatch({ type: "capNhatUserLoginSaga" });
-        } catch (err) {
-            error("Huỷ đăng ký khoá học không thành công");
-        }
     };
 
     return (
@@ -127,17 +111,7 @@ function ProfilePage() {
                                                         >
                                                             Tiếp tục học
                                                         </Button>
-                                                        <Popconfirm
-                                                            title="Huỷ đăng ký"
-                                                            description="Bạn có chắc chắn huỷ khoá học này không?"
-                                                            onConfirm={(e) => {
-                                                                confirm(khoaHoc._id, e);
-                                                            }}
-                                                            okText="Huỷ"
-                                                            cancelText="Không"
-                                                        >
-                                                            <Button type="red">Huỷ đăng ký</Button>
-                                                        </Popconfirm>
+                                                        <PopconfirmProfile khoaHoc={khoaHoc} />
                                                     </div>
                                                     <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                                                 </div>

@@ -4,8 +4,8 @@ import "./App.css";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import { ConfigProvider, message, theme } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "./redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, RootState } from "./redux/store";
 import { setMessageApi } from "./helpers/message";
 import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
@@ -22,10 +22,24 @@ import Notifications from "./pages/SettingsPage/Notifications/Notifications";
 import ModalAuth from "./components/Modal/ModalAuth";
 import Roadmap from "./pages/Roadmap/Roadmap";
 import Blog from "./pages/Blog/Blog";
+import LoadingPage from "./components/LoadingPage/LoadingPage";
+import { lcStorage } from "./helpers/localStorage";
+import { THEME } from "./contants/configContants";
+import { darkThemeREDU, lightThemeREDU } from "./redux/slices/toggleThemeSlice";
 
 function App() {
     const navigate = useNavigate();
+
+    const dispatch: DispatchType = useDispatch();
+
     const [messageApi, contextHolder] = message.useMessage();
+
+    useEffect(() => {
+        const theme = lcStorage.get(THEME);
+        console.log(theme);
+        if (theme === "light") dispatch(lightThemeREDU());
+        if (theme === "dark") dispatch(darkThemeREDU());
+    }, []);
 
     useEffect(() => {
         setMessageApi(messageApi);
@@ -46,6 +60,7 @@ function App() {
                     algorithm: themeAlgorithm,
                 }}
             >
+                <LoadingPage />
                 {contextHolder}
                 <ModalAuth />
                 <Routes>

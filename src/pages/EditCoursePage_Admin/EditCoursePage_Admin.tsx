@@ -427,7 +427,7 @@ function EditCoursePage_Admin() {
 
                     {/* BUTTON */}
                     <Form.Item>
-                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3 space-x-2" type="primary">
+                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3 " type="primary">
                             {isLoadingBtn && <LoadingOutlined />}
                             <span className="text-base">Chỉnh sửa khoá học</span>
                         </ButtonMe>

@@ -1,13 +1,15 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, delay, put, takeLatest } from "redux-saga/effects";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 import { layDanhSachKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
 import { error, success } from "../../helpers/message";
 import { navigate } from "../../helpers/navigate";
-import { setIsLoadingBtnREDU } from "../slices/loadingSlice";
+import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../slices/loadingSlice";
 
 // layDanhSachKhoaHocSaga
 function* layDanhSachKhoaHocSaga() {
     try {
+        yield put(setIsLoadingPageREDU(true));
+
         const { data, status } = yield call(() => khoaHocApi.layDanhSachKhoaHoc());
 
         console.log("Saga - layDanhSachKhoaHocSaga", { data, status });
@@ -15,6 +17,9 @@ function* layDanhSachKhoaHocSaga() {
         yield put(layDanhSachKhoaHocREDU(data.result.data));
     } catch (err) {
         console.log(err);
+    } finally {
+        yield delay(500);
+        yield put(setIsLoadingPageREDU(false));
     }
 }
 

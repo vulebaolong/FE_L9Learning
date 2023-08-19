@@ -41,7 +41,7 @@ function Button({ name, htmlFor, children, type, className, onClick, disabled = 
         classType = "bg-red-500 w-max hover:bg-red-500/90 active:bg-red-500/80 text-white text-sm font-semibold px-5 py-2";
     }
     if (disabled === true) {
-        classDisabled = "cursor-not-allowed"
+        classDisabled = "!cursor-not-allowed"
     }
     return (
         <button disabled={disabled} name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} ${classDisabled} cursor-pointer transition rounded-full `}>

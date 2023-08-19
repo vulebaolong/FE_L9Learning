@@ -11,6 +11,8 @@ import ContentCourse from "./ContentCourse";
 import { handleDuration } from "./../../helpers/durationHelper";
 import { error, success } from "../../helpers/message";
 import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
+import { LoadingOutlined } from "@ant-design/icons";
+import { setIsLoadingBtnREDU } from "../../redux/slices/loadingSlice";
 
 function DetailCoursePage() {
     const dispatch: DispatchType = useDispatch();
@@ -20,6 +22,8 @@ function DetailCoursePage() {
     const { id } = useParams();
 
     const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     useEffect(() => {
         const fetch = async () => {
@@ -56,7 +60,10 @@ function DetailCoursePage() {
     const handleDangKyKhoaHoc = async () => {
         if (id !== undefined) {
             try {
+                dispatch(setIsLoadingBtnREDU(true));
+
                 const { data, status } = await khoaHocApi.dangKyKhoaHoc({ maKhoaHoc: id });
+
                 console.log("Call API - dangKyKhoaHoc", { data, status });
 
                 success("Đăng ký khoá học thành công");
@@ -64,6 +71,8 @@ function DetailCoursePage() {
                 dispatch({ type: "capNhatUserLoginSaga" });
             } catch (err) {
                 error("Đăng ký khoá học không thành công");
+            } finally {
+                dispatch(setIsLoadingBtnREDU(false));
             }
         }
     };
@@ -115,7 +124,8 @@ function DetailCoursePage() {
                     <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>
 
                     <div className="text-center">
-                        <Button onClick={handleDangKyKhoaHoc} className="px-10 py-3" type="primary">
+                        <Button disabled={isLoadingBtn} onClick={handleDangKyKhoaHoc} className="px-10 py-3 space-x-2" type="primary">
+                            {isLoadingBtn && <LoadingOutlined />}
                             <span className="text-base">ĐĂNG KÝ HỌC</span>
                         </Button>
                     </div>

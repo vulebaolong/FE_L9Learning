@@ -1,5 +1,5 @@
 export const lcStorage = {
-    set: (key: string, value: object | []) => localStorage.setItem(key, JSON.stringify(value)),
+    set: (key: string, value: object | [] | string) => localStorage.setItem(key, JSON.stringify(value)),
 
     get: (key: string) => {
         const dataString: string | null = localStorage.getItem(key);
