@@ -4,6 +4,7 @@ import { layDanhSachKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
 import { error, success } from "../../helpers/message";
 import { navigate } from "../../helpers/navigate";
 import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../slices/loadingSlice";
+import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 
 // layDanhSachKhoaHocSaga
 function* layDanhSachKhoaHocSaga() {
@@ -18,7 +19,7 @@ function* layDanhSachKhoaHocSaga() {
     } catch (err) {
         console.log(err);
     } finally {
-        yield delay(500);
+        yield delay(DELAY_LOADING_PAGE)
         yield put(setIsLoadingPageREDU(false));
     }
 }
@@ -30,6 +31,8 @@ export function* theoDoiLayDanhSachKhoaHocSaga() {
 // layMotKhoaHocSaga
 function* layMotKhoaHocSaga({ payload }: { payload: string; type: string }) {
     try {
+        yield put(setIsLoadingPageREDU(true));
+
         const { data, status } = yield call(() => khoaHocApi.layMotKhoaHoc(payload));
 
         console.log("Saga - layMotKhoaHocSaga", { data, status });
@@ -37,6 +40,9 @@ function* layMotKhoaHocSaga({ payload }: { payload: string; type: string }) {
         // yield put(layDanhSachKhoaHocREDU(data.result.data));
     } catch (err) {
         console.log(err);
+    } finally {
+        yield delay(DELAY_LOADING_PAGE)
+        yield put(setIsLoadingPageREDU(false));
     }
 }
 
@@ -55,6 +61,7 @@ function* themKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
         // console.log(payload.get("seHocDuoc"));
         // console.log(payload.get("chuongHoc"));
         // console.log(payload.get("hinhAnh"));
+        yield put(setIsLoadingBtnREDU(true));
 
         const { data, status } = yield call(() => khoaHocApi.themKhoaHoc(payload));
 
@@ -66,6 +73,8 @@ function* themKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
     } catch (err) {
         console.log(err);
         error("Thêm khoá học không thành công");
+    } finally {
+        yield put(setIsLoadingBtnREDU(false));
     }
 }
 

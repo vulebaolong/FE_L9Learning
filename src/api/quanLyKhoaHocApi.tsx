@@ -28,4 +28,11 @@ export const khoaHocApi = {
     huyDangKyKhoaHoc: (maKhoaHoc: { maKhoaHoc: string }) => {
         return axios.post(`/QuanLyKhoaHoc/HuyDangKyKhoaHoc`, maKhoaHoc);
     },
+    layKhoaHocTheoDanhMuc: (maKhoaHoc?: string) => {
+        let url = "/QuanLyKhoaHoc/layKhoaHocTheoDanhMuc";
+        if (maKhoaHoc) {
+            url += `?maDanhMuc=${maKhoaHoc}`;
+        }
+        return axios.get(url);
+    },
 };

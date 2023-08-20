@@ -12,6 +12,9 @@ import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../interface
 import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+import { setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
+import { wait } from "../../helpers/awaitHelper";
+import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 
 function EditCoursePage_Admin() {
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
@@ -30,19 +33,23 @@ function EditCoursePage_Admin() {
 
     useEffect(() => {
         const fetch = async () => {
-            const { data } = await khoaHocApi.layDanhMucKhoaHoc();
-            setDanhMucKhoaHoc(data.result.data);
-        };
-        fetch();
-    }, []);
-
-    useEffect(() => {
-        const fetch = async () => {
             if (id !== undefined) {
-                const { data } = await khoaHocApi.layMotKhoaHoc(id);
-                setMotKhoaHoc(data.result.data);
-                const indexChuongHoc = data.result.data.chuongHoc.map((item, index) => index);
-                setArrChuong(indexChuongHoc);
+                try {
+                    dispatch(setIsLoadingPageREDU(true));
+
+                    const { data: data1 } = await khoaHocApi.layDanhMucKhoaHoc();
+                    console.log("fetch - layDanhMucKhoaHoc", { data1 });
+                    setDanhMucKhoaHoc(data1.result.data);
+
+                    const { data: data2 } = await khoaHocApi.layMotKhoaHoc(id);
+                    console.log("fetch - layMotKhoaHoc", { data2 });
+                    setMotKhoaHoc(data2.result.data);
+                    const indexChuongHoc = data2.result.data.chuongHoc.map((item, index) => index);
+                    setArrChuong(indexChuongHoc);
+                } finally {
+                    await wait(DELAY_LOADING_PAGE)
+                    dispatch(setIsLoadingPageREDU(false));
+                }
             }
         };
         fetch();
@@ -427,9 +434,11 @@ function EditCoursePage_Admin() {
 
                     {/* BUTTON */}
                     <Form.Item>
-                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3 " type="primary">
-                            {isLoadingBtn && <LoadingOutlined />}
-                            <span className="text-base">Chỉnh sửa khoá học</span>
+                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3" type="primary">
+                            <div className="flex items-center gap-2">
+                                {isLoadingBtn && <LoadingOutlined />}
+                                <span className="text-base">Chỉnh sửa khoá học</span>
+                            </div>
                         </ButtonMe>
                     </Form.Item>
                 </Form>

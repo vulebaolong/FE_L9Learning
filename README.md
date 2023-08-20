@@ -2,17 +2,16 @@
 
 
 ## Module người dùng
-- 1 - Lấy danh sách , tìm kiếm khóa học
-   - 1.1 - Lấy chi tiết khóa học
-- 2 - Lấy danh mục khóa học
-- 3 - Lấy khóa học theo danh mục
-- 4 - Đăng ký
-- 5 - Đăng nhập
-- 6 - Chỉnh sửa thông tin cá nhân
-- 7 - Đăng ký khóa học
-- 8 - Hủy đăng ký
-- 9 - Xem thông tin cá nhân
-- 10 - Chỉnh sửa thông tin cá nhân
+- 1 - Lấy danh sách , tìm kiếm khóa học - done
+   - 1.1 - Lấy chi tiết khóa học - done
+- 2 - Lấy danh mục khóa học - done
+- 3 - Lấy khóa học theo danh mục - done
+- 4 - Đăng ký - done
+- 5 - Đăng nhập - done
+- 6 - Chỉnh sửa thông tin cá nhân - done
+- 7 - Đăng ký khóa học - done
+- 8 - Hủy đăng ký - done
+- 9 - Xem thông tin cá nhân - done
 
 ## Module quản trị
 - 11 - Quản lý người dùng

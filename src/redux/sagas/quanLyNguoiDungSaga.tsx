@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, delay, put, takeLatest } from "redux-saga/effects";
 import { userApi } from "../../api/quanLyNguoiDungApi";
 import { I_dangKy, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
 import { capNhatUserLoginREDU, dangNhapREDU, setAutofillREDU, setIsPageDangNhapREDU } from "../slices/quanLyNguoiDungSlice";
@@ -6,7 +6,8 @@ import { error, success } from "../../helpers/message";
 import { lcStorage } from "../../helpers/localStorage";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants";
 import { setIsOpenModalREDU } from "../slices/modalSlice";
-import { setIsLoadingBtnREDU } from "../slices/loadingSlice";
+import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../slices/loadingSlice";
+import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 
 // dangNhapSaga
 function* dangNhapSaga({ payload }: { payload: I_dangNhap; type: string }) {
@@ -34,7 +35,6 @@ function* dangNhapSaga({ payload }: { payload: I_dangNhap; type: string }) {
     }
 }
 
-// Khai báo Saga Watcher để theo dõi action FETCH_USERS
 export function* theoDoiDangNhapSaga() {
     yield takeLatest("dangNhapSaga", dangNhapSaga);
 }
@@ -57,7 +57,6 @@ function* dangKySaga({ payload }: { payload: I_dangKy; type: string }) {
     }
 }
 
-// Khai báo Saga Watcher để theo dõi action FETCH_USERS
 export function* theoDoiDangKySaga() {
     yield takeLatest("dangKySaga", dangKySaga);
 }
@@ -76,7 +75,29 @@ function* capNhatUserLoginSaga() {
     }
 }
 
-// Khai báo Saga Watcher để theo dõi action FETCH_USERS
 export function* theoDoiCapNhatUserLoginSaga() {
     yield takeLatest("capNhatUserLoginSaga", capNhatUserLoginSaga);
+}
+
+// layThongTinTaiKhoanSaga
+function* layThongTinTaiKhoanSaga() {
+    try {
+        yield put(setIsLoadingPageREDU(true));
+
+        const { data, status } = yield call(() => userApi.layThongTinTaiKhoan());
+
+        console.log("Saga - layThongTinTaiKhoanSaga", { data, status });
+
+        yield put(capNhatUserLoginREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+        error(err.response?.data?.result?.message);
+    } finally {
+        yield delay(DELAY_LOADING_PAGE)
+        yield put(setIsLoadingPageREDU(false));
+    }
+}
+
+export function* theoDoiLayThongTinTaiKhoanSaga() {
+    yield takeLatest("layThongTinTaiKhoanSaga", layThongTinTaiKhoanSaga);
 }

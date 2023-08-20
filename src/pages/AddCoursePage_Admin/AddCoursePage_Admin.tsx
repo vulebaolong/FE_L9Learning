@@ -8,14 +8,15 @@ import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
 import { I_danhMucKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
 import _ from "lodash";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
 
 function AddCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
     const [arrChuong, setArrChuong] = useState([]);
     const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState([]);
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     useEffect(() => {
         const fetch = async () => {
@@ -364,8 +365,11 @@ function AddCoursePage_Admin() {
 
                     {/* BUTTON */}
                     <Form.Item>
-                        <ButtonMe className="px-10 py-3" type="primary">
-                            <span className="text-base">Thêm khoá học</span>
+                        <ButtonMe disabled={isLoadingBtn} className="px-10 py-3" type="primary">
+                            <div className="flex items-center gap-2">
+                                {isLoadingBtn && <LoadingOutlined />}
+                                <span className="text-base">Thêm khoá học</span>
+                            </div>
                         </ButtonMe>
                     </Form.Item>
                 </Form>

@@ -1,3 +1,4 @@
+import { Popover } from "antd";
 import { FaHouse, FaLightbulb, FaNewspaper, FaRoad } from "react-icons/fa6";
 import { Link, useMatch } from "react-router-dom";
 
@@ -9,6 +10,7 @@ function SideBar() {
     dark:bg-transparent dark:hover:!bg-[#e8ebed3c] dark:hover:!text-slate-200 dark:text-slate-400
     bg-transparent hover:bg-[#f5f5f5] text-[#404040] hover:text-[#1a1a1a]
     `;
+
 
     return (
         <div className=" px-2 sticky top-header py-5">

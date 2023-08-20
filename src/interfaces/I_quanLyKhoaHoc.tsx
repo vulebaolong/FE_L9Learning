@@ -60,3 +60,20 @@ export interface I_itemSearch {
 }
 
 export type I_resultSearch = I_itemSearch[] | [];
+
+export interface I_khoaHocTheoDanhMuc {
+    tenDanhMuc: string;
+    khoaHocDanhMuc: I_khoaHocDanhMuc[];
+}
+
+export interface I_khoaHocDanhMuc {
+    _id: string;
+    tenKhoaHoc: string;
+    hinhAnh: string;
+    danhMucKhoaHoc_ID: I_danhMucKhoaHocId;
+}
+
+export interface I_danhMucKhoaHocId {
+    _id: string;
+    tenDanhMuc: string;
+}

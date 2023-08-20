@@ -22,7 +22,7 @@ function ProfilePage() {
     const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     useEffect(() => {
-        dispatch({ type: "capNhatUserLoginSaga" });
+        dispatch({ type: "layThongTinTaiKhoanSaga" });
     }, []);
 
     const renderDaDangKyKhoaHoc = () => {

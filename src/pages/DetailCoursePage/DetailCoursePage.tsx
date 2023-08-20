@@ -12,7 +12,9 @@ import { handleDuration } from "./../../helpers/durationHelper";
 import { error, success } from "../../helpers/message";
 import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
 import { LoadingOutlined } from "@ant-design/icons";
-import { setIsLoadingBtnREDU } from "../../redux/slices/loadingSlice";
+import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
+import { wait } from "../../helpers/awaitHelper";
+import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 
 function DetailCoursePage() {
     const dispatch: DispatchType = useDispatch();
@@ -28,9 +30,18 @@ function DetailCoursePage() {
     useEffect(() => {
         const fetch = async () => {
             if (id !== undefined) {
-                const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
-                console.log("fetch - layMotKhoaHoc", { data, status });
-                setKhoaHoc(data.result.data);
+                try {
+                    dispatch(setIsLoadingPageREDU(true));
+
+                    const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
+
+                    console.log("fetch - layMotKhoaHoc", { data, status });
+
+                    setKhoaHoc(data.result.data);
+                } finally {
+                    await wait(DELAY_LOADING_PAGE)
+                    dispatch(setIsLoadingPageREDU(false));
+                }
             }
         };
 
