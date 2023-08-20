@@ -1,16 +1,9 @@
 import { useRef } from "react";
-import logoImg from "../../assets/logo/L9_logo.png";
-import Button from "../Button/Button";
 import { MdLightMode, MdNightlight } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
-import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
 import { toggleThemeREDU } from "../../redux/slices/toggleThemeSlice";
-import NotLogged from "./NotLogged";
-import { USER_LOGIN } from "../../contants/userContants";
-import { lcStorage } from "../../helpers/localStorage";
-import { ReactNode } from "react";
-import Logged from "./Logged";
+
 import UserControll from "./UserControll";
 import Logo from "../Logo/Logo";
 import Search from "../Search/Search";

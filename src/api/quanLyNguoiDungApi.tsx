@@ -20,4 +20,10 @@ export const userApi = {
     capNhatAvatar: (avatar: FormData) => {
         return axios.patch(`/QuanLyNguoiDung/CapNhatAvatar`, avatar);
     },
+    layDanhSachNguoiDung: () => {
+        return axios.get(`/QuanLyNguoiDung/LayDanhSachNguoiDung`);
+    },
+    xoaNguoiDung: (idNguoiDung:string) => {
+        return axios.delete(`/QuanLyNguoiDung/XoaNguoiDung?idNguoiDung=${idNguoiDung}`);
+    },
 };

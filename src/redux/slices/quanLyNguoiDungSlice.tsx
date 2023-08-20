@@ -7,6 +7,7 @@ const initialState: I_initialState["quanLyNguoiDungSlice"] = {
     userLogin: lcStorage.get(USER_LOGIN),
     isPageDangNhap: true,
     autofill: null,
+    danhSachNguoiDung: [],
 };
 
 const quanLyNguoiDungSlice = createSlice({
@@ -27,9 +28,12 @@ const quanLyNguoiDungSlice = createSlice({
         setAutofillREDU: (state, { payload }) => {
             state.autofill = payload;
         },
+        setDanhSachNguoiDungREDU: (state, { payload }) => {
+            state.danhSachNguoiDung = payload;
+        },
     },
 });
 
-export const { setAutofillREDU, dangNhapREDU, capNhatUserLoginREDU, setIsPageDangNhapREDU } = quanLyNguoiDungSlice.actions;
+export const { setDanhSachNguoiDungREDU, setAutofillREDU, dangNhapREDU, capNhatUserLoginREDU, setIsPageDangNhapREDU } = quanLyNguoiDungSlice.actions;
 
 export default quanLyNguoiDungSlice.reducer;

@@ -19,8 +19,7 @@ function ListCoursePage_Admin() {
         navigate(`/editcourse/${maKhoaHoc}`);
     };
 
-    const confirm = (maKhoaHoc: string, e?: MouseEvent<HTMLElement>) => {
-        console.log(e);
+    const confirm = (maKhoaHoc: string) => {
         dispatch({ type: "xoaKhoaHocSaga", payload: maKhoaHoc });
     };
 
@@ -43,11 +42,12 @@ function ListCoursePage_Admin() {
                                     >
                                         Chỉnh sửa
                                     </Button>
+                                    {/* //TODO: làm Popconfirm async */}
                                     <Popconfirm
                                         title="Xoá khoá học"
                                         description="Bạn có chắc chắn xóa khoá học này không?"
-                                        onConfirm={(e) => {
-                                            confirm(khoaHoc._id, e);
+                                        onConfirm={() => {
+                                            confirm(khoaHoc._id);
                                         }}
                                         okText="Xoá"
                                         cancelText="Không"

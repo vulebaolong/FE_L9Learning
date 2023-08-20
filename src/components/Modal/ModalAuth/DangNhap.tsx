@@ -1,15 +1,15 @@
 import style from "./ModalAuth.module.css";
-import { I_PropDangNhap, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
-import logoImg from "../../assets/logo/L9_logo.png";
-import Button from "../Button/Button";
+import logoImg from "../../../assets/logo/L9_logo.png";
 import { UserOutlined, KeyOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
-import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setAutofillREDU, setIsPageDangNhapREDU } from "../../redux/slices/quanLyNguoiDungSlice";
 import { useEffect } from "react";
 import { Store } from "antd/es/form/interface";
+import { DispatchType, RootState } from "../../../redux/store";
+import { I_dangNhap } from "../../../interfaces/I_quanLyNguoiDung";
+import { setAutofillREDU, setIsPageDangNhapREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
+import Button from "../../Button/Button";
 
 function DangNhap() {
     const { autofill } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);

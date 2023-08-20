@@ -19,13 +19,14 @@ import Personal from "./pages/SettingsPage/Personal/Personal";
 import Security from "./pages/SettingsPage/Security/Security";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import Notifications from "./pages/SettingsPage/Notifications/Notifications";
-import ModalAuth from "./components/Modal/ModalAuth";
 import Roadmap from "./pages/Roadmap/Roadmap";
 import Blog from "./pages/Blog/Blog";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import { lcStorage } from "./helpers/localStorage";
 import { THEME } from "./contants/configContants";
 import { darkThemeREDU, lightThemeREDU } from "./redux/slices/toggleThemeSlice";
+import UserManagement_Admin from "./pages/UserManagement_Admin/UserManagement_Admin";
+import Modal from "./components/Modal/Modal";
 
 function App() {
     const navigate = useNavigate();
@@ -62,7 +63,7 @@ function App() {
             >
                 <LoadingPage />
                 {contextHolder}
-                <ModalAuth />
+                <Modal />
                 <Routes>
                     {/* HOME LAYOUT */}
                     <Route element={<MainLayout />}>
@@ -72,6 +73,7 @@ function App() {
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
                         <Route path="listcourse" element={<ListCoursePage_Admin />} />
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
+                        <Route path="usermanagement" element={<UserManagement_Admin />} />
                         <Route path="roadmap" element={<Roadmap />} />
                         <Route path="blog" element={<Blog />} />
                     </Route>

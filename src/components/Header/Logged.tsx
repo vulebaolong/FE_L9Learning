@@ -56,31 +56,34 @@ function Logged(props: I_PropLogged) {
         setIsOpenPopupUser(false);
     };
 
+    const handleQuanLyNguoiDung = () => {
+        navigate("/usermanagement");
+        setIsOpenPopupUser(false);
+    };
+
+    const textItem = `text-base cursor-pointer transition
+    text-[#666] hover:text-[#292929]
+    dark:text-white/70 dark:hover:text-white/90`;
+
     const renderControllAdmin = () => {
         if (userLogin.maLoaiNguoiDung !== "QuanTri") return;
 
         return (
             <>
                 <div className="">
-                    <span
-                        onClick={handleThemKhoaHoc}
-                        className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                    >
+                    <span className={textItem} onClick={handleThemKhoaHoc}>
                         Thêm khoá học
                     </span>
                 </div>
                 <div className="mt-4">
-                    <span
-                        className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                        onClick={handleDanhSachKhoaHoc}
-                    >
+                    <span className={textItem} onClick={handleDanhSachKhoaHoc}>
                         Danh sách khoá học
+                    </span>
+                </div>
+                <hr className="dark:!border-gray-700 border-gray-200 my-5" />
+                <div>
+                    <span className={textItem} onClick={handleQuanLyNguoiDung}>
+                        Quản lý người dùng
                     </span>
                 </div>
                 <hr className="dark:!border-gray-700 border-gray-200 my-5" />
@@ -105,26 +108,14 @@ function Logged(props: I_PropLogged) {
 
             {/* TRANG CÁ NHÂN */}
             <div className="">
-                <span
-                    onClick={handleProfile}
-                    className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                >
+                <span className={textItem} onClick={handleProfile}>
                     Trang cá nhân
                 </span>
             </div>
 
             {/* KHOÁ HỌC */}
             <div className="mt-4">
-                    
-                <span  onClick={handleCourse}
-                    className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                >
+                <span className={textItem} onClick={handleCourse}>
                     Khoá học
                 </span>
             </div>
@@ -135,26 +126,14 @@ function Logged(props: I_PropLogged) {
 
             {/* CÀI ĐẶT */}
             <div className="">
-                <span
-                    onClick={handleSetting}
-                    className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                >
+                <span className={textItem} onClick={handleSetting}>
                     Cài đặt
                 </span>
             </div>
 
             {/* ĐĂNG XUẤT */}
             <div className="mt-4">
-                <span
-                    onClick={handleDangXuat}
-                    className="text-base cursor-pointer transition
-                text-[#666] hover:text-[#292929]
-                dark:text-white/70 dark:hover:text-white/90
-                "
-                >
+                <span className={textItem} onClick={handleDangXuat}>
                     Đăng xuất
                 </span>
             </div>

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ContentCourse from "./ContentCourse";
 import { handleDuration } from "./../../helpers/durationHelper";
 import { error, success } from "../../helpers/message";
-import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
+import { setIsOpenModalAuthREDU } from "../../redux/slices/modalSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
 import { wait } from "../../helpers/awaitHelper";
@@ -89,7 +89,7 @@ function DetailCoursePage() {
     };
 
     const handleDangKyKhoaHocNotLogged = () => {
-        dispatch(setIsOpenModalREDU(true));
+        dispatch(setIsOpenModalAuthREDU(true));
     };
 
     const renderHoctiep = () => {

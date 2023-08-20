@@ -1,25 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "antd";
-import { DispatchType, RootState } from "../../redux/store";
-import { setIsOpenModalREDU } from "../../redux/slices/modalSlice";
-import { useState } from "react";
 
 import { Link } from "react-router-dom";
 import DangNhap from "./DangNhap";
 import DangKy from "./DangKy";
+import { DispatchType, RootState } from "../../../redux/store";
+import { setIsOpenModalAuthREDU } from "../../../redux/slices/modalSlice";
 
 function ModalAuth() {
-    const { isOpenModal } = useSelector((state: RootState) => state.modalSlice);
+    const { isOpenModalAuth } = useSelector((state: RootState) => state.modalSlice);
     const { isPageDangNhap } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const dispatch: DispatchType = useDispatch();
 
     const handleCancel = () => {
-        dispatch(setIsOpenModalREDU(false));
+        dispatch(setIsOpenModalAuthREDU(false));
     };
 
     return (
-        <Modal footer={false} maskClosable={true} onCancel={handleCancel} centered open={isOpenModal}>
+        <Modal footer={false} maskClosable={true} onCancel={handleCancel} centered open={isOpenModalAuth}>
             <div className="py-8 px-11">
                 {isPageDangNhap === true ? <DangNhap /> : <DangKy />}
 

@@ -1,15 +1,17 @@
 import style from "./ModalAuth.module.css";
-import { KeyOutlined, ContactsOutlined, MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
-import { I_PropDangKy, I_dangKy } from "../../interfaces/I_quanLyNguoiDung";
-import logoImg from "../../assets/logo/L9_logo.png";
-import Button from "../Button/Button";
+import { KeyOutlined, ContactsOutlined, MailOutlined, PhoneOutlined, UserOutlined, LoadingOutlined } from "@ant-design/icons";
+import logoImg from "../../../assets/logo/L9_logo.png";
 import { Form, Input } from "antd";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
-import { setIsPageDangNhapREDU } from "../../redux/slices/quanLyNguoiDungSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "../../Button/Button";
+import { DispatchType, RootState } from "../../../redux/store";
+import { I_dangKy } from "../../../interfaces/I_quanLyNguoiDung";
+import { setIsPageDangNhapREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
 
 function DangKy() {
     const [form] = Form.useForm();
+
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     const dispatch: DispatchType = useDispatch();
 
@@ -137,8 +139,9 @@ function DangKy() {
 
                     {/* BUTTON */}
                     <Form.Item className="mt-[20px]">
-                        <Button className="" type="gradian">
-                            Đăng ký
+                        <Button disabled={isLoadingBtn} className="space-x-2" type="gradian">
+                            {isLoadingBtn && <LoadingOutlined />}
+                            <span> Đăng ký</span>
                         </Button>
                     </Form.Item>
                 </Form>

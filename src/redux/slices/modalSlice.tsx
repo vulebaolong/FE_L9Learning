@@ -1,23 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface I_initialState {
-    isOpenModal: boolean;
+    isOpenModalAuth: boolean;
+    isOpenModalAddUser: boolean;
 }
 
 const initialState: I_initialState = {
-    isOpenModal: false,
+    isOpenModalAuth: false,
+    isOpenModalAddUser: false,
 };
 
 const modalSlice = createSlice({
     name: "modalSlice",
     initialState,
     reducers: {
-        setIsOpenModalREDU: (state, { payload }) => {
-            state.isOpenModal = payload;
+        setIsOpenModalAuthREDU: (state, { payload }) => {
+            state.isOpenModalAuth = payload;
+        },
+        setIsOpenModalAddUserREDU: (state, { payload }) => {
+            state.isOpenModalAddUser = payload;
         },
     },
 });
 
-export const { setIsOpenModalREDU } = modalSlice.actions;
+export const { setIsOpenModalAuthREDU, setIsOpenModalAddUserREDU } = modalSlice.actions;
 
 export default modalSlice.reducer;

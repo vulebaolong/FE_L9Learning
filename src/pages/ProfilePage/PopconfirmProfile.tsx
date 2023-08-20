@@ -33,13 +33,13 @@ function PopconfirmProfile({ khoaHoc }: { khoaHoc: I_chiTietKhoaHocGhiDanh }) {
 
             success("Huỷ đăng ký khoá học thành công");
 
-            setOpen(false);
-
-            setConfirmLoading(false);
-
             dispatch({ type: "capNhatUserLoginSaga" });
         } catch (err) {
             error("Huỷ đăng ký khoá học không thành công");
+        } finally {
+            setOpen(false);
+
+            setConfirmLoading(false);
         }
     };
     return (
