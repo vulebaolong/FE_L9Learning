@@ -14,6 +14,8 @@ export default function* rootSaga() {
         quanLyNguoiDungSaga.theoDoiCapNhatThongTinNguoiDungSaga(),
         quanLyNguoiDungSaga.theoDoiThemNguoiDungSaga(),
         quanLyNguoiDungSaga.theoDoiLayDanhSachNguoiDungSaga(),
+        quanLyNguoiDungSaga.theoDoiLayThongTinKhoaHocNguoiDungSaga(),
+        quanLyNguoiDungSaga.theoDoiCapNhatKhoaHocNguoiDungSaga(),
 
         quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiLayMotKhoaHocSaga(),

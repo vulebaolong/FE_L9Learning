@@ -41,17 +41,13 @@ function EditUser_Admin() {
 
     return (
         <div className="container">
-            <h2 className="heading_2 pt-5">Thông tin cá nhân</h2>
+            <h1 className="heading_1 pt-5">Thông tin cá nhân</h1>
+            
+            <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{thongTinNguoiDung?.hoTen}</p>
 
             <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
 
-            <div className="space-y-12">
-                {renderListForm()}
-                {/* <FormTaiKhoan />
-              <FormEmail />
-              <FormSoDienThoai />
-              <FormAvatar /> */}
-            </div>
+            <div className="space-y-12">{renderListForm()}</div>
         </div>
     );
 }

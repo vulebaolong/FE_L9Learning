@@ -1,7 +1,15 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import { userApi } from "../../api/quanLyNguoiDungApi";
 import { I_dangKy, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
-import { capNhatUserLoginREDU, dangNhapREDU, setAutofillREDU, setDanhSachNguoiDungREDU, setIsPageDangNhapREDU, setThongTinNguoiDungREDU } from "../slices/quanLyNguoiDungSlice";
+import {
+    capNhatUserLoginREDU,
+    dangNhapREDU,
+    setAutofillREDU,
+    setDanhSachNguoiDungREDU,
+    setIsPageDangNhapREDU,
+    setThongTinKhoaHocNguoiDungREDU,
+    setThongTinNguoiDungREDU,
+} from "../slices/quanLyNguoiDungSlice";
 import { error, success } from "../../helpers/message";
 import { lcStorage } from "../../helpers/localStorage";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants";
@@ -119,6 +127,7 @@ export function* theoDoiThemNguoiDungSaga() {
 }
 
 // capNhatUserLoginSaga
+// cập nhật lại giao diện
 function* capNhatUserLoginSaga() {
     try {
         const { data, status } = yield call(() => userApi.layThongTinTaiKhoan());
@@ -183,6 +192,7 @@ export function* theoDoiLayThongTinNguoiDungSaga() {
 }
 
 // capNhatThongTinNguoiDungSaga
+// cập nhật lại giao diện
 function* capNhatThongTinNguoiDungSaga({ payload }: { payload: string; type: string }) {
     try {
         const { data, status } = yield call(() => userApi.layThongTinNguoiDung(payload));
@@ -198,4 +208,44 @@ function* capNhatThongTinNguoiDungSaga({ payload }: { payload: string; type: str
 
 export function* theoDoiCapNhatThongTinNguoiDungSaga() {
     yield takeLatest("capNhatThongTinNguoiDungSaga", capNhatThongTinNguoiDungSaga);
+}
+
+// layThongTinKhoaHocNguoiDungSaga
+function* layThongTinKhoaHocNguoiDungSaga({ payload }: { payload: string; type: string }) {
+    try {
+        yield put(setIsLoadingPageREDU(true));
+
+        const { data, status } = yield call(() => userApi.layThongTinKhoaHocNguoiDung(payload));
+
+        console.log("Saga - layThongTinKhoaHocNguoiDungSaga", { data, status });
+
+        yield put(setThongTinKhoaHocNguoiDungREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+    } finally {
+        yield delay(DELAY_LOADING_PAGE);
+        yield put(setIsLoadingPageREDU(false));
+    }
+}
+
+export function* theoDoiLayThongTinKhoaHocNguoiDungSaga() {
+    yield takeLatest("layThongTinKhoaHocNguoiDungSaga", layThongTinKhoaHocNguoiDungSaga);
+}
+
+// capNhatKhoaHocNguoiDungSaga
+// cập nhật lại giao diện
+function* capNhatKhoaHocNguoiDungSaga({ payload }: { payload: string; type: string }) {
+    try {
+        const { data, status } = yield call(() => userApi.layThongTinKhoaHocNguoiDung(payload));
+
+        console.log("Saga - capNhatKhoaHocNguoiDungSaga", { data, status });
+
+        yield put(setThongTinKhoaHocNguoiDungREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export function* theoDoiCapNhatKhoaHocNguoiDungSaga() {
+    yield takeLatest("capNhatKhoaHocNguoiDungSaga", capNhatKhoaHocNguoiDungSaga);
 }

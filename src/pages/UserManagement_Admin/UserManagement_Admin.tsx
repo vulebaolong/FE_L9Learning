@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DataType } from "../../interfaces/I_quanLyNguoiDung";
 import ButtonMe from "../../components/Button/Button";
 
-import { SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { SearchOutlined, EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import type { InputRef } from "antd";
 import { Button, Image, Input, Popconfirm, Table, Tag, Tooltip } from "antd";
@@ -108,6 +108,7 @@ function UserManagement_Admin() {
             dataIndex: "soThuTu",
             sorter: (a, b) => a.soThuTu - b.soThuTu,
             sortDirections: ["ascend"],
+            width: "5%",
         },
         {
             title: "Tài khoản",
@@ -120,6 +121,7 @@ function UserManagement_Admin() {
                     return <Tag color="red">{b.taiKhoan}</Tag>;
                 }
             },
+            width: "15%",
         },
         {
             title: "Họ tên",
@@ -130,6 +132,7 @@ function UserManagement_Admin() {
             title: "Số điện thoại",
             dataIndex: "soDt",
             ...getColumnSearchProps("soDt"),
+            width: "15%",
         },
         {
             title: "Email",
@@ -146,12 +149,22 @@ function UserManagement_Admin() {
                     </div>
                 );
             },
+            width: "10%",
         },
         {
             title: "Hành động",
             render: (_, nguoiDung) => {
                 return (
                     <div className="flex gap-2">
+                        <Tooltip placement="top" title="Thông tin khoá học">
+                            <Button
+                                type="primary"
+                                icon={<InfoCircleOutlined />}
+                                onClick={() => {
+                                    navigate(`/usertocourse/${nguoiDung.key}`);
+                                }}
+                            />
+                        </Tooltip>
                         <Tooltip placement="top" title="Chỉnh sửa">
                             <Button
                                 type="primary"
@@ -167,6 +180,7 @@ function UserManagement_Admin() {
                     </div>
                 );
             },
+            width: "15%",
         },
     ];
 

@@ -1,5 +1,5 @@
 import { I_motKhoaHoc } from "./I_quanLyKhoaHoc";
-import { I_dangNhap, I_nguoiDung, I_thongTinNguoiDung, I_userLogin } from "./I_quanLyNguoiDung";
+import { I_dangNhap, I_nguoiDung, I_thongTinKhoaHocNguoiDung, I_thongTinNguoiDung, I_userLogin } from "./I_quanLyNguoiDung";
 
 interface I_quanLyKhoaHoc {
     danhSachKhoaHoc: I_motKhoaHoc[];
@@ -11,6 +11,7 @@ interface I_quanLyNguoiDung {
     autofill: I_dangNhap | null;
     danhSachNguoiDung: I_nguoiDung[];
     thongTinNguoiDung: I_thongTinNguoiDung | null;
+    thongTinKhoaHocNguoiDung: I_thongTinKhoaHocNguoiDung | null;
 }
 
 interface I_initialState {

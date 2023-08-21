@@ -95,3 +95,21 @@ export interface I_thongTinNguoiDung {
     avatar: string;
     bannerProfile: string;
 }
+
+export interface I_thongTinKhoaHocNguoiDung {
+    nguoiDung: I_thongTinNguoiDung;
+    khoaHocDaDangKy: KhoaHocDaDangKy[];
+    khoaHocChuaDangKy: KhoaHocChuaDangKy[];
+}
+
+export interface KhoaHocDaDangKy {
+    _id: string;
+    tenKhoaHoc: string;
+    hinhAnh: string;
+}
+
+export interface KhoaHocChuaDangKy {
+    _id: string;
+    tenKhoaHoc: string;
+    hinhAnh: string;
+}

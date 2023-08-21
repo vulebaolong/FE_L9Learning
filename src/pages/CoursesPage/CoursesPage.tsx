@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { I_danhMucKhoaHoc, I_khoaHocDanhMuc, I_khoaHocTheoDanhMuc, I_motKhoaHoc } from "../../interfaces/I_quanLyKhoaHoc";
-import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../redux/store";
+import { I_danhMucKhoaHoc, I_khoaHocTheoDanhMuc } from "../../interfaces/I_quanLyKhoaHoc";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
 import Button from "../../components/Button/Button";
 import style from "./CoursesPage.module.css";
 import { navigate } from "../../helpers/navigate";
 import imgRoadmap from "../../assets/roadmap.png";
-import { Select, Skeleton } from "antd";
+import { Select } from "antd";
 import { setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
 import { wait } from "../../helpers/awaitHelper";
 import { DELAY_LOADING_PAGE } from "../../contants/configContants";
-import SkeletonCoursesPage from "./SkeletonCoursesPage";
+import SkeletonWarpCourses from "../../components/Skeleton/SkeletonWarpCourses";
 
 function CoursesPage() {
     const dispatch: DispatchType = useDispatch();
@@ -100,7 +100,7 @@ function CoursesPage() {
                 </div>
             </div>
             {isSkeleton === true ? (
-                <SkeletonCoursesPage />
+                <SkeletonWarpCourses />
             ) : (
                 khoaHocTheoDanhMuc?.map((khoaHocs, index) => {
                     return (

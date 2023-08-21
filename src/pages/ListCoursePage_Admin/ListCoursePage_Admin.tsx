@@ -3,8 +3,8 @@ import { DispatchType, RootState } from "../../redux/store";
 import style from "./ListCoursePage_Admin.module.css";
 import Button from "../../components/Button/Button";
 import { navigate } from "../../helpers/navigate";
-import { MouseEvent, useEffect } from "react";
-import { Popconfirm } from "antd";
+import { useEffect } from "react";
+import PopconfirmListCoursePage_Admin from "./PopconfirmListCoursePage_Admin";
 
 function ListCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
@@ -17,10 +17,6 @@ function ListCoursePage_Admin() {
 
     const handleChinhSuaKhoaHoc = (maKhoaHoc: string) => {
         navigate(`/editcourse/${maKhoaHoc}`);
-    };
-
-    const confirm = (maKhoaHoc: string) => {
-        dispatch({ type: "xoaKhoaHocSaga", payload: maKhoaHoc });
     };
 
     return (
@@ -42,18 +38,7 @@ function ListCoursePage_Admin() {
                                     >
                                         Chỉnh sửa
                                     </Button>
-                                    {/* //TODO: làm Popconfirm async */}
-                                    <Popconfirm
-                                        title="Xoá khoá học"
-                                        description="Bạn có chắc chắn xóa khoá học này không?"
-                                        onConfirm={() => {
-                                            confirm(khoaHoc._id);
-                                        }}
-                                        okText="Xoá"
-                                        cancelText="Không"
-                                    >
-                                        <Button type="red">Xoá</Button>
-                                    </Popconfirm>
+                                    <PopconfirmListCoursePage_Admin khoaHoc={khoaHoc} />
                                 </div>
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>

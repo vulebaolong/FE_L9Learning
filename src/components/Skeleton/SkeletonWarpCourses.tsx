@@ -1,6 +1,5 @@
 import { Skeleton } from "antd";
-
-function SkeletonCoursesPage() {
+function SkeletonWarpCourses() {
     return (
         <div>
             <h2 className="heading_2">
@@ -35,4 +34,4 @@ function SkeletonCoursesPage() {
         </div>
     );
 }
-export default SkeletonCoursesPage;
+export default SkeletonWarpCourses;

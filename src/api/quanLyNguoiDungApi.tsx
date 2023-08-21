@@ -5,7 +5,7 @@ import { I_dangKy, I_dangNhap } from "../interfaces/I_quanLyNguoiDung";
  * layThongTinTaiKhoan
  * capNhatMotThongTinTaiKhoan
  * => dành cho TÀI KHOẢN ĐANG ĐĂNG NHẬP
- * 
+ *
  * layDanhSachNguoiDung
  * layThongTinNguoiDung
  * capNhatMotThongTinNguoiDung
@@ -46,5 +46,14 @@ export const userApi = {
     },
     xoaNguoiDung: (idNguoiDung: string) => {
         return axios.delete(`/QuanLyNguoiDung/XoaNguoiDung?idNguoiDung=${idNguoiDung}`);
+    },
+    layThongTinKhoaHocNguoiDung: (idNguoiDung: string) => {
+        return axios.get(`/QuanLyNguoiDung/LayThongTinKhoaHocNguoiDung?idNguoiDung=${idNguoiDung}`);
+    },
+    huyDangKyKhoaHocChoNguoiDung: ({ idNguoiDung, idKhoaHoc }: { idNguoiDung: string; idKhoaHoc: string }) => {
+        return axios.post(`/QuanLyNguoiDung/HuyDangKyKhoaHocChoNguoiDung`, { idNguoiDung, idKhoaHoc });
+    },
+    dangKyKhoaHocChoNguoiDung: ({ idNguoiDung, idKhoaHoc }: { idNguoiDung: string; idKhoaHoc: string }) => {
+        return axios.post(`/QuanLyNguoiDung/DangKyKhoaHocChoNguoiDung`, { idNguoiDung, idKhoaHoc });
     },
 };
