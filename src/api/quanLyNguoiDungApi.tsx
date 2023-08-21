@@ -1,5 +1,17 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { I_dangKy, I_dangNhap } from "../interfaces/I_quanLyNguoiDung";
+
+/**
+ * layThongTinTaiKhoan
+ * capNhatMotThongTinTaiKhoan
+ * => dành cho TÀI KHOẢN ĐANG ĐĂNG NHẬP
+ * 
+ * layDanhSachNguoiDung
+ * layThongTinNguoiDung
+ * capNhatMotThongTinNguoiDung
+ * xoaNguoiDung
+ * => dành cho ADMIN QUẢN LÝ NGƯỜI DÙNG
+ */
 
 export const userApi = {
     dangNhap: (data: I_dangNhap) => {
@@ -11,19 +23,28 @@ export const userApi = {
     layThongTinTaiKhoan: () => {
         return axios.get(`/QuanLyNguoiDung/ThongTinTaiKhoan`);
     },
-    capNhatMotThongTinNguoiDung: (thongTinMoi: object) => {
-        return axios.patch(`/QuanLyNguoiDung/CapNhatMotThongTinNguoiDung`, thongTinMoi);
+    capNhatMotThongTinTaiKhoan: (thongTinMoi: object) => {
+        return axios.patch(`/QuanLyNguoiDung/CapNhatMotThongTinTaiKhoan`, thongTinMoi);
     },
     capNhatMatKhau: (thongTinMatKhau: { matKhauCurent: string; matKhauNew: string }) => {
         return axios.patch(`/QuanLyNguoiDung/CapNhatMatKhau`, thongTinMatKhau);
     },
-    capNhatAvatar: (avatar: FormData) => {
-        return axios.patch(`/QuanLyNguoiDung/CapNhatAvatar`, avatar);
+    capNhatAvatarTaiKhoan: (avatar: FormData) => {
+        return axios.patch(`/QuanLyNguoiDung/CapNhatAvatarTaiKhoan`, avatar);
+    },
+    capNhatAvatarNguoiDung: (avatar: FormData) => {
+        return axios.patch(`/QuanLyNguoiDung/CapNhatAvatarNguoiDung`, avatar);
     },
     layDanhSachNguoiDung: () => {
         return axios.get(`/QuanLyNguoiDung/LayDanhSachNguoiDung`);
     },
-    xoaNguoiDung: (idNguoiDung:string) => {
+    layThongTinNguoiDung: (idNguoiDung: string) => {
+        return axios.get(`/QuanLyNguoiDung/LayThongTinNguoiDung?idNguoiDung=${idNguoiDung}`);
+    },
+    capNhatMotThongTinNguoiDung: (thongTinMoi: object) => {
+        return axios.patch(`/QuanLyNguoiDung/CapNhatMotThongTinNguoiDung`, thongTinMoi);
+    },
+    xoaNguoiDung: (idNguoiDung: string) => {
         return axios.delete(`/QuanLyNguoiDung/XoaNguoiDung?idNguoiDung=${idNguoiDung}`);
     },
 };

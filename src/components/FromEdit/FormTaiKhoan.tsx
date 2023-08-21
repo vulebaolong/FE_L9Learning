@@ -1,15 +1,13 @@
+import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
 import { Form, Input } from "antd";
-import { DispatchType, RootState } from "../../../redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
-import { error, success } from "../../../helpers/message";
-import Button from "../../../components/Button/Button";
+import { useEffect, useState, useMemo } from "react";
+import Button from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
+import { error, success } from "../../helpers/message";
 
-function FormEmail() {
+function FormTaiKhoan({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
-
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const [componentDisabled, setComponentDisabled] = useState(true);
 
@@ -17,26 +15,29 @@ function FormEmail() {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { email: string }) => {
+    const onFinish = async (values: { taiKhoan: string }) => {
         console.log(values);
         try {
-            const { data, status } = await userApi.capNhatMotThongTinNguoiDung(values);
+            if (api !== undefined) {
+                const { data, status } = await api({ ...values, idNguoiDung });
 
-            console.log("Call API - capNhatMotThongTinNguoiDung", { data, status });
+                console.log(`Call API - ${logApi}`, { data, status });
 
-            setComponentDisabled(true);
+                setComponentDisabled(true);
 
-            success("Đổi Thông tin email thành công");
+                success("Đổi Thông tin tài khoản thành công");
+            }
         } catch (err) {
-            error("Đổi Thông tin email không thành công");
+            error("Đổi Thông tin tài khoản không thành công");
         } finally {
-            dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
         }
     };
 
     const initialValues = useMemo(
         () => ({
-            email: userLogin?.email,
+            taiKhoan: userLogin?.taiKhoan,
         }),
         [userLogin]
     );
@@ -47,7 +48,7 @@ function FormEmail() {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("email");
+        setFocusTarget("taiKhoan");
     };
 
     const handleHuy = () => {
@@ -82,35 +83,38 @@ function FormEmail() {
             if (element) element.focus();
         }
     }, [componentDisabled, focusTarget]);
-
     return (
         <Form form={form} onFinish={onFinish} initialValues={initialValues}>
             <div className="flex justify-between items-center">
                 <div className="flex-1">
                     <div className="space-y-4">
-                        <h3 className="heading_3">Email</h3>
+                        <h3 className="heading_3">Tài khoản</h3>
                         <Form.Item
-                            name="email"
+                            name="taiKhoan"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Vui lòng nhập email",
+                                    message: "Vui lòng nhập tài khoản",
                                 },
                                 {
-                                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: "Email phải đúng định dạng",
+                                    pattern: /^\S+$/,
+                                    message: "Không chứa khoảng trắng",
+                                },
+                                {
+                                    pattern: /^[a-zA-Z0-9\s]+$/,
+                                    message: "Chỉ gồm chữ hoặc số",
                                 },
                             ]}
                         >
-                            <Input className="email w-1/2 truncate font-semibold p-0" placeholder="Email của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="taiKhoan w-1/2 truncate font-semibold p-0" placeholder="Tài khoản của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
                     </div>
-                    <p className="para mt-3">Nhận thông tin quan trọng từ L9</p>
+                    <p className="para mt-3">Tài khoản để đăng nhập.</p>
                 </div>
                 {renderButton(componentDisabled)}
             </div>
         </Form>
     );
 }
-export default FormEmail;
+export default FormTaiKhoan;

@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export interface I_dangNhap {
     taiKhoan: string;
     matKhau: string;
@@ -53,24 +55,43 @@ export interface I_componentDisabled {
 }
 
 export interface I_nguoiDung {
-  _id: string
-  taiKhoan: string
-  email: string
-  soDt: string
-  hoTen: string
-  maLoaiNguoiDung: string
-  avatar: string
-  bannerProfile: string
-  tenAvatar?: string
+    _id: string;
+    taiKhoan: string;
+    email: string;
+    soDt: string;
+    hoTen: string;
+    maLoaiNguoiDung: string;
+    avatar: string;
+    bannerProfile: string;
+    tenAvatar?: string;
 }
 
 export interface DataType {
-  key: string;
-  soThuTu: number
-  hoTen: string;
-  taiKhoan: string;
-  maLoaiNguoiDung: string;
-  soDt: string;
-  email: string;
-  avatar: string;
+    key: string;
+    soThuTu: number;
+    hoTen: string;
+    taiKhoan: string;
+    maLoaiNguoiDung: string;
+    soDt: string;
+    email: string;
+    avatar: string;
+}
+
+export interface I_PropsFormEdit {
+    userLogin: I_userLogin | I_thongTinNguoiDung;
+    api?: (thongTinMoi: object) => Promise<AxiosResponse<object, object>>;
+    apiAvatar?: (avatar: FormData) => Promise<AxiosResponse<object, object>>;
+    logApi: string;
+    idNguoiDung?: string;
+}
+
+export interface I_thongTinNguoiDung {
+    _id: string;
+    taiKhoan: string;
+    email: string;
+    soDt: string;
+    hoTen: string;
+    maLoaiNguoiDung: string;
+    avatar: string;
+    bannerProfile: string;
 }

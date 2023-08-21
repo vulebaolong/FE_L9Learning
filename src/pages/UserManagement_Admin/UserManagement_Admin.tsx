@@ -158,7 +158,7 @@ function UserManagement_Admin() {
                                 icon={<EditOutlined />}
                                 onClick={() => {
                                     console.log("Edit");
-                                    // navigate(`/edit-movie/${record._id}`);
+                                    navigate(`/edituser/${nguoiDung.key}`);
                                 }}
                             />
                         </Tooltip>

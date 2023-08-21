@@ -27,6 +27,7 @@ import { THEME } from "./contants/configContants";
 import { darkThemeREDU, lightThemeREDU } from "./redux/slices/toggleThemeSlice";
 import UserManagement_Admin from "./pages/UserManagement_Admin/UserManagement_Admin";
 import Modal from "./components/Modal/Modal";
+import EditUser_Admin from "./pages/EditUser_Admin/EditUser_Admin";
 
 function App() {
     const navigate = useNavigate();
@@ -74,6 +75,7 @@ function App() {
                         <Route path="listcourse" element={<ListCoursePage_Admin />} />
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
                         <Route path="usermanagement" element={<UserManagement_Admin />} />
+                        <Route path="edituser/:id" element={<EditUser_Admin />} />
                         <Route path="roadmap" element={<Roadmap />} />
                         <Route path="blog" element={<Blog />} />
                     </Route>

@@ -1,15 +1,13 @@
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
+import { useEffect, useMemo, useState } from "react";
 import { Form, Input } from "antd";
-import Button from "../../../components/Button/Button";
-import { useState, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../../redux/store";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
-import { error, success } from "../../../helpers/message";
+import { error, success } from "../../helpers/message";
+import Button from "../Button/Button";
+import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
 
-function FormHoTen() {
+function FormSoDienThoai({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
-
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const [componentDisabled, setComponentDisabled] = useState(true);
 
@@ -17,26 +15,29 @@ function FormHoTen() {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { hoTen: string }) => {
+    const onFinish = async (values: { soDt: string }) => {
         console.log(values);
         try {
-            const { data, status } = await userApi.capNhatMotThongTinNguoiDung(values);
+            if (api !== undefined) {
+                const { data, status } = await api({ ...values, idNguoiDung });
 
-            console.log("Call API - capNhatMotThongTinNguoiDung", { data, status });
+                console.log(`Call API - ${logApi}`, { data, status });
 
-            setComponentDisabled(true);
+                setComponentDisabled(true);
 
-            success("Đổi Thông tin họ tên thành công");
+                success("Đổi Thông tin số điện thoại thành công");
+            }
         } catch (err) {
-            error("Đổi Thông tin họ tên không thành công");
+            error("Đổi Thông tin số điện thoại không thành công");
         } finally {
-            dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
         }
     };
 
     const initialValues = useMemo(
         () => ({
-            hoTen: userLogin?.hoTen,
+            soDt: userLogin?.soDt,
         }),
         [userLogin]
     );
@@ -47,7 +48,7 @@ function FormHoTen() {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("hoTen");
+        setFocusTarget("soDt");
     };
 
     const handleHuy = () => {
@@ -88,30 +89,30 @@ function FormHoTen() {
             <div className="flex justify-between items-center">
                 <div className="flex-1">
                     <div className="space-y-4">
-                        <h3 className="heading_3">Họ tên</h3>
+                        <h3 className="heading_3">Số điện thoại</h3>
                         <Form.Item
                             className="m-0 p-0"
-                            name="hoTen"
+                            name="soDt"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Vui lòng nhập họ và tên",
+                                    message: "Vui lòng nhập số điện thoại",
                                 },
                                 {
-                                    pattern: /^[\p{L}\s]+$/u,
-                                    message: "Họ và tên chỉ bao gồm chữ, khoảng trắng",
+                                    pattern: /^\d{10}$/,
+                                    message: "Số điện thoại phải là 10 chữ số",
                                 },
                             ]}
                         >
-                            <Input className="hoTen w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="soDt w-1/2 truncate font-semibold p-0" placeholder="Số điện thoại của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
                     </div>
-                    <p className="para mt-3">Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.</p>
+                    <p className="para mt-3">Điện thoại liên kết với L9.</p>
                 </div>
                 {renderButton(componentDisabled)}
             </div>
         </Form>
     );
 }
-export default FormHoTen;
+export default FormSoDienThoai;

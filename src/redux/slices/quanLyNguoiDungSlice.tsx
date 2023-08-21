@@ -8,6 +8,7 @@ const initialState: I_initialState["quanLyNguoiDungSlice"] = {
     isPageDangNhap: true,
     autofill: null,
     danhSachNguoiDung: [],
+    thongTinNguoiDung: null,
 };
 
 const quanLyNguoiDungSlice = createSlice({
@@ -31,9 +32,12 @@ const quanLyNguoiDungSlice = createSlice({
         setDanhSachNguoiDungREDU: (state, { payload }) => {
             state.danhSachNguoiDung = payload;
         },
+        setThongTinNguoiDungREDU: (state, { payload }) => {
+            state.thongTinNguoiDung = payload;
+        },
     },
 });
 
-export const { setDanhSachNguoiDungREDU, setAutofillREDU, dangNhapREDU, capNhatUserLoginREDU, setIsPageDangNhapREDU } = quanLyNguoiDungSlice.actions;
+export const { setThongTinNguoiDungREDU, setDanhSachNguoiDungREDU, setAutofillREDU, dangNhapREDU, capNhatUserLoginREDU, setIsPageDangNhapREDU } = quanLyNguoiDungSlice.actions;
 
 export default quanLyNguoiDungSlice.reducer;

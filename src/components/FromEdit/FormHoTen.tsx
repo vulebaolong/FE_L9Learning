@@ -1,16 +1,13 @@
-import { I_thongTinTaiKhoan } from "../../../interfaces/I_quanLyNguoiDung";
 import { Form, Input } from "antd";
-import { useEffect, useState, useMemo } from "react";
-import Button from "./../../../components/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../../redux/store";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
-import { error, success } from "../../../helpers/message";
+import Button from "../Button/Button";
+import { useState, useEffect, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
+import { error, success } from "../../helpers/message";
+import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
 
-function FormTaiKhoan() {
+function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
-
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const [componentDisabled, setComponentDisabled] = useState(true);
 
@@ -18,26 +15,29 @@ function FormTaiKhoan() {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { taiKhoan: string }) => {
+    const onFinish = async (values: { hoTen: string }) => {
         console.log(values);
         try {
-            const { data, status } = await userApi.capNhatMotThongTinNguoiDung(values);
+            if (api !== undefined) {
+                const { data, status } = await api({ ...values, idNguoiDung });
 
-            console.log("Call API - capNhatMotThongTinNguoiDung", { data, status });
+                console.log(`Call API - ${logApi}`, { data, status });
 
-            setComponentDisabled(true);
+                setComponentDisabled(true);
 
-            success("Đổi Thông tin họ tên thành công");
+                success("Đổi Thông tin họ tên thành công");
+            }
         } catch (err) {
             error("Đổi Thông tin họ tên không thành công");
         } finally {
-            dispatch({ type: "thongTinTaiKhoanSaga" });
+            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
         }
     };
 
     const initialValues = useMemo(
         () => ({
-            taiKhoan: userLogin?.taiKhoan,
+            hoTen: userLogin?.hoTen,
         }),
         [userLogin]
     );
@@ -48,7 +48,7 @@ function FormTaiKhoan() {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("taiKhoan");
+        setFocusTarget("hoTen");
     };
 
     const handleHuy = () => {
@@ -83,38 +83,36 @@ function FormTaiKhoan() {
             if (element) element.focus();
         }
     }, [componentDisabled, focusTarget]);
+
     return (
         <Form form={form} onFinish={onFinish} initialValues={initialValues}>
             <div className="flex justify-between items-center">
                 <div className="flex-1">
                     <div className="space-y-4">
-                        <h3 className="heading_3">Tài khoản</h3>
+                        <h3 className="heading_3">Họ tên</h3>
                         <Form.Item
-                            name="taiKhoan"
+                            className="m-0 p-0"
+                            name="hoTen"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Vui lòng nhập tài khoản",
+                                    message: "Vui lòng nhập họ và tên",
                                 },
                                 {
-                                    pattern: /^\S+$/,
-                                    message: "Không chứa khoảng trắng",
-                                },
-                                {
-                                    pattern: /^[a-zA-Z0-9\s]+$/,
-                                    message: "Chỉ gồm chữ hoặc số",
+                                    pattern: /^[\p{L}\s]+$/u,
+                                    message: "Họ và tên chỉ bao gồm chữ, khoảng trắng",
                                 },
                             ]}
                         >
-                            <Input className="taiKhoan w-1/2 truncate font-semibold p-0" placeholder="Tài khoản của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="hoTen w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
                     </div>
-                    <p className="para mt-3">Tài khoản để đăng nhập.</p>
+                    <p className="para mt-3">Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.</p>
                 </div>
                 {renderButton(componentDisabled)}
             </div>
         </Form>
     );
 }
-export default FormTaiKhoan;
+export default FormHoTen;

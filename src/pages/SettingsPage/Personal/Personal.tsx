@@ -1,21 +1,14 @@
-import { useEffect } from "react";
-import FormHoTen from "./FormHoTen";
-import FormTaiKhoan from "./FormTaiKhoan";
-import { DispatchType, RootState } from "../../../redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import FormEmail from "./FormEmail";
-import FormSoDienThoai from "./FormSoDienThoai";
-import FormThayDoiMatKhau from "../Security/FormThayDoiMatKhau";
-import FormAvatar from "./FormAvatar";
+import FormHoTen from "../../../components/FromEdit/FormHoTen";
+import FormTaiKhoan from "../../../components/FromEdit/FormTaiKhoan";
+import FormEmail from "../../../components/FromEdit/FormEmail";
+import FormSoDienThoai from "../../../components/FromEdit/FormSoDienThoai";
+import FormAvatar from "../../../components/FromEdit/FormAvatar";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { userApi } from "../../../api/quanLyNguoiDungApi";
 
 function Personal() {
-    // const dispatch: DispatchType = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch({ type: "thongTinTaiKhoanSaga" });
-    // }, []);
-
-    // const { thongTinTaiKhoan } = useSelector((state: RootState) => state.quanLyNguoiDungSlice)
+    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     return (
         <div>
@@ -24,11 +17,11 @@ function Personal() {
             <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
 
             <div className="space-y-12">
-                <FormHoTen />
-                <FormTaiKhoan />
-                <FormEmail />
-                <FormSoDienThoai />
-                <FormAvatar />
+                <FormHoTen userLogin={userLogin} api={userApi.capNhatMotThongTinTaiKhoan} logApi="capNhatMotThongTinTaiKhoan" />
+                <FormTaiKhoan userLogin={userLogin} api={userApi.capNhatMotThongTinTaiKhoan} logApi="capNhatMotThongTinTaiKhoan" />
+                <FormEmail userLogin={userLogin} api={userApi.capNhatMotThongTinTaiKhoan} logApi="capNhatMotThongTinTaiKhoan" />
+                <FormSoDienThoai userLogin={userLogin} api={userApi.capNhatMotThongTinTaiKhoan} logApi="capNhatMotThongTinTaiKhoan" />
+                <FormAvatar userLogin={userLogin} apiAvatar={userApi.capNhatAvatarTaiKhoan} logApi="capNhatAvatarTaiKhoan" />
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import { userApi } from "../../api/quanLyNguoiDungApi";
 import { I_dangKy, I_dangNhap } from "../../interfaces/I_quanLyNguoiDung";
-import { capNhatUserLoginREDU, dangNhapREDU, setAutofillREDU, setDanhSachNguoiDungREDU, setIsPageDangNhapREDU } from "../slices/quanLyNguoiDungSlice";
+import { capNhatUserLoginREDU, dangNhapREDU, setAutofillREDU, setDanhSachNguoiDungREDU, setIsPageDangNhapREDU, setThongTinNguoiDungREDU } from "../slices/quanLyNguoiDungSlice";
 import { error, success } from "../../helpers/message";
 import { lcStorage } from "../../helpers/localStorage";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants";
@@ -157,4 +157,45 @@ function* layThongTinTaiKhoanSaga() {
 
 export function* theoDoiLayThongTinTaiKhoanSaga() {
     yield takeLatest("layThongTinTaiKhoanSaga", layThongTinTaiKhoanSaga);
+}
+
+// layThongTinNguoiDungSaga
+function* layThongTinNguoiDungSaga({ payload }: { payload: string; type: string }) {
+    try {
+        yield put(setIsLoadingPageREDU(true));
+
+        const { data, status } = yield call(() => userApi.layThongTinNguoiDung(payload));
+
+        console.log("Saga - layThongTinNguoiDungSaga", { data, status });
+
+        yield put(setThongTinNguoiDungREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+        error(err.response?.data?.result?.message);
+    } finally {
+        yield delay(DELAY_LOADING_PAGE);
+        yield put(setIsLoadingPageREDU(false));
+    }
+}
+
+export function* theoDoiLayThongTinNguoiDungSaga() {
+    yield takeLatest("layThongTinNguoiDungSaga", layThongTinNguoiDungSaga);
+}
+
+// capNhatThongTinNguoiDungSaga
+function* capNhatThongTinNguoiDungSaga({ payload }: { payload: string; type: string }) {
+    try {
+        const { data, status } = yield call(() => userApi.layThongTinNguoiDung(payload));
+
+        console.log("Saga - capNhatThongTinNguoiDungSaga", { data, status });
+
+        yield put(setThongTinNguoiDungREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+        error(err.response?.data?.result?.message);
+    }
+}
+
+export function* theoDoiCapNhatThongTinNguoiDungSaga() {
+    yield takeLatest("capNhatThongTinNguoiDungSaga", capNhatThongTinNguoiDungSaga);
 }

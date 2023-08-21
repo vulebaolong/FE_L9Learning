@@ -1,19 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../../redux/store";
-import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../redux/store";
+import { useEffect, useState } from "react";
 import { Form, Modal, Upload, UploadFile } from "antd";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
-import { error, success } from "../../../helpers/message";
-import Button from "../../../components/Button/Button";
-import { getBase64 } from "../../../helpers/antdHelper";
+import { userApi } from "../../api/quanLyNguoiDungApi";
+import { error, success } from "../../helpers/message";
+import Button from "../Button/Button";
+import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { file } from "../../../interfaces/I_quanLyKhoaHoc";
+import { file } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
 
-function FormAvatar() {
+function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
-
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
     const [componentDisabled, setComponentDisabled] = useState(true);
 
@@ -35,18 +34,22 @@ function FormAvatar() {
             const formData = new FormData();
 
             formData.append("avatar", avatar());
+            formData.append("idNguoiDung", `${idNguoiDung}`);
 
-            const { data, status } = await userApi.capNhatAvatar(formData);
+            if (apiAvatar !== undefined) {
+                const { data, status } = await apiAvatar(formData);
 
-            console.log("Call API - capNhatMotThongTinNguoiDung", { data, status });
+                console.log(`Call API - ${logApi}`, { data, status });
 
-            setComponentDisabled(true);
+                setComponentDisabled(true);
 
-            success("Đổi avatar thành công");
+                success("Đổi avatar thành công");
+            }
         } catch (err) {
             error("Đổi avatar không thành công");
         } finally {
-            dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatAvatarTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
+            if (logApi === "capNhatAvatarNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
         }
     };
 
