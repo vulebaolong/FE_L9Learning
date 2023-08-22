@@ -58,20 +58,26 @@ function ProfilePage() {
                     {/* INFO */}
                     <div className="relative flex">
                         {/* AVATAR */}
-                        <div className="absolute bottom-0 left-0 aspect-square w-44 border-4 border-white dark:border-slate-900  rounded-full overflow-hidden">
+                        <div className="absolute bottom-0 left-0 aspect-square w-32 xl:w-44 border-4 border-white dark:border-slate-900  rounded-full overflow-hidden">
                             <img className="w-full h-full object-cover" src={userLogin?.avatar} alt="" />
                         </div>
-                        <div className="w-44 flex-shrink-0"></div>
+                        <div className="w-32 xl:w-44 flex-shrink-0"></div>
 
                         {/* CHI TIẾT */}
-                        <div className="my-5 ml-5 w-full">
-                            <p className="font-extrabold text-2xl w-1/2 truncate">{userLogin?.hoTen}</p>
-                            <p className="w-1/2 truncate">{renderDaDangKyKhoaHoc()}</p>
+                        <div className="my-5 ml-5 w-full h-10 sm:h-auto">
+                            <p className="font-extrabold text-2xl w-1/2 truncate hidden sm:block">{userLogin?.hoTen}</p>
+                            <p className="w-1/2 truncate hidden sm:block">{renderDaDangKyKhoaHoc()}</p>
                         </div>
                     </div>
 
+                    {/* CHI TIẾT */}
+                    <div className="my-5 w-full sm:hidden">
+                        <p className="font-extrabold text-2xl truncate">{userLogin?.hoTen}</p>
+                        <p className="truncate">{renderDaDangKyKhoaHoc()}</p>
+                    </div>
+
                     {/* CONTENT */}
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
                         {/* HOẠT ĐỘNG */}
                         <div className="space-y-5">
                             <div className={`${box} space-y-5`}>
@@ -99,25 +105,28 @@ function ProfilePage() {
                                     {userLogin?.chiTietKhoaHocGhiDanh.length === 0 && "Chưa đăng ký khoá học"}
                                     {userLogin?.chiTietKhoaHocGhiDanh.map((khoaHoc) => {
                                         return (
-                                            <div key={khoaHoc._id} className="grid grid-cols-2 gap-5">
+                                            <div key={khoaHoc._id} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                                 {/* HÌNH ẢNH */}
-                                                <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
-                                                    <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
-                                                        <Button
-                                                            onClick={() => {
-                                                                handleTiepTucHoc(khoaHoc._id);
-                                                            }}
-                                                            type="white"
-                                                        >
-                                                            Tiếp tục học
-                                                        </Button>
-                                                        <PopconfirmProfile khoaHoc={khoaHoc} />
+                                                <div className="">
+                                                    <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
+                                                        <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
+                                                            <Button
+                                                                onClick={() => {
+                                                                    handleTiepTucHoc(khoaHoc._id);
+                                                                }}
+                                                                type="white"
+                                                            >
+                                                                Tiếp tục học
+                                                            </Button>
+                                                            <PopconfirmProfile khoaHoc={khoaHoc} />
+                                                        </div>
+                                                        <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                                                     </div>
-                                                    <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                                    <p className="font-bold truncate sm:hidden">{khoaHoc.tenKhoaHoc}</p>
                                                 </div>
 
                                                 {/* MÔ TẢ */}
-                                                <div className="space-y-2">
+                                                <div className="space-y-2 hidden sm:block">
                                                     <p className="heading_3 truncate">{khoaHoc.tenKhoaHoc}</p>
                                                     <Typography.Paragraph className={`para`} ellipsis={{ rows: 5 }}>
                                                         {khoaHoc.moTa}

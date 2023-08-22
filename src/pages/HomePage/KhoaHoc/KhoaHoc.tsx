@@ -17,7 +17,7 @@ function KhoaHoc() {
     return (
         <section className="py-24">
             <h2 className="heading_2">Tất cả khoá học</h2>
-            <div className="grid grid-cols-4 gap-7 mt-5">
+            <div className="collumnCourse">
                 {danhSachKhoaHoc.map((khoaHoc) => {
                     return (
                         <div key={khoaHoc._id} className="">

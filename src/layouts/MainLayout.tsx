@@ -8,10 +8,16 @@ function MainLayout() {
         <>
             <Header />
             <div className="flex min-h-screen">
-                <div className="flex-shrink-0 w-sideBar">
+                <div className="hidden lg:block flex-shrink-0 w-sideBar">
                     <SideBar />
                 </div>
-                <div className="pl-[20px] pr-[40px] py-[20px] w-content">
+                {/* DESKTOP */}
+                <div className="hidden lg:block pl-[20px] pr-[40px] py-[20px] w-content">
+                    <Outlet />
+                </div>
+
+                {/* MOBILE */}
+                <div className="lg:hidden container py-5">
                     <Outlet />
                 </div>
             </div>

@@ -42,7 +42,7 @@ function CourseManagementPage_Admin() {
                 </Tooltip>
             </div>
 
-            <div className="grid grid-cols-4 gap-7 mt-5">
+            <div className="collumnCourse">
                 {danhSachKhoaHoc.map((khoaHoc) => {
                     return (
                         <div key={khoaHoc._id}>

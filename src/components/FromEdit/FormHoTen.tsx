@@ -86,7 +86,7 @@ function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
 
     return (
         <Form form={form} onFinish={onFinish} initialValues={initialValues}>
-            <div className="flex justify-between items-center">
+            <div className="space-y-3 sm:space-y-0 sm:flex justify-between items-center gap-2">
                 <div className="flex-1">
                     <div className="space-y-4">
                         <h3 className="heading_3">Họ tên</h3>
@@ -104,9 +104,9 @@ function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
                                 },
                             ]}
                         >
-                            <Input className="hoTen w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="hoTen w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
-                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
+                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>
                     <p className="para mt-3">Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.</p>
                 </div>

@@ -68,7 +68,7 @@ function FormThayDoiMatKhau() {
 
     return (
         <Form form={form} onFinish={onFinish}>
-            <div className="flex justify-between items-center">
+            <div className="space-y-3 sm:space-y-0 sm:flex justify-between items-center">
                 <div className="flex-1">
                     <div className="space-y-4">
                         <h3 className="heading_3">Thay đổi mật khẩu</h3>
@@ -86,9 +86,9 @@ function FormThayDoiMatKhau() {
                                 },
                             ]}
                         >
-                            <Input className="soDt w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu hiện tại của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="soDt w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu hiện tại của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
-                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
+                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                         <Form.Item
                             className="m-0 p-0"
                             name="matKhauNew"
@@ -103,9 +103,9 @@ function FormThayDoiMatKhau() {
                                 },
                             ]}
                         >
-                            <Input className="soDt w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu mới của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="soDt w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu mới của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
-                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-1/2" />
+                        <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>
                 </div>
                 {renderButton(componentDisabled)}

@@ -26,10 +26,10 @@
    -  Tìm kiếm khoá học - done
 - 13 - Ghi danh và hủy ghi danh (Nâng cao)
    -  Ghi danh người dùng dựa vào khóa học (KHOÁ HỌC)
-      -  Lấy danh sách người dùng chưa ghi danh khóa học đó
-      -  Lấy danh sách người dùng đã ghi danh vào khóa học đó
-      -  Đăng ký người dùng vào khóa học đó
-      -  Huỷ đăng ký người dùng vào khóa học đó
+      -  Lấy danh sách người dùng chưa ghi danh khóa học đó - done
+      -  Lấy danh sách người dùng đã ghi danh vào khóa học đó - done
+      -  Đăng ký người dùng vào khóa học đó - done
+      -  Huỷ đăng ký người dùng vào khóa học đó - done
    -  Ghi danh khóa học dựa vào người dùng (NGƯỜI DÙNG)
       -  Lấy danh sách khóa học mà người dùng đó chưa ghi danh - done
       -  Lấy danh sách khóa học mà người dùng đó đã ghi danh - done

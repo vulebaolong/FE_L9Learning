@@ -6,12 +6,12 @@ import { DispatchType } from "../../redux/store";
 import Button from "../../components/Button/Button";
 import style from "./CoursesPage.module.css";
 import { navigate } from "../../helpers/navigate";
-import imgRoadmap from "../../assets/roadmap.png";
 import { Select } from "antd";
 import { setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
 import { wait } from "../../helpers/awaitHelper";
 import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 import SkeletonWarpCourses from "../../components/Skeleton/SkeletonWarpCourses";
+import Cta from "../../components/Cta/Cta";
 
 function CoursesPage() {
     const dispatch: DispatchType = useDispatch();
@@ -106,7 +106,7 @@ function CoursesPage() {
                     return (
                         <div key={index} className="">
                             <h2 className="heading_2">{khoaHocs.tenDanhMuc}</h2>
-                            <div className="grid grid-cols-4 gap-7 mt-5">
+                            <div className="collumnCourse">
                                 {khoaHocs.khoaHocDanhMuc.map((khoaHoc) => {
                                     return (
                                         <div key={khoaHoc._id} className="">
@@ -130,23 +130,11 @@ function CoursesPage() {
                     );
                 })
             )}
-            <div className="grid grid-cols-2 gap-2">
-                <div className="w-[400px] self-center">
-                    <h2 className="heading_2 my-5">Bạn đang tìm kiếm lộ trình học cho người mới?</h2>
-                    <p className="my-[14px]">Các khóa học được thiết kế phù hợp cho người mới, lộ trình học rõ ràng, nội dung dễ hiểu.</p>
-                    <Button type="bg-whiteblack">Xem lộ trình</Button>
-                </div>
-                <div className="w-[400px] ml-auto">
-                    <img
-                        // style={{
-                        //     filter: "drop-shadow(0px 8px 24px rgba(220, 220, 220, 0.224))",
-                        // }}
-                        className="w-full h-full object-cover dark:drop-shadow-primary "
-                        src={imgRoadmap}
-                        alt=""
-                    />
-                </div>
-            </div>
+            <Cta
+                textBtn="Xem lộ trình"
+                title="Bạn đang tìm kiếm lộ trình học cho người mới?"
+                desc="Các khóa học được thiết kế phù hợp cho người mới, lộ trình học rõ ràng, nội dung dễ hiểu."
+            />
         </section>
     );
 }

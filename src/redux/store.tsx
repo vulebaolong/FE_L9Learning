@@ -8,6 +8,7 @@ import toggleThemeSlice from "./slices/toggleThemeSlice";
 import quanLyNguoiDungSlice from "./slices/quanLyNguoiDungSlice";
 import quanLyKhoaHocSlice from "./slices/quanLyKhoaHocSlice";
 import loadingSlice from "./slices/loadingSlice";
+import drawerSlice from "./slices/drawerSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +19,7 @@ const store = configureStore({
         quanLyNguoiDungSlice,
         quanLyKhoaHocSlice,
         loadingSlice,
+        drawerSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

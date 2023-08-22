@@ -13,7 +13,7 @@ function SideBar() {
 
 
     return (
-        <div className=" px-2 sticky top-header py-5">
+        <div className="px-2 sticky top-header py-5">
             <ul className="space-y-1">
                 <li>
                     <Link to="/" className={`${useMatch("/") && btnActive} ${btnSideBar} `}>

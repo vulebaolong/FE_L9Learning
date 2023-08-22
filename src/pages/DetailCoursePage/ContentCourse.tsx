@@ -37,9 +37,9 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
         return {
             key: `${index}`,
             label: (
-                <div className="flex items-baseline justify-between">
-                    <strong className="chuongHoc text-[#333] font-semibold dark:text-slate-300">{`${chuong.title}`}</strong>
-                    <span className={`para mr-4`}>{chuong.videos.length} bài học</span>
+                <div className="flex items-baseline justify-between gap-2">
+                    <strong className="chuongHoc truncate text-[#333] font-semibold dark:text-slate-300">{`${chuong.title}`}</strong>
+                    <span className={`para mr-4 flex-shrink-0`}>{chuong.videos.length} bài học</span>
                 </div>
             ),
             children: (
@@ -62,7 +62,7 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
     return (
         <>
             <h2 className={`heading_2`}>Nội dung khóa học</h2>
-            <div className="flex items-baseline justify-between">
+            <div className="sm:flex items-baseline justify-between">
                 <div className="">
                     <span className={`para`}>
                         <strong>{khoaHoc?.chuongHoc.length} </strong> chương

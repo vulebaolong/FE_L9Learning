@@ -172,7 +172,7 @@ function InfoUserToCoursePage_Admin() {
         <section className="pb-24">
             <div className="space-y-20">
                 <div>
-                    <h1 className="heading_1 pt-5">Thông tin khoá học của</h1>
+                    <h1 className="heading_1 pt-5">Thông tin khoá học của người dùng</h1>
                     <div className="flex items-center gap-2  mt-5">
                         <Avatar src={<img src={thongTinKhoaHocNguoiDung?.nguoiDung.avatar} alt="avatar" />} size={60} />
                         <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{thongTinKhoaHocNguoiDung?.nguoiDung.hoTen}</p>
@@ -182,12 +182,12 @@ function InfoUserToCoursePage_Admin() {
 
                 <div>
                     <h2 className="heading_2">Khoá học đã đăng ký</h2>
-                    <div className="grid grid-cols-4 gap-7 mt-5">{renderKhoaHocDaDangKy()}</div>
+                    <div className="collumnCourse">{renderKhoaHocDaDangKy()}</div>
                 </div>
 
                 <div>
                     <h2 className="heading_2">Khoá học chưa đăng ký</h2>
-                    <div className="grid grid-cols-4 gap-7 mt-5">{renderKhoaHocChuaDangKy()}</div>
+                    <div className="collumnCourse">{renderKhoaHocChuaDangKy()}</div>
                 </div>
             </div>
         </section>

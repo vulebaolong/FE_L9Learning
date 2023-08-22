@@ -69,7 +69,7 @@ function* themKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
 
         success("Thêm khoá học thành công");
 
-        navigate("/listcourse");
+        navigate("/coursemanagement");
     } catch (err) {
         console.log(err);
         error("Thêm khoá học không thành công");
@@ -122,6 +122,8 @@ function* capNhatKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
         console.log("Saga - capNhatKhoaHocSaga", { data, status });
 
         success("Cập nhật khoá học thành công");
+
+        navigate("/coursemanagement");
     } catch (err) {
         console.log(err);
         error("Cập nhật khoá học không thành công");

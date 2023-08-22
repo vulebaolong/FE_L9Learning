@@ -125,7 +125,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEd
 
     return (
         <Form form={form} onFinish={onFinish} initialValues={initialValues()}>
-            <div className="flex justify-between items-center">
+            <div className="space-y-3 sm:space-y-0 sm:flex justify-between items-center">
                 <div className="flex-1">
                     <div className="space-y-4">
                         <h3 className="heading_3">Hình đại diện</h3>

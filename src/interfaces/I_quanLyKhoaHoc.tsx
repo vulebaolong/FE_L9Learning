@@ -109,3 +109,9 @@ export interface I_nguoiDungChuaDangKy {
     avatar: string;
     maLoaiNguoiDung: string;
 }
+
+export interface I_PropsCta {
+    title: string;
+    desc: string;
+    textBtn: string;
+}

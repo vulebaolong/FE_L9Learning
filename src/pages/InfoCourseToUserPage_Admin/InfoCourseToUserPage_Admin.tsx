@@ -20,8 +20,8 @@ function InfoCourseToUserPage_Admin() {
         <section className="pb-24">
             <div className="space-y-20">
                 <div>
-                    <h1 className="heading_1 pt-5">Thông tin người dùng của</h1>
-                    <div className="grid grid-cols-4 gap-7 mt-5">
+                    <h1 className="heading_1 pt-5">Thông tin người dùng của khoá học</h1>
+                    <div className="collumnCourse">
                         <div>
                             {/* HÌNH ẢNH */}
                             <div className={` aspect-[292/165] relative rounded-2xl overflow-hidden`}>

@@ -108,7 +108,7 @@ function UserManagement_Admin() {
             dataIndex: "soThuTu",
             sorter: (a, b) => a.soThuTu - b.soThuTu,
             sortDirections: ["ascend"],
-            width: "5%",
+            className: "hidden sm:table-cell",
         },
         {
             title: "Ảnh",
@@ -120,36 +120,47 @@ function UserManagement_Admin() {
                     </div>
                 );
             },
-            width: "10%",
+            className: "hidden xl:table-cell",
         },
         {
             title: "Tài khoản",
             ...getColumnSearchProps("taiKhoan"),
             render: (_, b) => {
                 if (b.maLoaiNguoiDung === "KhachHang") {
-                    return <Tag color="green">{b.taiKhoan}</Tag>;
+                    return (
+                        <div className="">
+                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <Tag color="green">{b.taiKhoan}</Tag>
+                        </div>
+                    );
                 }
                 if (b.maLoaiNguoiDung === "QuanTri") {
-                    return <Tag color="red">{b.taiKhoan}</Tag>;
+                    return (
+                        <div className="">
+                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <Tag color="red">{b.taiKhoan}</Tag>
+                        </div>
+                    );
                 }
             },
-            width: "15%",
         },
         {
             title: "Họ tên",
             dataIndex: "hoTen",
             ...getColumnSearchProps("hoTen"),
+            className: "hidden sm:table-cell",
         },
         {
             title: "Số điện thoại",
             dataIndex: "soDt",
             ...getColumnSearchProps("soDt"),
-            width: "15%",
+            className: "hidden md:table-cell",
         },
         {
             title: "Email",
             dataIndex: "email",
             ...getColumnSearchProps("email"),
+            className: "hidden lg:table-cell",
         },
         {
             title: "Hành động",
@@ -180,7 +191,6 @@ function UserManagement_Admin() {
                     </div>
                 );
             },
-            width: "15%",
         },
     ];
 

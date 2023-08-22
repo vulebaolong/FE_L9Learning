@@ -37,9 +37,7 @@ input {
 
 /* Đặt màu cho quét khối văn bản */
 ::selection {
-    background-color: yellow;
-    @apply bg-primary
-
+    @apply bg-primary text-white
     /* color: black; */;
 }
 
@@ -113,4 +111,16 @@ input {
 .ant-image {
     width: 100%;
     height: 100%;
+}
+
+.ant-drawer-content-wrapper {
+    @apply !w-[90%] sm:!w-[50%];
+}
+
+.ant-drawer {
+    @apply lg:hidden;
+}
+
+.ant-table-cell {
+	word-break: break-all;
 }

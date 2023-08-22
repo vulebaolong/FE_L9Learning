@@ -5,7 +5,7 @@ function SkeletonWarpCourses() {
             <h2 className="heading_2">
                 <Skeleton.Input size="small" active />
             </h2>
-            <div className="grid grid-cols-4 gap-7 mt-5">
+            <div className="collumnCourse">
                 <div className="">
                     <Skeleton title={false} paragraph={{ width: "100%", rows: 4 }} round active />
                     <div className="mt-3">
