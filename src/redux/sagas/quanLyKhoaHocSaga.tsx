@@ -1,6 +1,6 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { layDanhSachKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
+import { layDanhSachKhoaHocREDU, setThongTinNguoiDungChoKhoaHocREDU } from "../slices/quanLyKhoaHocSlice";
 import { error, success } from "../../helpers/message";
 import { navigate } from "../../helpers/navigate";
 import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../slices/loadingSlice";
@@ -133,3 +133,26 @@ function* capNhatKhoaHocSaga({ payload }: { payload: FormData; type: string }) {
 export function* theoDoiCapNhatKhoaHocSaga() {
     yield takeLatest("capNhatKhoaHocSaga", capNhatKhoaHocSaga);
 }
+
+// layThongTinNguoiDungChoKhoaHocSaga
+function* layThongTinNguoiDungChoKhoaHocSaga({ payload }: { payload: string; type: string }) {
+    try {
+        yield put(setIsLoadingPageREDU(true));
+
+        const { data, status } = yield call(() => khoaHocApi.layThongTinNguoiDungChoKhoaHoc(payload));
+
+        console.log("Saga - layThongTinNguoiDungChoKhoaHocSaga", { data, status });
+
+        yield put(setThongTinNguoiDungChoKhoaHocREDU(data.result.data));
+    } catch (err) {
+        console.log(err);
+    } finally {
+        yield delay(DELAY_LOADING_PAGE);
+        yield put(setIsLoadingPageREDU(false));
+    }
+}
+
+export function* theoDoiLayThongTinNguoiDungChoKhoaHocSaga() {
+    yield takeLatest("layThongTinNguoiDungChoKhoaHocSaga", layThongTinNguoiDungChoKhoaHocSaga);
+}
+

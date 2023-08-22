@@ -31,13 +31,10 @@ function Logged(props: I_PropLogged) {
         window.location.reload();
     };
 
-    const handleThemKhoaHoc = () => {
-        navigate("/addcourse");
-        setIsOpenPopupUser(false);
-    };
+    
 
-    const handleDanhSachKhoaHoc = () => {
-        navigate("/listcourse");
+    const handleQuanLyKhoaHoc = () => {
+        navigate("/coursemanagement");
         setIsOpenPopupUser(false);
     };
 
@@ -70,18 +67,12 @@ function Logged(props: I_PropLogged) {
 
         return (
             <>
-                <div className="">
-                    <span className={textItem} onClick={handleThemKhoaHoc}>
-                        Thêm khoá học
+                <div>
+                    <span className={textItem} onClick={handleQuanLyKhoaHoc}>
+                        Quản lý khoá học
                     </span>
                 </div>
                 <div className="mt-4">
-                    <span className={textItem} onClick={handleDanhSachKhoaHoc}>
-                        Danh sách khoá học
-                    </span>
-                </div>
-                <hr className="dark:!border-gray-700 border-gray-200 my-5" />
-                <div>
                     <span className={textItem} onClick={handleQuanLyNguoiDung}>
                         Quản lý người dùng
                     </span>

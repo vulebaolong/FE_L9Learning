@@ -210,14 +210,14 @@ export function* theoDoiCapNhatThongTinNguoiDungSaga() {
     yield takeLatest("capNhatThongTinNguoiDungSaga", capNhatThongTinNguoiDungSaga);
 }
 
-// layThongTinKhoaHocNguoiDungSaga
-function* layThongTinKhoaHocNguoiDungSaga({ payload }: { payload: string; type: string }) {
+// layThongTinKhoaHocChoNguoiDungSaga
+function* layThongTinKhoaHocChoNguoiDungSaga({ payload }: { payload: string; type: string }) {
     try {
         yield put(setIsLoadingPageREDU(true));
 
-        const { data, status } = yield call(() => userApi.layThongTinKhoaHocNguoiDung(payload));
+        const { data, status } = yield call(() => userApi.layThongTinKhoaHocChoNguoiDung(payload));
 
-        console.log("Saga - layThongTinKhoaHocNguoiDungSaga", { data, status });
+        console.log("Saga - layThongTinKhoaHocChoNguoiDungSaga", { data, status });
 
         yield put(setThongTinKhoaHocNguoiDungREDU(data.result.data));
     } catch (err) {
@@ -228,15 +228,15 @@ function* layThongTinKhoaHocNguoiDungSaga({ payload }: { payload: string; type: 
     }
 }
 
-export function* theoDoiLayThongTinKhoaHocNguoiDungSaga() {
-    yield takeLatest("layThongTinKhoaHocNguoiDungSaga", layThongTinKhoaHocNguoiDungSaga);
+export function* theoDoiLayThongTinKhoaHocChoNguoiDungSaga() {
+    yield takeLatest("layThongTinKhoaHocChoNguoiDungSaga", layThongTinKhoaHocChoNguoiDungSaga);
 }
 
 // capNhatKhoaHocNguoiDungSaga
 // cập nhật lại giao diện
 function* capNhatKhoaHocNguoiDungSaga({ payload }: { payload: string; type: string }) {
     try {
-        const { data, status } = yield call(() => userApi.layThongTinKhoaHocNguoiDung(payload));
+        const { data, status } = yield call(() => userApi.layThongTinKhoaHocChoNguoiDung(payload));
 
         console.log("Saga - capNhatKhoaHocNguoiDungSaga", { data, status });
 

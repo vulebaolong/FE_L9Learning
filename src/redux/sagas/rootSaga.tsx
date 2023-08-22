@@ -14,7 +14,7 @@ export default function* rootSaga() {
         quanLyNguoiDungSaga.theoDoiCapNhatThongTinNguoiDungSaga(),
         quanLyNguoiDungSaga.theoDoiThemNguoiDungSaga(),
         quanLyNguoiDungSaga.theoDoiLayDanhSachNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiLayThongTinKhoaHocNguoiDungSaga(),
+        quanLyNguoiDungSaga.theoDoiLayThongTinKhoaHocChoNguoiDungSaga(),
         quanLyNguoiDungSaga.theoDoiCapNhatKhoaHocNguoiDungSaga(),
 
         quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga(),
@@ -22,5 +22,6 @@ export default function* rootSaga() {
         quanLyKhoaHocSaga.theoDoiThemKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiXoaKhoaHocSaga(),
         quanLyKhoaHocSaga.theoDoiCapNhatKhoaHocSaga(),
+        quanLyKhoaHocSaga.theoDoiLayThongTinNguoiDungChoKhoaHocSaga(),
     ]);
 }

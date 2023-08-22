@@ -10,7 +10,6 @@ import { setMessageApi } from "./helpers/message";
 import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
 import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
-import ListCoursePage_Admin from "./pages/ListCoursePage_Admin/ListCoursePage_Admin";
 import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Admin";
 import CoursesPage from "./pages/CoursesPage/CoursesPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -29,6 +28,8 @@ import UserManagement_Admin from "./pages/UserManagement_Admin/UserManagement_Ad
 import Modal from "./components/Modal/Modal";
 import EditUser_Admin from "./pages/EditUser_Admin/EditUser_Admin";
 import InfoUserToCoursePage_Admin from "./pages/InfoUserToCoursePage_Admin/InfoUserToCoursePage_Admin";
+import CourseManagementPage_Admin from "./pages/CourseManagementPage_Admin/CourseManagementPage_Admin";
+import InfoCourseToUserPage_Admin from "./pages/InfoCourseToUserPage_Admin/InfoCourseToUserPage_Admin";
 
 function App() {
     const navigate = useNavigate();
@@ -75,11 +76,12 @@ function App() {
                         <Route path="roadmap" element={<Roadmap />} />
                         <Route path="blog" element={<Blog />} />
                         <Route path="addcourse" element={<AddCoursePage_Admin />} />
-                        <Route path="listcourse" element={<ListCoursePage_Admin />} />
+                        <Route path="coursemanagement" element={<CourseManagementPage_Admin />} />
                         <Route path="editcourse/:id" element={<EditCoursePage_Admin />} />
                         <Route path="usermanagement" element={<UserManagement_Admin />} />
                         <Route path="edituser/:id" element={<EditUser_Admin />} />
                         <Route path="usertocourse/:id" element={<InfoUserToCoursePage_Admin />} />
+                        <Route path="coursetouser/:id" element={<InfoCourseToUserPage_Admin />} />
                     </Route>
 
                     {/* PROFILE LAYOUT */}

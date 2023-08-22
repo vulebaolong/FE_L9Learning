@@ -13,6 +13,7 @@ import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../redux/slices/lo
 import { LoadingOutlined } from "@ant-design/icons";
 import { error, success } from "../../helpers/message";
 import SkeletonCourses from "../../components/Skeleton/SkeletonCourses";
+import { Avatar } from "antd";
 
 function InfoUserToCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
@@ -26,15 +27,14 @@ function InfoUserToCoursePage_Admin() {
     const { id } = useParams();
 
     useEffect(() => {
-        // dispatch({ type: "layThongTinKhoaHocNguoiDungSaga", payload: id });
         const fetch = async () => {
             if (id !== undefined) {
                 try {
                     dispatch(setIsLoadingPageREDU(true));
 
-                    const { data, status } = await userApi.layThongTinKhoaHocNguoiDung(id);
+                    const { data, status } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
 
-                    console.log("Call Api - layThongTinKhoaHocNguoiDung", { data, status });
+                    console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data, status });
 
                     setThongTinKhoaHocNguoiDung(data.result.data);
                 } catch (err) {
@@ -66,9 +66,9 @@ function InfoUserToCoursePage_Admin() {
 
             // Cập nhật lại giao diện
             setIsSkeleton(true);
-            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocNguoiDung(id);
+            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
 
-            console.log("Call Api - layThongTinKhoaHocNguoiDung", { data2, status2 });
+            console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data2, status2 });
 
             setThongTinKhoaHocNguoiDung(data2.result.data);
         } catch (err) {
@@ -99,9 +99,9 @@ function InfoUserToCoursePage_Admin() {
 
             // Cập nhật lại giao diện
             setIsSkeleton(true);
-            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocNguoiDung(id);
+            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
 
-            console.log("Call Api - layThongTinKhoaHocNguoiDung", { data2, status2 });
+            console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data2, status2 });
 
             setThongTinKhoaHocNguoiDung(data2.result.data);
         } catch (err) {
@@ -167,13 +167,16 @@ function InfoUserToCoursePage_Admin() {
             });
         }
     };
+    
     return (
-        <section className="pb-24 ">
+        <section className="pb-24">
             <div className="space-y-20">
                 <div>
-                    <h1 className="heading_1 pt-5">Thông tin khoá học</h1>
-
-                    <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{thongTinKhoaHocNguoiDung?.nguoiDung.hoTen}</p>
+                    <h1 className="heading_1 pt-5">Thông tin khoá học của</h1>
+                    <div className="flex items-center gap-2  mt-5">
+                        <Avatar src={<img src={thongTinKhoaHocNguoiDung?.nguoiDung.avatar} alt="avatar" />} size={60} />
+                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{thongTinKhoaHocNguoiDung?.nguoiDung.hoTen}</p>
+                    </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 </div>
 

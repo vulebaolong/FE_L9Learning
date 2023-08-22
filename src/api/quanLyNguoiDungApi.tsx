@@ -47,8 +47,8 @@ export const userApi = {
     xoaNguoiDung: (idNguoiDung: string) => {
         return axios.delete(`/QuanLyNguoiDung/XoaNguoiDung?idNguoiDung=${idNguoiDung}`);
     },
-    layThongTinKhoaHocNguoiDung: (idNguoiDung: string) => {
-        return axios.get(`/QuanLyNguoiDung/LayThongTinKhoaHocNguoiDung?idNguoiDung=${idNguoiDung}`);
+    layThongTinKhoaHocChoNguoiDung: (idNguoiDung: string) => {
+        return axios.get(`/QuanLyNguoiDung/LayThongTinKhoaHocChoNguoiDung?idNguoiDung=${idNguoiDung}`);
     },
     huyDangKyKhoaHocChoNguoiDung: ({ idNguoiDung, idKhoaHoc }: { idNguoiDung: string; idKhoaHoc: string }) => {
         return axios.post(`/QuanLyNguoiDung/HuyDangKyKhoaHocChoNguoiDung`, { idNguoiDung, idKhoaHoc });

@@ -77,3 +77,35 @@ export interface I_danhMucKhoaHocId {
     _id: string;
     tenDanhMuc: string;
 }
+
+export interface I_thongTinNguoiDungChoKhoaHoc {
+    khoaHoc: I_khoaHoc;
+    nguoiDungDaDangKy: I_nguoiDungDaDangKy[];
+    nguoiDungChuaDangKy: I_nguoiDungChuaDangKy[];
+}
+
+export interface I_khoaHoc {
+    _id: string;
+    tenKhoaHoc: string;
+    hinhAnh: string;
+}
+
+export interface I_nguoiDungDaDangKy {
+    _id: string;
+    taiKhoan: string;
+    email: string;
+    soDt: string;
+    hoTen: string;
+    avatar: string;
+    maLoaiNguoiDung: string;
+}
+
+export interface I_nguoiDungChuaDangKy {
+    _id: string;
+    taiKhoan: string;
+    email: string;
+    soDt: string;
+    hoTen: string;
+    avatar: string;
+    maLoaiNguoiDung: string;
+}

@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/store";
-import style from "./ListCoursePage_Admin.module.css";
+import style from "./CourseManagementPage_Admin.module.css";
 import Button from "../../components/Button/Button";
 import { navigate } from "../../helpers/navigate";
 import { useEffect } from "react";
-import PopconfirmListCoursePage_Admin from "./PopconfirmListCoursePage_Admin";
+import PopconfirmCourseManagementPage_Admin from "./PopconfirmCourseManagementPage_Admin";
+import { Tooltip } from "antd";
+import { FaPlus } from "react-icons/fa6";
 
-function ListCoursePage_Admin() {
+function CourseManagementPage_Admin() {
     const dispatch: DispatchType = useDispatch();
 
     useEffect(() => {
@@ -19,9 +21,26 @@ function ListCoursePage_Admin() {
         navigate(`/editcourse/${maKhoaHoc}`);
     };
 
+    const handleThongTinKhoaHoc = (maKhoaHoc: string) => {
+        navigate(`/coursetouser/${maKhoaHoc}`);
+    };
+
+    const handleThemKhoaHoc = () => {
+        navigate("/addcourse");
+    };
+
     return (
         <section className="pb-24">
-            <h2 className="heading_1">Danh sách khoá học</h2>
+            <div className="flex items-center gap-5 mb-5">
+                <h1 className={`heading_1 my-5`}>Quản lý khoá học</h1>
+                <Tooltip title="Thêm khoá học">
+                    <div className="">
+                        <Button onClick={handleThemKhoaHoc} type="circle_2">
+                            <FaPlus />
+                        </Button>
+                    </div>
+                </Tooltip>
+            </div>
 
             <div className="grid grid-cols-4 gap-7 mt-5">
                 {danhSachKhoaHoc.map((khoaHoc) => {
@@ -32,13 +51,21 @@ function ListCoursePage_Admin() {
                                 <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                     <Button
                                         onClick={() => {
+                                            handleThongTinKhoaHoc(khoaHoc._id);
+                                        }}
+                                        type="white"
+                                    >
+                                        Thông tin
+                                    </Button>
+                                    <Button
+                                        onClick={() => {
                                             handleChinhSuaKhoaHoc(khoaHoc._id);
                                         }}
                                         type="white"
                                     >
                                         Chỉnh sửa
                                     </Button>
-                                    <PopconfirmListCoursePage_Admin khoaHoc={khoaHoc} />
+                                    <PopconfirmCourseManagementPage_Admin khoaHoc={khoaHoc} />
                                 </div>
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>
@@ -51,4 +78,4 @@ function ListCoursePage_Admin() {
         </section>
     );
 }
-export default ListCoursePage_Admin;
+export default CourseManagementPage_Admin;

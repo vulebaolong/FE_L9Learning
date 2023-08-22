@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
 
-function PopconfirmListCoursePage_Admin({ khoaHoc }: { khoaHoc: I_motKhoaHoc }) {
+function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_motKhoaHoc }) {
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const dispatch: DispatchType = useDispatch();
@@ -61,4 +61,4 @@ function PopconfirmListCoursePage_Admin({ khoaHoc }: { khoaHoc: I_motKhoaHoc }) 
         </Popconfirm>
     );
 }
-export default PopconfirmListCoursePage_Admin;
+export default PopconfirmCourseManagementPage_Admin;

@@ -35,4 +35,13 @@ export const khoaHocApi = {
         }
         return axios.get(url);
     },
+    layThongTinNguoiDungChoKhoaHoc: (idKhoaHoc: string) => {
+        return axios.get(`/QuanLyKhoaHoc/LayThongTinNguoiDungChoKhoaHoc?idKhoaHoc=${idKhoaHoc}`);
+    },
+    huyDangKyNguoiDungChoKhoaHoc: ({ idNguoiDung, idKhoaHoc }: { idNguoiDung: string; idKhoaHoc: string }) => {
+        return axios.post(`/QuanLyKhoaHoc/HuyDangKyNguoiDungChoKhoaHoc`, { idNguoiDung, idKhoaHoc });
+    },
+    dangKyNguoiDungChoKhoaHoc: ({ idNguoiDung, idKhoaHoc }: { idNguoiDung: string; idKhoaHoc: string }) => {
+        return axios.post(`/QuanLyKhoaHoc/DangKyNguoiDungChoKhoaHoc`, { idNguoiDung, idKhoaHoc });
+    },
 };
