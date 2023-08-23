@@ -1,11 +1,11 @@
 import { Popconfirm } from "antd";
-import Button from "../../components/Button/Button";
-import { I_motKhoaHoc } from "../../interfaces/I_quanLyKhoaHoc";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { error, success } from "../../helpers/message";
+import Button from "../../../components/Button/Button";
+import { I_motKhoaHoc } from "../../../interfaces/I_quanLyKhoaHoc";
+import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
+import { error, success } from "../../../helpers/message";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { DispatchType } from "../../redux/store";
+import { DispatchType } from "../../../redux/store";
 
 function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_motKhoaHoc }) {
     const [open, setOpen] = useState(false);

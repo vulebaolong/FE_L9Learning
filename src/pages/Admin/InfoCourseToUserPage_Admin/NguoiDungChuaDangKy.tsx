@@ -1,27 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../redux/store";
+import { DispatchType, RootState } from "../../../redux/store";
 import { Button, Image, Input, InputRef, Table, Tag, Tooltip } from "antd";
-import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
-import { navigate } from "../../helpers/navigate";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { FilterConfirmProps } from "antd/es/table/interface";
 import type { ColumnType, ColumnsType } from "antd/es/table";
-import { DataType } from "../../interfaces/I_quanLyNguoiDung";
+import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
 import Highlighter from "react-highlight-words";
 import { useParams } from "react-router-dom";
-import { setIsLoadingBtnREDU, setIsSkeletonInfoCourseToUserREDU } from "../../redux/slices/loadingSlice";
-import { khoaHocApi } from "./../../api/quanLyKhoaHocApi";
-import { error, success } from "../../helpers/message";
-import { setThongTinNguoiDungChoKhoaHocREDU } from "../../redux/slices/quanLyKhoaHocSlice";
-import { wait } from "../../helpers/awaitHelper";
-import { DELAY_LOADING_PAGE } from "../../contants/configContants";
-import SkeletonTable from "../../components/Skeleton/SkeletonTable";
+import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
+import { error, success } from "../../../helpers/message";
+import { setThongTinNguoiDungChoKhoaHocREDU } from "../../../redux/slices/quanLyKhoaHocSlice";
+import { wait } from "../../../helpers/awaitHelper";
+import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
+import SkeletonTable from "../../../components/Skeleton/SkeletonTable";
+import { setIsSkeletonInfoCourseToUserREDU } from "../../../redux/slices/loadingSlice";
 type DataIndex = keyof DataType;
 
-function NguoiDungDaDangKy() {
+function NguoiDungChuaDangKy() {
     const dispatch: DispatchType = useDispatch();
-
-    const [isSkeleton, setIsSkeleton] = useState(false);
 
     const { id } = useParams();
 
@@ -40,7 +37,7 @@ function NguoiDungDaDangKy() {
     };
 
     const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<DataType> => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => {
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, close }) => {
             return (
                 <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
                     <Input
@@ -88,7 +85,7 @@ function NguoiDungDaDangKy() {
             ),
     });
 
-    const data: DataType[] | undefined = thongTinNguoiDungChoKhoaHoc?.nguoiDungDaDangKy
+    const data: DataType[] | undefined = thongTinNguoiDungChoKhoaHoc?.nguoiDungChuaDangKy
         .map((nguoiDung, index) => {
             return {
                 key: nguoiDung._id,
@@ -103,7 +100,7 @@ function NguoiDungDaDangKy() {
         })
         .reverse();
 
-    const handleHuyDangKy = async (idNguoiDung: string) => {
+    const handleDangKy = async (idNguoiDung: string) => {
         if (id === undefined) return;
 
         const payload = {
@@ -114,11 +111,11 @@ function NguoiDungDaDangKy() {
         try {
             dispatch(setIsSkeletonInfoCourseToUserREDU(true));
 
-            const { data: data1, status: status1 } = await khoaHocApi.huyDangKyNguoiDungChoKhoaHoc(payload);
+            const { data: data1, status: status1 } = await khoaHocApi.dangKyNguoiDungChoKhoaHoc(payload);
 
-            console.log("Call Api - huyDangKyNguoiDungChoKhoaHoc", { data1, status1 });
+            console.log("Call Api - dangKyNguoiDungChoKhoaHoc", { data1, status1 });
 
-            success("Huỷ đăng ký thành công");
+            success("Đăng ký thành công");
 
             // Cập nhật lại giao diện
             const { data: data2, status: status2 } = await khoaHocApi.layThongTinNguoiDungChoKhoaHoc(id);
@@ -128,7 +125,7 @@ function NguoiDungDaDangKy() {
             dispatch(setThongTinNguoiDungChoKhoaHocREDU(data2.result.data));
         } catch (err) {
             console.log(err);
-            error("Huỷ đăng ký không thành công");
+            error("Đăng ký không thành công");
         } finally {
             await wait(DELAY_LOADING_PAGE);
             dispatch(setIsSkeletonInfoCourseToUserREDU(false));
@@ -200,13 +197,13 @@ function NguoiDungDaDangKy() {
             render: (_, nguoiDung) => {
                 return (
                     <div className="flex gap-2">
-                        <Tooltip placement="top" title="Huỷ đăng ký">
+                        <Tooltip placement="top" title="Đăng ký">
                             <Button
+                                shape="circle"
                                 type="primary"
-                                danger
-                                icon={<CloseOutlined />}
+                                icon={<PlusOutlined />}
                                 onClick={() => {
-                                    handleHuyDangKy(nguoiDung.key);
+                                    handleDangKy(nguoiDung.key);
                                 }}
                             />
                         </Tooltip>
@@ -215,6 +212,7 @@ function NguoiDungDaDangKy() {
             },
         },
     ];
+
     return (
         <>
             {isSkeletonInfoCourseToUser === true ? (
@@ -233,4 +231,5 @@ function NguoiDungDaDangKy() {
         </>
     );
 }
-export default NguoiDungDaDangKy;
+
+export default NguoiDungChuaDangKy;

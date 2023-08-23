@@ -1,31 +1,31 @@
+import { useEffect, useRef, useState } from "react";
+import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../redux/store";
-import { Button, Image, Input, InputRef, Table, Tag, Tooltip } from "antd";
-import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
-import { navigate } from "../../helpers/navigate";
-import { useState, useRef } from "react";
-import { FilterConfirmProps } from "antd/es/table/interface";
-import type { ColumnType, ColumnsType } from "antd/es/table";
-import { DataType } from "../../interfaces/I_quanLyNguoiDung";
+import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
+import ButtonMe from "../../../components/Button/Button";
+
+import { SearchOutlined, EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { useParams } from "react-router-dom";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { error, success } from "../../helpers/message";
-import { setThongTinNguoiDungChoKhoaHocREDU } from "../../redux/slices/quanLyKhoaHocSlice";
-import { wait } from "../../helpers/awaitHelper";
-import { DELAY_LOADING_PAGE } from "../../contants/configContants";
-import SkeletonTable from "../../components/Skeleton/SkeletonTable";
-import { setIsSkeletonInfoCourseToUserREDU } from "../../redux/slices/loadingSlice";
+import type { InputRef } from "antd";
+import { Button, Image, Input, Table, Tag, Tooltip } from "antd";
+import type { ColumnType, ColumnsType } from "antd/es/table";
+import type { FilterConfirmProps } from "antd/es/table/interface";
+import { FaPlus } from "react-icons/fa6";
+import { setIsOpenModalAddUserREDU } from "../../../redux/slices/modalSlice";
+import { navigate } from "../../../helpers/navigate";
+import PopconfirmUserManagement_Admin from "./PopconfirmUserManagement_Admin";
 type DataIndex = keyof DataType;
 
-function NguoiDungChuaDangKy() {
+function UserManagement_Admin() {
     const dispatch: DispatchType = useDispatch();
 
-    const { id } = useParams();
+    const { danhSachNguoiDung } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
 
-    const { thongTinNguoiDungChoKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
-
-    const { isSkeletonInfoCourseToUser } = useSelector((state: RootState) => state.loadingSlice);
+    useEffect(() => {
+        dispatch({
+            type: "layDanhSachNguoiDungSaga",
+        });
+    }, []);
 
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
@@ -38,7 +38,7 @@ function NguoiDungChuaDangKy() {
     };
 
     const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<DataType> => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => {
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, close }) => {
             return (
                 <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
                     <Input
@@ -86,7 +86,7 @@ function NguoiDungChuaDangKy() {
             ),
     });
 
-    const data: DataType[] | undefined = thongTinNguoiDungChoKhoaHoc?.nguoiDungChuaDangKy
+    const data: DataType[] = danhSachNguoiDung
         .map((nguoiDung, index) => {
             return {
                 key: nguoiDung._id,
@@ -100,38 +100,6 @@ function NguoiDungChuaDangKy() {
             };
         })
         .reverse();
-
-    const handleDangKy = async (idNguoiDung: string) => {
-        if (id === undefined) return;
-
-        const payload = {
-            idNguoiDung,
-            idKhoaHoc: id,
-        };
-
-        try {
-            dispatch(setIsSkeletonInfoCourseToUserREDU(true));
-
-            const { data: data1, status: status1 } = await khoaHocApi.dangKyNguoiDungChoKhoaHoc(payload);
-
-            console.log("Call Api - dangKyNguoiDungChoKhoaHoc", { data1, status1 });
-
-            success("Đăng ký thành công");
-
-            // Cập nhật lại giao diện
-            const { data: data2, status: status2 } = await khoaHocApi.layThongTinNguoiDungChoKhoaHoc(id);
-
-            console.log("Call Api - layThongTinNguoiDungChoKhoaHoc", { data2, status2 });
-
-            dispatch(setThongTinNguoiDungChoKhoaHocREDU(data2.result.data));
-        } catch (err) {
-            console.log(err);
-            error("Đăng ký không thành công");
-        } finally {
-            await wait(DELAY_LOADING_PAGE);
-            dispatch(setIsSkeletonInfoCourseToUserREDU(false));
-        }
-    };
 
     const columns: ColumnsType<DataType> = [
         {
@@ -198,39 +166,59 @@ function NguoiDungChuaDangKy() {
             render: (_, nguoiDung) => {
                 return (
                     <div className="flex gap-2">
-                        <Tooltip placement="top" title="Đăng ký">
+                        <Tooltip placement="top" title="Thông tin khoá học">
                             <Button
-                                shape="circle"
                                 type="primary"
-                                icon={<PlusOutlined />}
+                                icon={<InfoCircleOutlined />}
                                 onClick={() => {
-                                    handleDangKy(nguoiDung.key);
+                                    navigate(`/usertocourse/${nguoiDung.key}`);
                                 }}
                             />
                         </Tooltip>
+                        <Tooltip placement="top" title="Chỉnh sửa">
+                            <Button
+                                type="primary"
+                                icon={<EditOutlined />}
+                                onClick={() => {
+                                    console.log("Edit");
+                                    navigate(`/edituser/${nguoiDung.key}`);
+                                }}
+                            />
+                        </Tooltip>
+
+                        <PopconfirmUserManagement_Admin nguoiDung={nguoiDung} />
                     </div>
                 );
             },
         },
     ];
 
+    const handleAddUser = () => {
+        dispatch(setIsOpenModalAddUserREDU(true));
+    };
+
     return (
         <>
-            {isSkeletonInfoCourseToUser === true ? (
-                <SkeletonTable />
-            ) : (
-                <Table
-                    locale={{
-                        triggerDesc: "sắp xếp giảm dần",
-                        triggerAsc: "sắp xếp tăng dần",
-                        cancelSort: "hủy sắp xếp",
-                    }}
-                    columns={columns}
-                    dataSource={data}
-                />
-            )}
+            <div className="flex items-center gap-5 mb-5">
+                <h1 className={`heading_1 my-5`}>Quản lý người dùng</h1>
+                <Tooltip title="Thêm người dùng">
+                    <div className="">
+                        <ButtonMe onClick={handleAddUser} type="circle_2">
+                            <FaPlus />
+                        </ButtonMe>
+                    </div>
+                </Tooltip>
+            </div>
+            <Table
+                locale={{
+                    triggerDesc: "sắp xếp giảm dần",
+                    triggerAsc: "sắp xếp tăng dần",
+                    cancelSort: "hủy sắp xếp",
+                }}
+                columns={columns}
+                dataSource={data}
+            />
         </>
     );
 }
-
-export default NguoiDungChuaDangKy;
+export default UserManagement_Admin;

@@ -3,18 +3,18 @@ import style from "./EditCoursePage_Admin.module.css";
 import TextArea from "antd/es/input/TextArea";
 import { MinusCircleOutlined, PlusOutlined, CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { getBase64 } from "../../helpers/antdHelper";
+import { getBase64 } from "../../../helpers/antdHelper";
 import { RcFile, UploadFile } from "antd/es/upload";
-import ButtonMe from "../../components/Button/Button";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
+import ButtonMe from "../../../components/Button/Button";
+import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
 import { useParams } from "react-router-dom";
-import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
-import { DispatchType, RootState } from "../../redux/store";
+import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../../interfaces/I_quanLyKhoaHoc";
+import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
-import { wait } from "../../helpers/awaitHelper";
-import { DELAY_LOADING_PAGE } from "../../contants/configContants";
+import { setIsLoadingPageREDU } from "../../../redux/slices/loadingSlice";
+import { wait } from "../../../helpers/awaitHelper";
+import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
 
 function EditCoursePage_Admin() {
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);

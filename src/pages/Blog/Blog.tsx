@@ -1,6 +1,10 @@
+import Maintenance from "../../components/Maintenance/Maintenance";
+
 function Blog() {
-  return (
-    <div>Blog</div>
-  )
+    return (
+        <div className="container">
+            <Maintenance />
+        </div>
+    );
 }
-export default Blog
+export default Blog;

@@ -9,8 +9,7 @@ import { DispatchType, RootState } from "./redux/store";
 import { setMessageApi } from "./helpers/message";
 import { setNavigate } from "./helpers/navigate";
 import DetailCoursePage from "./pages/DetailCoursePage/DetailCoursePage";
-import AddCoursePage_Admin from "./pages/AddCoursePage_Admin/AddCoursePage_Admin";
-import EditCoursePage_Admin from "./pages/EditCoursePage_Admin/EditCoursePage_Admin";
+import EditCoursePage_Admin from "./pages/Admin/EditCoursePage_Admin/EditCoursePage_Admin";
 import CoursesPage from "./pages/CoursesPage/CoursesPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import BacsicLayout from "./layouts/BacsicLayout";
@@ -24,12 +23,13 @@ import LoadingPage from "./components/LoadingPage/LoadingPage";
 import { lcStorage } from "./helpers/localStorage";
 import { THEME } from "./contants/configContants";
 import { darkThemeREDU, lightThemeREDU } from "./redux/slices/toggleThemeSlice";
-import UserManagement_Admin from "./pages/UserManagement_Admin/UserManagement_Admin";
+import UserManagement_Admin from "./pages/Admin/UserManagement_Admin/UserManagement_Admin";
 import Modal from "./components/Modal/Modal";
-import EditUser_Admin from "./pages/EditUser_Admin/EditUser_Admin";
-import InfoUserToCoursePage_Admin from "./pages/InfoUserToCoursePage_Admin/InfoUserToCoursePage_Admin";
-import CourseManagementPage_Admin from "./pages/CourseManagementPage_Admin/CourseManagementPage_Admin";
-import InfoCourseToUserPage_Admin from "./pages/InfoCourseToUserPage_Admin/InfoCourseToUserPage_Admin";
+import EditUser_Admin from "./pages/Admin/EditUser_Admin/EditUser_Admin";
+import InfoUserToCoursePage_Admin from "./pages/Admin/InfoUserToCoursePage_Admin/InfoUserToCoursePage_Admin";
+import CourseManagementPage_Admin from "./pages/Admin/CourseManagementPage_Admin/CourseManagementPage_Admin";
+import InfoCourseToUserPage_Admin from "./pages/Admin/InfoCourseToUserPage_Admin/InfoCourseToUserPage_Admin";
+import AddCoursePage_Admin from "./pages/Admin/AddCoursePage_Admin/AddCoursePage_Admin";
 
 function App() {
     const navigate = useNavigate();

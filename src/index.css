@@ -37,8 +37,8 @@ input {
 
 /* Đặt màu cho quét khối văn bản */
 ::selection {
+    /* color: #0f172a; */
     @apply bg-primary text-white
-    /* color: black; */;
 }
 
 .swiper {

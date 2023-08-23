@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { DispatchType, RootState } from "../../redux/store";
+import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Button from "../../components/Button/Button";
+import Button from "../../../components/Button/Button";
 import style from "./InfoUserToCoursePage_Admin.module.css";
-import { navigate } from "../../helpers/navigate";
-import { userApi } from "../../api/quanLyNguoiDungApi";
-import { I_thongTinKhoaHocNguoiDung } from "../../interfaces/I_quanLyNguoiDung";
-import { wait } from "../../helpers/awaitHelper";
-import { DELAY_LOADING_PAGE } from "../../contants/configContants";
-import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../redux/slices/loadingSlice";
+import { userApi } from "../../../api/quanLyNguoiDungApi";
+import { I_thongTinKhoaHocNguoiDung } from "../../../interfaces/I_quanLyNguoiDung";
+import { wait } from "../../../helpers/awaitHelper";
+import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
+import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../../redux/slices/loadingSlice";
 import { LoadingOutlined } from "@ant-design/icons";
-import { error, success } from "../../helpers/message";
-import SkeletonCourses from "../../components/Skeleton/SkeletonCourses";
+import { error, success } from "../../../helpers/message";
+import SkeletonCourses from "../../../components/Skeleton/SkeletonCourses";
 import { Avatar } from "antd";
 
 function InfoUserToCoursePage_Admin() {
@@ -116,9 +115,13 @@ function InfoUserToCoursePage_Admin() {
 
     const renderKhoaHocDaDangKy = () => {
         if (isSkeleton === true) return <SkeletonCourses />;
+
         if (isSkeleton === false) {
+
             if (thongTinKhoaHocNguoiDung?.khoaHocDaDangKy.length === 0) return <p>Không có khoá học</p>;
+
             return thongTinKhoaHocNguoiDung?.khoaHocDaDangKy.map((khoaHoc) => {
+
                 return (
                     <div key={khoaHoc._id}>
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
@@ -145,8 +148,11 @@ function InfoUserToCoursePage_Admin() {
 
     const renderKhoaHocChuaDangKy = () => {
         if (isSkeleton === true) return <SkeletonCourses />;
+
         if (isSkeleton === false) {
+
             if (thongTinKhoaHocNguoiDung?.khoaHocChuaDangKy.length === 0) return <p>Không có khoá học</p>;
+            
             return thongTinKhoaHocNguoiDung?.khoaHocChuaDangKy.map((khoaHoc) => {
                 return (
                     <div key={khoaHoc._id} className="">

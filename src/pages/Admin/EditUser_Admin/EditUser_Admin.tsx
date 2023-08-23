@@ -1,18 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../redux/store";
-import FormHoTen from "../../components/FromEdit/FormHoTen";
+import { DispatchType, RootState } from "../../../redux/store";
+import FormHoTen from "../../../components/FromEdit/FormHoTen";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { userApi } from "../../api/quanLyNguoiDungApi";
-import { I_userLogin } from "../../interfaces/I_quanLyNguoiDung";
-import FormTaiKhoan from "../../components/FromEdit/FormTaiKhoan";
-import FormEmail from "../../components/FromEdit/FormEmail";
-import FormSoDienThoai from "../../components/FromEdit/FormSoDienThoai";
-import FormAvatar from "../../components/FromEdit/FormAvatar";
+import { useEffect } from "react";
+import { userApi } from "../../../api/quanLyNguoiDungApi";
+import FormTaiKhoan from "../../../components/FromEdit/FormTaiKhoan";
+import FormEmail from "../../../components/FromEdit/FormEmail";
+import FormSoDienThoai from "../../../components/FromEdit/FormSoDienThoai";
+import FormAvatar from "../../../components/FromEdit/FormAvatar";
 
 function EditUser_Admin() {
     const { id } = useParams();
-    console.log(id);
 
     const dispatch: DispatchType = useDispatch();
 

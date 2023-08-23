@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, RootState } from "../../redux/store";
+import { DispatchType, RootState } from "../../../redux/store";
 import style from "./CourseManagementPage_Admin.module.css";
-import Button from "../../components/Button/Button";
-import { navigate } from "../../helpers/navigate";
+import Button from "../../../components/Button/Button";
+import { navigate } from "../../../helpers/navigate";
 import { useEffect } from "react";
 import PopconfirmCourseManagementPage_Admin from "./PopconfirmCourseManagementPage_Admin";
 import { Tooltip } from "antd";

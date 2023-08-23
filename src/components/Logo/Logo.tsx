@@ -14,7 +14,7 @@ function Logo() {
                     dispatch(setIsDraweREDU(false));
                     navigate("/");
                 }}
-                className="w-[38px] h-[38px] rounded-lg"
+                className="w-[38px] h-[38px]"
                 src={logoImg}
                 alt="logo"
             />

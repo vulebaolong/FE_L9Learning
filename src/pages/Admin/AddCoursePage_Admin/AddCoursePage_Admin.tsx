@@ -1,16 +1,16 @@
-import { Button, Form, Input, InputNumber, Modal, Select, Space, Upload, UploadFile } from "antd";
+import { Button, Form, Input, InputNumber, Modal, Select, Upload, UploadFile } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import style from "./AddCoursePage_Admin.module.css";
 import { useState, useEffect } from "react";
 import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, CloseOutlined } from "@ant-design/icons";
-import ButtonMe from "../../components/Button/Button";
-import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
-import { I_danhMucKhoaHoc, I_valuesKhoahoc } from "../../interfaces/I_quanLyKhoaHoc";
 import _ from "lodash";
-import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
+import { DispatchType, RootState } from "../../../redux/store";
+import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
+import { I_danhMucKhoaHoc, I_valuesKhoahoc } from "../../../interfaces/I_quanLyKhoaHoc";
+import { getBase64 } from "../../../helpers/antdHelper";
+import ButtonMe from "../../../components/Button/Button"
 
 function AddCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();

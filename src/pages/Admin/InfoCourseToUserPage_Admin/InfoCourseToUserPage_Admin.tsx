@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import NguoiDungChuaDangKy from "./NguoiDungChuaDangKy";
 import NguoiDungDaDangKy from "./NguoiDungDaDangKy";
 import { useEffect } from "react";
-import { DispatchType, RootState } from "../../redux/store";
+import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
 function InfoCourseToUserPage_Admin() {

@@ -1,13 +1,12 @@
 import { Button, Popconfirm } from "antd";
-import { DataType } from "../../interfaces/I_quanLyNguoiDung";
-import { wait } from "../../helpers/awaitHelper";
+import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { DispatchType } from "../../redux/store";
+import { DispatchType } from "../../../redux/store";
 import { DeleteOutlined } from "@ant-design/icons";
-import { userApi } from "../../api/quanLyNguoiDungApi";
-import { error, success } from "../../helpers/message";
-import { setDanhSachNguoiDungREDU } from "../../redux/slices/quanLyNguoiDungSlice";
+import { userApi } from "../../../api/quanLyNguoiDungApi";
+import { error, success } from "../../../helpers/message";
+import { setDanhSachNguoiDungREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
 
 function PopconfirmUserManagement_Admin({ nguoiDung }: { nguoiDung: DataType }) {
     const [open, setOpen] = useState(false);

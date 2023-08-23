@@ -1,0 +1,7 @@
+[build]
+  command = "NODE_ENV=production vite build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
