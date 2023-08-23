@@ -34,7 +34,8 @@ function DangKy() {
         <>
             <div className="">
                 <img className="mx-auto w-[38px] h-[38px] rounded-lg" src={logoImg} alt="logo" />
-                <h1 className="text-[#292929] text-center mt-5 dark:text-slate-200 text-4xl font-bold">Đăng ký tài khoản L9</h1>
+                <h1 className="hidden sm:block text-[#292929] text-center mt-5 dark:text-slate-200 text-4xl font-bold">Đăng ký tài khoản L9</h1>
+                <h1 className="block sm:hidden text-[#292929] text-center mt-5 dark:text-slate-200 text-4xl font-bold">Đăng ký</h1>
             </div>
             <div className=" mt-11">
                 <Form form={form} layout={"vertical"} onFinish={onFinish} autoComplete="off">

@@ -83,12 +83,17 @@ function* layDanhSachNguoiDungSaga() {
         console.log("Saga - layDanhSachNguoiDungSaga", { data, status });
 
         yield put(setDanhSachNguoiDungREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
-    } finally {
+
         yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
-    }
+    } 
 }
 
 export function* theoDoiLayDanhSachNguoiDungSaga() {
@@ -155,13 +160,18 @@ function* layThongTinTaiKhoanSaga() {
         console.log("Saga - layThongTinTaiKhoanSaga", { data, status });
 
         yield put(capNhatUserLoginREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
         error(err.response?.data?.result?.message);
-    } finally {
+
         yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
-    }
+    } 
 }
 
 export function* theoDoiLayThongTinTaiKhoanSaga() {
@@ -178,13 +188,19 @@ function* layThongTinNguoiDungSaga({ payload }: { payload: string; type: string 
         console.log("Saga - layThongTinNguoiDungSaga", { data, status });
 
         yield put(setThongTinNguoiDungREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
+
         error(err.response?.data?.result?.message);
-    } finally {
+
         yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
-    }
+    } 
 }
 
 export function* theoDoiLayThongTinNguoiDungSaga() {
@@ -220,10 +236,15 @@ function* layThongTinKhoaHocChoNguoiDungSaga({ payload }: { payload: string; typ
         console.log("Saga - layThongTinKhoaHocChoNguoiDungSaga", { data, status });
 
         yield put(setThongTinKhoaHocNguoiDungREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
-    } finally {
+
         yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
     }
 }

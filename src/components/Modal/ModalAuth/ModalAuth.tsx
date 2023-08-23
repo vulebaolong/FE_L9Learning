@@ -19,7 +19,7 @@ function ModalAuth() {
 
     return (
         <Modal footer={false} maskClosable={true} onCancel={handleCancel} centered open={isOpenModalAuth}>
-            <div className="py-8 px-11">
+            <div className="py-8 sm:px-11">
                 {isPageDangNhap === true ? <DangNhap /> : <DangKy />}
 
                 <div className=" text-center text-xs text-[#666] dark:text-slate-400 mt-12">

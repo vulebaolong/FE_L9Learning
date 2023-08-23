@@ -33,8 +33,15 @@ function CoursesPage() {
                 const { data: data2, status: status2 } = await khoaHocApi.layKhoaHocTheoDanhMuc();
                 console.log("call API - layKhoaHocTheoDanhMuc - ĐẦU TRANG", { data2, status2 });
                 setKhoaHocTheoDanhMuc(data2.result.data);
-            } finally {
+
                 await wait(DELAY_LOADING_PAGE);
+                
+                dispatch(setIsLoadingPageREDU(false));
+            } catch (err) {
+                console.log(err);
+                
+                await wait(DELAY_LOADING_PAGE);
+
                 dispatch(setIsLoadingPageREDU(false));
             }
         };

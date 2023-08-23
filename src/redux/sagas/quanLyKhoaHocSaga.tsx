@@ -16,10 +16,15 @@ function* layDanhSachKhoaHocSaga() {
         console.log("Saga - layDanhSachKhoaHocSaga", { data, status });
 
         yield put(layDanhSachKhoaHocREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
-    } finally {
-        yield delay(DELAY_LOADING_PAGE)
+
+        yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
     }
 }
@@ -37,11 +42,15 @@ function* layMotKhoaHocSaga({ payload }: { payload: string; type: string }) {
 
         console.log("Saga - layMotKhoaHocSaga", { data, status });
 
-        // yield put(layDanhSachKhoaHocREDU(data.result.data));
+        
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
-    } finally {
-        yield delay(DELAY_LOADING_PAGE)
+        
+        yield delay(DELAY_LOADING_PAGE);
+
         yield put(setIsLoadingPageREDU(false));
     }
 }
@@ -146,15 +155,19 @@ function* layThongTinNguoiDungChoKhoaHocSaga({ payload }: { payload: string; typ
         console.log("Saga - layThongTinNguoiDungChoKhoaHocSaga", { data, status });
 
         yield put(setThongTinNguoiDungChoKhoaHocREDU(data.result.data));
+
+        yield delay(DELAY_LOADING_PAGE);
+
+        yield put(setIsLoadingPageREDU(false));
     } catch (err) {
         console.log(err);
-    } finally {
+
         yield delay(DELAY_LOADING_PAGE);
+        
         yield put(setIsLoadingPageREDU(false));
-    }
+    } 
 }
 
 export function* theoDoiLayThongTinNguoiDungChoKhoaHocSaga() {
     yield takeLatest("layThongTinNguoiDungChoKhoaHocSaga", layThongTinNguoiDungChoKhoaHocSaga);
 }
-

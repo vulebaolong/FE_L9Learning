@@ -43,11 +43,21 @@ function EditCoursePage_Admin() {
 
                     const { data: data2 } = await khoaHocApi.layMotKhoaHoc(id);
                     console.log("fetch - layMotKhoaHoc", { data2 });
+
                     setMotKhoaHoc(data2.result.data);
+
                     const indexChuongHoc = data2.result.data.chuongHoc.map((item, index) => index);
+
                     setArrChuong(indexChuongHoc);
-                } finally {
-                    await wait(DELAY_LOADING_PAGE)
+
+                    await wait(DELAY_LOADING_PAGE);
+                    
+                    dispatch(setIsLoadingPageREDU(false));
+                } catch (err) {
+                    console.log(err);
+
+                    await wait(DELAY_LOADING_PAGE);
+
                     dispatch(setIsLoadingPageREDU(false));
                 }
             }

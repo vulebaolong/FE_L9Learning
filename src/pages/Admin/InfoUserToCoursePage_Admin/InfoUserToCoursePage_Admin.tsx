@@ -36,10 +36,15 @@ function InfoUserToCoursePage_Admin() {
                     console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data, status });
 
                     setThongTinKhoaHocNguoiDung(data.result.data);
+
+                    await wait(DELAY_LOADING_PAGE);
+
+                    dispatch(setIsLoadingPageREDU(false));
                 } catch (err) {
                     console.log(err);
-                } finally {
+
                     await wait(DELAY_LOADING_PAGE);
+                    
                     dispatch(setIsLoadingPageREDU(false));
                 }
             }

@@ -38,8 +38,15 @@ function DetailCoursePage() {
                     console.log("fetch - layMotKhoaHoc", { data, status });
 
                     setKhoaHoc(data.result.data);
-                } finally {
+
                     await wait(DELAY_LOADING_PAGE);
+                    
+                    dispatch(setIsLoadingPageREDU(false));
+                } catch(err) {
+                    console.log(err);
+                    
+                    await wait(DELAY_LOADING_PAGE);
+
                     dispatch(setIsLoadingPageREDU(false));
                 }
             }

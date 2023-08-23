@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Navigation, Pagination, A11y } from "swiper/modules";
+import { Autoplay, Navigation, Pagination, A11y } from "swiper/modules";
 import SwiperClass from "swiper";
 import "swiper/css";
 
@@ -59,24 +59,52 @@ function Banner() {
         swiperRef.current?.slideNext();
     };
 
+    const progressCircle = useRef<SVGSVGElement | null>(null);
+    const progressContent = useRef<HTMLDivElement | null>(null);
+
+    const onAutoplayTimeLeft = (s, time: number, progress: number) => {
+        if (!progressCircle.current || !progressContent.current) return;
+
+        if (progressCircle.current.style) {
+            progressCircle.current.style.setProperty("--progress", String(1 - progress));
+        }
+
+        if (progressContent.current.textContent !== undefined) {
+            progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+    };
+
     return (
         <section className="w-full relative">
             <Swiper
-                modules={[Navigation, Pagination, A11y]}
+                modules={[Autoplay, Navigation, Pagination, A11y]}
                 pagination={{ clickable: true }}
                 spaceBetween={30}
                 loop={true}
                 speed={1100}
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+                onAutoplayTimeLeft={onAutoplayTimeLeft}
                 className="mySwiper rounded-2xl"
             >
                 {dataContent.map((item, index) => {
                     return (
                         <SwiperSlide key={index}>
-                            <ContentSlider dataContent={{...item}} />
+                            <ContentSlider dataContent={{ ...item }} />
                         </SwiperSlide>
                     );
                 })}
+                <div className="hidden lg:flex">
+                    <div className="autoplay-progress " slot="container-end">
+                        <svg viewBox="0 0 48 48" ref={progressCircle}>
+                            <circle cx="24" cy="24" r="20"></circle>
+                        </svg>
+                        <span ref={progressContent}></span>
+                    </div>
+                </div>
             </Swiper>
             <Button className={`left-0 -translate-x-1/2`} onClick={handleClickPrev} type="circle">
                 <FaChevronLeft className="text-[#4b4b4b]" />
