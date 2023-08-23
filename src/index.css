@@ -119,7 +119,7 @@ input {
 }
 
 .ant-drawer-content-wrapper {
-    @apply !w-[90%] sm:!w-[50%];
+    @apply !w-[76%] sm:!w-[50%];
 }
 
 .ant-drawer {

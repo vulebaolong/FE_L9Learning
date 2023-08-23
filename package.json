@@ -12,6 +12,7 @@
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@reduxjs/toolkit": "^1.9.5",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "antd": "^5.8.2",
     "axios": "^1.4.0",
     "get-video-duration": "^4.1.0",
