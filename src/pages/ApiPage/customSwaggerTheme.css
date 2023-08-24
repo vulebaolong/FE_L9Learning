@@ -1,0 +1,64 @@
+/* custom-swagger-theme.css */
+
+/* Background */
+/* body,
+.swagger-ui {
+	background-color: transparent !important;
+} */
+
+/* Text Color */
+.swagger-ui .topbar,
+.swagger-ui .scheme-container,
+.swagger-ui td,
+.swagger-ui th,
+.swagger-ui .parameter__name,
+.swagger-ui .parameter__type,
+.swagger-ui .tablinks,
+.swagger-ui h4,
+.swagger-ui h2,
+.swagger-ui h5,
+.swagger-ui .parameter__in {
+    @apply dark:!text-slate-200;
+}
+
+.swagger-ui svg {
+    @apply dark:fill-white;
+}
+
+/* Headers Background */
+.swagger-ui .topbar {
+    /* background-color: #333; */
+    @apply dark:bg-[#333];
+}
+
+/* Links Color */
+.swagger-ui a,
+.swagger-ui .errors-wrapper {
+    @apply dark:!text-slate-300;
+}
+
+.swagger-ui .opblock-summary-description,
+.swagger-ui p {
+    @apply dark:!text-slate-400;
+}
+
+/* Schemes Dropdown */
+.swagger-ui .scheme-container select {
+    /* background-color: #444; */
+    @apply dark:bg-[#444];
+}
+
+/* Buttons */
+.swagger-ui .btn,
+.swagger-ui .btn-group .btn {
+    /* background-color: #333; */
+    @apply dark:!text-slate-200 dark:bg-[#333];
+}
+.swagger-ui .try-out__btn {
+    @apply dark:!text-[#ff6060];
+}
+
+.swagger-ui input,
+.swagger-ui .opblock-section-header h4 {
+    @apply dark:!text-slate-700;
+}

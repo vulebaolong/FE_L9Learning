@@ -1,0 +1,886 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API L9 Learning - Vũ Lê Bảo Long",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "Welcome",
+            "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+        }
+    ],
+    "host": "l9-learning.onrender.com",
+    "paths": {
+        "/api/v1/welcome": {
+            "get": {
+                "tags": ["Welcome"],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/LayDanhSachKhoaHoc": {
+            "get": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "tenKhoaHoc",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/LayMotKhoaHoc": {
+            "get": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc": {
+            "get": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "maDanhMuc",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/LayDanhMucKhoaHoc": {
+            "get": {
+                "tags": ["QuanLyKhoaHoc"],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/ThemDanhMucKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "tenDanhMuc",
+                        "description": "tên danh mục",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "tenDanhMuc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/ThemKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "operationId": "ThemKhoaHoc",
+                "consumes": ["multipart/form-data"],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "frm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {},
+                        "collectionFormat": "multi",
+                        "uniqueItems": false
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/XoaKhoaHoc": {
+            "delete": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "maKhoaHoc",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/CapNhatKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "operationId": "CapNhatKhoaHoc",
+                "consumes": ["multipart/form-data"],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "frm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {},
+                        "collectionFormat": "multi",
+                        "uniqueItems": false
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/DangKyKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "DangKyKhoaHoc",
+                        "description": "Đăng ký khoá học mới",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "maKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/HuyDangKyKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "HuyDangKyKhoaHoc",
+                        "description": "Huỷ đăng ký khoá học ",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "maKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/LayThongTinNguoiDungChoKhoaHoc": {
+            "get": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "idKhoaHoc",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/DangKyNguoiDungChoKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "DangKyNguoiDungChoKhoaHoc",
+                        "description": "DangKyNguoiDungChoKhoaHoc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idNguoiDung": {
+                                    "type": "string"
+                                },
+                                "idKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyKhoaHoc/HuyDangKyNguoiDungChoKhoaHoc": {
+            "post": {
+                "tags": ["QuanLyKhoaHoc"],
+                "parameters": [
+                    {
+                        "name": "HuyDangKyNguoiDungChoKhoaHoc",
+                        "description": "HuyDangKyNguoiDungChoKhoaHoc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idNguoiDung": {
+                                    "type": "string"
+                                },
+                                "idKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/DangKy": {
+            "post": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "DangKy",
+                        "description": "DangKy",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "taiKhoan": {
+                                    "type": "string"
+                                },
+                                "matKhau": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "soDt": {
+                                    "type": "string"
+                                },
+                                "hoTen": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/DangNhap": {
+            "post": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "DangNhap",
+                        "description": "DangNhap",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "taiKhoan": {
+                                    "type": "string"
+                                },
+                                "matKhau": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/ThongTinTaiKhoan": {
+            "get": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatThongTinTaiKhoan": {
+            "put": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "CapNhatThongTinNguoiDung",
+                        "in": "body",
+                        "required": true,
+                        "properties": {
+                            "hoTen": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email"
+                            },
+                            "taiKhoan": {
+                                "type": "string"
+                            },
+                            "soDt": {
+                                "type": "string"
+                            },
+                            "maLoaiNguoiDung": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatMotThongTinTaiKhoan": {
+            "patch": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatMatKhau": {
+            "patch": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "CapNhatMatKhau",
+                        "description": "CapNhatMatKhau",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "matKhauCurent": {
+                                    "type": "string"
+                                },
+                                "matKhauNew": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatAvatarTaiKhoan": {
+            "patch": {
+                "tags": ["QuanLyNguoiDung"],
+                "operationId": "CapNhatAvatarTaiKhoan",
+                "consumes": ["multipart/form-data"],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "frm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {},
+                        "collectionFormat": "multi",
+                        "uniqueItems": false
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/LayDanhSachNguoiDung": {
+            "get": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "tenNguoiDung",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/LayThongTinNguoiDung": {
+            "get": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "idNguoiDung",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatMotThongTinNguoiDung": {
+            "patch": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "DanhSachVe",
+                        "description": "value: email, hoTen, maLoaiNguoiDung, soDt, taiKhoan",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "idNguoiDung": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/XoaNguoiDung": {
+            "delete": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "idNguoiDung",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/CapNhatAvatarNguoiDung": {
+            "patch": {
+                "tags": ["QuanLyNguoiDung"],
+                "operationId": "QuanLyNguoiDung",
+                "consumes": ["multipart/form-data"],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "frm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {},
+                        "collectionFormat": "multi",
+                        "uniqueItems": false
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/LayThongTinKhoaHocChoNguoiDung": {
+            "get": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "idNguoiDung",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/DangKyKhoaHocChoNguoiDung": {
+            "post": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "HuyDangKyKhoaHocChoNguoiDung",
+                        "description": "HuyDangKyKhoaHocChoNguoiDung",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idNguoiDung": {
+                                    "type": "string"
+                                },
+                                "idKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        },
+        "/api/v1/QuanLyNguoiDung/HuyDangKyKhoaHocChoNguoiDung": {
+            "post": {
+                "tags": ["QuanLyNguoiDung"],
+                "parameters": [
+                    {
+                        "name": "HuyDangKyKhoaHocChoNguoiDung",
+                        "description": "HuyDangKyKhoaHocChoNguoiDung",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idNguoiDung": {
+                                    "type": "string"
+                                },
+                                "idKhoaHoc": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+                    }
+                }
+            }
+        }
+    }
+}

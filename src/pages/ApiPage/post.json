@@ -1,0 +1,49 @@
+{
+    "post": {
+        "tags": ["Quản lý khoá học"],
+        "parameters": [
+            {
+                "name": "DanhSachVe",
+                "description": "Dữ liệu vé mới",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "maLichChieu": {
+                            "type": "string"
+                        },
+                        "danhSachVe": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "maGhe": {
+                                        "type": "string"
+                                    },
+                                    "giaVe": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Authorization",
+                "in": "header",
+                "description": "Bearer token",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
+            }
+        }
+    }
+}

@@ -30,6 +30,7 @@ import InfoUserToCoursePage_Admin from "./pages/Admin/InfoUserToCoursePage_Admin
 import CourseManagementPage_Admin from "./pages/Admin/CourseManagementPage_Admin/CourseManagementPage_Admin";
 import InfoCourseToUserPage_Admin from "./pages/Admin/InfoCourseToUserPage_Admin/InfoCourseToUserPage_Admin";
 import AddCoursePage_Admin from "./pages/Admin/AddCoursePage_Admin/AddCoursePage_Admin";
+import ApiPage from "./pages/ApiPage/ApiPage";
 
 function App() {
     const navigate = useNavigate();
@@ -86,6 +87,7 @@ function App() {
 
                     {/* PROFILE LAYOUT */}
                     <Route element={<BacsicLayout />}>
+                        <Route path="api" element={<ApiPage />} />
                         <Route path="profile" element={<ProfilePage />} />
                         <Route path="settings" element={<SettingsPage />}>
                             <Route path="personal" element={<Personal />} />

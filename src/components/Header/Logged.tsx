@@ -31,8 +31,6 @@ function Logged(props: I_PropLogged) {
         window.location.reload();
     };
 
-    
-
     const handleQuanLyKhoaHoc = () => {
         navigate("/coursemanagement");
         setIsOpenPopupUser(false);
@@ -55,6 +53,11 @@ function Logged(props: I_PropLogged) {
 
     const handleQuanLyNguoiDung = () => {
         navigate("/usermanagement");
+        setIsOpenPopupUser(false);
+    };
+
+    const handleApi = () => {
+        navigate("/api");
         setIsOpenPopupUser(false);
     };
 
@@ -97,8 +100,16 @@ function Logged(props: I_PropLogged) {
 
             <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
-            {/* TRANG CÁ NHÂN */}
+            {/* API*/}
             <div className="">
+                <span className={textItem} onClick={handleApi}>
+                    Api
+                </span>
+            </div>
+
+
+            {/* TRANG CÁ NHÂN */}
+            <div className="mt-4">
                 <span className={textItem} onClick={handleProfile}>
                     Trang cá nhân
                 </span>
