@@ -19,9 +19,9 @@ function LoadingPlayer() {
                     {/* <Controls visible={true} buttons={["play", "repeat", "frame", "debug"]} /> */}
                 </Player>
                 {isServer && (
-                    <div className="container text-center">
-                        <p className="heading-1">Server đang mở lại, bạn đợi xíu nhé.</p>
-                        <p className="para-1">Vì server có tính năng sẽ tự động tắt nếu như không có tương tác</p>
+                    <div className="container text-center space-y-5">
+                        <p className="heading_1">Server đang mở lại, bạn đợi xíu nhé.</p>
+                        <p className="heading_2">Vì server có tính năng sẽ tự động tắt nếu như không có tương tác</p>
                     </div>
                 )}
             </div>

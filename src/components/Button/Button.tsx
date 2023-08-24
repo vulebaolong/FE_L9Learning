@@ -47,7 +47,7 @@ function Button({ name, htmlFor, children, type, className, onClick, disabled = 
         classDisabled = "!cursor-not-allowed";
     }
     return (
-        <button disabled={disabled} name={name} type={htmlFor} onClick={onClick} className={`${className} ${classType} ${classDisabled} cursor-pointer transition rounded-full `}>
+        <button disabled={disabled} name={name} type={htmlFor} onClick={onClick} className={`ButtonMe ${className} ${classType} ${classDisabled} cursor-pointer transition rounded-full `}>
             {children}
         </button>
     );
