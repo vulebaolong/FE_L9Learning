@@ -1,12 +1,12 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { userApi } from "../../api/quanLyNguoiDungApi";
-import { I_thongTinTaiKhoan } from "../../interfaces/I_quanLyNguoiDung";
+import { userApi } from "../../api/userApi";
+import { I_accountInfo } from "../../interfaces/userManagementInterface";
 import { FaUserGroup } from "react-icons/fa6";
 import { Popconfirm, Typography } from "antd";
 import Button from "../../components/Button/Button";
 import style from "./ProfilePage.module.css";
 import { navigate } from "../../helpers/navigate";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
+import { courseApi } from "../../api/courseApi";
 import { DispatchType, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { error, success } from "../../helpers/message";
@@ -15,14 +15,14 @@ import PopconfirmProfile from "./PopconfirmProfile";
 function ProfilePage() {
     const dispatch: DispatchType = useDispatch();
 
-    // const [thongTinTaiKhoan, setThongTinTaiKhoan] = useState<I_thongTinTaiKhoan>();
+    // const [thongTinTaiKhoan, setThongTinTaiKhoan] = useState<I_accountInfo>();
 
     // console.log(thongTinTaiKhoan);
 
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     useEffect(() => {
-        dispatch({ type: "layThongTinTaiKhoanSaga" });
+        dispatch({ type: "getAccountInfoSaga" });
     }, []);
 
     const renderDaDangKyKhoaHoc = () => {
@@ -122,12 +122,12 @@ function ProfilePage() {
                                                         </div>
                                                         <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                                                     </div>
-                                                    <p className="font-bold truncate sm:hidden">{khoaHoc.tenKhoaHoc}</p>
+                                                    <p className="font-bold truncate sm:hidden">{khoaHoc.courseName}</p>
                                                 </div>
 
                                                 {/* MÔ TẢ */}
                                                 <div className="space-y-2 hidden sm:block">
-                                                    <p className="heading_3 truncate">{khoaHoc.tenKhoaHoc}</p>
+                                                    <p className="heading_3 truncate">{khoaHoc.courseName}</p>
                                                     <Typography.Paragraph className={`para`} ellipsis={{ rows: 5 }}>
                                                         {khoaHoc.moTa}
                                                     </Typography.Paragraph>

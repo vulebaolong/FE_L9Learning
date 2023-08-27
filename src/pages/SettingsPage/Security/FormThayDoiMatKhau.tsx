@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
+import { userApi } from "../../../api/userApi";
 import { Form, Input } from "antd";
 import { error, success } from "../../../helpers/message";
 import Button from "../../../components/Button/Button";
@@ -11,12 +11,12 @@ function FormThayDoiMatKhau() {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { matKhauCurent: string; matKhauNew: string }) => {
+    const onFinish = async (values: { currentPassword: string; newPassword: string }) => {
         console.log(values);
         try {
-            const { data, status } = await userApi.capNhatMatKhau(values);
+            const { data, status } = await userApi.updatePassword(values);
 
-            console.log("Call API - capNhatMatKhau", { data, status });
+            console.log("Call API - updatePassword", { data, status });
 
             setComponentDisabled(true);
 
@@ -74,7 +74,7 @@ function FormThayDoiMatKhau() {
                         <h3 className="heading_3">Thay đổi mật khẩu</h3>
                         <Form.Item
                             className="m-0 p-0"
-                            name="matKhauCurent"
+                            name="currentPassword"
                             rules={[
                                 {
                                     required: true,
@@ -91,7 +91,7 @@ function FormThayDoiMatKhau() {
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                         <Form.Item
                             className="m-0 p-0"
-                            name="matKhauNew"
+                            name="newPassword"
                             rules={[
                                 {
                                     required: true,

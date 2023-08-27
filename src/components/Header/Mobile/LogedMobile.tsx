@@ -9,7 +9,7 @@ import Logo from "../../Logo/Logo";
 import { useState } from "react";
 
 function LogedMobile() {
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     const [isOpenPopupSetting, setIsOpenPopupSetting] = useState(false);
 
@@ -70,7 +70,7 @@ function LogedMobile() {
         dispatch(setIsDraweREDU(false));
     };
 
-    const handleDangXuat = () => {
+    const handleLogout = () => {
         navigate("/");
         lcStorage.remove(USER_LOGIN);
         lcStorage.remove(ACCESS_TOKEN);
@@ -192,7 +192,7 @@ function LogedMobile() {
 
             {/* ĐĂNG XUẤT */}
             <div className="mt-4">
-                <span className={textItem} onClick={handleDangXuat}>
+                <span className={textItem} onClick={handleLogout}>
                     Đăng xuất
                 </span>
             </div>

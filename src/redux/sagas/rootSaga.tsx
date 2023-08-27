@@ -1,27 +1,23 @@
 // sagas.ts
 
 import { all } from "redux-saga/effects";
-import * as quanLyNguoiDungSaga from "./quanLyNguoiDungSaga";
-import * as quanLyKhoaHocSaga from "./quanLyKhoaHocSaga";
+import * as userManagementSaga  from "./userManagementSaga";
+import * as courseManagementSaga  from "./courseManagementSaga";
 
 export default function* rootSaga() {
     yield all([
-        quanLyNguoiDungSaga.theoDoiDangNhapSaga(),
-        quanLyNguoiDungSaga.theoDoiDangKySaga(),
-        quanLyNguoiDungSaga.theoDoiCapNhatUserLoginSaga(),
-        quanLyNguoiDungSaga.theoDoiLayThongTinTaiKhoanSaga(),
-        quanLyNguoiDungSaga.theoDoiLayThongTinNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiCapNhatThongTinNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiThemNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiLayDanhSachNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiLayThongTinKhoaHocChoNguoiDungSaga(),
-        quanLyNguoiDungSaga.theoDoiCapNhatKhoaHocNguoiDungSaga(),
+        userManagementSaga .watchLoginSaga(),
+        userManagementSaga .watchRegisterSaga(),
+        userManagementSaga .watchUpdateDisplayAccountSaga(),
+        userManagementSaga .watchGetAccountInfoSaga(),
+        userManagementSaga .watchGetUserInfoSaga(),
+        userManagementSaga .watchUpdateDisplayUserSaga(),
+        userManagementSaga .watchAddUserSaga(),
+        userManagementSaga .watchGetUserListSaga(),
 
-        quanLyKhoaHocSaga.theoDoiLayDanhSachKhoaHocSaga(),
-        quanLyKhoaHocSaga.theoDoiLayMotKhoaHocSaga(),
-        quanLyKhoaHocSaga.theoDoiThemKhoaHocSaga(),
-        quanLyKhoaHocSaga.theoDoiXoaKhoaHocSaga(),
-        quanLyKhoaHocSaga.theoDoiCapNhatKhoaHocSaga(),
-        quanLyKhoaHocSaga.theoDoiLayThongTinNguoiDungChoKhoaHocSaga(),
+        courseManagementSaga .watchGetCourseListSaga(),
+        courseManagementSaga .watchAddCourseSaga(),
+        courseManagementSaga .watchUpdateCourseSaga(),
+        courseManagementSaga .watchGetUserInfoForCourseSaga(),
     ]);
 }

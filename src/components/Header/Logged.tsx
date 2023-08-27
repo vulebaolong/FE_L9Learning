@@ -1,6 +1,6 @@
 import { Avatar, Popover, Tag } from "antd";
 import { useState } from "react";
-import { I_PropLogged } from "../../interfaces/I_quanLyNguoiDung";
+import { I_PropLogged } from "../../interfaces/userManagementInterface.js";
 import { lcStorage } from "../../helpers/localStorage.js";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../contants/userContants.js";
 import { navigate } from "../../helpers/navigate.js";

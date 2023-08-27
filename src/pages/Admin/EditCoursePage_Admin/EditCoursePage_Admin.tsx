@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { getBase64 } from "../../../helpers/antdHelper";
 import { RcFile, UploadFile } from "antd/es/upload";
 import ButtonMe from "../../../components/Button/Button";
-import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
+import { courseApi } from "../../../api/courseApi";
 import { useParams } from "react-router-dom";
-import { I_danhMucKhoaHoc, I_motKhoaHoc, I_valuesKhoahoc } from "../../../interfaces/I_quanLyKhoaHoc";
+import { I_courseCategory, I_singleCourse, I_courseValues } from "../../../interfaces/courseManagementInterface";
 import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
@@ -23,7 +23,7 @@ function EditCoursePage_Admin() {
 
     const [form] = Form.useForm();
 
-    const [motKhoaHoc, setMotKhoaHoc] = useState<I_motKhoaHoc | null>(null);
+    const [motKhoaHoc, setMotKhoaHoc] = useState<I_singleCourse | null>(null);
 
     const dispatch: DispatchType = useDispatch();
 
@@ -37,12 +37,12 @@ function EditCoursePage_Admin() {
                 try {
                     dispatch(setIsLoadingPageREDU(true));
 
-                    const { data: data1 } = await khoaHocApi.layDanhMucKhoaHoc();
-                    console.log("fetch - layDanhMucKhoaHoc", { data1 });
+                    const { data: data1 } = await courseApi.getListCourseCategories();
+                    console.log("fetch - getListCourseCategories", { data1 });
                     setDanhMucKhoaHoc(data1.result.data);
 
-                    const { data: data2 } = await khoaHocApi.layMotKhoaHoc(id);
-                    console.log("fetch - layMotKhoaHoc", { data2 });
+                    const { data: data2 } = await courseApi.getCourseById(id);
+                    console.log("fetch - getCourseById", { data2 });
 
                     setMotKhoaHoc(data2.result.data);
 
@@ -94,7 +94,7 @@ function EditCoursePage_Admin() {
 
     useEffect(() => form.resetFields(), [motKhoaHoc, form]);
 
-    const onFinish = (values: I_valuesKhoahoc) => {
+    const onFinish = (values: I_courseValues) => {
         const copyValues = JSON.parse(JSON.stringify(values));
 
         if (!copyValues.seHocDuoc) {
@@ -128,15 +128,15 @@ function EditCoursePage_Admin() {
             }
         };
 
-        let maKhoaHoc: string = "";
+        let courseCode: string = "";
 
         if (motKhoaHoc?._id !== undefined) {
-            maKhoaHoc = motKhoaHoc?._id;
+            courseCode = motKhoaHoc?._id;
         }
 
         const payload = {
-            maKhoaHoc,
-            tenKhoaHoc: values.tenKhoaHoc,
+            courseCode,
+            courseName: values.courseName,
             moTa: values.moTa,
             giaTien: values.giaTien,
             danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
@@ -147,8 +147,8 @@ function EditCoursePage_Admin() {
         console.log(payload);
 
         const formData = new FormData();
-        formData.append("maKhoaHoc", payload.maKhoaHoc);
-        formData.append("tenKhoaHoc", payload.tenKhoaHoc);
+        formData.append("courseCode", payload.courseCode);
+        formData.append("courseName", payload.courseName);
         formData.append("moTa", payload.moTa);
         formData.append("giaTien", payload.giaTien.toString());
         formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
@@ -156,7 +156,7 @@ function EditCoursePage_Admin() {
         formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
         formData.append("hinhAnh", payload.hinhAnh);
 
-        dispatch({ type: "capNhatKhoaHocSaga", payload: formData });
+        dispatch({ type: "updateCourseSaga", payload: formData });
     };
 
     const styleInput = `dark:!bg-gray-700/60 bg-transparent dark:!shadow-[rgba(0,0,0,0.20)_0px_5px_10px] shadow-[rgba(149,157,165,0.1)_0px_8px_24px]`;
@@ -198,7 +198,7 @@ function EditCoursePage_Admin() {
                     {/* TÊN KHOÁ HỌC */}
                     <Form.Item
                         label={<span className="text-base font-bold">Tên khoá học</span>}
-                        name="tenKhoaHoc"
+                        name="courseName"
                         rules={[
                             {
                                 required: true,
@@ -253,7 +253,7 @@ function EditCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => {
+                            {danhMucKhoaHoc.map((danhMuc: I_courseCategory) => {
                                 return (
                                     <Select.Option key={danhMuc._id} value={danhMuc._id}>
                                         {danhMuc.tenDanhMuc}

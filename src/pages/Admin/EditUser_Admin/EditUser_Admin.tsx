@@ -3,7 +3,7 @@ import { DispatchType, RootState } from "../../../redux/store";
 import FormHoTen from "../../../components/FromEdit/FormHoTen";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
+import { userApi } from "../../../api/userApi";
 import FormTaiKhoan from "../../../components/FromEdit/FormTaiKhoan";
 import FormEmail from "../../../components/FromEdit/FormEmail";
 import FormSoDienThoai from "../../../components/FromEdit/FormSoDienThoai";
@@ -14,25 +14,25 @@ function EditUser_Admin() {
 
     const dispatch: DispatchType = useDispatch();
 
-    const { thongTinNguoiDung } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userInfo } = useSelector((state: RootState) => state.userManagementSlice);
 
     useEffect(() => {
-        dispatch({ type: "layThongTinNguoiDungSaga", payload: id });
+        dispatch({ type: "GetUserInfoSaga", payload: id });
     }, [id]);
 
-    const api = userApi.capNhatMotThongTinNguoiDung;
+    const api = userApi.updateOneUserInfo;
 
-    const logApi = "capNhatMotThongTinNguoiDung";
+    const logApi = "updateOneUserInfo";
 
     const renderListForm = () => {
-        if (thongTinNguoiDung === null) return;
+        if (userInfo === null) return;
         return (
             <>
-                <FormHoTen idNguoiDung={id} userLogin={thongTinNguoiDung} api={api} logApi={logApi} />
-                <FormTaiKhoan idNguoiDung={id} userLogin={thongTinNguoiDung} api={api} logApi={logApi} />
-                <FormEmail idNguoiDung={id} userLogin={thongTinNguoiDung} api={api} logApi={logApi} />
-                <FormSoDienThoai idNguoiDung={id} userLogin={thongTinNguoiDung} api={api} logApi={logApi} />
-                <FormAvatar idNguoiDung={id} userLogin={thongTinNguoiDung} apiAvatar={userApi.capNhatAvatarNguoiDung} logApi="capNhatAvatarNguoiDung" />
+                <FormHoTen userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormTaiKhoan userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormEmail userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormSoDienThoai userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormAvatar userId={id} userLogin={userInfo} apiAvatar={userApi.updateUserAvatar} logApi="updateUserAvatar" />
             </>
         );
     };
@@ -41,7 +41,7 @@ function EditUser_Admin() {
         <div className="container">
             <h1 className="heading_1 pt-5">Thông tin cá nhân</h1>
             
-            <p className="w-full sm:w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{thongTinNguoiDung?.hoTen}</p>
+            <p className="w-full sm:w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{userInfo?.hoTen}</p>
 
             <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
 

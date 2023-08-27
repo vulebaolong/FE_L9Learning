@@ -2,16 +2,15 @@ import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
 import { useEffect, useState } from "react";
 import { Form, Modal, Upload, UploadFile } from "antd";
-import { userApi } from "../../api/quanLyNguoiDungApi";
 import { error, success } from "../../helpers/message";
 import Button from "../Button/Button";
 import { getBase64 } from "../../helpers/antdHelper";
 import { RcFile, UploadProps } from "antd/es/upload";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { file } from "../../interfaces/I_quanLyKhoaHoc";
-import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
+import { file } from "../../interfaces/courseManagementInterface";
+import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
 
-function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEdit) {
+function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -34,7 +33,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEd
             const formData = new FormData();
 
             formData.append("avatar", avatar());
-            formData.append("idNguoiDung", `${idNguoiDung}`);
+            formData.append("userId", `${userId}`);
 
             if (apiAvatar !== undefined) {
                 const { data, status } = await apiAvatar(formData);
@@ -48,8 +47,8 @@ function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEd
         } catch (err) {
             error("Đổi avatar không thành công");
         } finally {
-            if (logApi === "capNhatAvatarTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
-            if (logApi === "capNhatAvatarNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
+            if (logApi === "updateAccountAvatar") dispatch({ type: "updateDisplayAccountSaga" });
+            if (logApi === "updateUserAvatar") dispatch({ type: "updateDisplayUserSaga", payload: userId });
         }
     };
 
@@ -145,7 +144,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, idNguoiDung }: I_PropsFormEd
                                 listType="picture-card"
                                 accept="image/png, image/jpeg"
                                 maxCount={1}
-                                customRequest={({ file, onSuccess }) => {
+                                customRequest={({ onSuccess }) => {
                                     setTimeout(() => {
                                         if (onSuccess) {
                                             onSuccess("ok");

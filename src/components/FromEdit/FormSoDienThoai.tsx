@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Form, Input } from "antd";
 import { error, success } from "../../helpers/message";
 import Button from "../Button/Button";
-import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
+import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
 
-function FormSoDienThoai({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
+function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -19,7 +19,7 @@ function FormSoDienThoai({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdi
         console.log(values);
         try {
             if (api !== undefined) {
-                const { data, status } = await api({ ...values, idNguoiDung });
+                const { data, status } = await api({ ...values, userId });
 
                 console.log(`Call API - ${logApi}`, { data, status });
 
@@ -30,8 +30,8 @@ function FormSoDienThoai({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdi
         } catch (err) {
             error("Đổi Thông tin số điện thoại không thành công");
         } finally {
-            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
-            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
+            if (logApi === "updateOneAccountInfo") dispatch({ type: "updateDisplayAccountSaga" });
+            if (logApi === "updateOneUserInfo") dispatch({ type: "updateDisplayUserSaga", payload: userId });
         }
     };
 

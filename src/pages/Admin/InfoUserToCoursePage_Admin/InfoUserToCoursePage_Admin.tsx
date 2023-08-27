@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 import style from "./InfoUserToCoursePage_Admin.module.css";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
-import { I_thongTinKhoaHocNguoiDung } from "../../../interfaces/I_quanLyNguoiDung";
+import { userApi } from "../../../api/userApi";
+import { I_courseInfoForUser } from "../../../interfaces/userManagementInterface";
 import { wait } from "../../../helpers/awaitHelper";
 import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
 import { setIsLoadingBtnREDU, setIsLoadingPageREDU } from "../../../redux/slices/loadingSlice";
@@ -17,7 +17,7 @@ import { Avatar } from "antd";
 function InfoUserToCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
 
-    const [thongTinKhoaHocNguoiDung, setThongTinKhoaHocNguoiDung] = useState<I_thongTinKhoaHocNguoiDung | null>(null);
+    const [userCourseInfo, setThongTinKhoaHocNguoiDung] = useState<I_courseInfoForUser | null>(null);
 
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
@@ -31,9 +31,9 @@ function InfoUserToCoursePage_Admin() {
                 try {
                     dispatch(setIsLoadingPageREDU(true));
 
-                    const { data, status } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
+                    const { data, status } = await userApi.getCoursesInfoForUsser(id);
 
-                    console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data, status });
+                    console.log("Call Api - getCoursesInfoForUsser", { data, status });
 
                     setThongTinKhoaHocNguoiDung(data.result.data);
 
@@ -52,32 +52,32 @@ function InfoUserToCoursePage_Admin() {
         fetch();
     }, [id, dispatch]);
 
-    const handleHuyDangKyNguoiDung = async (idKhoaHoc: string) => {
+    const handleHuyDangKyNguoiDung = async (courseId: string) => {
         if (id === undefined) return;
 
         const payload = {
-            idNguoiDung: id,
-            idKhoaHoc,
+            userId: id,
+            courseId,
         };
         try {
             dispatch(setIsLoadingBtnREDU(true));
 
-            const { data: data1, status: status1 } = await userApi.huyDangKyKhoaHocChoNguoiDung(payload);
+            const { data: data1, status: status1 } = await userApi.cancelCourseEnrollmentForUser(payload);
 
-            console.log("Call Api - dangKyKhoaHocChoNguoiDung", { data1, status1 });
+            console.log("Call Api - enrollCourseForUser", { data1, status1 });
 
-            success("Đăng ký khoá học cho người dùng thành công");
+            success("Huỷ đăng ký khoá học cho người dùng thành công");
 
             // Cập nhật lại giao diện
             setIsSkeleton(true);
-            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
+            const { data: data2, status: status2 } = await userApi.getCoursesInfoForUsser(id);
 
-            console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data2, status2 });
+            console.log("Call Api - getCoursesInfoForUsser", { data2, status2 });
 
             setThongTinKhoaHocNguoiDung(data2.result.data);
         } catch (err) {
             console.log(err);
-            error("Đăng ký khoá học cho người dùng không thành công");
+            error("Huỷ đăng ký khoá học cho người dùng không thành công");
         } finally {
             await wait(DELAY_LOADING_PAGE);
             dispatch(setIsLoadingBtnREDU(false));
@@ -85,27 +85,27 @@ function InfoUserToCoursePage_Admin() {
         }
     };
 
-    const handleDangKyNguoiDung = async (idKhoaHoc: string) => {
+    const handleDangKyNguoiDung = async (courseId: string) => {
         if (id === undefined) return;
 
         const payload = {
-            idNguoiDung: id,
-            idKhoaHoc,
+            userId: id,
+            courseId,
         };
         try {
             dispatch(setIsLoadingBtnREDU(true));
 
-            const { data: data1, status: status1 } = await userApi.dangKyKhoaHocChoNguoiDung(payload);
+            const { data: data1, status: status1 } = await userApi.enrollCourseForUser(payload);
 
-            console.log("Call Api - dangKyKhoaHocChoNguoiDung", { data1, status1 });
+            console.log("Call Api - enrollCourseForUser", { data1, status1 });
 
             success("Đăng ký khoá học cho người dùng thành công");
 
             // Cập nhật lại giao diện
             setIsSkeleton(true);
-            const { data: data2, status: status2 } = await userApi.layThongTinKhoaHocChoNguoiDung(id);
+            const { data: data2, status: status2 } = await userApi.getCoursesInfoForUsser(id);
 
-            console.log("Call Api - layThongTinKhoaHocChoNguoiDung", { data2, status2 });
+            console.log("Call Api - getCoursesInfoForUsser", { data2, status2 });
 
             setThongTinKhoaHocNguoiDung(data2.result.data);
         } catch (err) {
@@ -123,9 +123,9 @@ function InfoUserToCoursePage_Admin() {
 
         if (isSkeleton === false) {
 
-            if (thongTinKhoaHocNguoiDung?.khoaHocDaDangKy.length === 0) return <p>Không có khoá học</p>;
+            if (userCourseInfo?.khoaHocDaDangKy.length === 0) return <p>Không có khoá học</p>;
 
-            return thongTinKhoaHocNguoiDung?.khoaHocDaDangKy.map((khoaHoc) => {
+            return userCourseInfo?.khoaHocDaDangKy.map((khoaHoc) => {
 
                 return (
                     <div key={khoaHoc._id}>
@@ -144,7 +144,7 @@ function InfoUserToCoursePage_Admin() {
                             </Button>
                             <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                         </div>
-                        <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
+                        <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                     </div>
                 );
             });
@@ -156,9 +156,9 @@ function InfoUserToCoursePage_Admin() {
 
         if (isSkeleton === false) {
 
-            if (thongTinKhoaHocNguoiDung?.khoaHocChuaDangKy.length === 0) return <p>Không có khoá học</p>;
+            if (userCourseInfo?.khoaHocChuaDangKy.length === 0) return <p>Không có khoá học</p>;
             
-            return thongTinKhoaHocNguoiDung?.khoaHocChuaDangKy.map((khoaHoc) => {
+            return userCourseInfo?.khoaHocChuaDangKy.map((khoaHoc) => {
                 return (
                     <div key={khoaHoc._id} className="">
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
@@ -172,7 +172,7 @@ function InfoUserToCoursePage_Admin() {
                             </Button>
                             <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                         </div>
-                        <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
+                        <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                     </div>
                 );
             });
@@ -185,8 +185,8 @@ function InfoUserToCoursePage_Admin() {
                 <div>
                     <h1 className="heading_1 pt-5">Thông tin khoá học của người dùng</h1>
                     <div className="flex items-center gap-2  mt-5">
-                        <Avatar src={<img src={thongTinKhoaHocNguoiDung?.nguoiDung.avatar} alt="avatar" />} size={60} />
-                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{thongTinKhoaHocNguoiDung?.nguoiDung.hoTen}</p>
+                        <Avatar src={<img src={userCourseInfo?.nguoiDung.avatar} alt="avatar" />} size={60} />
+                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{userCourseInfo?.nguoiDung.hoTen}</p>
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { I_danhMucKhoaHoc, I_khoaHocTheoDanhMuc } from "../../interfaces/I_quanLyKhoaHoc";
+import { courseApi } from "../../api/courseApi";
+import { I_courseCategory, I_coursesByCategory } from "../../interfaces/courseManagementInterface";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
 import Button from "../../components/Button/Button";
@@ -16,9 +16,9 @@ import Cta from "../../components/Cta/Cta";
 function CoursesPage() {
     const dispatch: DispatchType = useDispatch();
 
-    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState<I_danhMucKhoaHoc[]>([]);
+    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState<I_courseCategory[]>([]);
 
-    const [khoaHocTheoDanhMuc, setKhoaHocTheoDanhMuc] = useState<I_khoaHocTheoDanhMuc[]>([]);
+    const [khoaHocTheoDanhMuc, setKhoaHocTheoDanhMuc] = useState<I_coursesByCategory[]>([]);
 
     const [isSkeleton, setIsSkeleton] = useState(false);
 
@@ -26,12 +26,12 @@ function CoursesPage() {
         const fetch = async () => {
             try {
                 dispatch(setIsLoadingPageREDU(true));
-                const { data: data1, status: status1 } = await khoaHocApi.layDanhMucKhoaHoc();
-                console.log("call API - layDanhMucKhoaHoc - ĐẦU TRANG", { data1, status1 });
+                const { data: data1, status: status1 } = await courseApi.getListCourseCategories();
+                console.log("call API - getListCourseCategories - ĐẦU TRANG", { data1, status1 });
                 setDanhMucKhoaHoc(data1.result.data);
 
-                const { data: data2, status: status2 } = await khoaHocApi.layKhoaHocTheoDanhMuc();
-                console.log("call API - layKhoaHocTheoDanhMuc - ĐẦU TRANG", { data2, status2 });
+                const { data: data2, status: status2 } = await courseApi.getCourseByCategory();
+                console.log("call API - getCourseByCategory - ĐẦU TRANG", { data2, status2 });
                 setKhoaHocTheoDanhMuc(data2.result.data);
 
                 await wait(DELAY_LOADING_PAGE);
@@ -68,9 +68,9 @@ function CoursesPage() {
             try {
                 setIsSkeleton(true);
 
-                const { data, status } = await khoaHocApi.layKhoaHocTheoDanhMuc();
+                const { data, status } = await courseApi.getCourseByCategory();
 
-                console.log("call API - layKhoaHocTheoDanhMuc - CLICK Tất cả", { data, status });
+                console.log("call API - getCourseByCategory - CLICK Tất cả", { data, status });
 
                 setKhoaHocTheoDanhMuc(data.result.data);
             } finally {
@@ -83,9 +83,9 @@ function CoursesPage() {
         try {
             setIsSkeleton(true);
 
-            const { data, status } = await khoaHocApi.layKhoaHocTheoDanhMuc(value);
+            const { data, status } = await courseApi.getCourseByCategory(value);
 
-            console.log(`call API - layKhoaHocTheoDanhMuc - CLICK`, { data, status });
+            console.log(`call API - getCourseByCategory - CLICK`, { data, status });
 
             setKhoaHocTheoDanhMuc(data.result.data);
         } finally {
@@ -128,7 +128,7 @@ function CoursesPage() {
                                                 </Button>
                                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                                             </div>
-                                            <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
+                                            <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                                         </div>
                                     );
                                 })}

@@ -5,8 +5,8 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/rootSaga";
 import modalSlice from "./slices/modalSlice";
 import toggleThemeSlice from "./slices/toggleThemeSlice";
-import quanLyNguoiDungSlice from "./slices/quanLyNguoiDungSlice";
-import quanLyKhoaHocSlice from "./slices/quanLyKhoaHocSlice";
+import userManagementSlice from "./slices/userManagementSlice";
+import courseManagementSlice from "./slices/courseManagementSlice";
 import loadingSlice from "./slices/loadingSlice";
 import drawerSlice from "./slices/drawerSlice";
 const isProduction = import.meta.env.PROD;
@@ -17,8 +17,8 @@ const store = configureStore({
     reducer: {
         modalSlice,
         toggleThemeSlice,
-        quanLyNguoiDungSlice,
-        quanLyKhoaHocSlice,
+        userManagementSlice,
+        courseManagementSlice,
         loadingSlice,
         drawerSlice,
     },

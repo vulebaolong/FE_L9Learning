@@ -1,4 +1,4 @@
-import { I_PropContentCourse } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_PropContentCourse } from "../../interfaces/courseManagementInterface";
 import { useState } from "react";
 import { Collapse, CollapseProps } from "antd";
 import { FaCirclePlay } from "react-icons/fa6";

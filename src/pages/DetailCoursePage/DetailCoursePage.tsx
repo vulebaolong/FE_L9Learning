@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { I_motKhoaHoc } from "./../../interfaces/I_quanLyKhoaHoc";
+import { courseApi } from "../../api/courseApi";
+import { I_singleCourse } from "../../interfaces/courseManagementInterface";
 import { FaBatteryFull, FaCheck, FaCirclePlay, FaClock, FaFilm, FaGaugeHigh } from "react-icons/fa6";
 import { formatCurrency } from "../../helpers/formatNumber";
 import Button from "../../components/Button/Button";
@@ -19,11 +19,11 @@ import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 function DetailCoursePage() {
     const dispatch: DispatchType = useDispatch();
 
-    const [khoaHoc, setKhoaHoc] = useState<I_motKhoaHoc>();
+    const [khoaHoc, setKhoaHoc] = useState<I_singleCourse>();
 
     const { id } = useParams();
 
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
@@ -33,9 +33,9 @@ function DetailCoursePage() {
                 try {
                     dispatch(setIsLoadingPageREDU(true));
 
-                    const { data, status } = await khoaHocApi.layMotKhoaHoc(id);
+                    const { data, status } = await courseApi.getCourseById(id);
 
-                    console.log("fetch - layMotKhoaHoc", { data, status });
+                    console.log("fetch - getCourseById", { data, status });
 
                     setKhoaHoc(data.result.data);
 
@@ -80,13 +80,13 @@ function DetailCoursePage() {
             try {
                 dispatch(setIsLoadingBtnREDU(true));
 
-                const { data, status } = await khoaHocApi.dangKyKhoaHoc({ maKhoaHoc: id });
+                const { data, status } = await courseApi.enrollCourse({ courseCode: id });
 
-                console.log("Call API - dangKyKhoaHoc", { data, status });
+                console.log("Call API - enrollCourse", { data, status });
 
                 success("Đăng ký khoá học thành công");
 
-                dispatch({ type: "capNhatUserLoginSaga" });
+                dispatch({ type: "updateDisplayAccountSaga" });
             } catch (err) {
                 error("Đăng ký khoá học không thành công");
             } finally {
@@ -156,7 +156,7 @@ function DetailCoursePage() {
         <section className="pb-24">
             <div className="flex xl:flex-row flex-col">
                 <div className="xl:w-[66.66667%] xl:order-1 order-2">
-                    <h1 className={`heading_1 mt-4`}>{khoaHoc?.tenKhoaHoc}</h1>
+                    <h1 className={`heading_1 mt-4`}>{khoaHoc?.courseName}</h1>
                     <p className={`para mt-5 mb-16`}>{khoaHoc?.moTa}</p>
                     {isSeHocDuoc && (
                         <div className="space-y-3 mb-16">

@@ -4,7 +4,7 @@ import NotLogged from "./NotLogged";
 import Logged from "./Logged";
 
 function UserControll() {
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     let jsx = <NotLogged />;
 

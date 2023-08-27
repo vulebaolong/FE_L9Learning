@@ -4,9 +4,9 @@ import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
 import { error, success } from "../../helpers/message";
-import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
+import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
 
-function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
+function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -19,7 +19,7 @@ function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
         console.log(values);
         try {
             if (api !== undefined) {
-                const { data, status } = await api({ ...values, idNguoiDung });
+                const { data, status } = await api({ ...values, userId });
 
                 console.log(`Call API - ${logApi}`, { data, status });
 
@@ -30,8 +30,8 @@ function FormHoTen({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
         } catch (err) {
             error("Đổi Thông tin họ tên không thành công");
         } finally {
-            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
-            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
+            if (logApi === "updateOneAccountInfo") dispatch({ type: "updateDisplayAccountSaga" });
+            if (logApi === "updateOneUserInfo") dispatch({ type: "updateDisplayUserSaga", payload: userId });
         }
     };
 

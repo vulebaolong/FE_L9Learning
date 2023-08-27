@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../../redux/store";
 import { setIsOpenModalAddUserREDU } from "../../../redux/slices/modalSlice";
 import { Form, Input, Modal } from "antd";
-import { I_dangKy } from "../../../interfaces/I_quanLyNguoiDung";
+import { I_register } from "../../../interfaces/userManagementInterface";
 import style from "./ModalAddUser_Admin.module.css";
 import { ContactsOutlined, UserOutlined, KeyOutlined, MailOutlined, PhoneOutlined, LoadingOutlined } from "@ant-design/icons";
 import Button from "../../Button/Button";
@@ -25,10 +25,10 @@ function ModalAddUser_Admin() {
         dispatch(setIsOpenModalAddUserREDU(false));
     };
 
-    const onFinish = (values: I_dangKy) => {
+    const onFinish = (values: I_register) => {
         console.log("Success:", values);
         dispatch({
-            type: "themNguoiDungSaga",
+            type: "addUserSaga",
             payload: values,
         });
     };

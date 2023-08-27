@@ -1,6 +1,6 @@
 {
     "put": {
-        "tags": ["QuanLyNguoiDung"],
+        "tags": ["UserManagement"],
         "parameters": [
             {
                 "name": "CapNhatThongTinNguoiDung",

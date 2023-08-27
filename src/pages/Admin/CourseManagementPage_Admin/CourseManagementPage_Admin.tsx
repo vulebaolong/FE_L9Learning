@@ -12,17 +12,17 @@ function CourseManagementPage_Admin() {
     const dispatch: DispatchType = useDispatch();
 
     useEffect(() => {
-        dispatch({ type: "layDanhSachKhoaHocSaga" });
+        dispatch({ type: "getCourseListSaga" });
     }, []);
 
-    const { danhSachKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
+    const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
 
-    const handleChinhSuaKhoaHoc = (maKhoaHoc: string) => {
-        navigate(`/editcourse/${maKhoaHoc}`);
+    const handleChinhSuaKhoaHoc = (courseCode: string) => {
+        navigate(`/editcourse/${courseCode}`);
     };
 
-    const handleThongTinKhoaHoc = (maKhoaHoc: string) => {
-        navigate(`/coursetouser/${maKhoaHoc}`);
+    const handleThongTinKhoaHoc = (courseCode: string) => {
+        navigate(`/coursetouser/${courseCode}`);
     };
 
     const handleThemKhoaHoc = () => {
@@ -43,7 +43,7 @@ function CourseManagementPage_Admin() {
             </div>
 
             <div className="collumnCourse">
-                {danhSachKhoaHoc.map((khoaHoc) => {
+                {courseList.map((khoaHoc) => {
                     return (
                         <div key={khoaHoc._id}>
                             {/* HÌNH ẢNH */}
@@ -70,7 +70,7 @@ function CourseManagementPage_Admin() {
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>
                             {/* TÊN KHOÁ HỌC */}
-                            <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
+                            <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                         </div>
                     );
                 })}

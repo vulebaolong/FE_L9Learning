@@ -7,28 +7,28 @@ import { RcFile, UploadProps } from "antd/es/upload";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../../redux/store";
-import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
-import { I_danhMucKhoaHoc, I_valuesKhoahoc } from "../../../interfaces/I_quanLyKhoaHoc";
+import { courseApi } from "../../../api/courseApi";
+import { I_courseCategory, I_courseValues } from "../../../interfaces/courseManagementInterface";
 import { getBase64 } from "../../../helpers/antdHelper";
-import ButtonMe from "../../../components/Button/Button"
+import ButtonMe from "../../../components/Button/Button";
 
 function AddCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
     const [arrChuong, setArrChuong] = useState([]);
-    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState([]);
+    const [courseCategories, setCourseCategories] = useState([]);
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     useEffect(() => {
         const fetch = async () => {
-            const { data, status } = await khoaHocApi.layDanhMucKhoaHoc();
-            console.log("call API - layDanhMucKhoaHoc", { data, status });
-            setDanhMucKhoaHoc(data.result.data);
+            const { data, status } = await courseApi.getListCourseCategories();
+            console.log("call API - getListCourseCategories", { data, status });
+            setCourseCategories(data.result.data);
         };
         fetch();
     }, []);
 
     const [form] = Form.useForm();
-    const onFinish = async (values: I_valuesKhoahoc) => {
+    const onFinish = async (values: I_courseValues) => {
         console.log(values);
 
         const copyValues = JSON.parse(JSON.stringify(values));
@@ -57,7 +57,7 @@ function AddCoursePage_Admin() {
         });
 
         const payload = {
-            tenKhoaHoc: values.tenKhoaHoc,
+            courseName: values.courseName,
             moTa: values.moTa,
             giaTien: values.giaTien,
             danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
@@ -66,7 +66,7 @@ function AddCoursePage_Admin() {
             hinhAnh: values.hinhAnh.file.originFileObj,
         };
         const formData = new FormData();
-        formData.append("tenKhoaHoc", payload.tenKhoaHoc);
+        formData.append("courseName", payload.courseName);
         formData.append("moTa", payload.moTa);
         formData.append("giaTien", payload.giaTien.toString());
         formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
@@ -74,7 +74,7 @@ function AddCoursePage_Admin() {
         formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
         formData.append("hinhAnh", payload.hinhAnh);
 
-        dispatch({ type: "themKhoaHocSaga", payload: formData });
+        dispatch({ type: "addCourseSaga", payload: formData });
     };
 
     const [loading, setLoading] = useState(false);
@@ -116,7 +116,7 @@ function AddCoursePage_Admin() {
                     {/* TÊN KHOÁ HỌC */}
                     <Form.Item
                         label={<span className="text-base font-bold">Tên khoá học</span>}
-                        name="tenKhoaHoc"
+                        name="courseName"
                         rules={[
                             {
                                 required: true,
@@ -171,7 +171,7 @@ function AddCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {danhMucKhoaHoc.map((danhMuc: I_danhMucKhoaHoc) => {
+                            {courseCategories.map((danhMuc: I_courseCategory) => {
                                 return (
                                     <Select.Option key={danhMuc._id} value={danhMuc._id}>
                                         {danhMuc.tenDanhMuc}
@@ -336,7 +336,7 @@ function AddCoursePage_Admin() {
                             listType="picture-card"
                             accept="image/png, image/jpeg"
                             maxCount={1}
-                            customRequest={({ file, onSuccess }) => {
+                            customRequest={({ onSuccess }) => {
                                 setTimeout(() => {
                                     if (onSuccess) {
                                         // Kiểm tra xem onSuccess tồn tại trước khi gọi

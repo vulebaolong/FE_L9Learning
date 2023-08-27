@@ -4,7 +4,7 @@ import LogedMobile from "./LogedMobile";
 import NotLoggedMobile from "./NotLoggedMobile";
 
 function UserControllMobile() {
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     let jsx = <NotLoggedMobile />;
 

@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 import imgCta from "../../assets/cta.png";
-import { I_PropsCta } from "../../interfaces/I_quanLyKhoaHoc";
+import { I_PropsCta } from "../../interfaces/courseManagementInterface";
 
 function Cta({ title, desc, textBtn }: I_PropsCta) {
     return (

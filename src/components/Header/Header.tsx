@@ -10,7 +10,7 @@ import Search from "../Search/Search";
 import NavbarMobile from "./Mobile/NavbarMobile";
 
 function Header() {
-    const { userLogin } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     const btnLightRef = useRef<HTMLDivElement | null>(null);
     const btnNightRef = useRef<HTMLDivElement | null>(null);

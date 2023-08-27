@@ -5,13 +5,13 @@ import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { useState, useRef } from "react";
 import { FilterConfirmProps } from "antd/es/table/interface";
 import type { ColumnType, ColumnsType } from "antd/es/table";
-import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
+import { DataType } from "../../../interfaces/userManagementInterface";
 import Highlighter from "react-highlight-words";
 import { useParams } from "react-router-dom";
 import { setIsSkeletonInfoCourseToUserREDU } from "../../../redux/slices/loadingSlice";
-import { khoaHocApi } from "../../../api/quanLyKhoaHocApi";
+import { courseApi } from "../../../api/courseApi";
 import { error, success } from "../../../helpers/message";
-import { setThongTinNguoiDungChoKhoaHocREDU } from "../../../redux/slices/quanLyKhoaHocSlice";
+import { setUserInfoForCourseREDU } from "../../../redux/slices/courseManagementSlice";
 import { wait } from "../../../helpers/awaitHelper";
 import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
 import SkeletonTable from "../../../components/Skeleton/SkeletonTable";
@@ -22,7 +22,7 @@ function NguoiDungDaDangKy() {
 
     const { id } = useParams();
 
-    const { thongTinNguoiDungChoKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
+    const { userInfoForCourse } = useSelector((state: RootState) => state.courseManagementSlice);
 
     const { isSkeletonInfoCourseToUser } = useSelector((state: RootState) => state.loadingSlice);
 
@@ -85,7 +85,7 @@ function NguoiDungDaDangKy() {
             ),
     });
 
-    const data: DataType[] | undefined = thongTinNguoiDungChoKhoaHoc?.nguoiDungDaDangKy
+    const data: DataType[] | undefined = userInfoForCourse?.nguoiDungDaDangKy
         .map((nguoiDung, index) => {
             return {
                 key: nguoiDung._id,
@@ -100,29 +100,29 @@ function NguoiDungDaDangKy() {
         })
         .reverse();
 
-    const handleHuyDangKy = async (idNguoiDung: string) => {
+    const handleHuyDangKy = async (userId: string) => {
         if (id === undefined) return;
 
         const payload = {
-            idNguoiDung,
-            idKhoaHoc: id,
+            userId,
+            courseId: id,
         };
 
         try {
             dispatch(setIsSkeletonInfoCourseToUserREDU(true));
 
-            const { data: data1, status: status1 } = await khoaHocApi.huyDangKyNguoiDungChoKhoaHoc(payload);
+            const { data: data1, status: status1 } = await courseApi.cancelUserEnrollmentForCourse(payload);
 
-            console.log("Call Api - huyDangKyNguoiDungChoKhoaHoc", { data1, status1 });
+            console.log("Call Api - cancelUserEnrollmentForCourse", { data1, status1 });
 
             success("Huỷ đăng ký thành công");
 
             // Cập nhật lại giao diện
-            const { data: data2, status: status2 } = await khoaHocApi.layThongTinNguoiDungChoKhoaHoc(id);
+            const { data: data2, status: status2 } = await courseApi.getUserInformationForCourse(id);
 
-            console.log("Call Api - layThongTinNguoiDungChoKhoaHoc", { data2, status2 });
+            console.log("Call Api - getUserInformationForCourse", { data2, status2 });
 
-            dispatch(setThongTinNguoiDungChoKhoaHocREDU(data2.result.data));
+            dispatch(setUserInfoForCourseREDU(data2.result.data));
         } catch (err) {
             console.log(err);
             error("Huỷ đăng ký không thành công");

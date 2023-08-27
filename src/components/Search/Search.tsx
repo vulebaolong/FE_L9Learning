@@ -1,8 +1,8 @@
 import { Empty, Input, Popover } from "antd";
 import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-import { khoaHocApi } from "../../api/quanLyKhoaHocApi";
-import { I_resultSearch } from "../../interfaces/I_quanLyKhoaHoc";
+import { courseApi } from "../../api/courseApi";
+import { I_resultSearch } from "../../interfaces/courseManagementInterface";
 import { navigate } from "../../helpers/navigate";
 import { DEBOUNCE_TIMEOUT } from "../../contants/quanLyKhoaHocContants";
 function Search() {
@@ -26,9 +26,9 @@ function Search() {
             console.log(inputValue);
             setIsLoading(true);
             try {
-                const tenKhoaHoc = encodeURIComponent(inputValue);
-                const { data, status } = await khoaHocApi.timKiemTenKhoaHoc(tenKhoaHoc);
-                console.log("Call API - timKiemTenKhoaHoc", { data, status });
+                const courseName = encodeURIComponent(inputValue);
+                const { data, status } = await courseApi.searchCourseByName(courseName);
+                console.log("Call API - searchCourseByName", { data, status });
                 setResultSearch(data.result.data);
                 setIsOpenPopupUser(true);
             } finally {
@@ -41,13 +41,13 @@ function Search() {
         };
     }, [inputValue]);
 
-    const handleClickResultSearch = (maKhoaHoc: string) => {
+    const handleClickResultSearch = (courseCode: string) => {
         setIsOpenPopupUser(false);
         setInputValue("");
-        navigate(`/detailcourse/${maKhoaHoc}`);
+        navigate(`/detailcourse/${courseCode}`);
     };
 
-    const handleXemThem = () => {
+    const handleLoadMore = () => {
         setIsOpenPopupUser(false);
         setInputValue("");
         navigate("/courses");
@@ -59,7 +59,7 @@ function Search() {
                 <div className="w-[395px] px-3">
                     <div className=" flex justify-between items-baseline ">
                         <p className="text-sm font-semibold">KHOÁ HỌC</p>
-                        <p onClick={handleXemThem} className="text-sm dark:text-white/50 text-black/50 cursor-pointer">
+                        <p onClick={handleLoadMore} className="text-sm dark:text-white/50 text-black/50 cursor-pointer">
                             Xem thêm
                         </p>
                     </div>
@@ -77,7 +77,7 @@ function Search() {
                                     <div className="w-10 h-10 rounded-full overflow-hidden">
                                         <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                                     </div>
-                                    <p>{khoaHoc.tenKhoaHoc}</p>
+                                    <p>{khoaHoc.courseName}</p>
                                 </div>
                             );
                         })}

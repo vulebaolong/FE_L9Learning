@@ -1,4 +1,4 @@
-import { I_PropsFormEdit } from "../../interfaces/I_quanLyNguoiDung";
+import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
 import { Form, Input } from "antd";
 import { useEffect, useState, useMemo } from "react";
 import Button from "../Button/Button";
@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { DispatchType } from "../../redux/store";
 import { error, success } from "../../helpers/message";
 
-function FormTaiKhoan({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) {
+function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -19,7 +19,7 @@ function FormTaiKhoan({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) 
         console.log(values);
         try {
             if (api !== undefined) {
-                const { data, status } = await api({ ...values, idNguoiDung });
+                const { data, status } = await api({ ...values, userId });
 
                 console.log(`Call API - ${logApi}`, { data, status });
 
@@ -30,8 +30,8 @@ function FormTaiKhoan({ userLogin, api, logApi, idNguoiDung }: I_PropsFormEdit) 
         } catch (err) {
             error("Đổi Thông tin tài khoản không thành công");
         } finally {
-            if (logApi === "capNhatMotThongTinTaiKhoan") dispatch({ type: "capNhatUserLoginSaga" });
-            if (logApi === "capNhatMotThongTinNguoiDung") dispatch({ type: "capNhatThongTinNguoiDungSaga", payload: idNguoiDung });
+            if (logApi === "updateOneAccountInfo") dispatch({ type: "updateDisplayAccountSaga" });
+            if (logApi === "updateOneUserInfo") dispatch({ type: "updateDisplayUserSaga", payload: userId });
         }
     };
 

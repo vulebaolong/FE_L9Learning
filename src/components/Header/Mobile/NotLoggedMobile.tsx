@@ -27,7 +27,7 @@ function NotLoggedMobile() {
         dispatch(setIsDraweREDU(false));
     };
 
-    const handleDangNhap = () => {
+    const handleLogin = () => {
         dispatch(setIsDraweREDU(false));
         dispatch(setIsOpenModalAuthREDU(true));
     };
@@ -40,7 +40,7 @@ function NotLoggedMobile() {
 
             {/* ĐĂNG NHẬP */}
             <div className="">
-                <span className={textItem} onClick={handleDangNhap}>
+                <span className={textItem} onClick={handleLogin}>
                     Đăng nhập
                 </span>
             </div>

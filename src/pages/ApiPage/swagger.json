@@ -22,12 +22,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/LayDanhSachKhoaHoc": {
+        "/api/v1/CourseManagement/GetListCourses": {
             "get": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "tenKhoaHoc",
+                        "name": "courseName",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -41,9 +41,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/LayMotKhoaHoc": {
+        "/api/v1/CourseManagement/GetCourseById": {
             "get": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
                         "name": "id",
@@ -61,12 +61,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc": {
+        "/api/v1/CourseManagement/LayKhoaHocTheoDanhMuc": {
             "get": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "maDanhMuc",
+                        "name": "courseCategoryCode",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -81,9 +81,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/LayDanhMucKhoaHoc": {
+        "/api/v1/CourseManagement/GetListCourseCategories": {
             "get": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "responses": {
                     "200": {
                         "description": "The server might take some time to restart after a period of inactivity. \nMáy chủ có thể mất một chút thời gian để khởi động lại sau một thời gian không hoạt động"
@@ -91,9 +91,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/ThemDanhMucKhoaHoc": {
+        "/api/v1/CourseManagement/ThemDanhMucKhoaHoc": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
                         "name": "tenDanhMuc",
@@ -126,10 +126,10 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/ThemKhoaHoc": {
+        "/api/v1/CourseManagement/AddCourse": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
-                "operationId": "ThemKhoaHoc",
+                "tags": ["CourseManagement"],
+                "operationId": "AddCourse",
                 "consumes": ["multipart/form-data"],
                 "produces": [],
                 "parameters": [
@@ -159,12 +159,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/XoaKhoaHoc": {
+        "/api/v1/CourseManagement/DeleteCourse": {
             "delete": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "maKhoaHoc",
+                        "name": "courseCode",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -188,10 +188,10 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/CapNhatKhoaHoc": {
+        "/api/v1/CourseManagement/UpdateCourse": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
-                "operationId": "CapNhatKhoaHoc",
+                "tags": ["CourseManagement"],
+                "operationId": "UpdateCourse",
                 "consumes": ["multipart/form-data"],
                 "produces": [],
                 "parameters": [
@@ -221,19 +221,19 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/DangKyKhoaHoc": {
+        "/api/v1/CourseManagement/EnrollCourse": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "DangKyKhoaHoc",
+                        "name": "EnrollCourse",
                         "description": "Đăng ký khoá học mới",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "maKhoaHoc": {
+                                "courseCode": {
                                     "type": "string"
                                 }
                             }
@@ -256,19 +256,19 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/HuyDangKyKhoaHoc": {
+        "/api/v1/CourseManagement/CancelEnrollment": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "HuyDangKyKhoaHoc",
+                        "name": "CancelEnrollment",
                         "description": "Huỷ đăng ký khoá học ",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "maKhoaHoc": {
+                                "courseCode": {
                                     "type": "string"
                                 }
                             }
@@ -291,12 +291,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/LayThongTinNguoiDungChoKhoaHoc": {
+        "/api/v1/CourseManagement/GetUserInformationForCourse": {
             "get": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "idKhoaHoc",
+                        "name": "courseId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -320,22 +320,22 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/DangKyNguoiDungChoKhoaHoc": {
+        "/api/v1/CourseManagement/EnrollUserForCourse": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "DangKyNguoiDungChoKhoaHoc",
-                        "description": "DangKyNguoiDungChoKhoaHoc",
+                        "name": "EnrollUserForCourse",
+                        "description": "EnrollUserForCourse",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "idNguoiDung": {
+                                "userId": {
                                     "type": "string"
                                 },
-                                "idKhoaHoc": {
+                                "courseId": {
                                     "type": "string"
                                 }
                             }
@@ -358,22 +358,22 @@
                 }
             }
         },
-        "/api/v1/QuanLyKhoaHoc/HuyDangKyNguoiDungChoKhoaHoc": {
+        "/api/v1/CourseManagement/CancelUserEnrollmentForCourse": {
             "post": {
-                "tags": ["QuanLyKhoaHoc"],
+                "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "HuyDangKyNguoiDungChoKhoaHoc",
-                        "description": "HuyDangKyNguoiDungChoKhoaHoc",
+                        "name": "CancelUserEnrollmentForCourse",
+                        "description": "CancelUserEnrollmentForCourse",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "idNguoiDung": {
+                                "userId": {
                                     "type": "string"
                                 },
-                                "idKhoaHoc": {
+                                "courseId": {
                                     "type": "string"
                                 }
                             }
@@ -396,13 +396,13 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/DangKy": {
+        "/api/v1/UserManagement/Register": {
             "post": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "DangKy",
-                        "description": "DangKy",
+                        "name": "Register",
+                        "description": "Register",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -434,13 +434,13 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/DangNhap": {
+        "/api/v1/UserManagement/Login": {
             "post": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "DangNhap",
-                        "description": "DangNhap",
+                        "name": "Login",
+                        "description": "Login",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -463,9 +463,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/ThongTinTaiKhoan": {
+        "/api/v1/UserManagement/GetAccountInfo": {
             "get": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -484,9 +484,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatThongTinTaiKhoan": {
+        "/api/v1/UserManagement/CapNhatThongTinTaiKhoan": {
             "put": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
                         "name": "CapNhatThongTinNguoiDung",
@@ -528,9 +528,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatMotThongTinTaiKhoan": {
+        "/api/v1/UserManagement/UpdateOneAccountInfo": {
             "patch": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -549,22 +549,22 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatMatKhau": {
+        "/api/v1/UserManagement/UpdatePassword": {
             "patch": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "CapNhatMatKhau",
-                        "description": "CapNhatMatKhau",
+                        "name": "UpdatePassword",
+                        "description": "UpdatePassword",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "matKhauCurent": {
+                                "currentPassword": {
                                     "type": "string"
                                 },
-                                "matKhauNew": {
+                                "newPassword": {
                                     "type": "string"
                                 }
                             }
@@ -587,10 +587,10 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatAvatarTaiKhoan": {
+        "/api/v1/UserManagement/UpdateAccountAvatar": {
             "patch": {
-                "tags": ["QuanLyNguoiDung"],
-                "operationId": "CapNhatAvatarTaiKhoan",
+                "tags": ["UserManagement"],
+                "operationId": "UpdateAccountAvatar",
                 "consumes": ["multipart/form-data"],
                 "produces": [],
                 "parameters": [
@@ -620,9 +620,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/LayDanhSachNguoiDung": {
+        "/api/v1/UserManagement/GetListUsers": {
             "get": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
                         "name": "tenNguoiDung",
@@ -648,12 +648,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/LayThongTinNguoiDung": {
+        "/api/v1/UserManagement/GetUserInfo": {
             "get": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "idNguoiDung",
+                        "name": "userId",
                         "required": true,
                         "in": "query",
                         "schema": {
@@ -677,9 +677,9 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatMotThongTinNguoiDung": {
+        "/api/v1/UserManagement/UpdateOneUserInfo": {
             "patch": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
                         "name": "DanhSachVe",
@@ -692,7 +692,7 @@
                                 "value": {
                                     "type": "string"
                                 },
-                                "idNguoiDung": {
+                                "userId": {
                                     "type": "string"
                                 }
                             }
@@ -715,12 +715,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/XoaNguoiDung": {
+        "/api/v1/UserManagement/DeleteUser": {
             "delete": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "idNguoiDung",
+                        "name": "userId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -744,10 +744,10 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/CapNhatAvatarNguoiDung": {
+        "/api/v1/UserManagement/UpdateUserAvatar": {
             "patch": {
-                "tags": ["QuanLyNguoiDung"],
-                "operationId": "QuanLyNguoiDung",
+                "tags": ["UserManagement"],
+                "operationId": "UserManagement",
                 "consumes": ["multipart/form-data"],
                 "produces": [],
                 "parameters": [
@@ -777,12 +777,12 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/LayThongTinKhoaHocChoNguoiDung": {
+        "/api/v1/UserManagement/GetCoursesInfoForUsser": {
             "get": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "idNguoiDung",
+                        "name": "userId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -806,22 +806,22 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/DangKyKhoaHocChoNguoiDung": {
+        "/api/v1/UserManagement/EnrollCourseForUser": {
             "post": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "HuyDangKyKhoaHocChoNguoiDung",
-                        "description": "HuyDangKyKhoaHocChoNguoiDung",
+                        "name": "EnrollCourseForUser",
+                        "description": "EnrollCourseForUser",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "idNguoiDung": {
+                                "userId": {
                                     "type": "string"
                                 },
-                                "idKhoaHoc": {
+                                "courseId": {
                                     "type": "string"
                                 }
                             }
@@ -844,22 +844,22 @@
                 }
             }
         },
-        "/api/v1/QuanLyNguoiDung/HuyDangKyKhoaHocChoNguoiDung": {
+        "/api/v1/UserManagement/CancelCourseEnrollmentForUser": {
             "post": {
-                "tags": ["QuanLyNguoiDung"],
+                "tags": ["UserManagement"],
                 "parameters": [
                     {
-                        "name": "HuyDangKyKhoaHocChoNguoiDung",
-                        "description": "HuyDangKyKhoaHocChoNguoiDung",
+                        "name": "CancelCourseEnrollmentForUser",
+                        "description": "CancelCourseEnrollmentForUser",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "idNguoiDung": {
+                                "userId": {
                                     "type": "string"
                                 },
-                                "idKhoaHoc": {
+                                "courseId": {
                                     "type": "string"
                                 }
                             }

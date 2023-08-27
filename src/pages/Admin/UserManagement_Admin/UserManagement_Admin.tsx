@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
+import { DataType } from "../../../interfaces/userManagementInterface";
 import ButtonMe from "../../../components/Button/Button";
 
 import { SearchOutlined, EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
@@ -19,11 +19,11 @@ type DataIndex = keyof DataType;
 function UserManagement_Admin() {
     const dispatch: DispatchType = useDispatch();
 
-    const { danhSachNguoiDung } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { userList } = useSelector((state: RootState) => state.userManagementSlice);
 
     useEffect(() => {
         dispatch({
-            type: "layDanhSachNguoiDungSaga",
+            type: "getUserListSaga",
         });
     }, []);
 
@@ -86,7 +86,7 @@ function UserManagement_Admin() {
             ),
     });
 
-    const data: DataType[] = danhSachNguoiDung
+    const data: DataType[] = userList
         .map((nguoiDung, index) => {
             return {
                 key: nguoiDung._id,

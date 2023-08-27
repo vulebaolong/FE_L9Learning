@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "antd";
 
 import { Link } from "react-router-dom";
-import DangNhap from "./DangNhap";
-import DangKy from "./DangKy";
+import Login from "./Login";
+import Register from "./Register";
 import { DispatchType, RootState } from "../../../redux/store";
 import { setIsOpenModalAuthREDU } from "../../../redux/slices/modalSlice";
 
 function ModalAuth() {
     const { isOpenModalAuth } = useSelector((state: RootState) => state.modalSlice);
-    const { isPageDangNhap } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+    const { isPageLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
     const dispatch: DispatchType = useDispatch();
 
@@ -20,7 +20,7 @@ function ModalAuth() {
     return (
         <Modal footer={false} maskClosable={true} onCancel={handleCancel} centered open={isOpenModalAuth}>
             <div className="py-8 sm:px-11">
-                {isPageDangNhap === true ? <DangNhap /> : <DangKy />}
+                {isPageLogin === true ? <Login /> : <Register />}
 
                 <div className=" text-center text-xs text-[#666] dark:text-slate-400 mt-12">
                     <span>Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với </span>

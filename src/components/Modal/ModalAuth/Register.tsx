@@ -5,20 +5,20 @@ import { Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Button/Button";
 import { DispatchType, RootState } from "../../../redux/store";
-import { I_dangKy } from "../../../interfaces/I_quanLyNguoiDung";
-import { setIsPageDangNhapREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
+import { I_register } from "../../../interfaces/userManagementInterface";
+import { setIsPageLoginREDU } from "../../../redux/slices/userManagementSlice";
 
-function DangKy() {
+function Register() {
     const [form] = Form.useForm();
 
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     const dispatch: DispatchType = useDispatch();
 
-    const onFinish = (values: I_dangKy) => {
+    const onFinish = (values: I_register) => {
         console.log("Success:", values);
         dispatch({
-            type: "dangKySaga",
+            type: "registerSaga",
             payload: values,
         });
     };
@@ -27,8 +27,8 @@ function DangKy() {
     border dark:border-slate-700 dark:focus:border-slate-400 
     focus:border-slate-400  border-slate-200 `;
 
-    const handleNavigateDangKy = () => {
-        dispatch(setIsPageDangNhapREDU(true));
+    const handleNavigateRegister = () => {
+        dispatch(setIsPageLoginREDU(true));
     };
     return (
         <>
@@ -150,7 +150,7 @@ function DangKy() {
             <div className=" mt-11">
                 <p className="text-center text-base">
                     <span>Bạn đã có tài khoản? </span>
-                    <span onClick={handleNavigateDangKy} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
+                    <span onClick={handleNavigateRegister} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
                         Đăng nhập
                     </span>
                 </p>
@@ -158,4 +158,4 @@ function DangKy() {
         </>
     );
 }
-export default DangKy;
+export default Register;

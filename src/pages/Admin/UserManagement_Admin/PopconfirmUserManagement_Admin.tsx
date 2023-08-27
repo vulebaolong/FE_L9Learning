@@ -1,12 +1,12 @@
 import { Button, Popconfirm } from "antd";
-import { DataType } from "../../../interfaces/I_quanLyNguoiDung";
+import { DataType } from "../../../interfaces/userManagementInterface";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../../redux/store";
 import { DeleteOutlined } from "@ant-design/icons";
-import { userApi } from "../../../api/quanLyNguoiDungApi";
+import { userApi } from "../../../api/userApi";
 import { error, success } from "../../../helpers/message";
-import { setDanhSachNguoiDungREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
+import { setUserListREDU } from "../../../redux/slices/userManagementSlice";
 
 function PopconfirmUserManagement_Admin({ nguoiDung }: { nguoiDung: DataType }) {
     const [open, setOpen] = useState(false);
@@ -22,23 +22,23 @@ function PopconfirmUserManagement_Admin({ nguoiDung }: { nguoiDung: DataType }) 
         setOpen(false);
     };
 
-    const confirm = async (idNguoiDung: string) => {
-        console.log(idNguoiDung);
+    const confirm = async (userId: string) => {
+        console.log(userId);
 
         try {
             setConfirmLoading(true);
 
             // Xoá người dùng
-            const { data: data1, status: status1 }= await userApi.xoaNguoiDung(idNguoiDung);
+            const { data: data1, status: status1 }= await userApi.deleteUser(userId);
 
-            console.log("Call API - xoaNguoiDung", { data1, status1 });
+            console.log("Call API - deleteUser", { data1, status1 });
 
             // Cập nhật lại danh sách người dùng
-            const { data: data2, status: status2 } = await userApi.layDanhSachNguoiDung();
+            const { data: data2, status: status2 } = await userApi.getListUsers();
 
-            console.log("Call API - layDanhSachNguoiDung", { data2, status2 });
+            console.log("Call API - getListUsers", { data2, status2 });
 
-            dispatch(setDanhSachNguoiDungREDU(data2.result.data))
+            dispatch(setUserListREDU(data2.result.data))
 
             success("Xoá người dùng thành công");
         } catch (err) {

@@ -7,22 +7,22 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Store } from "antd/es/form/interface";
 import { DispatchType, RootState } from "../../../redux/store";
-import { I_dangNhap } from "../../../interfaces/I_quanLyNguoiDung";
-import { setAutofillREDU, setIsPageDangNhapREDU } from "../../../redux/slices/quanLyNguoiDungSlice";
+import { I_login } from "../../../interfaces/userManagementInterface";
+import { setAutofillREDU, setIsPageLoginREDU } from "../../../redux/slices/userManagementSlice";
 import Button from "../../Button/Button";
 
-function DangNhap() {
-    const { autofill } = useSelector((state: RootState) => state.quanLyNguoiDungSlice);
+function Login() {
+    const { autofill } = useSelector((state: RootState) => state.userManagementSlice);
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     const [form] = Form.useForm();
 
     const dispatch: DispatchType = useDispatch();
 
-    const onFinish = (values: I_dangNhap) => {
+    const onFinish = (values: I_login) => {
         console.log("Success:", values);
         dispatch({
-            type: "dangNhapSaga",
+            type: "loginSaga",
             payload: values,
         });
     };
@@ -31,8 +31,8 @@ function DangNhap() {
     border dark:border-slate-700 dark:focus:border-slate-400 
     focus:border-slate-400  border-slate-200 `;
 
-    const handleNavigateDangNhap = () => {
-        dispatch(setIsPageDangNhapREDU(false));
+    const handleNavigateLogin = () => {
+        dispatch(setIsPageLoginREDU(false));
     };
 
     const initialValues = autofill as Store | undefined;
@@ -120,7 +120,7 @@ function DangNhap() {
             <div className=" mt-11">
                 <p className="text-center text-base">
                     <span>Bạn chưa có tài khoản? </span>
-                    <span onClick={handleNavigateDangNhap} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
+                    <span onClick={handleNavigateLogin} className="font-semibold text-primary hover:text-primary_hover active:text-primary_active cursor-pointer">
                         Đăng ký
                     </span>
                 </p>
@@ -133,4 +133,4 @@ function DangNhap() {
         </>
     );
 }
-export default DangNhap;
+export default Login;

@@ -10,10 +10,10 @@ function InfoCourseToUserPage_Admin() {
 
     const dispatch: DispatchType = useDispatch();
 
-    const { thongTinNguoiDungChoKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
+    const { userInfoForCourse } = useSelector((state: RootState) => state.courseManagementSlice);
 
     useEffect(() => {
-        dispatch({ type: "layThongTinNguoiDungChoKhoaHocSaga", payload: id });
+        dispatch({ type: "getUserInfoForCourseSaga", payload: id });
     }, [id, dispatch]);
 
     return (
@@ -27,12 +27,12 @@ function InfoCourseToUserPage_Admin() {
                             <div className={` aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                 <img
                                     className="w-full h-full object-cover"
-                                    src={thongTinNguoiDungChoKhoaHoc?.khoaHoc.hinhAnh}
+                                    src={userInfoForCourse?.khoaHoc.hinhAnh}
                                     alt=""
                                 />
                             </div>
                             {/* TÊN KHOÁ HỌC */}
-                            <p className="heading_3 mt-3">{thongTinNguoiDungChoKhoaHoc?.khoaHoc.tenKhoaHoc}</p>
+                            <p className="heading_3 mt-3">{userInfoForCourse?.khoaHoc.courseName}</p>
                         </div>
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />

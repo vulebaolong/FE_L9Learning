@@ -8,9 +8,9 @@ import { navigate } from "../../../helpers/navigate";
 function KhoaHoc() {
     const dispatch: DispatchType = useDispatch();
     useEffect(() => {
-        dispatch({ type: "layDanhSachKhoaHocSaga" });
+        dispatch({ type: "getCourseListSaga" });
     }, []);
-    const { danhSachKhoaHoc } = useSelector((state: RootState) => state.quanLyKhoaHocSlice);
+    const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
     const handleChiTietKhoaHoc = (khoaHocId: string) => {
         navigate(`/detailcourse/${khoaHocId}`)
     };
@@ -18,7 +18,7 @@ function KhoaHoc() {
         <section className="py-24">
             <h2 className="heading_2">Tất cả khoá học</h2>
             <div className="collumnCourse">
-                {danhSachKhoaHoc.map((khoaHoc) => {
+                {courseList.map((khoaHoc) => {
                     return (
                         <div key={khoaHoc._id} className="">
                             <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
@@ -32,7 +32,7 @@ function KhoaHoc() {
                                 </Button>
                                 <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
                             </div>
-                            <p className="heading_3 mt-3">{khoaHoc.tenKhoaHoc}</p>
+                            <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                         </div>
                     );
                 })}
