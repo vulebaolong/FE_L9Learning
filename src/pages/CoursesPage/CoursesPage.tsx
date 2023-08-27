@@ -16,9 +16,9 @@ import Cta from "../../components/Cta/Cta";
 function CoursesPage() {
     const dispatch: DispatchType = useDispatch();
 
-    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState<I_courseCategory[]>([]);
+    const [courseCategories, setCourseCategories] = useState<I_courseCategory[]>([]);
 
-    const [khoaHocTheoDanhMuc, setKhoaHocTheoDanhMuc] = useState<I_coursesByCategory[]>([]);
+    const [coursesByCategory, setCoursesByCategory] = useState<I_coursesByCategory[]>([]);
 
     const [isSkeleton, setIsSkeleton] = useState(false);
 
@@ -28,11 +28,11 @@ function CoursesPage() {
                 dispatch(setIsLoadingPageREDU(true));
                 const { data: data1, status: status1 } = await courseApi.getListCourseCategories();
                 console.log("call API - getListCourseCategories - ĐẦU TRANG", { data1, status1 });
-                setDanhMucKhoaHoc(data1.result.data);
+                setCourseCategories(data1.result.data);
 
                 const { data: data2, status: status2 } = await courseApi.getCourseByCategory();
                 console.log("call API - getCourseByCategory - ĐẦU TRANG", { data2, status2 });
-                setKhoaHocTheoDanhMuc(data2.result.data);
+                setCoursesByCategory(data2.result.data);
 
                 await wait(DELAY_LOADING_PAGE);
                 
@@ -49,11 +49,11 @@ function CoursesPage() {
         fetch();
     }, []);
 
-    const handleChiTietKhoaHoc = (khoaHocId: string) => {
+    const handleCourseDetail = (khoaHocId: string) => {
         navigate(`/detailcourse/${khoaHocId}`);
     };
 
-    const options = danhMucKhoaHoc.map((danhMuc) => {
+    const options = courseCategories.map((danhMuc) => {
         return {
             value: danhMuc._id,
             label: danhMuc.tenDanhMuc,
@@ -72,7 +72,7 @@ function CoursesPage() {
 
                 console.log("call API - getCourseByCategory - CLICK Tất cả", { data, status });
 
-                setKhoaHocTheoDanhMuc(data.result.data);
+                setCoursesByCategory(data.result.data);
             } finally {
                 setIsSkeleton(false);
             }
@@ -87,7 +87,7 @@ function CoursesPage() {
 
             console.log(`call API - getCourseByCategory - CLICK`, { data, status });
 
-            setKhoaHocTheoDanhMuc(data.result.data);
+            setCoursesByCategory(data.result.data);
         } finally {
             setIsSkeleton(false);
         }
@@ -109,7 +109,7 @@ function CoursesPage() {
             {isSkeleton === true ? (
                 <SkeletonWarpCourses />
             ) : (
-                khoaHocTheoDanhMuc?.map((khoaHocs, index) => {
+                coursesByCategory?.map((khoaHocs, index) => {
                     return (
                         <div key={index} className="">
                             <h2 className="heading_2">{khoaHocs.tenDanhMuc}</h2>
@@ -120,7 +120,7 @@ function CoursesPage() {
                                             <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                                 <Button
                                                     onClick={() => {
-                                                        handleChiTietKhoaHoc(khoaHoc._id);
+                                                        handleCourseDetail(khoaHoc._id);
                                                     }}
                                                     type="white"
                                                 >

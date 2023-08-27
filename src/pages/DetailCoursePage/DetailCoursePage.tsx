@@ -19,7 +19,7 @@ import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 function DetailCoursePage() {
     const dispatch: DispatchType = useDispatch();
 
-    const [khoaHoc, setKhoaHoc] = useState<I_singleCourse>();
+    const [course, setCourse] = useState<I_singleCourse>();
 
     const { id } = useParams();
 
@@ -37,7 +37,7 @@ function DetailCoursePage() {
 
                     console.log("fetch - getCourseById", { data, status });
 
-                    setKhoaHoc(data.result.data);
+                    setCourse(data.result.data);
 
                     await wait(DELAY_LOADING_PAGE);
                     
@@ -55,24 +55,24 @@ function DetailCoursePage() {
         fetch();
     }, [id]);
 
-    console.log(khoaHoc?.chuongHoc);
+    console.log(course?.chuongHoc);
 
     let baiHoc = 0;
 
-    khoaHoc?.chuongHoc.forEach((item) => {
+    course?.chuongHoc.forEach((item) => {
         baiHoc += item.videos.length;
     });
 
     let totalDuration = "0";
 
-    if (khoaHoc?.chuongHoc !== undefined) {
-        totalDuration = handleDuration(khoaHoc?.chuongHoc);
+    if (course?.chuongHoc !== undefined) {
+        totalDuration = handleDuration(course?.chuongHoc);
     }
 
     let isSeHocDuoc = false;
 
-    if (khoaHoc?.seHocDuoc !== undefined) {
-        if (khoaHoc?.seHocDuoc.length > 0) isSeHocDuoc = true;
+    if (course?.seHocDuoc !== undefined) {
+        if (course?.seHocDuoc.length > 0) isSeHocDuoc = true;
     }
 
     const handleDangKyKhoaHoc = async () => {
@@ -105,7 +105,7 @@ function DetailCoursePage() {
             console.log("Trường hợp CHƯA đăng nhập");
             return (
                 <>
-                    <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>
+                    <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(course?.giaTien)}</h5>
 
                     <div className="text-center">
                         <Button onClick={handleDangKyKhoaHocNotLogged} className="px-10 py-3" type="primary">
@@ -117,7 +117,7 @@ function DetailCoursePage() {
         }
 
         // Trường hợp ĐÃ đăng nhập
-        const flag = userLogin.chiTietKhoaHocGhiDanh.findIndex((khoaHoc) => khoaHoc._id === id);
+        const flag = userLogin.chiTietKhoaHocGhiDanh.findIndex((course) => course._id === id);
 
         console.log(flag);
 
@@ -139,7 +139,7 @@ function DetailCoursePage() {
             console.log("Trường hợp khoá học CHƯA đăng ký");
             return (
                 <>
-                    <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(khoaHoc?.giaTien)}</h5>
+                    <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(course?.giaTien)}</h5>
 
                     <div className="text-center">
                         <Button disabled={isLoadingBtn} onClick={handleDangKyKhoaHoc} className="px-10 py-3 space-x-2" type="primary">
@@ -156,13 +156,13 @@ function DetailCoursePage() {
         <section className="pb-24">
             <div className="flex xl:flex-row flex-col">
                 <div className="xl:w-[66.66667%] xl:order-1 order-2">
-                    <h1 className={`heading_1 mt-4`}>{khoaHoc?.courseName}</h1>
-                    <p className={`para mt-5 mb-16`}>{khoaHoc?.moTa}</p>
+                    <h1 className={`heading_1 mt-4`}>{course?.courseName}</h1>
+                    <p className={`para mt-5 mb-16`}>{course?.moTa}</p>
                     {isSeHocDuoc && (
                         <div className="space-y-3 mb-16">
                             <h2 className={`heading_2`}>Bạn sẽ học được gì?</h2>
                             <div className="grid sm:grid-cols-2 gap-5">
-                                {khoaHoc?.seHocDuoc.map((text: string, index) => {
+                                {course?.seHocDuoc.map((text: string, index) => {
                                     return (
                                         <div key={index} className="flex items-center gap-2 pr-3">
                                             <div className="text-primary text-sm">
@@ -177,13 +177,13 @@ function DetailCoursePage() {
                     )}
 
                     <div className="space-y-3">
-                        <ContentCourse totalDuration={totalDuration} khoaHoc={khoaHoc} />
+                        <ContentCourse totalDuration={totalDuration} course={course} />
                     </div>
                 </div>
                 <div className="xl:w-[33.33333%] xl:order-2 order-1 xl:pl-12 xl:block xl:mb-0 grid md:grid-cols-2 md:gap-0 gap-16 mb-16">
                     {/* HÌNH ẢNH */}
                     <div className="rounded-2xl overflow-hidden relative cursor-pointer xl:mb-7">
-                        <img className="w-full h-full object-cover" src={khoaHoc?.hinhAnh} alt="" />
+                        <img className="w-full h-full object-cover" src={course?.hinhAnh} alt="" />
                         <div className="absolute z-10 top-0 left-0 w-full h-full bg-[linear-gradient(180deg,rgba(30,30,28,0),rgba(30,30,28,.9))] "></div>
                         <div className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-6xl">
                             <FaCirclePlay />

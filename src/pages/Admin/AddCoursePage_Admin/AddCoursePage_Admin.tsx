@@ -14,7 +14,7 @@ import ButtonMe from "../../../components/Button/Button";
 
 function AddCoursePage_Admin() {
     const dispatch: DispatchType = useDispatch();
-    const [arrChuong, setArrChuong] = useState([]);
+    const [chapterArray, setChapterArray] = useState([]);
     const [courseCategories, setCourseCategories] = useState([]);
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
@@ -206,18 +206,18 @@ function AddCoursePage_Admin() {
                     {/* CHƯƠNG HỌC */}
                     <p className="text-base font-bold mb-2">Chương học</p>
                     <div className="space-y-3 ">
-                        {arrChuong.map((item, index) => {
+                        {chapterArray.map((item, index) => {
                             return (
                                 <div key={item} className="border-4 relative dark:border-gray-600 border-gray-200 rounded-xl p-5">
                                     <div
                                         onClick={() => {
-                                            let copyArrChuong = JSON.parse(JSON.stringify(arrChuong));
+                                            let copyArrChuong = JSON.parse(JSON.stringify(chapterArray));
                                             copyArrChuong = copyArrChuong.filter((itemChuong: number) => {
                                                 return +itemChuong !== +item;
                                             });
                                             console.log(copyArrChuong);
 
-                                            setArrChuong(copyArrChuong);
+                                            setChapterArray(copyArrChuong);
                                         }}
                                         className="cursor-pointer absolute z-10 top-2 right-2 text-white/50 hover:text-white/80 transition bg-transparent hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center"
                                     >
@@ -304,13 +304,13 @@ function AddCoursePage_Admin() {
                         <Button
                             type="dashed"
                             onClick={() => {
-                                const copyArrChuong = JSON.parse(JSON.stringify(arrChuong));
+                                const copyArrChuong = JSON.parse(JSON.stringify(chapterArray));
                                 let resultPush = 0;
                                 if (copyArrChuong.length > 0) {
                                     resultPush = copyArrChuong[copyArrChuong.length - 1] + 1;
                                 }
                                 copyArrChuong.push(resultPush);
-                                setArrChuong(copyArrChuong);
+                                setChapterArray(copyArrChuong);
                             }}
                             block
                             icon={<PlusOutlined />}

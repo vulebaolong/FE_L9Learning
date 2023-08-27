@@ -17,7 +17,7 @@ import { DELAY_LOADING_PAGE } from "../../../contants/configContants";
 import SkeletonTable from "../../../components/Skeleton/SkeletonTable";
 type DataIndex = keyof DataType;
 
-function NguoiDungDaDangKy() {
+function EnrolledUsers() {
     const dispatch: DispatchType = useDispatch();
 
     const { id } = useParams();
@@ -230,4 +230,4 @@ function NguoiDungDaDangKy() {
         </>
     );
 }
-export default NguoiDungDaDangKy;
+export default EnrolledUsers;

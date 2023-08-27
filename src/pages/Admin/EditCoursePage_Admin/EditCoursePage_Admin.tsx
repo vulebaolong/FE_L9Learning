@@ -23,13 +23,13 @@ function EditCoursePage_Admin() {
 
     const [form] = Form.useForm();
 
-    const [motKhoaHoc, setMotKhoaHoc] = useState<I_singleCourse | null>(null);
+    const [oneCourse, setOneCourse] = useState<I_singleCourse | null>(null);
 
     const dispatch: DispatchType = useDispatch();
 
-    const [arrChuong, setArrChuong] = useState([]);
+    const [chapterArray, setChapterArray] = useState([]);
 
-    const [danhMucKhoaHoc, setDanhMucKhoaHoc] = useState([]);
+    const [courseCategories, setCourseCategories] = useState([]);
 
     useEffect(() => {
         const fetch = async () => {
@@ -39,19 +39,19 @@ function EditCoursePage_Admin() {
 
                     const { data: data1 } = await courseApi.getListCourseCategories();
                     console.log("fetch - getListCourseCategories", { data1 });
-                    setDanhMucKhoaHoc(data1.result.data);
+                    setCourseCategories(data1.result.data);
 
                     const { data: data2 } = await courseApi.getCourseById(id);
                     console.log("fetch - getCourseById", { data2 });
 
-                    setMotKhoaHoc(data2.result.data);
+                    setOneCourse(data2.result.data);
 
                     const indexChuongHoc = data2.result.data.chuongHoc.map((item, index) => index);
 
-                    setArrChuong(indexChuongHoc);
+                    setChapterArray(indexChuongHoc);
 
                     await wait(DELAY_LOADING_PAGE);
-                    
+
                     dispatch(setIsLoadingPageREDU(false));
                 } catch (err) {
                     console.log(err);
@@ -66,17 +66,17 @@ function EditCoursePage_Admin() {
     }, [id]);
 
     const initialValues = () => {
-        const seHocDuoc = motKhoaHoc?.seHocDuoc.map((item) => {
+        const seHocDuoc = oneCourse?.seHocDuoc.map((item) => {
             return { item };
         });
 
         const objTitleChuong: { [key: string]: string } = {};
-        motKhoaHoc?.chuongHoc.forEach((item, index) => {
+        oneCourse?.chuongHoc.forEach((item, index) => {
             objTitleChuong[`titleChuong_${index + 1}`] = item.title;
         });
         const objChuongHoc: { [key: string]: { title_video: string; video_url: string }[] } = {};
 
-        motKhoaHoc?.chuongHoc.forEach((chuong, index) => {
+        oneCourse?.chuongHoc.forEach((chuong, index) => {
             objChuongHoc[`chuongHoc${index + 1}`] = chuong.videos.map((video) => ({
                 title_video: video.title,
                 video_url: video.video_url,
@@ -84,15 +84,15 @@ function EditCoursePage_Admin() {
         });
 
         return {
-            ...motKhoaHoc,
+            ...oneCourse,
             seHocDuoc,
             ...objTitleChuong,
             ...objChuongHoc,
-            danhMucKhoaHoc_ID: motKhoaHoc?.danhMucKhoaHoc_ID._id,
+            danhMucKhoaHoc_ID: oneCourse?.danhMucKhoaHoc_ID._id,
         };
     };
 
-    useEffect(() => form.resetFields(), [motKhoaHoc, form]);
+    useEffect(() => form.resetFields(), [oneCourse, form]);
 
     const onFinish = (values: I_courseValues) => {
         const copyValues = JSON.parse(JSON.stringify(values));
@@ -130,8 +130,8 @@ function EditCoursePage_Admin() {
 
         let courseCode: string = "";
 
-        if (motKhoaHoc?._id !== undefined) {
-            courseCode = motKhoaHoc?._id;
+        if (oneCourse?._id !== undefined) {
+            courseCode = oneCourse?._id;
         }
 
         const payload = {
@@ -253,7 +253,7 @@ function EditCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {danhMucKhoaHoc.map((danhMuc: I_courseCategory) => {
+                            {courseCategories.map((danhMuc: I_courseCategory) => {
                                 return (
                                     <Select.Option key={danhMuc._id} value={danhMuc._id}>
                                         {danhMuc.tenDanhMuc}
@@ -288,16 +288,16 @@ function EditCoursePage_Admin() {
                     {/* CHƯƠNG HỌC */}
                     <p className="text-base font-bold mb-2">Chương học</p>
                     <div className="space-y-3 ">
-                        {arrChuong.map((item, index) => {
+                        {chapterArray.map((item, index) => {
                             return (
                                 <div key={item} className="border-4 relative dark:border-gray-600 border-gray-200 rounded-xl p-5">
                                     <div
                                         onClick={() => {
-                                            let copyArrChuong = JSON.parse(JSON.stringify(arrChuong));
+                                            let copyArrChuong = JSON.parse(JSON.stringify(chapterArray));
                                             copyArrChuong = copyArrChuong.filter((itemChuong: number) => {
                                                 return +itemChuong !== +item;
                                             });
-                                            setArrChuong(copyArrChuong);
+                                            setChapterArray(copyArrChuong);
                                         }}
                                         className="cursor-pointer absolute z-10 top-2 right-2 text-white/50 hover:text-white/80 transition bg-transparent hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center"
                                     >
@@ -384,13 +384,13 @@ function EditCoursePage_Admin() {
                         <Button
                             type="dashed"
                             onClick={() => {
-                                const copyArrChuong = JSON.parse(JSON.stringify(arrChuong));
+                                const copyArrChuong = JSON.parse(JSON.stringify(chapterArray));
                                 let resultPush = 0;
                                 if (copyArrChuong.length > 0) {
                                     resultPush = copyArrChuong[copyArrChuong.length - 1] + 1;
                                 }
                                 copyArrChuong.push(resultPush);
-                                setArrChuong(copyArrChuong);
+                                setChapterArray(copyArrChuong);
                             }}
                             block
                             icon={<PlusOutlined />}
@@ -424,7 +424,7 @@ function EditCoursePage_Admin() {
                             }}
                             onPreview={handlePreview}
                             onChange={handleChange}
-                            defaultFileList={motKhoaHoc?.hinhAnh ? [{ url: motKhoaHoc.hinhAnh, uid: "1", name: "image.jpg" }] : []}
+                            defaultFileList={oneCourse?.hinhAnh ? [{ url: oneCourse.hinhAnh, uid: "1", name: "image.jpg" }] : []}
                         >
                             <div className="UPLOAD">
                                 {loading ? <LoadingOutlined /> : <PlusOutlined />}

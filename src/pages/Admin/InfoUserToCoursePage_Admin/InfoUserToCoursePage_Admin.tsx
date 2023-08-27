@@ -52,7 +52,7 @@ function InfoUserToCoursePage_Admin() {
         fetch();
     }, [id, dispatch]);
 
-    const handleHuyDangKyNguoiDung = async (courseId: string) => {
+    const handleUnenrollUser = async (courseId: string) => {
         if (id === undefined) return;
 
         const payload = {
@@ -85,7 +85,7 @@ function InfoUserToCoursePage_Admin() {
         }
     };
 
-    const handleDangKyNguoiDung = async (courseId: string) => {
+    const handleEnrollUser = async (courseId: string) => {
         if (id === undefined) return;
 
         const payload = {
@@ -118,7 +118,7 @@ function InfoUserToCoursePage_Admin() {
         }
     };
 
-    const renderKhoaHocDaDangKy = () => {
+    const renderEnrolledCourses = () => {
         if (isSkeleton === true) return <SkeletonCourses />;
 
         if (isSkeleton === false) {
@@ -132,7 +132,7 @@ function InfoUserToCoursePage_Admin() {
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                             <Button
                                 onClick={() => {
-                                    handleHuyDangKyNguoiDung(khoaHoc._id);
+                                    handleUnenrollUser(khoaHoc._id);
                                 }}
                                 type="white"
                                 disabled={isLoadingBtn}
@@ -151,7 +151,7 @@ function InfoUserToCoursePage_Admin() {
         }
     };
 
-    const renderKhoaHocChuaDangKy = () => {
+    const renderUnenrolledCourses = () => {
         if (isSkeleton === true) return <SkeletonCourses />;
 
         if (isSkeleton === false) {
@@ -164,7 +164,7 @@ function InfoUserToCoursePage_Admin() {
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                             <Button
                                 onClick={() => {
-                                    handleDangKyNguoiDung(khoaHoc._id);
+                                    handleEnrollUser(khoaHoc._id);
                                 }}
                                 type="white"
                             >
@@ -193,12 +193,12 @@ function InfoUserToCoursePage_Admin() {
 
                 <div>
                     <h2 className="heading_2">Khoá học đã đăng ký</h2>
-                    <div className="collumnCourse">{renderKhoaHocDaDangKy()}</div>
+                    <div className="collumnCourse">{renderEnrolledCourses()}</div>
                 </div>
 
                 <div>
                     <h2 className="heading_2">Khoá học chưa đăng ký</h2>
-                    <div className="collumnCourse">{renderKhoaHocChuaDangKy()}</div>
+                    <div className="collumnCourse">{renderUnenrolledCourses()}</div>
                 </div>
             </div>
         </section>

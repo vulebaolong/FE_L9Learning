@@ -17,7 +17,7 @@ import SkeletonTable from "../../../components/Skeleton/SkeletonTable";
 import { setIsSkeletonInfoCourseToUserREDU } from "../../../redux/slices/loadingSlice";
 type DataIndex = keyof DataType;
 
-function NguoiDungChuaDangKy() {
+function UnenrolledUsers() {
     const dispatch: DispatchType = useDispatch();
 
     const { id } = useParams();
@@ -100,7 +100,7 @@ function NguoiDungChuaDangKy() {
         })
         .reverse();
 
-    const handleDangKy = async (userId: string) => {
+    const handleRegister = async (userId: string) => {
         if (id === undefined) return;
 
         const payload = {
@@ -203,7 +203,7 @@ function NguoiDungChuaDangKy() {
                                 type="primary"
                                 icon={<PlusOutlined />}
                                 onClick={() => {
-                                    handleDangKy(nguoiDung.key);
+                                    handleRegister(nguoiDung.key);
                                 }}
                             />
                         </Tooltip>
@@ -232,4 +232,4 @@ function NguoiDungChuaDangKy() {
     );
 }
 
-export default NguoiDungChuaDangKy;
+export default UnenrolledUsers;

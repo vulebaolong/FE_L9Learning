@@ -15,9 +15,6 @@ import PopconfirmProfile from "./PopconfirmProfile";
 function ProfilePage() {
     const dispatch: DispatchType = useDispatch();
 
-    // const [thongTinTaiKhoan, setThongTinTaiKhoan] = useState<I_accountInfo>();
-
-    // console.log(thongTinTaiKhoan);
 
     const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
@@ -25,7 +22,7 @@ function ProfilePage() {
         dispatch({ type: "getAccountInfoSaga" });
     }, []);
 
-    const renderDaDangKyKhoaHoc = () => {
+    const renderEnrolledCourse = () => {
         const length = userLogin?.chiTietKhoaHocGhiDanh.length;
         console.log(length);
 
@@ -41,8 +38,8 @@ function ProfilePage() {
 
     const box = `px-[18px] py-[14px] shadow-[0_0_5px_0_rgba(0,0,0,.1),0_0_1px_0_rgba(0,0,0,.1)] dark:shadow-[0_0_5px_0_rgba(255,255,255,.1),0_0_1px_0_rgba(255,255,255,.1)] rounded-lg space-y-5`;
 
-    const handleTiepTucHoc = (khoaHocId: string) => {
-        navigate(`/detailcourse/${khoaHocId}`);
+    const handleContinueLearning = (courseId: string) => {
+        navigate(`/detailcourse/${courseId}`);
     };
 
     return (
@@ -66,14 +63,14 @@ function ProfilePage() {
                         {/* CHI TIẾT */}
                         <div className="my-5 ml-5 w-full h-10 sm:h-auto">
                             <p className="font-extrabold text-2xl w-1/2 truncate hidden sm:block">{userLogin?.hoTen}</p>
-                            <p className="w-1/2 truncate hidden sm:block">{renderDaDangKyKhoaHoc()}</p>
+                            <p className="w-1/2 truncate hidden sm:block">{renderEnrolledCourse()}</p>
                         </div>
                     </div>
 
                     {/* CHI TIẾT */}
                     <div className="my-5 w-full sm:hidden">
                         <p className="font-extrabold text-2xl truncate">{userLogin?.hoTen}</p>
-                        <p className="truncate">{renderDaDangKyKhoaHoc()}</p>
+                        <p className="truncate">{renderEnrolledCourse()}</p>
                     </div>
 
                     {/* CONTENT */}
@@ -112,7 +109,7 @@ function ProfilePage() {
                                                         <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                                             <Button
                                                                 onClick={() => {
-                                                                    handleTiepTucHoc(khoaHoc._id);
+                                                                    handleContinueLearning(khoaHoc._id);
                                                                 }}
                                                                 type="white"
                                                             >

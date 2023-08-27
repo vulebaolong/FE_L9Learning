@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import NguoiDungChuaDangKy from "./NguoiDungChuaDangKy";
-import NguoiDungDaDangKy from "./NguoiDungDaDangKy";
+import UnenrolledUsers from "./UnenrolledUsers";
+import EnrolledUsers from "./EnrolledUsers";
 import { useEffect } from "react";
 import { DispatchType, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,12 +40,12 @@ function InfoCourseToUserPage_Admin() {
 
                 <div>
                     <h2 className="heading_2 mb-5">Người dùng đã đăng ký</h2>
-                    <NguoiDungDaDangKy />
+                    <EnrolledUsers />
                 </div>
 
                 <div>
                     <h2 className="heading_2 mb-5">Người dùng chưa đăng ký</h2>
-                    <NguoiDungChuaDangKy />
+                    <UnenrolledUsers />
                 </div>
             </div>
         </section>

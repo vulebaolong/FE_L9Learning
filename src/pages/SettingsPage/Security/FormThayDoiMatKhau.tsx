@@ -28,19 +28,19 @@ function FormThayDoiMatKhau() {
         }
     };
 
-    const handleChinhSua = () => {
+    const handleEdit = () => {
         setComponentDisabled(false);
         setFocusTarget("soDt");
     };
 
-    const handleHuy = () => {
+    const handleCancel = () => {
         setComponentDisabled(true);
     };
 
     const renderButton = (componentDisabled: boolean) => {
         if (componentDisabled) {
             return (
-                <Button onClick={handleChinhSua} htmlFor="button" type="transparent_1">
+                <Button onClick={handleEdit} htmlFor="button" type="transparent_1">
                     Chỉnh sửa
                 </Button>
             );
@@ -51,7 +51,7 @@ function FormThayDoiMatKhau() {
                     <Button htmlFor="submit" type="transparent_2">
                         Lưu
                     </Button>
-                    <Button onClick={handleHuy} htmlFor="button" type="transparent_1">
+                    <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ
                     </Button>
                 </div>

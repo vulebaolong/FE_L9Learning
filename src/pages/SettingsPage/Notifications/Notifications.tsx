@@ -2,46 +2,46 @@ import { Switch } from "antd";
 import { MouseEvent, useState } from "react";
 
 function Notifications() {
-    const [isSwitchBaiHocMoi, setIsSwitchBaiHocMoi] = useState(true);
-    const [isSwitchThongBaoBaiHocMoi, setIsSwitchThongBaoBaiHocMoi] = useState(true);
-    const [isSwitchNhacBinhLuan, setIsSwitchNhacBinhLuan] = useState(true);
-    const [isSwitchTLBinhLuan, setIsSwitchTLBinhLuan] = useState(true);
-    const [isSwitchCXBinhLuan, setIsSwitchCXBinhLuan] = useState(true);
-    const [isSwitchBinhLuatBlog, setIsSwitchBinhLuatBlog] = useState(true);
-    const [isSwitchCXBlog, setIsSwitchCXBlog] = useState(true);
-    const [isSwitchThaoLuan, setIsSwitchThaoLuan] = useState(true);
+    const [isNewLessonSwitch, setIsNewLessonSwitch] = useState(true);
+    const [isNewLessonNotificationSwitch, setIsNewLessonNotificationSwitch] = useState(true);
+    const [isCommentReminderSwitch, setIsCommentReminderSwitch] = useState(true);
+    const [isCommentReplyReminderSwitch, setIsCommentReplyReminderSwitch] = useState(true);
+    const [isCommentEditReminderSwitch, setIsCommentEditReminderSwitch] = useState(true);
+    const [isBlogRuleReminderSwitch, setIsBlogRuleReminderSwitch] = useState(true);
+    const [isBlogEditReminderSwitch, setIsBlogEditReminderSwitch] = useState(true);
+    const [isDiscussionSwitch, setIsDiscussionSwitch] = useState(true);
 
-    const handleBaiHocMoi = () => {
-        if (isSwitchBaiHocMoi) setIsSwitchBaiHocMoi(false);
-        if (!isSwitchBaiHocMoi) setIsSwitchBaiHocMoi(true);
+    const handleNewLesson = () => {
+        if (isNewLessonSwitch) setIsNewLessonSwitch(false);
+        if (!isNewLessonSwitch) setIsNewLessonSwitch(true);
     };
-    const handleThongBaoBaiHocMoi = () => {
-        if (isSwitchThongBaoBaiHocMoi) setIsSwitchThongBaoBaiHocMoi(false);
-        if (!isSwitchThongBaoBaiHocMoi) setIsSwitchThongBaoBaiHocMoi(true);
+    const handleCommentReminder = () => {
+        if (isNewLessonNotificationSwitch) setIsNewLessonNotificationSwitch(false);
+        if (!isNewLessonNotificationSwitch) setIsNewLessonNotificationSwitch(true);
     };
-    const handleNhacBinhLuan = () => {
-        if (isSwitchNhacBinhLuan) setIsSwitchNhacBinhLuan(false);
-        if (!isSwitchNhacBinhLuan) setIsSwitchNhacBinhLuan(true);
+    const handleNewLessonNotification = () => {
+        if (isCommentReminderSwitch) setIsCommentReminderSwitch(false);
+        if (!isCommentReminderSwitch) setIsCommentReminderSwitch(true);
     };
-    const handleTLBinhLuan = () => {
-        if (isSwitchTLBinhLuan) setIsSwitchTLBinhLuan(false);
-        if (!isSwitchTLBinhLuan) setIsSwitchTLBinhLuan(true);
+    const handleCommentReplyReminder = () => {
+        if (isCommentReplyReminderSwitch) setIsCommentReplyReminderSwitch(false);
+        if (!isCommentReplyReminderSwitch) setIsCommentReplyReminderSwitch(true);
     };
-    const handleCXBinhLuan= () => {
-        if (isSwitchCXBinhLuan) setIsSwitchCXBinhLuan(false);
-        if (!isSwitchCXBinhLuan) setIsSwitchCXBinhLuan(true);
+    const handleCommentEditReminder= () => {
+        if (isCommentEditReminderSwitch) setIsCommentEditReminderSwitch(false);
+        if (!isCommentEditReminderSwitch) setIsCommentEditReminderSwitch(true);
     };
-    const handleBinhLuatBlog = () => {
-        if (isSwitchBinhLuatBlog) setIsSwitchBinhLuatBlog(false);
-        if (!isSwitchBinhLuatBlog) setIsSwitchBinhLuatBlog(true);
+    const handleBlogRuleReminder = () => {
+        if (isBlogRuleReminderSwitch) setIsBlogRuleReminderSwitch(false);
+        if (!isBlogRuleReminderSwitch) setIsBlogRuleReminderSwitch(true);
     };
-    const handleCXBlog = () => {
-        if (isSwitchCXBlog) setIsSwitchCXBlog(false);
-        if (!isSwitchCXBlog) setIsSwitchCXBlog(true);
+    const handleBlogEditReminder = () => {
+        if (isBlogEditReminderSwitch) setIsBlogEditReminderSwitch(false);
+        if (!isBlogEditReminderSwitch) setIsBlogEditReminderSwitch(true);
     };
-    const handleThaoLuan = () => {
-        if (isSwitchThaoLuan) setIsSwitchThaoLuan(false);
-        if (!isSwitchThaoLuan) setIsSwitchThaoLuan(true);
+    const handleDiscussion = () => {
+        if (isDiscussionSwitch) setIsDiscussionSwitch(false);
+        if (!isDiscussionSwitch) setIsDiscussionSwitch(true);
     };
     const box = `flex justify-between items-center py-[12px] px-[20px] rounded-lg hover:bg-[#e8ebed] dark:hover:bg-[#e8ebed23] cursor-pointer transition`;
     return (
@@ -51,9 +51,9 @@ function Notifications() {
                 <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 <div className="space-y-2">
                     <p>Gửi email cho tôi khi có:</p>
-                    <div onClick={handleBaiHocMoi} className={`${box}`}>
+                    <div onClick={handleNewLesson} className={`${box}`}>
                         <p className="para">Bài học mới</p>
-                        <Switch checked={isSwitchBaiHocMoi} />
+                        <Switch checked={isNewLessonSwitch} />
                     </div>
                 </div>
             </div>
@@ -62,33 +62,33 @@ function Notifications() {
                 <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 <div className="space-y-2">
                     <p>Gửi thông báo cho tôi khi có:</p>
-                    <div onClick={handleThongBaoBaiHocMoi} className={`${box}`}>
+                    <div onClick={handleCommentReminder} className={`${box}`}>
                         <p className="para">Bài học mới</p>
-                        <Switch checked={isSwitchThongBaoBaiHocMoi} />
+                        <Switch checked={isNewLessonNotificationSwitch} />
                     </div>
-                    <div onClick={handleNhacBinhLuan} className={`${box}`}>
+                    <div onClick={handleNewLessonNotification} className={`${box}`}>
                         <p className="para">Nhắc đến trong bình luận</p>
-                        <Switch checked={isSwitchNhacBinhLuan} />
+                        <Switch checked={isCommentReminderSwitch} />
                     </div>
-                    <div onClick={handleTLBinhLuan} className={`${box}`}>
+                    <div onClick={handleCommentReplyReminder} className={`${box}`}>
                         <p className="para">Trả lời bình luận</p>
-                        <Switch checked={isSwitchTLBinhLuan} />
+                        <Switch checked={isCommentReplyReminderSwitch} />
                     </div>
-                    <div onClick={handleCXBinhLuan} className={`${box}`}>
+                    <div onClick={handleCommentEditReminder} className={`${box}`}>
                         <p className="para">Cảm xúc trong bình luận</p>
-                        <Switch checked={isSwitchCXBinhLuan} />
+                        <Switch checked={isCommentEditReminderSwitch} />
                     </div>
-                    <div onClick={handleBinhLuatBlog} className={`${box}`}>
+                    <div onClick={handleBlogRuleReminder} className={`${box}`}>
                         <p className="para">Bình luận trong bài blog</p>
-                        <Switch checked={isSwitchBinhLuatBlog} />
+                        <Switch checked={isBlogRuleReminderSwitch} />
                     </div>
-                    <div onClick={handleCXBlog} className={`${box}`}>
+                    <div onClick={handleBlogEditReminder} className={`${box}`}>
                         <p className="para">Cảm xúc trong bài blog</p>
-                        <Switch checked={isSwitchCXBlog} />
+                        <Switch checked={isBlogEditReminderSwitch} />
                     </div>
-                    <div onClick={handleThaoLuan} className={`${box}`}>
+                    <div onClick={handleDiscussion} className={`${box}`}>
                         <p className="para">Câu trả lời được chọn trong màn thảo luận</p>
-                        <Switch checked={isSwitchThaoLuan} />
+                        <Switch checked={isDiscussionSwitch} />
                     </div>
                 </div>
             </div>

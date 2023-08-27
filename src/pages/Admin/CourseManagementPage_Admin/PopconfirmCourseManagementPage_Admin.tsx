@@ -9,7 +9,9 @@ import { DispatchType } from "../../../redux/store";
 
 function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCourse }) {
     const [open, setOpen] = useState(false);
+
     const [confirmLoading, setConfirmLoading] = useState(false);
+
     const dispatch: DispatchType = useDispatch();
 
     const showPopconfirm = () => {
@@ -17,20 +19,14 @@ function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCo
     };
 
     const handleCancel = () => {
-        console.log("Clicked cancel button");
         setOpen(false);
     };
 
     const confirm = async (courseCode: string) => {
-        console.log(courseCode);
-
         try {
             setConfirmLoading(true);
 
             const { data, status } = await courseApi.deleteCourse(courseCode);
-
-            console.log("Call API - deleteCourse", { data, status });
-
             success("Xoá khoá học thành công");
 
             dispatch({ type: "getCourseListSaga" });
@@ -42,6 +38,7 @@ function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCo
             setConfirmLoading(false);
         }
     };
+
     return (
         <Popconfirm
             title="Xoá khoá học"

@@ -41,7 +41,6 @@ function App() {
 
     useEffect(() => {
         const theme = lcStorage.get(THEME);
-        console.log(theme);
         if (theme === "light") dispatch(lightThemeREDU());
         if (theme === "dark") dispatch(darkThemeREDU());
     }, []);

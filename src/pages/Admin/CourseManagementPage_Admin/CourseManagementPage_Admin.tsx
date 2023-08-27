@@ -17,15 +17,15 @@ function CourseManagementPage_Admin() {
 
     const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
 
-    const handleChinhSuaKhoaHoc = (courseCode: string) => {
+    const handleEditCourse = (courseCode: string) => {
         navigate(`/editcourse/${courseCode}`);
     };
 
-    const handleThongTinKhoaHoc = (courseCode: string) => {
+    const handleCourseInfo = (courseCode: string) => {
         navigate(`/coursetouser/${courseCode}`);
     };
 
-    const handleThemKhoaHoc = () => {
+    const handleAddCourse = () => {
         navigate("/addcourse");
     };
 
@@ -35,7 +35,7 @@ function CourseManagementPage_Admin() {
                 <h1 className={`heading_1 my-5`}>Quản lý khoá học</h1>
                 <Tooltip title="Thêm khoá học">
                     <div className="">
-                        <Button onClick={handleThemKhoaHoc} type="circle_2">
+                        <Button onClick={handleAddCourse} type="circle_2">
                             <FaPlus />
                         </Button>
                     </div>
@@ -51,7 +51,7 @@ function CourseManagementPage_Admin() {
                                 <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                     <Button
                                         onClick={() => {
-                                            handleThongTinKhoaHoc(khoaHoc._id);
+                                            handleCourseInfo(khoaHoc._id);
                                         }}
                                         type="white"
                                     >
@@ -59,7 +59,7 @@ function CourseManagementPage_Admin() {
                                     </Button>
                                     <Button
                                         onClick={() => {
-                                            handleChinhSuaKhoaHoc(khoaHoc._id);
+                                            handleEditCourse(khoaHoc._id);
                                         }}
                                         type="white"
                                     >

@@ -7,13 +7,11 @@ import { handleDuration } from "../../helpers/durationHelper";
 function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
     const [expandedKeys, setExpandedKeys] = useState<string | string[]>([]);
 
-    let baiHoc = 0;
+    let lesson = 0;
 
     khoaHoc?.chuongHoc.forEach((item) => {
-        baiHoc += item.videos.length;
+        lesson += item.videos.length;
     });
-
-    const para = `text-black/80 text-sm dark:text-slate-400`;
 
     const handleToggleOpenClose = () => {
         if (khoaHoc?.chuongHoc.length !== expandedKeys.length) {
@@ -69,7 +67,7 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
                     </span>
                     <span> • </span>
                     <span className={`para`}>
-                        <strong>{baiHoc} </strong> bài học
+                        <strong>{lesson} </strong> bài học
                     </span>
                     <span> • </span>
                     <span className={`para`}>
