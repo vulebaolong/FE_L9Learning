@@ -85,17 +85,17 @@ function UnenrolledUsers() {
             ),
     });
 
-    const data: DataType[] | undefined = userInfoForCourse?.nguoiDungChuaDangKy
-        .map((nguoiDung, index) => {
+    const data: DataType[] | undefined = userInfoForCourse?.unenrolledUsers
+        .map((user, index) => {
             return {
-                key: nguoiDung._id,
+                key: user._id,
                 soThuTu: index + 1,
-                hoTen: nguoiDung.hoTen,
-                taiKhoan: nguoiDung.taiKhoan,
-                maLoaiNguoiDung: nguoiDung.maLoaiNguoiDung,
-                soDt: nguoiDung.soDt,
-                email: nguoiDung.email,
-                avatar: nguoiDung.avatar,
+                fullName: user.fullName,
+                username: user.username,
+                userType: user.userType,
+                phoneNumber: user.phoneNumber,
+                email: user.email,
+                avatar: user.avatar,
             };
         })
         .reverse();
@@ -154,21 +154,21 @@ function UnenrolledUsers() {
         },
         {
             title: "Tài khoản",
-            ...getColumnSearchProps("taiKhoan"),
+            ...getColumnSearchProps("username"),
             render: (_, b) => {
-                if (b.maLoaiNguoiDung === "KhachHang") {
+                if (b.userType === "Customer") {
                     return (
                         <div className="">
                             <span className="sm:hidden">{b.soThuTu} </span>
-                            <Tag color="green">{b.taiKhoan}</Tag>
+                            <Tag color="green">{b.username}</Tag>
                         </div>
                     );
                 }
-                if (b.maLoaiNguoiDung === "QuanTri") {
+                if (b.userType === "Admin") {
                     return (
                         <div className="">
                             <span className="sm:hidden">{b.soThuTu} </span>
-                            <Tag color="red">{b.taiKhoan}</Tag>
+                            <Tag color="red">{b.username}</Tag>
                         </div>
                     );
                 }
@@ -176,14 +176,14 @@ function UnenrolledUsers() {
         },
         {
             title: "Họ tên",
-            dataIndex: "hoTen",
-            ...getColumnSearchProps("hoTen"),
+            dataIndex: "fullName",
+            ...getColumnSearchProps("fullName"),
             className: "hidden sm:table-cell",
         },
         {
             title: "Số điện thoại",
-            dataIndex: "soDt",
-            ...getColumnSearchProps("soDt"),
+            dataIndex: "phoneNumber",
+            ...getColumnSearchProps("phoneNumber"),
             className: "hidden md:table-cell",
         },
         {

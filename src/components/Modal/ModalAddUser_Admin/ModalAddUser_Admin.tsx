@@ -46,7 +46,7 @@ function ModalAddUser_Admin() {
                     <Form form={form} layout={"vertical"} onFinish={onFinish} autoComplete="off">
                         {/* HỌ TÊN */}
                         <Form.Item
-                            name="hoTen"
+                            name="fullName"
                             rules={[
                                 {
                                     required: true,
@@ -65,7 +65,7 @@ function ModalAddUser_Admin() {
 
                         {/* TÀI KHOẢN */}
                         <Form.Item
-                            name="taiKhoan"
+                            name="username"
                             rules={[
                                 {
                                     required: true,
@@ -88,7 +88,7 @@ function ModalAddUser_Admin() {
 
                         {/* MẬT KHẨU */}
                         <Form.Item
-                            name="matKhau"
+                            name="password"
                             rules={[
                                 {
                                     required: true,
@@ -126,7 +126,7 @@ function ModalAddUser_Admin() {
 
                         {/* SỐ ĐIỆN THOẠI */}
                         <Form.Item
-                            name="soDt"
+                            name="phoneNumber"
                             rules={[
                                 {
                                     required: true,

@@ -4,23 +4,23 @@ import { Collapse, CollapseProps } from "antd";
 import { FaCirclePlay } from "react-icons/fa6";
 import { handleDuration } from "../../helpers/durationHelper";
 
-function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
+function ContentCourse({ course, totalDuration }: I_PropContentCourse) {
     const [expandedKeys, setExpandedKeys] = useState<string | string[]>([]);
 
     let lesson = 0;
 
-    khoaHoc?.chuongHoc.forEach((item) => {
+    course?.lessons.forEach((item) => {
         lesson += item.videos.length;
     });
 
     const handleToggleOpenClose = () => {
-        if (khoaHoc?.chuongHoc.length !== expandedKeys.length) {
-            const allKeys = khoaHoc?.chuongHoc.map((chuong, index) => index.toString());
+        if (course?.lessons.length !== expandedKeys.length) {
+            const allKeys = course?.lessons.map((chuong, index) => index.toString());
             if (allKeys !== undefined) {
                 setExpandedKeys(allKeys);
             }
         }
-        if (khoaHoc?.chuongHoc.length === expandedKeys.length) {
+        if (course?.lessons.length === expandedKeys.length) {
             setExpandedKeys([]);
         }
     };
@@ -31,12 +31,12 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
         setExpandedKeys(key);
     };
 
-    const items: CollapseProps["items"] = khoaHoc?.chuongHoc.map((chuong, index) => {
+    const items: CollapseProps["items"] = course?.lessons.map((chuong, index) => {
         return {
             key: `${index}`,
             label: (
                 <div className="flex items-baseline justify-between gap-2">
-                    <strong className="chuongHoc truncate text-[#333] font-semibold dark:text-slate-300">{`${chuong.title}`}</strong>
+                    <strong className="lessons truncate text-[#333] font-semibold dark:text-slate-300">{`${chuong.title}`}</strong>
                     <span className={`para mr-4 flex-shrink-0`}>{chuong.videos.length} bài học</span>
                 </div>
             ),
@@ -63,7 +63,7 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
             <div className="sm:flex items-baseline justify-between">
                 <div className="">
                     <span className={`para`}>
-                        <strong>{khoaHoc?.chuongHoc.length} </strong> chương
+                        <strong>{course?.lessons.length} </strong> chương
                     </span>
                     <span> • </span>
                     <span className={`para`}>
@@ -75,7 +75,7 @@ function ContentCourse({ khoaHoc, totalDuration }: I_PropContentCourse) {
                     </span>
                 </div>
                 <span onClick={handleToggleOpenClose} className={`para font-semibold cursor-pointer !text-primary hover:!text-primary_hover active:!text-primary_active`}>
-                    {khoaHoc?.chuongHoc.length === expandedKeys.length ? "Thu nhỏ tất cả" : "Mở rộng tất cả"}
+                    {course?.lessons.length === expandedKeys.length ? "Thu nhỏ tất cả" : "Mở rộng tất cả"}
                 </span>
             </div>
             <Collapse onChange={handleOnChange} activeKey={expandedKeys} size="large" items={items} />

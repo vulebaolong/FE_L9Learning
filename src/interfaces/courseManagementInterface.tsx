@@ -12,24 +12,21 @@ export interface I_lesson {
 }
 export interface I_courseCategory {
     _id: string;
-    tenDanhMuc: string;
+    categoryName: string;
 }
 export interface I_singleCourse {
     _id: string;
     courseName: string;
-    moTa: string;
-    ngayTao: string;
-    soLuongHocVien: number;
-    luotXem: number;
-    giaTien: number;
-    seHocDuoc: string[];
-    chuongHoc: I_lesson[];
-    hinhAnh: string;
-    danhMucKhoaHoc_ID: I_courseCategory;
+    description: string;
+    price: number;
+    willLearn: string[];
+    lessons: I_lesson[];
+    image: string;
+    courseCategory_ID: I_courseCategory;
 }
 
 export interface I_PropContentCourse {
-    khoaHoc: I_singleCourse | undefined;
+    course: I_singleCourse | undefined;
     totalDuration: string;
 }
 
@@ -42,72 +39,69 @@ export interface file {
 export interface I_courseValues {
     _id: string;
     courseName: string;
-    moTa: string;
-    ngayTao: string;
-    soLuongHocVien: number;
-    luotXem: number;
-    giaTien: number;
-    seHocDuoc: string[];
-    chuongHoc: I_lesson[];
-    hinhAnh: file;
-    danhMucKhoaHoc_ID: I_courseCategory;
+    description: string;
+    price: number;
+    willLearn: string[];
+    lessons: I_lesson[];
+    image: file;
+    courseCategory_ID: I_courseCategory;
 }
 
 export interface I_itemSearch {
     _id: string;
     courseName: string;
-    hinhAnh: string;
+    image: string;
 }
 
 export type I_resultSearch = I_itemSearch[] | [];
 
 export interface I_coursesByCategory {
-    tenDanhMuc: string;
+    categoryName: string;
     khoaHocDanhMuc: I_courseCategoryDetail[];
 }
 
 export interface I_courseCategoryDetail {
     _id: string;
     courseName: string;
-    hinhAnh: string;
-    danhMucKhoaHoc_ID: I_courseCategoryId;
+    image: string;
+    courseCategory_ID: I_courseCategoryId;
 }
 
 export interface I_courseCategoryId {
     _id: string;
-    tenDanhMuc: string;
+    categoryName: string;
 }
 
 export interface I_userInfoForCourse {
-    khoaHoc: I_khoaHoc;
-    nguoiDungDaDangKy: I_enrolledUsers[];
-    nguoiDungChuaDangKy: I_unenrolledUsers[];
+    course: I_khoaHoc;
+    enrolledUsers: I_enrolledUsers[];
+    unenrolledUsers: I_unenrolledUsers[];
 }
 
 export interface I_khoaHoc {
     _id: string;
     courseName: string;
-    hinhAnh: string;
+    image: string;
 }
 
 export interface I_enrolledUsers {
     _id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
+    phoneNumber: string;
+    fullName: string;
     avatar: string;
-    maLoaiNguoiDung: string;
+    userType: string;
 }
 
 export interface I_unenrolledUsers {
     _id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
+    phoneNumber: string;
+    fullName: string;
     avatar: string;
-    maLoaiNguoiDung: string;
+    userType: string;
 }
 
 export interface I_PropsCta {

@@ -30,7 +30,7 @@ function FormThayDoiMatKhau() {
 
     const handleEdit = () => {
         setComponentDisabled(false);
-        setFocusTarget("soDt");
+        setFocusTarget("currentPassword");
     };
 
     const handleCancel = () => {
@@ -86,7 +86,7 @@ function FormThayDoiMatKhau() {
                                 },
                             ]}
                         >
-                            <Input className="soDt w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu hiện tại của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="currentPassword w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu hiện tại của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                         <Form.Item
@@ -103,7 +103,7 @@ function FormThayDoiMatKhau() {
                                 },
                             ]}
                         >
-                            <Input className="soDt w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu mới của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Mật khẩu mới của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>

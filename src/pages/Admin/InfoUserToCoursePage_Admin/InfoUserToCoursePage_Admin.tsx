@@ -142,7 +142,7 @@ function InfoUserToCoursePage_Admin() {
                                     <span>Huỷ đăng ký</span>
                                 </div>
                             </Button>
-                            <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                            <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                         </div>
                         <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                     </div>
@@ -170,7 +170,7 @@ function InfoUserToCoursePage_Admin() {
                             >
                                 Đăng ký
                             </Button>
-                            <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                            <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                         </div>
                         <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                     </div>
@@ -186,7 +186,7 @@ function InfoUserToCoursePage_Admin() {
                     <h1 className="heading_1 pt-5">Thông tin khoá học của người dùng</h1>
                     <div className="flex items-center gap-2  mt-5">
                         <Avatar src={<img src={userCourseInfo?.nguoiDung.avatar} alt="avatar" />} size={60} />
-                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{userCourseInfo?.nguoiDung.hoTen}</p>
+                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{userCourseInfo?.nguoiDung.fullName}</p>
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 </div>

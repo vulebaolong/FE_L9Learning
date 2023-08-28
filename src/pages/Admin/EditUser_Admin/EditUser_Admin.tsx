@@ -41,7 +41,7 @@ function EditUser_Admin() {
         <div className="container">
             <h1 className="heading_1 pt-5">Thông tin cá nhân</h1>
             
-            <p className="w-full sm:w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{userInfo?.hoTen}</p>
+            <p className="w-full sm:w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400 mt-5">{userInfo?.fullName}</p>
 
             <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
 

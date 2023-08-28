@@ -7,20 +7,20 @@
                 "in": "body",
                 "required": true,
                 "properties": {
-                    "hoTen": {
+                    "fullName": {
                         "type": "string"
                     },
                     "email": {
                         "type": "string",
                         "format": "email"
                     },
-                    "taiKhoan": {
+                    "username": {
                         "type": "string"
                     },
-                    "soDt": {
+                    "phoneNumber": {
                         "type": "string"
                     },
-                    "maLoaiNguoiDung": {
+                    "userType": {
                         "type": "string"
                     }
                 }

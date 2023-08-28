@@ -62,14 +62,14 @@ function ProfilePage() {
 
                         {/* CHI TIẾT */}
                         <div className="my-5 ml-5 w-full h-10 sm:h-auto">
-                            <p className="font-extrabold text-2xl w-1/2 truncate hidden sm:block">{userLogin?.hoTen}</p>
+                            <p className="font-extrabold text-2xl w-1/2 truncate hidden sm:block">{userLogin?.fullName}</p>
                             <p className="w-1/2 truncate hidden sm:block">{renderEnrolledCourse()}</p>
                         </div>
                     </div>
 
                     {/* CHI TIẾT */}
                     <div className="my-5 w-full sm:hidden">
-                        <p className="font-extrabold text-2xl truncate">{userLogin?.hoTen}</p>
+                        <p className="font-extrabold text-2xl truncate">{userLogin?.fullName}</p>
                         <p className="truncate">{renderEnrolledCourse()}</p>
                     </div>
 
@@ -117,7 +117,7 @@ function ProfilePage() {
                                                             </Button>
                                                             <PopconfirmProfile khoaHoc={khoaHoc} />
                                                         </div>
-                                                        <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                                        <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                                                     </div>
                                                     <p className="font-bold truncate sm:hidden">{khoaHoc.courseName}</p>
                                                 </div>
@@ -126,7 +126,7 @@ function ProfilePage() {
                                                 <div className="space-y-2 hidden sm:block">
                                                     <p className="heading_3 truncate">{khoaHoc.courseName}</p>
                                                     <Typography.Paragraph className={`para`} ellipsis={{ rows: 5 }}>
-                                                        {khoaHoc.moTa}
+                                                        {khoaHoc.description}
                                                     </Typography.Paragraph>
                                                 </div>
                                             </div>

@@ -15,7 +15,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { hoTen: string }) => {
+    const onFinish = async (values: { fullName: string }) => {
         console.log(values);
         try {
             if (api !== undefined) {
@@ -37,7 +37,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const initialValues = useMemo(
         () => ({
-            hoTen: userLogin?.hoTen,
+            fullName: userLogin?.fullName,
         }),
         [userLogin]
     );
@@ -48,7 +48,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("hoTen");
+        setFocusTarget("fullName");
     };
 
     const handleHuy = () => {
@@ -92,7 +92,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                         <h3 className="heading_3">Họ tên</h3>
                         <Form.Item
                             className="m-0 p-0"
-                            name="hoTen"
+                            name="fullName"
                             rules={[
                                 {
                                     required: true,
@@ -104,7 +104,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                                 },
                             ]}
                         >
-                            <Input className="hoTen w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="fullName w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Tên của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>

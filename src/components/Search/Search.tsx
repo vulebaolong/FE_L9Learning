@@ -75,7 +75,7 @@ function Search() {
                                     className="flex items-center gap-2 cursor-pointer"
                                 >
                                     <div className="w-10 h-10 rounded-full overflow-hidden">
-                                        <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                        <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                                     </div>
                                     <p>{khoaHoc.courseName}</p>
                                 </div>

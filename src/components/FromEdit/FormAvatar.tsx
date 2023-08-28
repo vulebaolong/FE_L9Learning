@@ -64,7 +64,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("soDt");
+        setFocusTarget("phoneNumber");
     };
 
     const handleHuy = () => {

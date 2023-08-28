@@ -96,14 +96,14 @@
                 "tags": ["CourseManagement"],
                 "parameters": [
                     {
-                        "name": "tenDanhMuc",
+                        "name": "categoryName",
                         "description": "tên danh mục",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "tenDanhMuc": {
+                                "categoryName": {
                                     "type": "string"
                                 }
                             }
@@ -408,19 +408,19 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "taiKhoan": {
+                                "username": {
                                     "type": "string"
                                 },
-                                "matKhau": {
+                                "password": {
                                     "type": "string"
                                 },
                                 "email": {
                                     "type": "string"
                                 },
-                                "soDt": {
+                                "phoneNumber": {
                                     "type": "string"
                                 },
-                                "hoTen": {
+                                "fullName": {
                                     "type": "string"
                                 }
                             }
@@ -446,10 +446,10 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "taiKhoan": {
+                                "username": {
                                     "type": "string"
                                 },
-                                "matKhau": {
+                                "password": {
                                     "type": "string"
                                 }
                             }
@@ -493,20 +493,20 @@
                         "in": "body",
                         "required": true,
                         "properties": {
-                            "hoTen": {
+                            "fullName": {
                                 "type": "string"
                             },
                             "email": {
                                 "type": "string",
                                 "format": "email"
                             },
-                            "taiKhoan": {
+                            "username": {
                                 "type": "string"
                             },
-                            "soDt": {
+                            "phoneNumber": {
                                 "type": "string"
                             },
-                            "maLoaiNguoiDung": {
+                            "userType": {
                                 "type": "string"
                             }
                         }
@@ -683,7 +683,7 @@
                 "parameters": [
                     {
                         "name": "DanhSachVe",
-                        "description": "value: email, hoTen, maLoaiNguoiDung, soDt, taiKhoan",
+                        "description": "value: email, fullName, userType, phoneNumber, username",
                         "in": "body",
                         "required": true,
                         "schema": {

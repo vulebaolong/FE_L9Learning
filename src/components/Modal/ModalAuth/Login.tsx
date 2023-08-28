@@ -40,11 +40,11 @@ function Login() {
     useEffect(() => form.resetFields(), [autofill, form]);
 
     const handleKhachHang = () => {
-        dispatch(setAutofillREDU({ taiKhoan: "khachhang", matKhau: "123456" }));
+        dispatch(setAutofillREDU({ username: "khachhang", password: "123456" }));
     };
 
     const handleQuanTri = () => {
-        dispatch(setAutofillREDU({ taiKhoan: "quantri", matKhau: "123456" }));
+        dispatch(setAutofillREDU({ username: "quantri", password: "123456" }));
     };
 
     return (
@@ -58,7 +58,7 @@ function Login() {
                 <Form form={form} layout={"vertical"} onFinish={onFinish} initialValues={initialValues} autoComplete="off">
                     {/* TÀI KHOẢN */}
                     <Form.Item
-                        name="taiKhoan"
+                        name="username"
                         rules={[
                             {
                                 required: true,
@@ -68,12 +68,12 @@ function Login() {
                         hasFeedback
                         className="mb-[10px]"
                     >
-                        <Input className={`${style.inputAuth} ${classInput}`} size="large" prefix={<UserOutlined />} placeholder="Tài khoản" autoComplete="taiKhoan" />
+                        <Input className={`${style.inputAuth} ${classInput}`} size="large" prefix={<UserOutlined />} placeholder="Tài khoản" autoComplete="username" />
                     </Form.Item>
 
                     {/* MẬT KHẨU */}
                     <Form.Item
-                        name="matKhau"
+                        name="password"
                         rules={[
                             {
                                 required: true,

@@ -5,8 +5,8 @@ const parseDuration = (duration: string): number => {
     return parts[0] * 3600 + parts[1] * 60 + parts[2];
 }
 
-export const handleDuration = (chuongHoc: I_lesson[]) => {
-    const totalDurationInSeconds: number = chuongHoc.reduce((total: number, chuong: I_lesson) => {
+export const handleDuration = (lessons: I_lesson[]) => {
+    const totalDurationInSeconds: number = lessons.reduce((total: number, chuong: I_lesson) => {
         const chuongDuration: number = chuong.videos.reduce((chuongTotal: number, video: I_video) => {
             return chuongTotal + parseDuration(video.duration);
         }, 0);

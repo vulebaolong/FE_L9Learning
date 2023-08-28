@@ -46,7 +46,7 @@ function EditCoursePage_Admin() {
 
                     setOneCourse(data2.result.data);
 
-                    const indexChuongHoc = data2.result.data.chuongHoc.map((item, index) => index);
+                    const indexChuongHoc = data2.result.data.lessons.map((item, index) => index);
 
                     setChapterArray(indexChuongHoc);
 
@@ -66,18 +66,18 @@ function EditCoursePage_Admin() {
     }, [id]);
 
     const initialValues = () => {
-        const seHocDuoc = oneCourse?.seHocDuoc.map((item) => {
+        const willLearn = oneCourse?.willLearn.map((item) => {
             return { item };
         });
 
         const objTitleChuong: { [key: string]: string } = {};
-        oneCourse?.chuongHoc.forEach((item, index) => {
+        oneCourse?.lessons.forEach((item, index) => {
             objTitleChuong[`titleChuong_${index + 1}`] = item.title;
         });
         const objChuongHoc: { [key: string]: { title_video: string; video_url: string }[] } = {};
 
-        oneCourse?.chuongHoc.forEach((chuong, index) => {
-            objChuongHoc[`chuongHoc${index + 1}`] = chuong.videos.map((video) => ({
+        oneCourse?.lessons.forEach((chuong, index) => {
+            objChuongHoc[`lessons${index + 1}`] = chuong.videos.map((video) => ({
                 title_video: video.title,
                 video_url: video.video_url,
             }));
@@ -85,10 +85,10 @@ function EditCoursePage_Admin() {
 
         return {
             ...oneCourse,
-            seHocDuoc,
+            willLearn,
             ...objTitleChuong,
             ...objChuongHoc,
-            danhMucKhoaHoc_ID: oneCourse?.danhMucKhoaHoc_ID._id,
+            courseCategory_ID: oneCourse?.courseCategory_ID._id,
         };
     };
 
@@ -97,20 +97,20 @@ function EditCoursePage_Admin() {
     const onFinish = (values: I_courseValues) => {
         const copyValues = JSON.parse(JSON.stringify(values));
 
-        if (!copyValues.seHocDuoc) {
-            values.seHocDuoc = [];
+        if (!copyValues.willLearn) {
+            values.willLearn = [];
         } else {
-            values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
+            values.willLearn = copyValues.willLearn.map((item: { item: string }) => item.item);
         }
 
-        values.chuongHoc = [];
+        values.lessons = [];
         _.forEach(copyValues, (value, key) => {
             if (key.startsWith("titleChuong_")) {
                 const chuongNumber = key.split("_")[1];
-                const chuongHocKey = `chuongHoc${chuongNumber}`;
+                const chuongHocKey = `lessons${chuongNumber}`;
                 const videos = copyValues[chuongHocKey];
 
-                values.chuongHoc.push({
+                values.lessons.push({
                     title: value,
                     videos: videos.map((video: { title_video: string; video_url: string }) => ({
                         title: video.title_video,
@@ -120,11 +120,11 @@ function EditCoursePage_Admin() {
             }
         });
 
-        const hinhAnh = () => {
-            if (typeof values.hinhAnh === "string") {
-                return values.hinhAnh;
+        const image = () => {
+            if (typeof values.image === "string") {
+                return values.image;
             } else {
-                return values.hinhAnh.file.originFileObj;
+                return values.image.file.originFileObj;
             }
         };
 
@@ -137,24 +137,24 @@ function EditCoursePage_Admin() {
         const payload = {
             courseCode,
             courseName: values.courseName,
-            moTa: values.moTa,
-            giaTien: values.giaTien,
-            danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
-            seHocDuoc: values.seHocDuoc,
-            chuongHoc: values.chuongHoc,
-            hinhAnh: hinhAnh(),
+            description: values.description,
+            price: values.price,
+            courseCategory_ID: values.courseCategory_ID,
+            willLearn: values.willLearn,
+            lessons: values.lessons,
+            image: image(),
         };
         console.log(payload);
 
         const formData = new FormData();
         formData.append("courseCode", payload.courseCode);
         formData.append("courseName", payload.courseName);
-        formData.append("moTa", payload.moTa);
-        formData.append("giaTien", payload.giaTien.toString());
-        formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
-        formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
-        formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
-        formData.append("hinhAnh", payload.hinhAnh);
+        formData.append("description", payload.description);
+        formData.append("price", payload.price.toString());
+        formData.append("courseCategory_ID", payload.courseCategory_ID.toString());
+        formData.append("willLearn", JSON.stringify(payload.willLearn));
+        formData.append("lessons", JSON.stringify(payload.lessons));
+        formData.append("image", payload.image);
 
         dispatch({ type: "updateCourseSaga", payload: formData });
     };
@@ -213,7 +213,7 @@ function EditCoursePage_Admin() {
                     {/* MÔ TẢ */}
                     <Form.Item
                         label={<span className="text-base font-bold">Mô tả</span>}
-                        name="moTa"
+                        name="description"
                         rules={[
                             {
                                 required: true,
@@ -228,7 +228,7 @@ function EditCoursePage_Admin() {
                     {/* GIÁ KHOA HOC*/}
                     <Form.Item
                         label={<span className="text-base font-bold">Giá khoá học</span>}
-                        name="giaTien"
+                        name="price"
                         rules={[
                             {
                                 required: true,
@@ -243,7 +243,7 @@ function EditCoursePage_Admin() {
                     {/* DANH MỤC KHOÁ HỌC*/}
                     <Form.Item
                         label={<span className="text-base font-bold">Danh mục khoá học</span>}
-                        name="danhMucKhoaHoc_ID"
+                        name="courseCategory_ID"
                         rules={[
                             {
                                 required: true,
@@ -253,10 +253,10 @@ function EditCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {courseCategories.map((danhMuc: I_courseCategory) => {
+                            {courseCategories.map((category: I_courseCategory) => {
                                 return (
-                                    <Select.Option key={danhMuc._id} value={danhMuc._id}>
-                                        {danhMuc.tenDanhMuc}
+                                    <Select.Option key={category._id} value={category._id}>
+                                        {category.categoryName}
                                     </Select.Option>
                                 );
                             })}
@@ -265,7 +265,7 @@ function EditCoursePage_Admin() {
 
                     {/* SẼ HỌC ĐƯỢC */}
                     <p className="text-base font-bold mb-2">Sẽ học được gì?</p>
-                    <Form.List name="seHocDuoc">
+                    <Form.List name="willLearn">
                         {(fields, { add, remove }) => (
                             <>
                                 {fields.map(({ key, name, ...restField }) => (
@@ -321,7 +321,7 @@ function EditCoursePage_Admin() {
                                     <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
                                     <Form.List
-                                        name={`chuongHoc${index + 1}`}
+                                        name={`lessons${index + 1}`}
                                         rules={[
                                             {
                                                 validator: async (_, names) => {
@@ -402,7 +402,7 @@ function EditCoursePage_Admin() {
                     {/* HÌNH ẢNH */}
                     <Form.Item
                         label={<span className="text-base font-bold">Hình ảnh</span>}
-                        name="hinhAnh"
+                        name="image"
                         valuePropName="file"
                         rules={[
                             {
@@ -424,7 +424,7 @@ function EditCoursePage_Admin() {
                             }}
                             onPreview={handlePreview}
                             onChange={handleChange}
-                            defaultFileList={oneCourse?.hinhAnh ? [{ url: oneCourse.hinhAnh, uid: "1", name: "image.jpg" }] : []}
+                            defaultFileList={oneCourse?.image ? [{ url: oneCourse.image, uid: "1", name: "image.jpg" }] : []}
                         >
                             <div className="UPLOAD">
                                 {loading ? <LoadingOutlined /> : <PlusOutlined />}

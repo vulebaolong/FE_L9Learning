@@ -33,20 +33,20 @@ function AddCoursePage_Admin() {
 
         const copyValues = JSON.parse(JSON.stringify(values));
 
-        if (!copyValues.seHocDuoc) {
-            values.seHocDuoc = [];
+        if (!copyValues.willLearn) {
+            values.willLearn = [];
         } else {
-            values.seHocDuoc = copyValues.seHocDuoc.map((item: { item: string }) => item.item);
+            values.willLearn = copyValues.willLearn.map((item: { item: string }) => item.item);
         }
 
-        values.chuongHoc = [];
+        values.lessons = [];
         _.forEach(copyValues, (value, key) => {
             if (key.startsWith("titleChuong_")) {
                 const chuongNumber = key.split("_")[1];
-                const chuongHocKey = `chuongHoc${chuongNumber}`;
+                const chuongHocKey = `lessons${chuongNumber}`;
                 const videos = copyValues[chuongHocKey];
 
-                values.chuongHoc.push({
+                values.lessons.push({
                     title: value,
                     videos: videos.map((video: { title_video: string; video_url: string }) => ({
                         title: video.title_video,
@@ -58,21 +58,21 @@ function AddCoursePage_Admin() {
 
         const payload = {
             courseName: values.courseName,
-            moTa: values.moTa,
-            giaTien: values.giaTien,
-            danhMucKhoaHoc_ID: values.danhMucKhoaHoc_ID,
-            seHocDuoc: values.seHocDuoc,
-            chuongHoc: values.chuongHoc,
-            hinhAnh: values.hinhAnh.file.originFileObj,
+            description: values.description,
+            price: values.price,
+            courseCategory_ID: values.courseCategory_ID,
+            willLearn: values.willLearn,
+            lessons: values.lessons,
+            image: values.image.file.originFileObj,
         };
         const formData = new FormData();
         formData.append("courseName", payload.courseName);
-        formData.append("moTa", payload.moTa);
-        formData.append("giaTien", payload.giaTien.toString());
-        formData.append("danhMucKhoaHoc_ID", payload.danhMucKhoaHoc_ID.toString());
-        formData.append("seHocDuoc", JSON.stringify(payload.seHocDuoc));
-        formData.append("chuongHoc", JSON.stringify(payload.chuongHoc));
-        formData.append("hinhAnh", payload.hinhAnh);
+        formData.append("description", payload.description);
+        formData.append("price", payload.price.toString());
+        formData.append("courseCategory_ID", payload.courseCategory_ID.toString());
+        formData.append("willLearn", JSON.stringify(payload.willLearn));
+        formData.append("lessons", JSON.stringify(payload.lessons));
+        formData.append("image", payload.image);
 
         dispatch({ type: "addCourseSaga", payload: formData });
     };
@@ -131,7 +131,7 @@ function AddCoursePage_Admin() {
                     {/* MÔ TẢ */}
                     <Form.Item
                         label={<span className="text-base font-bold">Mô tả</span>}
-                        name="moTa"
+                        name="description"
                         rules={[
                             {
                                 required: true,
@@ -146,7 +146,7 @@ function AddCoursePage_Admin() {
                     {/* GIÁ KHOA HOC*/}
                     <Form.Item
                         label={<span className="text-base font-bold">Giá khoá học</span>}
-                        name="giaTien"
+                        name="price"
                         rules={[
                             {
                                 required: true,
@@ -161,7 +161,7 @@ function AddCoursePage_Admin() {
                     {/* DANH MỤC KHOÁ HỌC*/}
                     <Form.Item
                         label={<span className="text-base font-bold">Danh mục khoá học</span>}
-                        name="danhMucKhoaHoc_ID"
+                        name="courseCategory_ID"
                         rules={[
                             {
                                 required: true,
@@ -171,10 +171,10 @@ function AddCoursePage_Admin() {
                         hasFeedback
                     >
                         <Select size="large" className={`SELECT ${style.input} ${styleInput}`} placeholder="Danh mục khoá học" allowClear>
-                            {courseCategories.map((danhMuc: I_courseCategory) => {
+                            {courseCategories.map((category: I_courseCategory) => {
                                 return (
-                                    <Select.Option key={danhMuc._id} value={danhMuc._id}>
-                                        {danhMuc.tenDanhMuc}
+                                    <Select.Option key={category._id} value={category._id}>
+                                        {category.categoryName}
                                     </Select.Option>
                                 );
                             })}
@@ -183,7 +183,7 @@ function AddCoursePage_Admin() {
 
                     {/* SẼ HỌC ĐƯỢC */}
                     <p className="text-base font-bold mb-2">Sẽ học được gì?</p>
-                    <Form.List name="seHocDuoc">
+                    <Form.List name="willLearn">
                         {(fields, { add, remove }) => (
                             <>
                                 {fields.map(({ key, name, ...restField }) => (
@@ -241,7 +241,7 @@ function AddCoursePage_Admin() {
                                     <hr className="dark:!border-gray-700 border-gray-200 my-5" />
 
                                     <Form.List
-                                        name={`chuongHoc${index + 1}`}
+                                        name={`lessons${index + 1}`}
                                         rules={[
                                             {
                                                 validator: async (_, names) => {
@@ -322,7 +322,7 @@ function AddCoursePage_Admin() {
                     {/* HÌNH ẢNH */}
                     <Form.Item
                         label={<span className="text-base font-bold">Hình ảnh</span>}
-                        name="hinhAnh"
+                        name="image"
                         valuePropName="file"
                         rules={[
                             {

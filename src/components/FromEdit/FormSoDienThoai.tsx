@@ -15,7 +15,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { soDt: string }) => {
+    const onFinish = async (values: { phoneNumber: string }) => {
         console.log(values);
         try {
             if (api !== undefined) {
@@ -37,7 +37,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const initialValues = useMemo(
         () => ({
-            soDt: userLogin?.soDt,
+            phoneNumber: userLogin?.phoneNumber,
         }),
         [userLogin]
     );
@@ -48,7 +48,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("soDt");
+        setFocusTarget("phoneNumber");
     };
 
     const handleHuy = () => {
@@ -92,7 +92,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                         <h3 className="heading_3">Số điện thoại</h3>
                         <Form.Item
                             className="m-0 p-0"
-                            name="soDt"
+                            name="phoneNumber"
                             rules={[
                                 {
                                     required: true,
@@ -104,7 +104,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                                 },
                             ]}
                         >
-                            <Input className="soDt w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Số điện thoại của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="phoneNumber w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Số điện thoại của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>

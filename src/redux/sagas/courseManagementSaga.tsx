@@ -39,11 +39,11 @@ function* addCourseSaga({ payload }: { payload: FormData; type: string }) {
         console.log(payload);
 
         // console.log(payload.get("courseName"));
-        // console.log(payload.get("moTa"));
-        // console.log(payload.get("giaTien"));
-        // console.log(payload.get("seHocDuoc"));
-        // console.log(payload.get("chuongHoc"));
-        // console.log(payload.get("hinhAnh"));
+        // console.log(payload.get("description"));
+        // console.log(payload.get("price"));
+        // console.log(payload.get("willLearn"));
+        // console.log(payload.get("lessons"));
+        // console.log(payload.get("image"));
         yield put(setIsLoadingBtnREDU(true));
 
         const { data, status } = yield call(() => courseApi.addCourse(payload));
@@ -74,11 +74,11 @@ function* updateCourseSaga({ payload }: { payload: FormData; type: string }) {
 
         // console.log("courseCode ",payload.get("courseCode"));
         // console.log("courseName ",payload.get("courseName"));
-        // console.log("moTa ",payload.get("moTa"));
-        // console.log("giaTien ",payload.get("giaTien"));
-        // console.log("seHocDuoc ",payload.get("seHocDuoc"));
-        // console.log("chuongHoc ",payload.get("chuongHoc"));
-        // console.log("hinhAnh ",payload.get("hinhAnh"));
+        // console.log("description ",payload.get("description"));
+        // console.log("price ",payload.get("price"));
+        // console.log("willLearn ",payload.get("willLearn"));
+        // console.log("lessons ",payload.get("lessons"));
+        // console.log("image ",payload.get("image"));
 
         const { data, status } = yield call(() => courseApi.updateCourse(payload));
 

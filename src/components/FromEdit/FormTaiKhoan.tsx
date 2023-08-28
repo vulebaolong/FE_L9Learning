@@ -15,7 +15,7 @@ function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const [form] = Form.useForm();
 
-    const onFinish = async (values: { taiKhoan: string }) => {
+    const onFinish = async (values: { username: string }) => {
         console.log(values);
         try {
             if (api !== undefined) {
@@ -37,7 +37,7 @@ function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const initialValues = useMemo(
         () => ({
-            taiKhoan: userLogin?.taiKhoan,
+            username: userLogin?.username,
         }),
         [userLogin]
     );
@@ -48,7 +48,7 @@ function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
 
     const handleChinhSua = () => {
         setComponentDisabled(false);
-        setFocusTarget("taiKhoan");
+        setFocusTarget("username");
     };
 
     const handleHuy = () => {
@@ -90,7 +90,7 @@ function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                     <div className="space-y-4">
                         <h3 className="heading_3">Tài khoản</h3>
                         <Form.Item
-                            name="taiKhoan"
+                            name="username"
                             rules={[
                                 {
                                     required: true,
@@ -106,7 +106,7 @@ function FormTaiKhoan({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                                 },
                             ]}
                         >
-                            <Input className="taiKhoan w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Tài khoản của bạn" bordered={false} disabled={componentDisabled} />
+                            <Input className="username w-full sm:w-1/2 truncate font-semibold p-0" placeholder="Tài khoản của bạn" bordered={false} disabled={componentDisabled} />
                         </Form.Item>
                         <hr className="dark:!border-gray-700 border-gray-200 !m-0 w-full sm:w-1/2" />
                     </div>

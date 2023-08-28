@@ -41,7 +41,7 @@ function Register() {
                 <Form form={form} layout={"vertical"} onFinish={onFinish} autoComplete="off">
                     {/* HỌ TÊN */}
                     <Form.Item
-                        name="hoTen"
+                        name="fullName"
                         rules={[
                             {
                                 required: true,
@@ -60,7 +60,7 @@ function Register() {
 
                     {/* TÀI KHOẢN */}
                     <Form.Item
-                        name="taiKhoan"
+                        name="username"
                         rules={[
                             {
                                 required: true,
@@ -83,7 +83,7 @@ function Register() {
 
                     {/* MẬT KHẨU */}
                     <Form.Item
-                        name="matKhau"
+                        name="password"
                         rules={[
                             {
                                 required: true,
@@ -121,7 +121,7 @@ function Register() {
 
                     {/* SỐ ĐIỆN THOẠI */}
                     <Form.Item
-                        name="soDt"
+                        name="phoneNumber"
                         rules={[
                             {
                                 required: true,

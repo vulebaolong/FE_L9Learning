@@ -27,12 +27,12 @@ function InfoCourseToUserPage_Admin() {
                             <div className={` aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                 <img
                                     className="w-full h-full object-cover"
-                                    src={userInfoForCourse?.khoaHoc.hinhAnh}
+                                    src={userInfoForCourse?.course.image}
                                     alt=""
                                 />
                             </div>
                             {/* TÊN KHOÁ HỌC */}
-                            <p className="heading_3 mt-3">{userInfoForCourse?.khoaHoc.courseName}</p>
+                            <p className="heading_3 mt-3">{userInfoForCourse?.course.courseName}</p>
                         </div>
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />

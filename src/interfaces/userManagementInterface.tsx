@@ -1,27 +1,27 @@
 import { AxiosResponse } from "axios";
 
 export interface I_login {
-    taiKhoan: string;
-    matKhau: string;
+    username: string;
+    password: string;
 }
 
 export interface I_register {
-    hoTen: string;
-    taiKhoan: string;
-    matKhau: string;
+    fullName: string;
+    username: string;
+    password: string;
     email: string;
-    soDt: string;
+    phoneNumber: string;
 }
 
 export interface I_userLogin {
     chiTietKhoaHocGhiDanh: I_enrolledCourseDetails[];
     id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
+    phoneNumber: string;
+    fullName: string;
     accessToken: string;
-    maLoaiNguoiDung: string;
+    userType: string;
     avatar: string;
     bannerProfile: string;
 }
@@ -33,11 +33,11 @@ export interface I_PropLogged {
 export interface I_accountInfo {
     chiTietKhoaHocGhiDanh: I_enrolledCourseDetails[];
     id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
-    maLoaiNguoiDung: string;
+    phoneNumber: string;
+    fullName: string;
+    userType: string;
     avatar: string;
     bannerProfile: string;
 }
@@ -45,34 +45,34 @@ export interface I_accountInfo {
 export interface I_enrolledCourseDetails {
     _id: string;
     courseName: string;
-    moTa: string;
-    hinhAnh: string;
+    description: string;
+    image: string;
 }
 
 export interface I_componentDisabled {
-    hoTen: boolean;
+    fullName: boolean;
     email: boolean;
 }
 
 export interface I_user {
     _id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
-    maLoaiNguoiDung: string;
+    phoneNumber: string;
+    fullName: string;
+    userType: string;
     avatar: string;
     bannerProfile: string;
-    tenAvatar?: string;
+    avatarName?: string;
 }
 
 export interface DataType {
     key: string;
     soThuTu: number;
-    hoTen: string;
-    taiKhoan: string;
-    maLoaiNguoiDung: string;
-    soDt: string;
+    fullName: string;
+    username: string;
+    userType: string;
+    phoneNumber: string;
     email: string;
     avatar: string;
 }
@@ -87,11 +87,11 @@ export interface I_PropsFormEdit {
 
 export interface I_userInfo {
     _id: string;
-    taiKhoan: string;
+    username: string;
     email: string;
-    soDt: string;
-    hoTen: string;
-    maLoaiNguoiDung: string;
+    phoneNumber: string;
+    fullName: string;
+    userType: string;
     avatar: string;
     bannerProfile: string;
 }
@@ -105,13 +105,13 @@ export interface I_courseInfoForUser {
 export interface I_enrolledCourses {
     _id: string;
     courseName: string;
-    hinhAnh: string;
+    image: string;
 }
 
 export interface I_unenrolledCourses {
     _id: string;
     courseName: string;
-    hinhAnh: string;
+    image: string;
 }
 
 

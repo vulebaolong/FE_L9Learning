@@ -30,7 +30,7 @@ function KhoaHoc() {
                                 >
                                     Xem khoá học
                                 </Button>
-                                <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                             </div>
                             <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                         </div>

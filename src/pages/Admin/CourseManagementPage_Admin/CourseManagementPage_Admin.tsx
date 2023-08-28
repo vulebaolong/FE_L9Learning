@@ -67,7 +67,7 @@ function CourseManagementPage_Admin() {
                                     </Button>
                                     <PopconfirmCourseManagementPage_Admin khoaHoc={khoaHoc} />
                                 </div>
-                                <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                             </div>
                             {/* TÊN KHOÁ HỌC */}
                             <p className="heading_3 mt-3">{khoaHoc.courseName}</p>

@@ -15,10 +15,10 @@ function Logged(props: I_PropLogged) {
     };
 
     const renderTag = () => {
-        if (userLogin.maLoaiNguoiDung === "KhachHang") {
+        if (userLogin.userType === "Customer") {
             return <Tag color="green">khách hàng</Tag>;
         }
-        if (userLogin.maLoaiNguoiDung === "QuanTri") {
+        if (userLogin.userType === "Admin") {
             return <Tag color="red">admin</Tag>;
         }
     };
@@ -66,7 +66,7 @@ function Logged(props: I_PropLogged) {
     dark:text-white/70 dark:hover:text-white/90`;
 
     const renderControllAdmin = () => {
-        if (userLogin.maLoaiNguoiDung !== "QuanTri") return;
+        if (userLogin.userType !== "Admin") return;
 
         return (
             <>
@@ -94,7 +94,7 @@ function Logged(props: I_PropLogged) {
                 </div>
                 <div className=" whitespace-normal max-w-[154px] space-y-1">
                     {renderTag()}
-                    <p className="text-base font-bold truncate ">{userLogin.hoTen}</p>
+                    <p className="text-base font-bold truncate ">{userLogin.fullName}</p>
                 </div>
             </div>
 

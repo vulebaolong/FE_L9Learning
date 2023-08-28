@@ -53,10 +53,10 @@ function CoursesPage() {
         navigate(`/detailcourse/${khoaHocId}`);
     };
 
-    const options = courseCategories.map((danhMuc) => {
+    const options = courseCategories.map((category) => {
         return {
-            value: danhMuc._id,
-            label: danhMuc.tenDanhMuc,
+            value: category._id,
+            label: category.categoryName,
         };
     });
 
@@ -112,7 +112,7 @@ function CoursesPage() {
                 coursesByCategory?.map((khoaHocs, index) => {
                     return (
                         <div key={index} className="">
-                            <h2 className="heading_2">{khoaHocs.tenDanhMuc}</h2>
+                            <h2 className="heading_2">{khoaHocs.categoryName}</h2>
                             <div className="collumnCourse">
                                 {khoaHocs.khoaHocDanhMuc.map((khoaHoc) => {
                                     return (
@@ -126,7 +126,7 @@ function CoursesPage() {
                                                 >
                                                     Xem khoá học
                                                 </Button>
-                                                <img className="w-full h-full object-cover" src={khoaHoc.hinhAnh} alt="" />
+                                                <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
                                             </div>
                                             <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
                                         </div>
