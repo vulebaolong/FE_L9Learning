@@ -7,12 +7,17 @@ import { navigate } from "../../../helpers/navigate";
 
 function Course() {
     const dispatch: DispatchType = useDispatch();
+
+    const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
+
     useEffect(() => {
+        console.log("Bắn API getCourseListSaga");
+
         dispatch({ type: "getCourseListSaga" });
     }, []);
-    const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
+
     const handleChiTietKhoaHoc = (courseId: string) => {
-        navigate(`/detailcourse/${courseId}`)
+        navigate(`/detailcourse/${courseId}`);
     };
     return (
         <section className="py-24">

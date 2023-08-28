@@ -25,21 +25,23 @@ function CoursesPage() {
     useEffect(() => {
         const fetch = async () => {
             try {
+                console.log("call api");
+
                 dispatch(setIsLoadingPageREDU(true));
                 const { data: data1, status: status1 } = await courseApi.getListCourseCategories();
-                console.log("call API - getListCourseCategories - ĐẦU TRANG", { data1, status1 });
-                setCourseCategories(data1.result.data);
-
+                // console.log("call API - getListCourseCategories - ĐẦU TRANG", { data1, status1 });
+                
                 const { data: data2, status: status2 } = await courseApi.getCourseByCategory();
-                console.log("call API - getCourseByCategory - ĐẦU TRANG", { data2, status2 });
+                // console.log("call API - getCourseByCategory - ĐẦU TRANG", { data2, status2 });
+                setCourseCategories(data1.result.data);
                 setCoursesByCategory(data2.result.data);
 
                 await wait(DELAY_LOADING_PAGE);
-                
+
                 dispatch(setIsLoadingPageREDU(false));
             } catch (err) {
                 console.log(err);
-                
+
                 await wait(DELAY_LOADING_PAGE);
 
                 dispatch(setIsLoadingPageREDU(false));
@@ -47,7 +49,7 @@ function CoursesPage() {
         };
 
         fetch();
-    }, []);
+    }, [dispatch]);
 
     const handleCourseDetail = (courseId: string) => {
         navigate(`/detailcourse/${courseId}`);

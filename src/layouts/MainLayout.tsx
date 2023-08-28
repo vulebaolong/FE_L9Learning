@@ -11,15 +11,20 @@ function MainLayout() {
                 <div className="hidden lg:block flex-shrink-0 w-sideBar">
                     <SideBar />
                 </div>
-                {/* DESKTOP */}
-                <div className="hidden lg:block pl-[20px] pr-[40px] py-[20px] w-content">
+
+                <div
+                    className="
+                    container py-5
+                    lg:pl-[20px] lg:pr-[40px] lg:py-[20px] lg:w-content
+                    "
+                >
                     <Outlet />
                 </div>
 
                 {/* MOBILE */}
-                <div className="lg:hidden container py-5">
+                {/* <div className="lg:hidden container py-5">
                     <Outlet />
-                </div>
+                </div> */}
             </div>
             <Footer />
         </>

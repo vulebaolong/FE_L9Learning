@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userApi } from "../../api/userApi";
 import { I_accountInfo } from "../../interfaces/userManagementInterface";
 import { FaUserGroup } from "react-icons/fa6";
@@ -13,8 +13,9 @@ import { error, success } from "../../helpers/message";
 import PopconfirmProfile from "./PopconfirmProfile";
 
 function ProfilePage() {
-    const dispatch: DispatchType = useDispatch();
+    console.log(123);
 
+    const dispatch: DispatchType = useDispatch();
 
     const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
 
@@ -24,7 +25,6 @@ function ProfilePage() {
 
     const renderEnrolledCourse = () => {
         const length = userLogin?.enrolledCourseDetail.length;
-        console.log(length);
 
         if (length === undefined) return;
         if (length > 0)

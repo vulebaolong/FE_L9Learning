@@ -10,7 +10,7 @@ import { DELAY_LOADING_PAGE } from "../../contants/configContants";
 function* getCourseListSaga() {
     try {
         yield put(setIsLoadingPageREDU(true));
-
+        
         const { data, status } = yield call(() => courseApi.getListCourses());
 
         console.log("Saga - getCourseListSaga", { data, status });

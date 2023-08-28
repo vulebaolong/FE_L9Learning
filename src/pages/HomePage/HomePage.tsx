@@ -1,8 +1,10 @@
 import Banner from "./Banner/Banner";
-import Course from "./KhoaHoc/Course";
+import Course from "./Course/Course";
 
 
 function HomePage() {
+    console.log("render HomePage");
+    
     return (
         <>
             <Banner />
