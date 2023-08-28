@@ -87,16 +87,16 @@ function UserManagement_Admin() {
     });
 
     const data: DataType[] = userList
-        .map((nguoiDung, index) => {
+        .map((userInfo, index) => {
             return {
-                key: nguoiDung._id,
-                soThuTu: index + 1,
-                fullName: nguoiDung.fullName,
-                username: nguoiDung.username,
-                userType: nguoiDung.userType,
-                phoneNumber: nguoiDung.phoneNumber,
-                email: nguoiDung.email,
-                avatar: nguoiDung.avatar,
+                key: userInfo._id,
+                ordinalNumber: index + 1,
+                fullName: userInfo.fullName,
+                username: userInfo.username,
+                userType: userInfo.userType,
+                phoneNumber: userInfo.phoneNumber,
+                email: userInfo.email,
+                avatar: userInfo.avatar,
             };
         })
         .reverse();
@@ -104,18 +104,18 @@ function UserManagement_Admin() {
     const columns: ColumnsType<DataType> = [
         {
             title: "STT",
-            dataIndex: "soThuTu",
-            sorter: (a, b) => a.soThuTu - b.soThuTu,
+            dataIndex: "ordinalNumber",
+            sorter: (a, b) => a.ordinalNumber - b.ordinalNumber,
             sortDirections: ["ascend"],
             className: "hidden sm:table-cell",
         },
         {
             title: "Ảnh",
             dataIndex: "avatar",
-            render: (_, nguoiDung) => {
+            render: (_, userInfo) => {
                 return (
                     <div className="w-14 h-14 rounded-full overflow-hidden">
-                        <Image className="!w-full !h-full object-cover" src={nguoiDung.avatar} />
+                        <Image className="!w-full !h-full object-cover" src={userInfo.avatar} />
                     </div>
                 );
             },
@@ -128,7 +128,7 @@ function UserManagement_Admin() {
                 if (b.userType === "Customer") {
                     return (
                         <div className="">
-                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <span className="sm:hidden">{b.ordinalNumber} </span>
                             <Tag color="green">{b.username}</Tag>
                         </div>
                     );
@@ -136,7 +136,7 @@ function UserManagement_Admin() {
                 if (b.userType === "Admin") {
                     return (
                         <div className="">
-                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <span className="sm:hidden">{b.ordinalNumber} </span>
                             <Tag color="red">{b.username}</Tag>
                         </div>
                     );
@@ -163,7 +163,7 @@ function UserManagement_Admin() {
         },
         {
             title: "Hành động",
-            render: (_, nguoiDung) => {
+            render: (_, userInfo) => {
                 return (
                     <div className="flex gap-2">
                         <Tooltip placement="top" title="Thông tin khoá học">
@@ -171,7 +171,7 @@ function UserManagement_Admin() {
                                 type="primary"
                                 icon={<InfoCircleOutlined />}
                                 onClick={() => {
-                                    navigate(`/usertocourse/${nguoiDung.key}`);
+                                    navigate(`/usertocourse/${userInfo.key}`);
                                 }}
                             />
                         </Tooltip>
@@ -181,12 +181,12 @@ function UserManagement_Admin() {
                                 icon={<EditOutlined />}
                                 onClick={() => {
                                     console.log("Edit");
-                                    navigate(`/edituser/${nguoiDung.key}`);
+                                    navigate(`/edituser/${userInfo.key}`);
                                 }}
                             />
                         </Tooltip>
 
-                        <PopconfirmUserManagement_Admin nguoiDung={nguoiDung} />
+                        <PopconfirmUserManagement_Admin userInfo={userInfo} />
                     </div>
                 );
             },

@@ -42,9 +42,9 @@ function AddCoursePage_Admin() {
         values.lessons = [];
         _.forEach(copyValues, (value, key) => {
             if (key.startsWith("titleChuong_")) {
-                const chuongNumber = key.split("_")[1];
-                const chuongHocKey = `lessons${chuongNumber}`;
-                const videos = copyValues[chuongHocKey];
+                const chapterNumber = key.split("_")[1];
+                const chapterKey = `lessons${chapterNumber}`;
+                const videos = copyValues[chapterKey];
 
                 values.lessons.push({
                     title: value,

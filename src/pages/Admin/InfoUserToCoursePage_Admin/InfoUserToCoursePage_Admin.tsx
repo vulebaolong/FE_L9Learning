@@ -123,16 +123,16 @@ function InfoUserToCoursePage_Admin() {
 
         if (isSkeleton === false) {
 
-            if (userCourseInfo?.khoaHocDaDangKy.length === 0) return <p>Không có khoá học</p>;
+            if (userCourseInfo?.enrolledCourse.length === 0) return <p>Không có khoá học</p>;
 
-            return userCourseInfo?.khoaHocDaDangKy.map((khoaHoc) => {
+            return userCourseInfo?.enrolledCourse.map((course) => {
 
                 return (
-                    <div key={khoaHoc._id}>
+                    <div key={course._id}>
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                             <Button
                                 onClick={() => {
-                                    handleUnenrollUser(khoaHoc._id);
+                                    handleUnenrollUser(course._id);
                                 }}
                                 type="white"
                                 disabled={isLoadingBtn}
@@ -142,9 +142,9 @@ function InfoUserToCoursePage_Admin() {
                                     <span>Huỷ đăng ký</span>
                                 </div>
                             </Button>
-                            <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                            <img className="w-full h-full object-cover" src={course.image} alt="" />
                         </div>
-                        <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
+                        <p className="heading_3 mt-3">{course.courseName}</p>
                     </div>
                 );
             });
@@ -156,23 +156,23 @@ function InfoUserToCoursePage_Admin() {
 
         if (isSkeleton === false) {
 
-            if (userCourseInfo?.khoaHocChuaDangKy.length === 0) return <p>Không có khoá học</p>;
+            if (userCourseInfo?.unenrolledCourse.length === 0) return <p>Không có khoá học</p>;
             
-            return userCourseInfo?.khoaHocChuaDangKy.map((khoaHoc) => {
+            return userCourseInfo?.unenrolledCourse.map((course) => {
                 return (
-                    <div key={khoaHoc._id} className="">
+                    <div key={course._id} className="">
                         <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                             <Button
                                 onClick={() => {
-                                    handleEnrollUser(khoaHoc._id);
+                                    handleEnrollUser(course._id);
                                 }}
                                 type="white"
                             >
                                 Đăng ký
                             </Button>
-                            <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                            <img className="w-full h-full object-cover" src={course.image} alt="" />
                         </div>
-                        <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
+                        <p className="heading_3 mt-3">{course.courseName}</p>
                     </div>
                 );
             });
@@ -185,8 +185,8 @@ function InfoUserToCoursePage_Admin() {
                 <div>
                     <h1 className="heading_1 pt-5">Thông tin khoá học của người dùng</h1>
                     <div className="flex items-center gap-2  mt-5">
-                        <Avatar src={<img src={userCourseInfo?.nguoiDung.avatar} alt="avatar" />} size={60} />
-                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{userCourseInfo?.nguoiDung.fullName}</p>
+                        <Avatar src={<img src={userCourseInfo?.userInfo.avatar} alt="avatar" />} size={60} />
+                        <p className="w-1/2 truncate text-2xl font-black text-[#292929]/70 dark:text-slate-400">{userCourseInfo?.userInfo.fullName}</p>
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 </div>

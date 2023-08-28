@@ -8,7 +8,7 @@ import { userApi } from "../../../api/userApi";
 import { error, success } from "../../../helpers/message";
 import { setUserListREDU } from "../../../redux/slices/userManagementSlice";
 
-function PopconfirmUserManagement_Admin({ nguoiDung }: { nguoiDung: DataType }) {
+function PopconfirmUserManagement_Admin({ userInfo }: { userInfo: DataType }) {
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const dispatch: DispatchType = useDispatch();
@@ -53,7 +53,7 @@ function PopconfirmUserManagement_Admin({ nguoiDung }: { nguoiDung: DataType }) 
         <Popconfirm
             title="Xoá người dùng"
             description="Bạn có chắc muốn xoá người dùng này?"
-            onConfirm={() => confirm(nguoiDung.key)}
+            onConfirm={() => confirm(userInfo.key)}
             open={open}
             okButtonProps={{ loading: confirmLoading }}
             onCancel={handleCancel}

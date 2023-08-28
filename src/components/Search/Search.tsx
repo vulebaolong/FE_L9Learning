@@ -21,15 +21,23 @@ function Search() {
 
     useEffect(() => {
         const timerId = setTimeout(async () => {
-            if (isLoading) return ;
+            if (isLoading) return;
+
             if (inputValue === "") return setIsOpenPopupUser(false);
+
             console.log(inputValue);
+
             setIsLoading(true);
+
             try {
                 const courseName = encodeURIComponent(inputValue);
+
                 const { data, status } = await courseApi.searchCourseByName(courseName);
+
                 console.log("Call API - searchCourseByName", { data, status });
+
                 setResultSearch(data.result.data);
+
                 setIsOpenPopupUser(true);
             } finally {
                 setIsLoading(false);
@@ -65,19 +73,19 @@ function Search() {
                     </div>
                     <hr className="dark:!border-gray-700 border-gray-200 my-2" />
                     <div className="space-y-3">
-                        {resultSearch?.map((khoaHoc) => {
+                        {resultSearch?.map((course) => {
                             return (
                                 <div
                                     onClick={() => {
-                                        handleClickResultSearch(khoaHoc._id);
+                                        handleClickResultSearch(course._id);
                                     }}
-                                    key={khoaHoc._id}
+                                    key={course._id}
                                     className="flex items-center gap-2 cursor-pointer"
                                 >
                                     <div className="w-10 h-10 rounded-full overflow-hidden">
-                                        <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                                        <img className="w-full h-full object-cover" src={course.image} alt="" />
                                     </div>
-                                    <p>{khoaHoc.courseName}</p>
+                                    <p>{course.courseName}</p>
                                 </div>
                             );
                         })}

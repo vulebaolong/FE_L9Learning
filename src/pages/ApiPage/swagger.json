@@ -61,7 +61,7 @@
                 }
             }
         },
-        "/api/v1/CourseManagement/LayKhoaHocTheoDanhMuc": {
+        "/api/v1/CourseManagement/GetCourseByCategory": {
             "get": {
                 "tags": ["CourseManagement"],
                 "parameters": [
@@ -91,7 +91,7 @@
                 }
             }
         },
-        "/api/v1/CourseManagement/ThemDanhMucKhoaHoc": {
+        "/api/v1/CourseManagement/AddCategory": {
             "post": {
                 "tags": ["CourseManagement"],
                 "parameters": [

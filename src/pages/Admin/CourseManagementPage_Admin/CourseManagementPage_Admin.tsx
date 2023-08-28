@@ -43,15 +43,15 @@ function CourseManagementPage_Admin() {
             </div>
 
             <div className="collumnCourse">
-                {courseList.map((khoaHoc) => {
+                {courseList.map((course) => {
                     return (
-                        <div key={khoaHoc._id}>
+                        <div key={course._id}>
                             {/* HÌNH ẢNH */}
                             <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                 <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                     <Button
                                         onClick={() => {
-                                            handleCourseInfo(khoaHoc._id);
+                                            handleCourseInfo(course._id);
                                         }}
                                         type="white"
                                     >
@@ -59,18 +59,18 @@ function CourseManagementPage_Admin() {
                                     </Button>
                                     <Button
                                         onClick={() => {
-                                            handleEditCourse(khoaHoc._id);
+                                            handleEditCourse(course._id);
                                         }}
                                         type="white"
                                     >
                                         Chỉnh sửa
                                     </Button>
-                                    <PopconfirmCourseManagementPage_Admin khoaHoc={khoaHoc} />
+                                    <PopconfirmCourseManagementPage_Admin course={course} />
                                 </div>
-                                <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                                <img className="w-full h-full object-cover" src={course.image} alt="" />
                             </div>
                             {/* TÊN KHOÁ HỌC */}
-                            <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
+                            <p className="heading_3 mt-3">{course.courseName}</p>
                         </div>
                     );
                 })}

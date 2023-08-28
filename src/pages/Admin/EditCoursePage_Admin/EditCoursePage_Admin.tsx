@@ -70,14 +70,14 @@ function EditCoursePage_Admin() {
             return { item };
         });
 
-        const objTitleChuong: { [key: string]: string } = {};
+        const objTitleChapter: { [key: string]: string } = {};
         oneCourse?.lessons.forEach((item, index) => {
-            objTitleChuong[`titleChuong_${index + 1}`] = item.title;
+            objTitleChapter[`titleChuong_${index + 1}`] = item.title;
         });
-        const objChuongHoc: { [key: string]: { title_video: string; video_url: string }[] } = {};
+        const objChapter: { [key: string]: { title_video: string; video_url: string }[] } = {};
 
         oneCourse?.lessons.forEach((chuong, index) => {
-            objChuongHoc[`lessons${index + 1}`] = chuong.videos.map((video) => ({
+            objChapter[`lessons${index + 1}`] = chuong.videos.map((video) => ({
                 title_video: video.title,
                 video_url: video.video_url,
             }));
@@ -86,8 +86,8 @@ function EditCoursePage_Admin() {
         return {
             ...oneCourse,
             willLearn,
-            ...objTitleChuong,
-            ...objChuongHoc,
+            ...objTitleChapter,
+            ...objChapter,
             courseCategory_ID: oneCourse?.courseCategory_ID._id,
         };
     };
@@ -106,9 +106,9 @@ function EditCoursePage_Admin() {
         values.lessons = [];
         _.forEach(copyValues, (value, key) => {
             if (key.startsWith("titleChuong_")) {
-                const chuongNumber = key.split("_")[1];
-                const chuongHocKey = `lessons${chuongNumber}`;
-                const videos = copyValues[chuongHocKey];
+                const chapterNumber = key.split("_")[1];
+                const chapterKey = `lessons${chapterNumber}`;
+                const videos = copyValues[chapterKey];
 
                 values.lessons.push({
                     title: value,

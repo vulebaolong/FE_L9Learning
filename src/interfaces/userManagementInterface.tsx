@@ -14,7 +14,7 @@ export interface I_register {
 }
 
 export interface I_userLogin {
-    chiTietKhoaHocGhiDanh: I_enrolledCourseDetails[];
+    enrolledCourseDetail: I_enrolledCourseDetails[];
     id: string;
     username: string;
     email: string;
@@ -31,7 +31,7 @@ export interface I_PropLogged {
 }
 
 export interface I_accountInfo {
-    chiTietKhoaHocGhiDanh: I_enrolledCourseDetails[];
+    enrolledCourseDetail: I_enrolledCourseDetails[];
     id: string;
     username: string;
     email: string;
@@ -68,7 +68,7 @@ export interface I_user {
 
 export interface DataType {
     key: string;
-    soThuTu: number;
+    ordinalNumber: number;
     fullName: string;
     username: string;
     userType: string;
@@ -97,9 +97,9 @@ export interface I_userInfo {
 }
 
 export interface I_courseInfoForUser {
-    nguoiDung: I_userInfo;
-    khoaHocDaDangKy: I_enrolledCourses[];
-    khoaHocChuaDangKy: I_unenrolledCourses[];
+    userInfo: I_userInfo;
+    enrolledCourse: I_enrolledCourses[];
+    unenrolledCourse: I_unenrolledCourses[];
 }
 
 export interface I_enrolledCourses {

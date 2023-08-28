@@ -78,12 +78,12 @@ function LogedMobile() {
         window.location.reload();
     };
 
-    const handleQuanLyKhoaHoc = () => {
+    const handleCourseManagement = () => {
         navigate("/coursemanagement");
         dispatch(setIsDraweREDU(false));
     };
 
-    const handleQuanLyNguoiDung = () => {
+    const handleUserManagement = () => {
         navigate("/usermanagement");
         dispatch(setIsDraweREDU(false));
     };
@@ -94,12 +94,12 @@ function LogedMobile() {
         return (
             <>
                 <div>
-                    <span className={textItem} onClick={handleQuanLyKhoaHoc}>
+                    <span className={textItem} onClick={handleCourseManagement}>
                         Quản lý khoá học
                     </span>
                 </div>
                 <div className="mt-4">
-                    <span className={textItem} onClick={handleQuanLyNguoiDung}>
+                    <span className={textItem} onClick={handleUserManagement}>
                         Quản lý người dùng
                     </span>
                 </div>

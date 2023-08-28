@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../../redux/store";
 
-function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCourse }) {
+function PopconfirmCourseManagementPage_Admin({ course }: { course: I_singleCourse }) {
     const [open, setOpen] = useState(false);
 
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -27,6 +27,9 @@ function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCo
             setConfirmLoading(true);
 
             const { data, status } = await courseApi.deleteCourse(courseCode);
+
+            console.log("Call Api - deleteCourse", { data, status });
+
             success("Xoá khoá học thành công");
 
             dispatch({ type: "getCourseListSaga" });
@@ -44,7 +47,7 @@ function PopconfirmCourseManagementPage_Admin({ khoaHoc }: { khoaHoc: I_singleCo
             title="Xoá khoá học"
             description="Bạn có chắc chắn xóa khoá học này không?"
             onConfirm={() => {
-                confirm(khoaHoc._id);
+                confirm(course._id);
             }}
             open={open}
             okButtonProps={{ loading: confirmLoading }}

@@ -62,19 +62,19 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
         form.resetFields();
     }, [userLogin, form]);
 
-    const handleChinhSua = () => {
+    const handleEdit = () => {
         setComponentDisabled(false);
         setFocusTarget("phoneNumber");
     };
 
-    const handleHuy = () => {
+    const handleCancel = () => {
         setComponentDisabled(true);
     };
 
     const renderButton = (componentDisabled: boolean) => {
         if (componentDisabled) {
             return (
-                <Button onClick={handleChinhSua} htmlFor="button" type="transparent_1">
+                <Button onClick={handleEdit} htmlFor="button" type="transparent_1">
                     Chỉnh sửa
                 </Button>
             );
@@ -85,7 +85,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
                     <Button htmlFor="submit" type="transparent_2">
                         Lưu
                     </Button>
-                    <Button onClick={handleHuy} htmlFor="button" type="transparent_1">
+                    <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ
                     </Button>
                 </div>
@@ -120,7 +120,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
 
         if (info.file.status === "error") setLoading(false);
     };
-    const handleCancel = () => setPreviewOpen(false);
+    const handleCancelImg = () => setPreviewOpen(false);
 
     return (
         <Form form={form} onFinish={onFinish} initialValues={initialValues()}>
@@ -161,7 +161,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
                                 </div>
                             </Upload>
                         </Form.Item>
-                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancelImg}>
                             <img
                                 alt="example"
                                 style={{

@@ -89,7 +89,7 @@ function EnrolledUsers() {
         .map((user, index) => {
             return {
                 key: user._id,
-                soThuTu: index + 1,
+                ordinalNumber: index + 1,
                 fullName: user.fullName,
                 username: user.username,
                 userType: user.userType,
@@ -135,18 +135,18 @@ function EnrolledUsers() {
     const columns: ColumnsType<DataType> = [
         {
             title: "STT",
-            dataIndex: "soThuTu",
-            sorter: (a, b) => a.soThuTu - b.soThuTu,
+            dataIndex: "ordinalNumber",
+            sorter: (a, b) => a.ordinalNumber - b.ordinalNumber,
             sortDirections: ["ascend"],
             className: "hidden sm:table-cell",
         },
         {
             title: "Ảnh",
             dataIndex: "avatar",
-            render: (_, nguoiDung) => {
+            render: (_, userInfo) => {
                 return (
                     <div className="w-14 h-14 rounded-full overflow-hidden">
-                        <Image className="!w-full !h-full object-cover" src={nguoiDung.avatar} />
+                        <Image className="!w-full !h-full object-cover" src={userInfo.avatar} />
                     </div>
                 );
             },
@@ -159,7 +159,7 @@ function EnrolledUsers() {
                 if (b.userType === "Customer") {
                     return (
                         <div className="">
-                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <span className="sm:hidden">{b.ordinalNumber} </span>
                             <Tag color="green">{b.username}</Tag>
                         </div>
                     );
@@ -167,7 +167,7 @@ function EnrolledUsers() {
                 if (b.userType === "Admin") {
                     return (
                         <div className="">
-                            <span className="sm:hidden">{b.soThuTu} </span>
+                            <span className="sm:hidden">{b.ordinalNumber} </span>
                             <Tag color="red">{b.username}</Tag>
                         </div>
                     );
@@ -194,7 +194,7 @@ function EnrolledUsers() {
         },
         {
             title: "Hành động",
-            render: (_, nguoiDung) => {
+            render: (_, userInfo) => {
                 return (
                     <div className="flex gap-2">
                         <Tooltip placement="top" title="Huỷ đăng ký">
@@ -203,7 +203,7 @@ function EnrolledUsers() {
                                 danger
                                 icon={<CloseOutlined />}
                                 onClick={() => {
-                                    handleHuyDangKy(nguoiDung.key);
+                                    handleHuyDangKy(userInfo.key);
                                 }}
                             />
                         </Tooltip>

@@ -1,4 +1,3 @@
-import { UploadFile } from "antd";
 import { RcFile } from "antd/es/upload";
 
 export interface I_video {
@@ -57,7 +56,7 @@ export type I_resultSearch = I_itemSearch[] | [];
 
 export interface I_coursesByCategory {
     categoryName: string;
-    khoaHocDanhMuc: I_courseCategoryDetail[];
+    coursesInCategory: I_courseCategoryDetail[];
 }
 
 export interface I_courseCategoryDetail {
@@ -73,12 +72,12 @@ export interface I_courseCategoryId {
 }
 
 export interface I_userInfoForCourse {
-    course: I_khoaHoc;
+    course: I_course;
     enrolledUsers: I_enrolledUsers[];
     unenrolledUsers: I_unenrolledUsers[];
 }
 
-export interface I_khoaHoc {
+export interface I_course {
     _id: string;
     courseName: string;
     image: string;

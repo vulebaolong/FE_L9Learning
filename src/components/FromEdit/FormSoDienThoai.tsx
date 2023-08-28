@@ -46,19 +46,19 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         form.resetFields();
     }, [initialValues, form]);
 
-    const handleChinhSua = () => {
+    const handleEdit = () => {
         setComponentDisabled(false);
         setFocusTarget("phoneNumber");
     };
 
-    const handleHuy = () => {
+    const handleCancel = () => {
         setComponentDisabled(true);
     };
 
     const renderButton = (componentDisabled: boolean) => {
         if (componentDisabled) {
             return (
-                <Button onClick={handleChinhSua} htmlFor="button" type="transparent_1">
+                <Button onClick={handleEdit} htmlFor="button" type="transparent_1">
                     Chỉnh sửa
                 </Button>
             );
@@ -69,7 +69,7 @@ function FormSoDienThoai({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
                     <Button htmlFor="submit" type="transparent_2">
                         Lưu
                     </Button>
-                    <Button onClick={handleHuy} htmlFor="button" type="transparent_1">
+                    <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ
                     </Button>
                 </div>

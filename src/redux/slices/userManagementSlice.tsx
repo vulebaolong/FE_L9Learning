@@ -20,7 +20,7 @@ const userManagementSlice = createSlice({
             state.userLogin = payload;
         },
         updateUserLoginREDU: (state, { payload }) => {
-            // delete payload.chiTietKhoaHocGhiDanh;
+            // delete payload.enrolledCourseDetail;
             lcStorage.set(USER_LOGIN, payload);
             state.userLogin = payload;
         },

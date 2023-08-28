@@ -31,7 +31,7 @@ function Logged(props: I_PropLogged) {
         window.location.reload();
     };
 
-    const handleQuanLyKhoaHoc = () => {
+    const handleCourseManagement = () => {
         navigate("/coursemanagement");
         setIsOpenPopupUser(false);
     };
@@ -51,7 +51,7 @@ function Logged(props: I_PropLogged) {
         setIsOpenPopupUser(false);
     };
 
-    const handleQuanLyNguoiDung = () => {
+    const handleUserManagement = () => {
         navigate("/usermanagement");
         setIsOpenPopupUser(false);
     };
@@ -71,12 +71,12 @@ function Logged(props: I_PropLogged) {
         return (
             <>
                 <div>
-                    <span className={textItem} onClick={handleQuanLyKhoaHoc}>
+                    <span className={textItem} onClick={handleCourseManagement}>
                         Quản lý khoá học
                     </span>
                 </div>
                 <div className="mt-4">
-                    <span className={textItem} onClick={handleQuanLyNguoiDung}>
+                    <span className={textItem} onClick={handleUserManagement}>
                         Quản lý người dùng
                     </span>
                 </div>

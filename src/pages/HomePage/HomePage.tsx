@@ -1,12 +1,12 @@
 import Banner from "./Banner/Banner";
-import KhoaHoc from "./KhoaHoc/KhoaHoc";
+import Course from "./KhoaHoc/Course";
 
 
 function HomePage() {
     return (
         <>
             <Banner />
-            <KhoaHoc />
+            <Course />
         </>
     );
 }

@@ -49,8 +49,8 @@ function CoursesPage() {
         fetch();
     }, []);
 
-    const handleCourseDetail = (khoaHocId: string) => {
-        navigate(`/detailcourse/${khoaHocId}`);
+    const handleCourseDetail = (courseId: string) => {
+        navigate(`/detailcourse/${courseId}`);
     };
 
     const options = courseCategories.map((category) => {
@@ -109,26 +109,26 @@ function CoursesPage() {
             {isSkeleton === true ? (
                 <SkeletonWarpCourses />
             ) : (
-                coursesByCategory?.map((khoaHocs, index) => {
+                coursesByCategory?.map((courses, index) => {
                     return (
                         <div key={index} className="">
-                            <h2 className="heading_2">{khoaHocs.categoryName}</h2>
+                            <h2 className="heading_2">{courses.categoryName}</h2>
                             <div className="collumnCourse">
-                                {khoaHocs.khoaHocDanhMuc.map((khoaHoc) => {
+                                {courses.coursesInCategory.map((course) => {
                                     return (
-                                        <div key={khoaHoc._id} className="">
+                                        <div key={course._id} className="">
                                             <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                                 <Button
                                                     onClick={() => {
-                                                        handleCourseDetail(khoaHoc._id);
+                                                        handleCourseDetail(course._id);
                                                     }}
                                                     type="white"
                                                 >
                                                     Xem khoá học
                                                 </Button>
-                                                <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                                                <img className="w-full h-full object-cover" src={course.image} alt="" />
                                             </div>
-                                            <p className="heading_3 mt-3">{khoaHoc.courseName}</p>
+                                            <p className="heading_3 mt-3">{course.courseName}</p>
                                         </div>
                                     );
                                 })}

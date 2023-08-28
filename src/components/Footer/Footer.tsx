@@ -1,6 +1,5 @@
 import { FaFacebookF, FaGithub, FaGoogle, FaInstagram } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { navigate } from "../../helpers/navigate";
 import Logo from "../Logo/Logo";
 import style from "./Footer.module.css";
 

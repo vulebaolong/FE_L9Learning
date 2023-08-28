@@ -23,7 +23,7 @@ function ProfilePage() {
     }, []);
 
     const renderEnrolledCourse = () => {
-        const length = userLogin?.chiTietKhoaHocGhiDanh.length;
+        const length = userLogin?.enrolledCourseDetail.length;
         console.log(length);
 
         if (length === undefined) return;
@@ -99,34 +99,34 @@ function ProfilePage() {
                             <div className={`${box}`}>
                                 <h4 className="heading_3">Các khóa học đã tham gia</h4>
                                 <div className="space-y-5">
-                                    {userLogin?.chiTietKhoaHocGhiDanh.length === 0 && "Chưa đăng ký khoá học"}
-                                    {userLogin?.chiTietKhoaHocGhiDanh.map((khoaHoc) => {
+                                    {userLogin?.enrolledCourseDetail.length === 0 && "Chưa đăng ký khoá học"}
+                                    {userLogin?.enrolledCourseDetail.map((course) => {
                                         return (
-                                            <div key={khoaHoc._id} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                            <div key={course._id} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                                 {/* HÌNH ẢNH */}
                                                 <div className="">
                                                     <div className={`${style.overlay} aspect-[292/165] relative rounded-2xl overflow-hidden`}>
                                                         <div className={`${style.actionButton} flex flex-col gap-2 items-center`}>
                                                             <Button
                                                                 onClick={() => {
-                                                                    handleContinueLearning(khoaHoc._id);
+                                                                    handleContinueLearning(course._id);
                                                                 }}
                                                                 type="white"
                                                             >
                                                                 Tiếp tục học
                                                             </Button>
-                                                            <PopconfirmProfile khoaHoc={khoaHoc} />
+                                                            <PopconfirmProfile course={course} />
                                                         </div>
-                                                        <img className="w-full h-full object-cover" src={khoaHoc.image} alt="" />
+                                                        <img className="w-full h-full object-cover" src={course.image} alt="" />
                                                     </div>
-                                                    <p className="font-bold truncate sm:hidden">{khoaHoc.courseName}</p>
+                                                    <p className="font-bold truncate sm:hidden">{course.courseName}</p>
                                                 </div>
 
                                                 {/* MÔ TẢ */}
                                                 <div className="space-y-2 hidden sm:block">
-                                                    <p className="heading_3 truncate">{khoaHoc.courseName}</p>
+                                                    <p className="heading_3 truncate">{course.courseName}</p>
                                                     <Typography.Paragraph className={`para`} ellipsis={{ rows: 5 }}>
-                                                        {khoaHoc.description}
+                                                        {course.description}
                                                     </Typography.Paragraph>
                                                 </div>
                                             </div>

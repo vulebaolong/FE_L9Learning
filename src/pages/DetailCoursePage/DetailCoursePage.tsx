@@ -57,10 +57,10 @@ function DetailCoursePage() {
 
     console.log(course?.lessons);
 
-    let baiHoc = 0;
+    let lesson = 0;
 
     course?.lessons.forEach((item) => {
-        baiHoc += item.videos.length;
+        lesson += item.videos.length;
     });
 
     let totalDuration = "0";
@@ -69,10 +69,10 @@ function DetailCoursePage() {
         totalDuration = handleDuration(course?.lessons);
     }
 
-    let isSeHocDuoc = false;
+    let isWillLearn = false;
 
     if (course?.willLearn !== undefined) {
-        if (course?.willLearn.length > 0) isSeHocDuoc = true;
+        if (course?.willLearn.length > 0) isWillLearn = true;
     }
 
     const handleDangKyKhoaHoc = async () => {
@@ -117,7 +117,7 @@ function DetailCoursePage() {
         }
 
         // Trường hợp ĐÃ đăng nhập
-        const flag = userLogin.chiTietKhoaHocGhiDanh.findIndex((course) => course._id === id);
+        const flag = userLogin.enrolledCourseDetail.findIndex((course) => course._id === id);
 
         console.log(flag);
 
@@ -141,7 +141,7 @@ function DetailCoursePage() {
                 <>
                     <h5 className="text-primary text-3xl font-semibold text-center">{formatCurrency(course?.price)}</h5>
 
-                    <div className="text-center">
+                    <div className="text-center mt-5">
                         <Button disabled={isLoadingBtn} onClick={handleDangKyKhoaHoc} className="px-10 py-3 space-x-2" type="primary">
                             {isLoadingBtn && <LoadingOutlined />}
                             <span className="text-base">ĐĂNG KÝ HỌC</span>
@@ -158,7 +158,7 @@ function DetailCoursePage() {
                 <div className="xl:w-[66.66667%] xl:order-1 order-2">
                     <h1 className={`heading_1 mt-4`}>{course?.courseName}</h1>
                     <p className={`para mt-5 mb-16`}>{course?.description}</p>
-                    {isSeHocDuoc && (
+                    {isWillLearn && (
                         <div className="space-y-3 mb-16">
                             <h2 className={`heading_2`}>Bạn sẽ học được gì?</h2>
                             <div className="grid sm:grid-cols-2 gap-5">
@@ -182,7 +182,7 @@ function DetailCoursePage() {
                 </div>
                 <div className="xl:w-[33.33333%] xl:order-2 order-1 xl:pl-12 xl:block xl:mb-0 grid md:grid-cols-2 md:gap-0 gap-16 mb-16">
                     {/* HÌNH ẢNH */}
-                    <div className="rounded-2xl overflow-hidden relative cursor-pointer xl:mb-7">
+                    <div className="rounded-2xl aspect-[292/165] overflow-hidden relative cursor-pointer xl:mb-7">
                         <img className="w-full h-full object-cover" src={course?.image} alt="" />
                         <div className="absolute z-10 top-0 left-0 w-full h-full bg-[linear-gradient(180deg,rgba(30,30,28,0),rgba(30,30,28,.9))] "></div>
                         <div className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-6xl">
@@ -210,7 +210,7 @@ function DetailCoursePage() {
                                 </div>
                                 <span className={`para`}>
                                     <span>Tổng số </span>
-                                    <strong>{baiHoc} </strong> bài học
+                                    <strong>{lesson} </strong> bài học
                                 </span>
                             </div>
                             <div className="flex gap-5 items-center">

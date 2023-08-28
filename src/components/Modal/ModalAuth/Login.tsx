@@ -13,6 +13,7 @@ import Button from "../../Button/Button";
 
 function Login() {
     const { autofill } = useSelector((state: RootState) => state.userManagementSlice);
+
     const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
 
     const [form] = Form.useForm();
@@ -39,11 +40,11 @@ function Login() {
 
     useEffect(() => form.resetFields(), [autofill, form]);
 
-    const handleKhachHang = () => {
+    const handleCustomer = () => {
         dispatch(setAutofillREDU({ username: "khachhang", password: "123456" }));
     };
 
-    const handleQuanTri = () => {
+    const handleAdmin = () => {
         dispatch(setAutofillREDU({ username: "quantri", password: "123456" }));
     };
 
@@ -108,10 +109,10 @@ function Login() {
                     </div>
 
                     <div className="flex gap-5 items-center">
-                        <Button onClick={handleKhachHang} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
+                        <Button onClick={handleCustomer} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
                             Khách hàng
                         </Button>
-                        <Button onClick={handleQuanTri} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
+                        <Button onClick={handleAdmin} className="w-full px-0 !border-slate-500" htmlFor="button" type="bg-whiteblack">
                             Quản trị
                         </Button>
                     </div>
