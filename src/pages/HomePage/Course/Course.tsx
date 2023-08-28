@@ -11,8 +11,6 @@ function Course() {
     const { courseList } = useSelector((state: RootState) => state.courseManagementSlice);
 
     useEffect(() => {
-        console.log("Bắn API getCourseListSaga");
-
         dispatch({ type: "getCourseListSaga" });
     }, []);
 

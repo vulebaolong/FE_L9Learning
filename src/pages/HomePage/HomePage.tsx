@@ -3,7 +3,6 @@ import Course from "./Course/Course";
 
 
 function HomePage() {
-    console.log("render HomePage");
     
     return (
         <>

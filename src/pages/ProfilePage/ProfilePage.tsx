@@ -13,8 +13,6 @@ import { error, success } from "../../helpers/message";
 import PopconfirmProfile from "./PopconfirmProfile";
 
 function ProfilePage() {
-    console.log(123);
-
     const dispatch: DispatchType = useDispatch();
 
     const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
