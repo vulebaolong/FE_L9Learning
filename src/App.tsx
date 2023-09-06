@@ -43,6 +43,7 @@ function App() {
         const theme = lcStorage.get(THEME);
         if (theme === "light") dispatch(lightThemeREDU());
         if (theme === "dark") dispatch(darkThemeREDU());
+        if (theme === null) dispatch(lightThemeREDU());
     }, []);
 
     useEffect(() => {
