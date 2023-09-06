@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { MdLightMode, MdNightlight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/store";
@@ -11,9 +10,6 @@ import NavbarMobile from "./Mobile/NavbarMobile";
 
 function Header() {
     const { userLogin } = useSelector((state: RootState) => state.userManagementSlice);
-
-    const btnLightRef = useRef<HTMLDivElement | null>(null);
-    const btnNightRef = useRef<HTMLDivElement | null>(null);
 
     const dispatch: DispatchType = useDispatch();
 
@@ -40,10 +36,10 @@ function Header() {
 
                 {/* TOOGLE THEME */}
                 <div className="flex items-center gap-2">
-                    <div ref={btnLightRef} onClick={toggleTheme} className="btnLight text-2xl cursor-pointer">
+                    <div onClick={toggleTheme} className="btnLightMb text-2xl cursor-pointer">
                         <MdLightMode />
                     </div>
-                    <div ref={btnNightRef} onClick={toggleTheme} className="btnNight text-2xl hidden cursor-pointer">
+                    <div onClick={toggleTheme} className="btnNightMb text-2xl hidden cursor-pointer">
                         <MdNightlight />
                     </div>
                     <UserControll />
@@ -65,10 +61,10 @@ function Header() {
 
                 {/* TOOGLE THEME */}
                 <div className="flex items-center gap-2">
-                    <div ref={btnLightRef} onClick={toggleTheme} className="btnLight text-2xl cursor-pointer">
+                    <div onClick={toggleTheme} className="btnLightDt text-2xl cursor-pointer">
                         <MdLightMode />
                     </div>
-                    <div ref={btnNightRef} onClick={toggleTheme} className="btnNight text-2xl hidden cursor-pointer">
+                    <div onClick={toggleTheme} className="btnNightDt text-2xl hidden cursor-pointer">
                         <MdNightlight />
                     </div>
                     <UserControll />

@@ -18,11 +18,15 @@ const toggleThemeSlice = createSlice({
             const htmlElement = document.querySelector("html");
             htmlElement?.classList.toggle("dark");
 
-            const btnLightEl = document.querySelector(".btnLight");
-            btnLightEl?.classList.toggle("hidden");
+            const btnLightElDt = document.querySelector(".btnLightDt");
+            const btnLightElMb = document.querySelector(".btnLightMb");
+            btnLightElDt?.classList.toggle("hidden");
+            btnLightElMb?.classList.toggle("hidden");
 
-            const btnNightEl = document.querySelector(".btnNight");
-            btnNightEl?.classList.toggle("hidden");
+            const btnNightElDt = document.querySelector(".btnNightDt");
+            const btnNightElMb = document.querySelector(".btnNightMb");
+            btnNightElDt?.classList.toggle("hidden");
+            btnNightElMb?.classList.toggle("hidden");
 
             if (state.themeSelect === "dark") {
                 state.themeSelect = "light";
@@ -36,11 +40,15 @@ const toggleThemeSlice = createSlice({
             const htmlElement = document.querySelector("html");
             htmlElement?.classList.add("dark");
 
-            const btnLightEl = document.querySelector(".btnLight");
-            btnLightEl?.classList.remove("hidden");
+            const btnLightElDt = document.querySelector(".btnLightDt");
+            const btnLightElMb = document.querySelector(".btnLightMb");
+            btnLightElDt?.classList.remove("hidden");
+            btnLightElMb?.classList.remove("hidden");
 
-            const btnNightEl = document.querySelector(".btnNight");
-            btnNightEl?.classList.add("hidden");
+            const btnNightElDt = document.querySelector(".btnNightDt");
+            const btnNightElMb = document.querySelector(".btnNightMb");
+            btnNightElDt?.classList.add("hidden");
+            btnNightElMb?.classList.add("hidden");
 
             state.themeSelect = "dark";
         },
@@ -48,11 +56,15 @@ const toggleThemeSlice = createSlice({
             const htmlElement = document.querySelector("html");
             htmlElement?.classList.remove("dark");
 
-            const btnLightEl = document.querySelector(".btnLight");
-            btnLightEl?.classList.add("hidden");
+            const btnLightElDt = document.querySelector(".btnLightDt");
+            const btnLightElMb = document.querySelector(".btnLightMb");
+            btnLightElDt?.classList.add("hidden");
+            btnLightElMb?.classList.add("hidden");
 
-            const btnNightEl = document.querySelector(".btnNight");
-            btnNightEl?.classList.remove("hidden");
+            const btnNightElDt = document.querySelector(".btnNightDt");
+            const btnNightElMb = document.querySelector(".btnNightMb");
+            btnNightElDt?.classList.remove("hidden");
+            btnNightElMb?.classList.remove("hidden");
 
             state.themeSelect = "light";
         }
