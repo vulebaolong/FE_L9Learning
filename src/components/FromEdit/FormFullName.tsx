@@ -1,12 +1,16 @@
 import { Form, Input } from "antd";
 import Button from "../Button/Button";
 import { useState, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { DispatchType } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
 import { error, success } from "../../helpers/message";
 import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
+import { LoadingOutlined } from "@ant-design/icons";
+import { setIsLoadingBtnREDU } from "../../redux/slices/loadingSlice";
 
-function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
+function FormFullName({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
+
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -19,6 +23,8 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         console.log(values);
         try {
             if (api !== undefined) {
+                dispatch(setIsLoadingBtnREDU(true));
+
                 const { data, status } = await api({ ...values, userId });
 
                 console.log(`Call API - ${logApi}`, { data, status });
@@ -32,6 +38,7 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         } finally {
             if (logApi === "updateOneAccountInfo") dispatch({ type: "updateDisplayAccountSaga" });
             if (logApi === "updateOneUserInfo") dispatch({ type: "updateDisplayUserSaga", payload: userId });
+            dispatch(setIsLoadingBtnREDU(false));
         }
     };
 
@@ -66,8 +73,9 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         if (!componentDisabled) {
             return (
                 <div className="flex items-center gap-2">
-                    <Button htmlFor="submit" type="transparent_2">
-                        Lưu
+                    <Button disabled={isLoadingBtn} className="space-x-2" htmlFor="submit" type="transparent_2">
+                        {isLoadingBtn && <LoadingOutlined />}
+                        <span>Lưu</span>
                     </Button>
                     <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ
@@ -115,4 +123,4 @@ function FormHoTen({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         </Form>
     );
 }
-export default FormHoTen;
+export default FormFullName;

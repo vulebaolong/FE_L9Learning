@@ -1,12 +1,16 @@
 import { Form, Input } from "antd";
-import { DispatchType } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { error, success } from "../../helpers/message";
 import Button from "../Button/Button";
 import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
+import { LoadingOutlined } from "@ant-design/icons";
+import { setIsLoadingBtnREDU } from "../../redux/slices/loadingSlice";
 
 function FormEmail({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
+
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -19,6 +23,8 @@ function FormEmail({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         console.log(values);
         try {
             if (api !== undefined) {
+                dispatch(setIsLoadingBtnREDU(true));
+
                 const { data, status } = await api({ ...values, userId });
 
                 console.log(`Call API - ${logApi}`, { data, status });
@@ -32,6 +38,7 @@ function FormEmail({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         } finally {
             if (logApi === "updateOneAccountInfo") dispatch({ type: "updateDisplayAccountSaga" });
             if (logApi === "updateOneUserInfo") dispatch({ type: "updateDisplayUserSaga", payload: userId });
+            dispatch(setIsLoadingBtnREDU(false));
         }
     };
 
@@ -66,8 +73,9 @@ function FormEmail({ userLogin, api, logApi, userId }: I_PropsFormEdit) {
         if (!componentDisabled) {
             return (
                 <div className="flex items-center gap-2">
-                    <Button htmlFor="submit" type="transparent_2">
-                        Lưu
+                    <Button disabled={isLoadingBtn} className="space-x-2" htmlFor="submit" type="transparent_2">
+                        {isLoadingBtn && <LoadingOutlined />}
+                        <span>Lưu</span>
                     </Button>
                     <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ

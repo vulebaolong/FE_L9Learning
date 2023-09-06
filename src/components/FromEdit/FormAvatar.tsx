@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { DispatchType } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, RootState } from "../../redux/store";
 import { useEffect, useState } from "react";
 import { Form, Modal, Upload, UploadFile } from "antd";
 import { error, success } from "../../helpers/message";
@@ -9,8 +9,11 @@ import { RcFile, UploadProps } from "antd/es/upload";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { file } from "../../interfaces/courseManagementInterface";
 import { I_PropsFormEdit } from "../../interfaces/userManagementInterface";
+import { setIsLoadingBtnREDU } from "../../redux/slices/loadingSlice";
 
 function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
+    const { isLoadingBtn } = useSelector((state: RootState) => state.loadingSlice);
+
     const dispatch: DispatchType = useDispatch();
 
     const [componentDisabled, setComponentDisabled] = useState(true);
@@ -36,6 +39,8 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
             formData.append("userId", `${userId}`);
 
             if (apiAvatar !== undefined) {
+                dispatch(setIsLoadingBtnREDU(true));
+
                 const { data, status } = await apiAvatar(formData);
 
                 console.log(`Call API - ${logApi}`, { data, status });
@@ -49,6 +54,7 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
         } finally {
             if (logApi === "updateAccountAvatar") dispatch({ type: "updateDisplayAccountSaga" });
             if (logApi === "updateUserAvatar") dispatch({ type: "updateDisplayUserSaga", payload: userId });
+            dispatch(setIsLoadingBtnREDU(false));
         }
     };
 
@@ -82,8 +88,9 @@ function FormAvatar({ userLogin, apiAvatar, logApi, userId }: I_PropsFormEdit) {
         if (!componentDisabled) {
             return (
                 <div className="flex items-center gap-2">
-                    <Button htmlFor="submit" type="transparent_2">
-                        Lưu
+                    <Button disabled={isLoadingBtn} className="space-x-2" htmlFor="submit" type="transparent_2">
+                        {isLoadingBtn && <LoadingOutlined />}
+                        <span>Lưu</span>
                     </Button>
                     <Button onClick={handleCancel} htmlFor="button" type="transparent_1">
                         Huỷ

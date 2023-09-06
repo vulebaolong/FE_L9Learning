@@ -4,7 +4,7 @@ import { Form, Input } from "antd";
 import { error, success } from "../../../helpers/message";
 import Button from "../../../components/Button/Button";
 
-function FormThayDoiMatKhau() {
+function FormChangePasswork() {
     const [componentDisabled, setComponentDisabled] = useState(true);
 
     const [focusTarget, setFocusTarget] = useState<string | null>(null);
@@ -113,4 +113,4 @@ function FormThayDoiMatKhau() {
         </Form>
     );
 }
-export default FormThayDoiMatKhau;
+export default FormChangePasswork;

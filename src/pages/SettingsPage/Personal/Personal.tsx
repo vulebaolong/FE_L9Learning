@@ -1,7 +1,7 @@
-import FormHoTen from "../../../components/FromEdit/FormHoTen";
-import FormTaiKhoan from "../../../components/FromEdit/FormTaiKhoan";
+import FormFullName from "../../../components/FromEdit/FormFullName";
+import FormUserName from "../../../components/FromEdit/FormUserName";
 import FormEmail from "../../../components/FromEdit/FormEmail";
-import FormSoDienThoai from "../../../components/FromEdit/FormSoDienThoai";
+import FormPhoneNumber from "../../../components/FromEdit/FormPhoneNumber";
 import FormAvatar from "../../../components/FromEdit/FormAvatar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
@@ -17,10 +17,10 @@ function Personal() {
             <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
 
             <div className="space-y-12">
-                <FormHoTen userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
-                <FormTaiKhoan userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
+                <FormFullName userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
+                <FormUserName userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
                 <FormEmail userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
-                <FormSoDienThoai userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
+                <FormPhoneNumber userLogin={userLogin} api={userApi.updateOneAccountInfo} logApi="updateOneAccountInfo" />
                 <FormAvatar userLogin={userLogin} apiAvatar={userApi.updateAccountAvatar} logApi="updateAccountAvatar" />
             </div>
         </div>

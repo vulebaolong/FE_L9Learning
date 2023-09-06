@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../../redux/store";
-import FormHoTen from "../../../components/FromEdit/FormHoTen";
+import FormFullName from "../../../components/FromEdit/FormFullName";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { userApi } from "../../../api/userApi";
-import FormTaiKhoan from "../../../components/FromEdit/FormTaiKhoan";
+import FormUserName from "../../../components/FromEdit/FormUserName";
 import FormEmail from "../../../components/FromEdit/FormEmail";
-import FormSoDienThoai from "../../../components/FromEdit/FormSoDienThoai";
+import FormPhoneNumber from "../../../components/FromEdit/FormPhoneNumber";
 import FormAvatar from "../../../components/FromEdit/FormAvatar";
 
 function EditUser_Admin() {
@@ -28,10 +28,10 @@ function EditUser_Admin() {
         if (userInfo === null) return;
         return (
             <>
-                <FormHoTen userId={id} userLogin={userInfo} api={api} logApi={logApi} />
-                <FormTaiKhoan userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormFullName userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormUserName userId={id} userLogin={userInfo} api={api} logApi={logApi} />
                 <FormEmail userId={id} userLogin={userInfo} api={api} logApi={logApi} />
-                <FormSoDienThoai userId={id} userLogin={userInfo} api={api} logApi={logApi} />
+                <FormPhoneNumber userId={id} userLogin={userInfo} api={api} logApi={logApi} />
                 <FormAvatar userId={id} userLogin={userInfo} apiAvatar={userApi.updateUserAvatar} logApi="updateUserAvatar" />
             </>
         );

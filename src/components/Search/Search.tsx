@@ -4,7 +4,7 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { courseApi } from "../../api/courseApi";
 import { I_resultSearch } from "../../interfaces/courseManagementInterface";
 import { navigate } from "../../helpers/navigate";
-import { DEBOUNCE_TIMEOUT } from "../../contants/quanLyKhoaHocContants";
+import { DEBOUNCE_TIMEOUT } from "../../contants/courseManagementContants";
 function Search() {
     const [resultSearch, setResultSearch] = useState<I_resultSearch>([]);
     const [isOpenPopupUser, setIsOpenPopupUser] = useState(false);

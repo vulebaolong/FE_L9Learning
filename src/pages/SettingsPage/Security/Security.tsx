@@ -1,6 +1,6 @@
 import { FaFacebookF, FaGoogle, FaPhone } from "react-icons/fa6";
 import Button from "../../../components/Button/Button";
-import FormThayDoiMatKhau from "./FormThayDoiMatKhau";
+import FormChangePasswork from "./FormChangePasswork";
 
 function Security() {
     return (
@@ -9,7 +9,7 @@ function Security() {
                 <h2 className="heading_2">Mật khẩu</h2>
                 <hr className="dark:!border-gray-700 border-gray-200 mt-3 mb-5" />
                 <div className="space-y-10">
-                    <FormThayDoiMatKhau />
+                    <FormChangePasswork />
                 </div>
             </div>
             <div>
